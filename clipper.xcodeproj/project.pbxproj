@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3B9F61D2CD5CE0062D19D /* main.m */; };
+		3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3B9F91D2CD5CE0062D19D /* MKRAppDelegate.m */; };
+		3AB3BA001D2CD5CE0062D19D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3B9FE1D2CD5CE0062D19D /* Main.storyboard */; };
+		3AB3BA021D2CD5CE0062D19D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3BA011D2CD5CE0062D19D /* Assets.xcassets */; };
+		3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3BA031D2CD5CE0062D19D /* LaunchScreen.storyboard */; };
+		3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3AB3B9F21D2CD5CE0062D19D /* clipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = clipper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AB3B9F61D2CD5CE0062D19D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3AB3B9F81D2CD5CE0062D19D /* MKRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKRAppDelegate.h; sourceTree = "<group>"; };
+		3AB3B9F91D2CD5CE0062D19D /* MKRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MKRAppDelegate.m; sourceTree = "<group>"; };
+		3AB3B9FF1D2CD5CE0062D19D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3AB3BA011D2CD5CE0062D19D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3AB3BA041D2CD5CE0062D19D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3AB3BA061D2CD5CE0062D19D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AB3BA0C1D2CD8270062D19D /* MKRVideoSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVideoSelectViewController.h; sourceTree = "<group>"; };
+		3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVideoSelectViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3AB3B9EF1D2CD5CE0062D19D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3AB3B9E91D2CD5CE0062D19D = {
+			isa = PBXGroup;
+			children = (
+				3AB3B9F41D2CD5CE0062D19D /* clipper */,
+				3AB3B9F31D2CD5CE0062D19D /* Products */,
+				58AAACA1DA2AF1E41D159602 /* clipperSources */,
+			);
+			sourceTree = "<group>";
+		};
+		3AB3B9F31D2CD5CE0062D19D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3AB3B9F21D2CD5CE0062D19D /* clipper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3AB3B9F41D2CD5CE0062D19D /* clipper */ = {
+			isa = PBXGroup;
+			children = (
+				3AB3B9F81D2CD5CE0062D19D /* MKRAppDelegate.h */,
+				3AB3B9F91D2CD5CE0062D19D /* MKRAppDelegate.m */,
+				3AB3B9FE1D2CD5CE0062D19D /* Main.storyboard */,
+				3AB3BA011D2CD5CE0062D19D /* Assets.xcassets */,
+				3AB3BA031D2CD5CE0062D19D /* LaunchScreen.storyboard */,
+				3AB3BA061D2CD5CE0062D19D /* Info.plist */,
+				3AB3B9F51D2CD5CE0062D19D /* Supporting Files */,
+			);
+			path = clipper;
+			sourceTree = "<group>";
+		};
+		3AB3B9F51D2CD5CE0062D19D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3AB3B9F61D2CD5CE0062D19D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		58AAA98146A845B5B5C3A4DD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				58AAAB7EBAA750EF408542C4 /* VideoSelect */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		58AAAB7EBAA750EF408542C4 /* VideoSelect */ = {
+			isa = PBXGroup;
+			children = (
+				3AB3BA0C1D2CD8270062D19D /* MKRVideoSelectViewController.h */,
+				3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */,
+			);
+			path = VideoSelect;
+			sourceTree = "<group>";
+		};
+		58AAACA1DA2AF1E41D159602 /* clipperSources */ = {
+			isa = PBXGroup;
+			children = (
+				58AAA98146A845B5B5C3A4DD /* Controllers */,
+				58AAAE3E60EC6A81FCC3071F /* Utils */,
+			);
+			path = clipperSources;
+			sourceTree = "<group>";
+		};
+		58AAAE3E60EC6A81FCC3071F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3AB3B9F11D2CD5CE0062D19D /* clipper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AB3BA091D2CD5CE0062D19D /* Build configuration list for PBXNativeTarget "clipper" */;
+			buildPhases = (
+				3AB3B9EE1D2CD5CE0062D19D /* Sources */,
+				3AB3B9EF1D2CD5CE0062D19D /* Frameworks */,
+				3AB3B9F01D2CD5CE0062D19D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = clipper;
+			productName = clipper;
+			productReference = 3AB3B9F21D2CD5CE0062D19D /* clipper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3AB3B9EA1D2CD5CE0062D19D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = mayak;
+				TargetAttributes = {
+					3AB3B9F11D2CD5CE0062D19D = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 3AB3B9ED1D2CD5CE0062D19D /* Build configuration list for PBXProject "clipper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3AB3B9E91D2CD5CE0062D19D;
+			productRefGroup = 3AB3B9F31D2CD5CE0062D19D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3AB3B9F11D2CD5CE0062D19D /* clipper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3AB3B9F01D2CD5CE0062D19D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */,
+				3AB3BA021D2CD5CE0062D19D /* Assets.xcassets in Resources */,
+				3AB3BA001D2CD5CE0062D19D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3AB3B9EE1D2CD5CE0062D19D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */,
+				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
+				3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3AB3B9FE1D2CD5CE0062D19D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3AB3B9FF1D2CD5CE0062D19D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3AB3BA031D2CD5CE0062D19D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3AB3BA041D2CD5CE0062D19D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3AB3BA071D2CD5CE0062D19D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3AB3BA081D2CD5CE0062D19D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3AB3BA0A1D2CD5CE0062D19D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = clipper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3AB3BA0B1D2CD5CE0062D19D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = clipper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3AB3B9ED1D2CD5CE0062D19D /* Build configuration list for PBXProject "clipper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AB3BA071D2CD5CE0062D19D /* Debug */,
+				3AB3BA081D2CD5CE0062D19D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3AB3BA091D2CD5CE0062D19D /* Build configuration list for PBXNativeTarget "clipper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AB3BA0A1D2CD5CE0062D19D /* Debug */,
+				3AB3BA0B1D2CD5CE0062D19D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3AB3B9EA1D2CD5CE0062D19D /* Project object */;
+}
