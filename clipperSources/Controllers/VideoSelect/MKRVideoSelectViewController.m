@@ -10,6 +10,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
+#import <pocketsphinx/pocketsphinx.h>
 
 @interface MKRVideoSelectViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 

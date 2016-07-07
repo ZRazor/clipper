@@ -13,6 +13,7 @@
 		3AB3BA021D2CD5CE0062D19D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3BA011D2CD5CE0062D19D /* Assets.xcassets */; };
 		3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3BA031D2CD5CE0062D19D /* LaunchScreen.storyboard */; };
 		3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */; };
+		58AAA040886A724D9945554E /* README.MD in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAE5350D8F9BD1ACE429C /* README.MD */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3AB3BA061D2CD5CE0062D19D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AB3BA0C1D2CD8270062D19D /* MKRVideoSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVideoSelectViewController.h; sourceTree = "<group>"; };
 		3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVideoSelectViewController.m; sourceTree = "<group>"; };
+		58AAAE5350D8F9BD1ACE429C /* README.MD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 				3AB3B9F41D2CD5CE0062D19D /* clipper */,
 				3AB3B9F31D2CD5CE0062D19D /* Products */,
 				58AAACA1DA2AF1E41D159602 /* clipperSources */,
+				58AAAE5350D8F9BD1ACE429C /* README.MD */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,6 +187,7 @@
 				3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */,
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
 				3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */,
+				58AAA040886A724D9945554E /* README.MD in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,10 +296,24 @@
 		3AB3BA0A1D2CD5CE0062D19D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/pocketsphinx/x86_64/include/pocketsphinx,
+					/usr/local/pocketsphinx/x86_64/include,
+					/usr/local/sphinxbase/x86_64/include/sphinxbase,
+					/usr/local/sphinxbase/x86_64/include,
+				);
 				INFOPLIST_FILE = clipper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/pocketsphinx/armv7/lib,
+					/usr/local/pocketsphinx/x86_64/lib,
+					/usr/local/sphinxbase/armv7/lib,
+					/usr/local/sphinxbase/x86_64/lib,
+				);
+				OTHER_LDFLAGS = "-lsphinxbase";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -304,10 +322,24 @@
 		3AB3BA0B1D2CD5CE0062D19D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/pocketsphinx/x86_64/include/pocketsphinx,
+					/usr/local/pocketsphinx/x86_64/include,
+					/usr/local/sphinxbase/x86_64/include/sphinxbase,
+					/usr/local/sphinxbase/x86_64/include,
+				);
 				INFOPLIST_FILE = clipper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/pocketsphinx/armv7/lib,
+					/usr/local/pocketsphinx/x86_64/lib,
+					/usr/local/sphinxbase/armv7/lib,
+					/usr/local/sphinxbase/x86_64/lib,
+				);
+				OTHER_LDFLAGS = "-lsphinxbase";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
