@@ -36,6 +36,9 @@
     [self setMoviePlayerNew:[[MPMoviePlayerController alloc] init]];
     [self.moviePlaceViewNew addSubview:self.moviePlayerNew.view];
     [self.moviePlayerNew setShouldAutoplay:NO];
+
+//    cmd_ln_t *config = cmd_ln_init(NULL, defs, TRUE, "-hmm", "foodir", "-dsratio", "2", "-lm", "bar.lm", NULL);
+//    ps_decoder_t *decoder = ps_init(config);
 }
 
 - (void)didReceiveMemoryWarning {
