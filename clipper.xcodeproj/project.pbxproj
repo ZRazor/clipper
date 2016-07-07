@@ -308,12 +308,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					/usr/local/pocketsphinx/armv7/lib,
 					/usr/local/pocketsphinx/x86_64/lib,
-					/usr/local/sphinxbase/armv7/lib,
 					/usr/local/sphinxbase/x86_64/lib,
 				);
-				OTHER_LDFLAGS = "-lsphinxbase";
+				OTHER_LDFLAGS = (
+					"-lpocketsphinx",
+					"-lsphinxbase",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -334,12 +335,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					/usr/local/pocketsphinx/armv7/lib,
 					/usr/local/pocketsphinx/x86_64/lib,
-					/usr/local/sphinxbase/armv7/lib,
 					/usr/local/sphinxbase/x86_64/lib,
 				);
-				OTHER_LDFLAGS = "-lsphinxbase";
+				OTHER_LDFLAGS = (
+					"-lpocketsphinx",
+					"-lsphinxbase",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
