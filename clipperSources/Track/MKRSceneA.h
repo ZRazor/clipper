@@ -1,5 +1,5 @@
 //
-//  MKRScene.h
+//  MKRSceneA.h
 //  clipper
 //
 //  Created by dev on 08.07.16.
@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MKRScene.h"
 
-@interface MKRScene : NSObject
-
-@property(nonatomic) NSMutableArray *bars;
+@interface MKRSceneA : MKRScene
 
 @end

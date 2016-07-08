@@ -8,6 +8,29 @@
 
 #import "MKRBar.h"
 
+@interface MKRBar()
+
+@property (readwrite, nonatomic) NSInteger identifier;
+
+@end
+
+
+static NSInteger globalIdentifier = 0;
+
 @implementation MKRBar
+
+-(instancetype)initWithSequence:(NSMutableArray *)sequence andQuantsLength:(NSInteger)quantsLength andError:(double)error andTotalQuantsLength:(NSInteger)totalQuantsLength {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    [self setQuantsLength:quantsLength];
+    [self setSequence:[sequence mutableCopy]];
+    [self setError:error];
+    [self setTotalQuantsLength:totalQuantsLength];
+    [self setIdentifier:globalIdentifier++];
+    
+    return self;
+}
 
 @end

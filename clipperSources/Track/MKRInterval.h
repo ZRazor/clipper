@@ -19,6 +19,6 @@
  */
 - (NSInteger)length;
 
-- (id)initWithStart:(int)start andEnd:(int)end;
+- (instancetype)initWithStart:(NSInteger)start andEnd:(NSInteger)end;
 
 @end

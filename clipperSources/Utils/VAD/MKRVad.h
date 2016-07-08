@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Accelerate/Accelerate.h>
 #import "MKRCVad.h"
+#import "MKRInterval.h"
 
 static int const kMKRAudioSampleRate = 16000;
 static int const kMKRAudioBitDepth = 16;
@@ -28,6 +29,6 @@ static int const kMKRVadTimeout = -1;
 
 @interface MKRVad : NSObject
 
-- (void)gotAudioSamples:(NSData *)samples;
+- (NSMutableArray<MKRInterval *> *)gotAudioWithSamples:(NSData *)samples andAudioMsDuration:(NSInteger)msDuration;
 
 @end

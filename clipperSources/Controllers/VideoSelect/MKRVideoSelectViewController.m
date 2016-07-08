@@ -11,6 +11,10 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MKRVad.h"
+#import "MKRTrack.h"
+#import "MKRScene.h"
+#import "MKRBarManager.h"
+#import "MKRBar.h"
 
 @interface MKRVideoSelectViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -111,7 +115,7 @@
         for (int y = 0; y < audioBufferList.mNumberBuffers; y++) {
             AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
             Float32 *frame = (Float32*)audioBuffer.mData;
-            NSLog(@"Size of frame: %u", (unsigned int)audioBuffer.mDataByteSize);
+//            NSLog(@"Size of frame: %u", (unsigned int)audioBuffer.mDataByteSize);
             [audioData appendBytes:frame length:audioBuffer.mDataByteSize];
         }
         CFRelease(blockBuffer);
@@ -120,9 +124,18 @@
         sample = [readerOutput copyNextSampleBuffer];
     }
 
-    NSLog(@"Finish");
+    NSLog(@"Finish decoding audio");
+    
+    CMTime audioDuration = avAsset.duration;
+    NSInteger audioMsDuration = round(CMTimeGetSeconds(audioDuration) * 1000);
+    
     MKRVad *vad = [[MKRVad alloc] init];
-    [vad gotAudioSamples:audioData];
+    NSMutableArray<MKRInterval *> *speechIntervals = [vad gotAudioWithSamples:audioData andAudioMsDuration:audioMsDuration];
+    
+    NSLog(@"VAD complete, found %lu speech intervals", [speechIntervals count]);
+    MKRTrack *track = [[MKRTrack alloc] initWithBPM:120 andQPB:4];
+    MKRBarManager *barManager = [[MKRBarManager alloc] initWithTrack:track andFeaturesIntervals:speechIntervals];
+    NSMutableArray<MKRBar *> *bars = [barManager getBarsWithQuantsLength:@4];
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask ,YES);
@@ -130,6 +143,11 @@
     NSString *destPath = [documentsPath stringByAppendingPathComponent:[videoURL lastPathComponent]];
     [fileManager copyItemAtPath:[videoURL path] toPath:destPath error:&error];
     callback([NSURL fileURLWithPath:destPath]);
+    
+//    MKRScene sceneA1 = [MKRScene initWith]
+    
+    
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

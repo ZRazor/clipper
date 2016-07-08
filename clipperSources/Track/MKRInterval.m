@@ -17,7 +17,7 @@
 
 @implementation MKRInterval
 
-- (id)initWithStart:(int)start andEnd:(int)end {
+- (instancetype)initWithStart:(NSInteger)start andEnd:(NSInteger)end {
     self = [super init];
     if (!self) {
         return nil;

@@ -16,6 +16,8 @@
 		58AAA040886A724D9945554E /* README.MD in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAE5350D8F9BD1ACE429C /* README.MD */; };
 		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
+		D76621721D2F95CC00E0A402 /* MKRSceneA.m in Sources */ = {isa = PBXBuildFile; fileRef = D76621711D2F95CC00E0A402 /* MKRSceneA.m */; };
+		D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */; };
 		D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */; };
 		D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C71D2F48A90095F5D6 /* MKRBar.m */; };
 		D7E5F3CB1D2F48B00095F5D6 /* MKRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3CA1D2F48B00095F5D6 /* MKRScene.m */; };
@@ -39,6 +41,10 @@
 		58AAACD1FA4D58090C4CD60E /* MKRCVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCVad.m; sourceTree = "<group>"; };
 		58AAAE5350D8F9BD1ACE429C /* README.MD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = "<group>"; };
 		58AAAFB31421FAF140184D43 /* MKRCVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCVad.h; sourceTree = "<group>"; };
+		D76621701D2F95CC00E0A402 /* MKRSceneA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneA.h; sourceTree = "<group>"; };
+		D76621711D2F95CC00E0A402 /* MKRSceneA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneA.m; sourceTree = "<group>"; };
+		D76621731D2F9DE200E0A402 /* MKRProcessedInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRProcessedInterval.h; sourceTree = "<group>"; };
+		D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRProcessedInterval.m; sourceTree = "<group>"; };
 		D7E5F3C31D2F489C0095F5D6 /* MKRTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTrack.h; sourceTree = "<group>"; };
 		D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRTrack.m; sourceTree = "<group>"; };
 		D7E5F3C61D2F48A90095F5D6 /* MKRBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRBar.h; sourceTree = "<group>"; };
@@ -160,6 +166,10 @@
 				D7E5F3CA1D2F48B00095F5D6 /* MKRScene.m */,
 				D7E5F3D01D2F49D80095F5D6 /* MKRInterval.h */,
 				D7E5F3D11D2F49D80095F5D6 /* MKRInterval.m */,
+				D76621701D2F95CC00E0A402 /* MKRSceneA.h */,
+				D76621711D2F95CC00E0A402 /* MKRSceneA.m */,
+				D76621731D2F9DE200E0A402 /* MKRProcessedInterval.h */,
+				D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -247,9 +257,11 @@
 				3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */,
 				D7E5F3CB1D2F48B00095F5D6 /* MKRScene.m in Sources */,
 				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
+				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
 				D7E5F3D21D2F49D80095F5D6 /* MKRInterval.m in Sources */,
 				3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */,
+				D76621721D2F95CC00E0A402 /* MKRSceneA.m in Sources */,
 				D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */,
 				58AAA040886A724D9945554E /* README.MD in Sources */,
 				58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */,

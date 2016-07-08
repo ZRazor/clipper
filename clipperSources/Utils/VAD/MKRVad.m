@@ -8,50 +8,59 @@
 
 #import "MKRVad.h"
 
-
 @implementation MKRVad {
     s_wv_detector_cvad_state *vad_state;
     FFTSetup fft_setup;
 }
 
-- (void)gotAudioSamples:(NSData *)samples {
+- (NSMutableArray<MKRInterval *> *)gotAudioWithSamples:(NSData *)samples andAudioMsDuration:(NSInteger)msDuration {
     UInt32 size = (UInt32)[samples length];
     short *bytes = (short*)[samples bytes];
+    NSMutableArray<MKRInterval *> *intervals = [NSMutableArray new];
+    double speechStartsAtMs = -1;
+    double speechEndsAtMs = -1;
+    double msInSample = ((double)msDuration) / size;
 
-    for(int sample_offset=0; sample_offset+self->vad_state->samples_per_frame < size/2; sample_offset+=self->vad_state->samples_per_frame){
-
-        int nonZero=0;
+    for (int sampleOffset = 0; sampleOffset + self->vad_state->samples_per_frame < size / 2; sampleOffset += self->vad_state->samples_per_frame) {
+        int nonZero = 0;
 
         //check to make sure buffer actually has audio data
-        for(int i=0; i<self->vad_state->samples_per_frame; i++){
-            if(bytes[sample_offset+i] != 0){
-                nonZero=1;
+        for(int i = 0; i < self->vad_state->samples_per_frame; i++) {
+            if (bytes[sampleOffset + i] != 0) {
+                nonZero = 1;
                 break;
             }
         }
 
         //skip frame if it has nothing
-        if(!nonZero) continue;
+        if(!nonZero) {
+            continue;
+        }
 
-        float *fft_mags = [self get_fft:(bytes+sample_offset)];
-
-        int detected_speech = wvs_cvad_detect_talking(self->vad_state, bytes+sample_offset, fft_mags);
-
+        float *fft_mags = [self get_fft:(bytes + sampleOffset)];
+        int detected_speech = wvs_cvad_detect_talking(self->vad_state, bytes + sampleOffset, fft_mags);
         free(fft_mags);
 
-        if ( detected_speech == 1){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"Speech started at sample_offset: %d", sample_offset);
-            });
+        if (detected_speech == 1) {
+            if (speechStartsAtMs == -1) {
+                speechStartsAtMs = sampleOffset * msInSample;
+            } else {
+                NSLog(@"Some problem found: double detect_speech == 1!");
+            }
         } else if ( detected_speech == 0) {
-            //someone just stopped talking
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"Speech ended at sample_offset: %d", sample_offset);
-            });
-//            break;
+            if (speechStartsAtMs != -1) {
+                speechEndsAtMs = sampleOffset * msInSample;
+                MKRInterval *foundInterval = [[MKRInterval alloc] initWithStart:speechStartsAtMs andEnd:speechEndsAtMs];
+                [intervals addObject:foundInterval];
+                speechStartsAtMs = -1;
+                speechEndsAtMs = -1;
+            } else {
+                NSLog(@"Some problem found: double detect_speech == 0!");
+            }
         }
     }
-
+    
+    return intervals;
 }
 
 - (instancetype)init {

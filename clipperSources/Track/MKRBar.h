@@ -10,5 +10,12 @@
 
 @interface MKRBar : NSObject
 
+@property (nonatomic) NSMutableArray *sequence;
+@property (nonatomic) NSInteger quantsLength;
+@property (nonatomic) double error;
+@property (nonatomic) NSInteger totalQuantsLength;
+@property (readonly, nonatomic) NSInteger identifier;
+
+- (instancetype)initWithSequence:(NSMutableArray *)sequence andQuantsLength:(NSInteger)quantsLength andError:(double)error andTotalQuantsLength:(NSInteger)totalQuantsLength;
 
 @end
