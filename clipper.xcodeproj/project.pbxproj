@@ -318,23 +318,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/pocketsphinx/x86_64/include/pocketsphinx,
-					/usr/local/pocketsphinx/x86_64/include,
-					/usr/local/sphinxbase/x86_64/include/sphinxbase,
-					/usr/local/sphinxbase/x86_64/include,
-				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = clipper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/pocketsphinx/x86_64/lib,
-					/usr/local/sphinxbase/x86_64/lib,
-				);
-				OTHER_LDFLAGS = (
-					"-lpocketsphinx",
-					"-lsphinxbase",
-				);
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -345,23 +334,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/pocketsphinx/x86_64/include/pocketsphinx,
-					/usr/local/pocketsphinx/x86_64/include,
-					/usr/local/sphinxbase/x86_64/include/sphinxbase,
-					/usr/local/sphinxbase/x86_64/include,
-				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = clipper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/pocketsphinx/x86_64/lib,
-					/usr/local/sphinxbase/x86_64/lib,
-				);
-				OTHER_LDFLAGS = (
-					"-lpocketsphinx",
-					"-lsphinxbase",
-				);
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
