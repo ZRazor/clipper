@@ -1,8 +1,9 @@
 Install pocketsphinx
 ====================
 
-* `mkrdir sphinxtmp`
-* `cd spnixtmp`
+* зайти в папку с проектом
+* `mkrdir sphinx`
+* `cd sphinx`
 * `git clone https://github.com/cmusphinx/pocketsphinx-ios-demo.git`
 * `git clone https://github.com/cmusphinx/sphinxbase.git`
 * `git clone https://github.com/cmusphinx/pocketsphinx.git`
@@ -15,5 +16,20 @@ Install pocketsphinx
 * `cp pocketsphinx-ios-demo/build_iphone.sh pocketsphinx/build_iphone.sh`
 * `cd sphinxbase` `chmod +x build_iphone.sh` `./build_iphone.sh`
 * `cd pocketsphinx` `chmod +x build_iphone.sh` `./build_iphone.sh`
-* `cp sphinxbase/bin /usr/local/sphinxbase`
-* `cp pocketsphinx/bin /usr/local/pocketsphinx`
+* прописать в настройках проекта Header Search Paths:
+```
+${PROJECT_DIR}/sphinx/sphinxbase/bin/x86_64/include/sphinxbase
+${PROJECT_DIR}/sphinx/sphinxbase/bin/x86_64/include
+${PROJECT_DIR}/sphinx/pocketsphinx/bin/x86_64/include/pocketsphinx
+${PROJECT_DIR}/sphinx/pocketsphinx/bin/x86_64/include
+```
+* прописать в Library Search path:
+```
+${PROJECT_DIR}/sphinx/sphinxbase/bin/x86_64/lib
+${PROJECT_DIR}/sphinx/pocketsphinx/bin/x86_64/lib
+```
+* прописать в Other Linker Flags
+```
+-lsphinxbase
+-lpocketsphinx
+```

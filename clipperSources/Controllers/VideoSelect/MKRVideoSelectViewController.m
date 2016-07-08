@@ -10,7 +10,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
-#import <pocketsphinx/pocketsphinx.h>
+#import "MKRVad.h"
 
 @interface MKRVideoSelectViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -36,9 +36,6 @@
     [self setMoviePlayerNew:[[MPMoviePlayerController alloc] init]];
     [self.moviePlaceViewNew addSubview:self.moviePlayerNew.view];
     [self.moviePlayerNew setShouldAutoplay:NO];
-
-//    cmd_ln_t *config = cmd_ln_init(NULL, defs, TRUE, "-hmm", "foodir", "-dsratio", "2", "-lm", "bar.lm", NULL);
-//    ps_decoder_t *decoder = ps_init(config);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,56 +72,57 @@
     NSError *error = nil;
     AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:avAsset error:&error];
     NSArray *audioTracks = [avAsset tracksWithMediaType:AVMediaTypeAudio];
-    for (AVAssetTrack *audioTrack in audioTracks) {
-        NSLog(@"Track ID: %d", audioTrack.trackID);
-        NSArray* formatDesc = audioTrack.formatDescriptions;
-        for(unsigned int i = 0; i < [formatDesc count]; ++i) {
-            CMAudioFormatDescriptionRef item = (__bridge CMAudioFormatDescriptionRef) formatDesc[i];
-            const AudioStreamBasicDescription* bobTheDesc = CMAudioFormatDescriptionGetStreamBasicDescription (item);
-            NSLog(@"mSampleRate: %lf",bobTheDesc->mSampleRate);
-            NSLog(@"mFormatID: %u",(unsigned int)bobTheDesc->mFormatID);
-            NSLog(@"mFormatFlags: %u",(unsigned int)bobTheDesc->mFormatFlags);
-            NSLog(@"mBytesPerPacket: %u",(unsigned int)bobTheDesc->mBytesPerPacket);
-            NSLog(@"mFramesPerPacket: %u",(unsigned int)bobTheDesc->mFramesPerPacket);
-            NSLog(@"mBytesPerFrame: %u",(unsigned int)bobTheDesc->mBytesPerFrame);
-            NSLog(@"mChannelsPerFrame: %u",(unsigned int)bobTheDesc->mChannelsPerFrame);
-            NSLog(@"mBitsPerChannel: %u",(unsigned int)bobTheDesc->mBitsPerChannel);
-            NSLog(@"mReserved: %u",(unsigned int)bobTheDesc->mReserved);
-            NSLog(@"-------");
+    AVAssetTrack *audioTrack = audioTracks[0];
+    NSLog(@"Track ID: %d", audioTrack.trackID);
+    NSArray* formatDesc = audioTrack.formatDescriptions;
+    for(unsigned int i = 0; i < [formatDesc count]; ++i) {
+        CMAudioFormatDescriptionRef item = (__bridge CMAudioFormatDescriptionRef) formatDesc[i];
+        const AudioStreamBasicDescription* bobTheDesc = CMAudioFormatDescriptionGetStreamBasicDescription (item);
+        NSLog(@"mSampleRate: %lf",bobTheDesc->mSampleRate);
+        NSLog(@"mFormatID: %u",(unsigned int)bobTheDesc->mFormatID);
+        NSLog(@"mFormatFlags: %u",(unsigned int)bobTheDesc->mFormatFlags);
+        NSLog(@"mBytesPerPacket: %u",(unsigned int)bobTheDesc->mBytesPerPacket);
+        NSLog(@"mFramesPerPacket: %u",(unsigned int)bobTheDesc->mFramesPerPacket);
+        NSLog(@"mBytesPerFrame: %u",(unsigned int)bobTheDesc->mBytesPerFrame);
+        NSLog(@"mChannelsPerFrame: %u",(unsigned int)bobTheDesc->mChannelsPerFrame);
+        NSLog(@"mBitsPerChannel: %u",(unsigned int)bobTheDesc->mBitsPerChannel);
+        NSLog(@"mReserved: %u",(unsigned int)bobTheDesc->mReserved);
+        NSLog(@"-------");
+    }
+    NSLog(@"nominalFrameRate: %f", audioTrack.nominalFrameRate);
+
+    NSMutableDictionary* audioReadSettings = [NSMutableDictionary dictionary];
+    [audioReadSettings setValue:@(kAudioFormatLinearPCM)
+                         forKey:AVFormatIDKey];
+
+    AVAssetReaderTrackOutput* readerOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:audioTrack outputSettings:audioReadSettings];
+    [reader addOutput:readerOutput];
+    [reader startReading];
+
+    CMSampleBufferRef sample = [readerOutput copyNextSampleBuffer];
+    NSMutableData *audioData =[[NSMutableData alloc] init];
+    while (sample != NULL) {
+        if (sample == NULL)
+            continue;
+        AudioBufferList audioBufferList;
+        CMBlockBufferRef blockBuffer = CMSampleBufferGetDataBuffer( sample );
+        CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sample, NULL, &audioBufferList, sizeof(audioBufferList), NULL, NULL, 0, &blockBuffer);
+
+        for (int y = 0; y < audioBufferList.mNumberBuffers; y++) {
+            AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
+            Float32 *frame = (Float32*)audioBuffer.mData;
+            NSLog(@"Size of frame: %u", (unsigned int)audioBuffer.mDataByteSize);
+            [audioData appendBytes:frame length:audioBuffer.mDataByteSize];
         }
-        NSLog(@"nominalFrameRate: %f", audioTrack.nominalFrameRate);
-
-        NSMutableDictionary* audioReadSettings = [NSMutableDictionary dictionary];
-        [audioReadSettings setValue:@(kAudioFormatLinearPCM)
-                             forKey:AVFormatIDKey];
-
-        AVAssetReaderTrackOutput* readerOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:audioTrack outputSettings:audioReadSettings];
-        [reader addOutput:readerOutput];
-        [reader startReading];
-
-        CMSampleBufferRef sample = [readerOutput copyNextSampleBuffer];
-        NSMutableData *audioData =[[NSMutableData alloc] init];
-        while (sample != NULL) {
-            if (sample == NULL)
-                continue;
-            AudioBufferList audioBufferList;
-            CMBlockBufferRef blockBuffer = CMSampleBufferGetDataBuffer( sample );
-            CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sample, NULL, &audioBufferList, sizeof(audioBufferList), NULL, NULL, 0, &blockBuffer);
-
-            for (int y = 0; y < audioBufferList.mNumberBuffers; y++) {
-                AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
-                Float32 *frame = (Float32*)audioBuffer.mData;
-                NSLog(@"Size of frame: %u", (unsigned int)audioBuffer.mDataByteSize);
-                [audioData appendBytes:frame length:audioBuffer.mDataByteSize];
-            }
-            CFRelease(blockBuffer);
-            blockBuffer=NULL;
-            CFRelease(sample);
-            sample = [readerOutput copyNextSampleBuffer];
-        }
+        CFRelease(blockBuffer);
+        blockBuffer=NULL;
+        CFRelease(sample);
+        sample = [readerOutput copyNextSampleBuffer];
     }
 
     NSLog(@"Finish");
+    MKRVad *vad = [[MKRVad alloc] init];
+    [vad gotAudioSamples:audioData];
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask ,YES);

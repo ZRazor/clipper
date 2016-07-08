@@ -14,6 +14,8 @@
 		3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3BA031D2CD5CE0062D19D /* LaunchScreen.storyboard */; };
 		3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */; };
 		58AAA040886A724D9945554E /* README.MD in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAE5350D8F9BD1ACE429C /* README.MD */; };
+		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
+		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +29,11 @@
 		3AB3BA061D2CD5CE0062D19D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AB3BA0C1D2CD8270062D19D /* MKRVideoSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVideoSelectViewController.h; sourceTree = "<group>"; };
 		3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVideoSelectViewController.m; sourceTree = "<group>"; };
+		58AAAA340F82A110339BAA56 /* MKRVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVad.m; sourceTree = "<group>"; };
+		58AAAB935C8B7FE6E7E27DF0 /* MKRVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVad.h; sourceTree = "<group>"; };
+		58AAACD1FA4D58090C4CD60E /* MKRCVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCVad.m; sourceTree = "<group>"; };
 		58AAAE5350D8F9BD1ACE429C /* README.MD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = "<group>"; };
+		58AAAFB31421FAF140184D43 /* MKRCVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCVad.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		58AAA18E58E2FC73F249ECB2 /* VAD */ = {
+			isa = PBXGroup;
+			children = (
+				58AAACD1FA4D58090C4CD60E /* MKRCVad.m */,
+				58AAAFB31421FAF140184D43 /* MKRCVad.h */,
+				58AAAA340F82A110339BAA56 /* MKRVad.m */,
+				58AAAB935C8B7FE6E7E27DF0 /* MKRVad.h */,
+			);
+			path = VAD;
+			sourceTree = "<group>";
+		};
 		58AAA98146A845B5B5C3A4DD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +127,7 @@
 		58AAAE3E60EC6A81FCC3071F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				58AAA18E58E2FC73F249ECB2 /* VAD */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -188,6 +206,8 @@
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
 				3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */,
 				58AAA040886A724D9945554E /* README.MD in Sources */,
+				58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */,
+				58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
