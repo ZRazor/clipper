@@ -16,6 +16,11 @@
 		58AAA040886A724D9945554E /* README.MD in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAE5350D8F9BD1ACE429C /* README.MD */; };
 		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
+		D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */; };
+		D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C71D2F48A90095F5D6 /* MKRBar.m */; };
+		D7E5F3CB1D2F48B00095F5D6 /* MKRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3CA1D2F48B00095F5D6 /* MKRScene.m */; };
+		D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3CE1D2F49110095F5D6 /* MKRBarManager.m */; };
+		D7E5F3D21D2F49D80095F5D6 /* MKRInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3D11D2F49D80095F5D6 /* MKRInterval.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,16 @@
 		58AAACD1FA4D58090C4CD60E /* MKRCVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCVad.m; sourceTree = "<group>"; };
 		58AAAE5350D8F9BD1ACE429C /* README.MD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = "<group>"; };
 		58AAAFB31421FAF140184D43 /* MKRCVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCVad.h; sourceTree = "<group>"; };
+		D7E5F3C31D2F489C0095F5D6 /* MKRTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTrack.h; sourceTree = "<group>"; };
+		D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRTrack.m; sourceTree = "<group>"; };
+		D7E5F3C61D2F48A90095F5D6 /* MKRBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRBar.h; sourceTree = "<group>"; };
+		D7E5F3C71D2F48A90095F5D6 /* MKRBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRBar.m; sourceTree = "<group>"; };
+		D7E5F3C91D2F48B00095F5D6 /* MKRScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRScene.h; sourceTree = "<group>"; };
+		D7E5F3CA1D2F48B00095F5D6 /* MKRScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRScene.m; sourceTree = "<group>"; };
+		D7E5F3CD1D2F49110095F5D6 /* MKRBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRBarManager.h; sourceTree = "<group>"; };
+		D7E5F3CE1D2F49110095F5D6 /* MKRBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRBarManager.m; sourceTree = "<group>"; };
+		D7E5F3D01D2F49D80095F5D6 /* MKRInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRInterval.h; sourceTree = "<group>"; };
+		D7E5F3D11D2F49D80095F5D6 /* MKRInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRInterval.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +133,7 @@
 		58AAACA1DA2AF1E41D159602 /* clipperSources */ = {
 			isa = PBXGroup;
 			children = (
+				D7E5F3C21D2F48920095F5D6 /* Track */,
 				58AAA98146A845B5B5C3A4DD /* Controllers */,
 				58AAAE3E60EC6A81FCC3071F /* Utils */,
 			);
@@ -127,9 +143,34 @@
 		58AAAE3E60EC6A81FCC3071F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D7E5F3CC1D2F48D10095F5D6 /* Analysis */,
 				58AAA18E58E2FC73F249ECB2 /* VAD */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		D7E5F3C21D2F48920095F5D6 /* Track */ = {
+			isa = PBXGroup;
+			children = (
+				D7E5F3C31D2F489C0095F5D6 /* MKRTrack.h */,
+				D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */,
+				D7E5F3C61D2F48A90095F5D6 /* MKRBar.h */,
+				D7E5F3C71D2F48A90095F5D6 /* MKRBar.m */,
+				D7E5F3C91D2F48B00095F5D6 /* MKRScene.h */,
+				D7E5F3CA1D2F48B00095F5D6 /* MKRScene.m */,
+				D7E5F3D01D2F49D80095F5D6 /* MKRInterval.h */,
+				D7E5F3D11D2F49D80095F5D6 /* MKRInterval.m */,
+			);
+			path = Track;
+			sourceTree = "<group>";
+		};
+		D7E5F3CC1D2F48D10095F5D6 /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				D7E5F3CD1D2F49110095F5D6 /* MKRBarManager.h */,
+				D7E5F3CE1D2F49110095F5D6 /* MKRBarManager.m */,
+			);
+			path = Analysis;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,9 +243,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */,
 				3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */,
+				D7E5F3CB1D2F48B00095F5D6 /* MKRScene.m in Sources */,
+				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
+				D7E5F3D21D2F49D80095F5D6 /* MKRInterval.m in Sources */,
 				3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */,
+				D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */,
 				58AAA040886A724D9945554E /* README.MD in Sources */,
 				58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */,
 				58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */,
