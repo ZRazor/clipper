@@ -115,7 +115,6 @@
         for (int y = 0; y < audioBufferList.mNumberBuffers; y++) {
             AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
             Float32 *frame = (Float32*)audioBuffer.mData;
-//            NSLog(@"Size of frame: %u", (unsigned int)audioBuffer.mDataByteSize);
             [audioData appendBytes:frame length:audioBuffer.mDataByteSize];
         }
         CFRelease(blockBuffer);
@@ -133,21 +132,19 @@
     NSMutableArray<MKRInterval *> *speechIntervals = [vad gotAudioWithSamples:audioData andAudioMsDuration:audioMsDuration];
     
     NSLog(@"VAD complete, found %lu speech intervals", [speechIntervals count]);
-    MKRTrack *track = [[MKRTrack alloc] initWithBPM:120 andQPB:4];
-    MKRBarManager *barManager = [[MKRBarManager alloc] initWithTrack:track andFeaturesIntervals:speechIntervals];
-    NSMutableArray<MKRBar *> *bars = [barManager getBarsWithQuantsLength:@4];
+    
+    NSString *trackMetaDataPath = [[NSBundle mainBundle] pathForResource:@"01" ofType:@"plist"];
+    MKRTrack *track = [[MKRTrack alloc] initWithMetaDataPath:trackMetaDataPath andFeaturesInterval:speechIntervals];
+    if (![track fillScenes]) {
+        NSLog(@"Track scenes filling failed");
+    }
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask ,YES);
     NSString* documentsPath = paths[0];
     NSString *destPath = [documentsPath stringByAppendingPathComponent:[videoURL lastPathComponent]];
     [fileManager copyItemAtPath:[videoURL path] toPath:destPath error:&error];
-    callback([NSURL fileURLWithPath:destPath]);
-    
-//    MKRScene sceneA1 = [MKRScene initWith]
-    
-    
-    
+    callback([NSURL fileURLWithPath:destPath]);    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

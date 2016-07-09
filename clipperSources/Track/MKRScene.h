@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MKRBarManager.h"
 
 @interface MKRScene : NSObject
 
 @property(nonatomic) NSMutableArray *bars;
+@property(readonly, nonatomic) NSInteger identifier;
+
+-(instancetype)initWithIdentifier:(NSInteger)identifier;
+-(BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager;
 
 @end

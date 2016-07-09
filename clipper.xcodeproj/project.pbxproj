@@ -16,6 +16,8 @@
 		58AAA040886A724D9945554E /* README.MD in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAE5350D8F9BD1ACE429C /* README.MD */; };
 		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
+		D713467D1D30F7C400B9EDC3 /* MKRSceneB.m in Sources */ = {isa = PBXBuildFile; fileRef = D713467C1D30F7C400B9EDC3 /* MKRSceneB.m */; };
+		D71346851D3119CB00B9EDC3 /* 01.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71346841D3119CB00B9EDC3 /* 01.plist */; };
 		D76621721D2F95CC00E0A402 /* MKRSceneA.m in Sources */ = {isa = PBXBuildFile; fileRef = D76621711D2F95CC00E0A402 /* MKRSceneA.m */; };
 		D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */; };
 		D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */; };
@@ -41,6 +43,9 @@
 		58AAACD1FA4D58090C4CD60E /* MKRCVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCVad.m; sourceTree = "<group>"; };
 		58AAAE5350D8F9BD1ACE429C /* README.MD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = "<group>"; };
 		58AAAFB31421FAF140184D43 /* MKRCVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCVad.h; sourceTree = "<group>"; };
+		D713467B1D30F7C400B9EDC3 /* MKRSceneB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneB.h; sourceTree = "<group>"; };
+		D713467C1D30F7C400B9EDC3 /* MKRSceneB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneB.m; sourceTree = "<group>"; };
+		D71346841D3119CB00B9EDC3 /* 01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 01.plist; sourceTree = "<group>"; };
 		D76621701D2F95CC00E0A402 /* MKRSceneA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneA.h; sourceTree = "<group>"; };
 		D76621711D2F95CC00E0A402 /* MKRSceneA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneA.m; sourceTree = "<group>"; };
 		D76621731D2F9DE200E0A402 /* MKRProcessedInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRProcessedInterval.h; sourceTree = "<group>"; };
@@ -71,6 +76,7 @@
 		3AB3B9E91D2CD5CE0062D19D = {
 			isa = PBXGroup;
 			children = (
+				D71346821D3119CB00B9EDC3 /* assets */,
 				3AB3B9F41D2CD5CE0062D19D /* clipper */,
 				3AB3B9F31D2CD5CE0062D19D /* Products */,
 				58AAACA1DA2AF1E41D159602 /* clipperSources */,
@@ -155,6 +161,22 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		D71346821D3119CB00B9EDC3 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				D71346831D3119CB00B9EDC3 /* tracks */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		D71346831D3119CB00B9EDC3 /* tracks */ = {
+			isa = PBXGroup;
+			children = (
+				D71346841D3119CB00B9EDC3 /* 01.plist */,
+			);
+			path = tracks;
+			sourceTree = "<group>";
+		};
 		D7E5F3C21D2F48920095F5D6 /* Track */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +192,8 @@
 				D76621711D2F95CC00E0A402 /* MKRSceneA.m */,
 				D76621731D2F9DE200E0A402 /* MKRProcessedInterval.h */,
 				D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */,
+				D713467B1D30F7C400B9EDC3 /* MKRSceneB.h */,
+				D713467C1D30F7C400B9EDC3 /* MKRSceneB.m */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -243,6 +267,7 @@
 				3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */,
 				3AB3BA021D2CD5CE0062D19D /* Assets.xcassets in Resources */,
 				3AB3BA001D2CD5CE0062D19D /* Main.storyboard in Resources */,
+				D71346851D3119CB00B9EDC3 /* 01.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +284,7 @@
 				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
 				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
+				D713467D1D30F7C400B9EDC3 /* MKRSceneB.m in Sources */,
 				D7E5F3D21D2F49D80095F5D6 /* MKRInterval.m in Sources */,
 				3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */,
 				D76621721D2F95CC00E0A402 /* MKRSceneA.m in Sources */,

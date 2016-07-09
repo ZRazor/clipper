@@ -15,6 +15,7 @@
 @property (nonatomic) double error;
 @property (nonatomic) NSInteger totalQuantsLength;
 @property (readonly, nonatomic) NSInteger identifier;
+@property (nonatomic) BOOL used;
 
 - (instancetype)initWithSequence:(NSMutableArray *)sequence andQuantsLength:(NSInteger)quantsLength andError:(double)error andTotalQuantsLength:(NSInteger)totalQuantsLength;
 

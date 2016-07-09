@@ -24,6 +24,7 @@ static NSInteger globalIdentifier = 0;
     if (!self) {
         return nil;
     }
+    [self setUsed:NO];
     [self setQuantsLength:quantsLength];
     [self setSequence:[sequence mutableCopy]];
     [self setError:error];

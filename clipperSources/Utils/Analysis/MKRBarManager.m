@@ -7,24 +7,22 @@
 //
 
 #import "MKRBarManager.h"
-#import "MKRInterval.h"
 #import "MKRProcessedInterval.h"
-#import "MKRBar.h"
 
 @implementation MKRBarManager{
     NSMutableDictionary *cache;
 }
 
--(instancetype)initWithTrack:(MKRTrack *)track andFeaturesIntervals:(NSMutableArray<MKRInterval *> *)features {
+-(instancetype)initWithFeaturesIntervals:(NSMutableArray<MKRInterval *> *)features andMSPQ:(double)MSPQ andQPB:(NSInteger)QPB {
     self = [super init];
     if (!self) {
         return nil;
     }
-    
+    [self setMSPQ:MSPQ];
+    [self setQPB:QPB];
+    [self setFeatures:[features mutableCopy]];
     cache = [NSMutableDictionary new];
     
-    [self setTrack:track];
-    [self setFeatures:[features mutableCopy]];
     return self;
 }
 
@@ -40,8 +38,8 @@
 
 -(MKRProcessedInterval *)calculateIntervalWithLeft:(double)left andRight:(double)right andBarErrorPtr:(double *)barErrorPtr {
     double msLength = right - left;
-    double quantsLength = round(msLength / self.track.MSPQ);
-    double warpedMsLength = quantsLength * self.track.MSPQ;
+    double quantsLength = round(msLength / self.MSPQ);
+    double warpedMsLength = quantsLength * self.MSPQ;
     double speedFactor = msLength / warpedMsLength;
     *barErrorPtr += fabs(warpedMsLength - msLength);
     MKRProcessedInterval *interval = [[MKRProcessedInterval alloc] initWithStart:left andEnd:right andSpeedFactor:speedFactor andQuantsLength:quantsLength andMsLength:msLength andWarpedMsLength:warpedMsLength];
@@ -67,7 +65,7 @@
                 }
                 [currentIntervalSequence addObject:foundInterval];
                 currentIntervalQuants += foundInterval.quantsLength;
-                double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.track.MSPQ + foundInterval.speedFactor * 100;
+                double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ + foundInterval.speedFactor * 100;
                 MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence andQuantsLength:currentIntervalQuants andError:barError andTotalQuantsLength:realQuantsLength];
                 [bars addObject:bar];
             }
@@ -78,7 +76,7 @@
             mergeLeftMs = foundInterval.start;
             [currentIntervalSequence addObject:foundInterval];
             currentIntervalQuants += foundInterval.quantsLength;
-            double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.track.MSPQ + foundInterval.speedFactor * 100;
+            double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ + foundInterval.speedFactor * 100;
             MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence andQuantsLength:currentIntervalQuants andError:barError andTotalQuantsLength:realQuantsLength];
             [bars addObject:bar];
         }
@@ -89,6 +87,18 @@
     }];
     
     return bars;
+}
+
+-(MKRBar *)getBarWithQuantsLength:(NSNumber *)quantsLength {
+    NSMutableArray<MKRBar *> *bars = [self getBarsWithQuantsLength:quantsLength];
+    for (NSInteger i = 0; i < [bars count]; i++) {
+        if (!bars[i].used) {
+            [bars[i] setUsed:YES];
+            return bars[i];
+        }
+    }
+    
+    return [bars count] > 0 ? bars[0] : nil;
 }
 
 @end

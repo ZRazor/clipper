@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Structure</key>
+	<array>
+		<integer>0</integer>
+		<integer>0</integer>
+		<integer>1</integer>
+		<integer>1</integer>
+		<integer>2</integer>
+		<integer>3</integer>
+		<integer>3</integer>
+	</array>
+	<key>Scenes</key>
+	<array>
+		<string>SceneA</string>
+		<string>SceneA</string>
+		<string>SceneB</string>
+		<string>SceneA</string>
+	</array>
+	<key>BPM</key>
+	<integer>120</integer>
+	<key>QPB</key>
+	<integer>4</integer>
+</dict>
+</plist>

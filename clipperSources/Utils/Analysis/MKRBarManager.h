@@ -7,16 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MKRTrack.h"
 #import "MKRInterval.h"
 #import "MKRBar.h"
 
 @interface MKRBarManager : NSObject
 
-@property (nonatomic) MKRTrack *track;
+@property (nonatomic) double MSPQ;
+@property (nonatomic) NSInteger QPB;
 @property (nonatomic) NSMutableArray<MKRInterval *> *features;
 
--(instancetype)initWithTrack:(MKRTrack *)track andFeaturesIntervals:(NSMutableArray<MKRInterval *> *)features;
+-(instancetype)initWithFeaturesIntervals:(NSMutableArray<MKRInterval *> *)features andMSPQ:(double)MSPQ andQPB:(NSInteger)QPB;
+
 -(NSMutableArray<MKRBar *> *)getBarsWithQuantsLength:(NSNumber *)quantsLength;
+-(MKRBar *)getBarWithQuantsLength:(NSNumber *)quantsLength;
 
 @end
