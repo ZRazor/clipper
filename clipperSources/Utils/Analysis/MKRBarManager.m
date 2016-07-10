@@ -45,6 +45,8 @@
     *barErrorPtr += fabs(warpedMsLength - msLength);
     MKRProcessedInterval *interval = [[MKRProcessedInterval alloc] initWithStart:left andEnd:right andSpeedFactor:speedFactor andQuantsLength:quantsLength andMsLength:msLength andWarpedMsLength:warpedMsLength];
     
+    NSLog(@"w: %f ms: %f, q: %f, sx: %f", warpedMsLength, msLength, quantsLength, speedFactor);
+    
     return interval;
     
 }
@@ -75,7 +77,7 @@
             if (currentIntervalQuants + foundInterval.quantsLength > realQuantsLength) {
                 break;
             }
-            mergeLeftMs = foundInterval.start;
+            mergeLeftMs = foundInterval.end;
             [currentIntervalSequence addObject:foundInterval];
             currentIntervalQuants += foundInterval.quantsLength;
             double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ + foundInterval.speedFactor * 100;
