@@ -139,7 +139,10 @@
         NSLog(@"Track scenes filling failed");
     }
     
-    AVMutableComposition *result = [track processVideo:avAsset];
+    NSString *playbackPath = [[NSBundle mainBundle] pathForResource:@"01" ofType:@"wav"];
+    AVAsset *playback = [AVAsset assetWithURL:[NSURL fileURLWithPath:playbackPath]];
+    
+    AVMutableComposition *result = [track processVideo:avAsset andAudio:playback];
     AVAssetExportSession *export = [[AVAssetExportSession alloc] initWithAsset:result presetName:AVAssetExportPresetMediumQuality];
     export.outputFileType = AVFileTypeMPEG4;
 
