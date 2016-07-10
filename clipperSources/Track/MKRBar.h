@@ -7,16 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MKRProcessedInterval.h"
 
 @interface MKRBar : NSObject
 
-@property (nonatomic) NSMutableArray *sequence;
+@property (nonatomic) NSMutableArray<MKRProcessedInterval *> *sequence;
 @property (nonatomic) NSInteger quantsLength;
 @property (nonatomic) double error;
 @property (nonatomic) NSInteger totalQuantsLength;
 @property (readonly, nonatomic) NSInteger identifier;
 @property (nonatomic) BOOL used;
 
-- (instancetype)initWithSequence:(NSMutableArray *)sequence andQuantsLength:(NSInteger)quantsLength andError:(double)error andTotalQuantsLength:(NSInteger)totalQuantsLength;
+- (instancetype)initWithSequence:(NSMutableArray<MKRProcessedInterval *> *)sequence andQuantsLength:(NSInteger)quantsLength andError:(double)error andTotalQuantsLength:(NSInteger)totalQuantsLength;
 
 @end

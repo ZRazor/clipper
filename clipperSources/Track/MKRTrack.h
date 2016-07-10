@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 #import "MKRBarManager.h"
 
 @interface MKRTrack : NSObject
@@ -17,5 +18,6 @@
 
 -(instancetype)initWithMetaDataPath:(NSString *)metaDataPath andFeaturesInterval:(NSMutableArray<MKRInterval *> *)features;
 -(BOOL)fillScenes;
+-(AVMutableComposition *)processVideo:(AVAsset *)original;
 
 @end

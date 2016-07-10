@@ -21,6 +21,7 @@
     [self setMSPQ:MSPQ];
     [self setQPB:QPB];
     [self setFeatures:[features mutableCopy]];
+    [self setRegisteredBars:[NSMutableArray<MKRBar *> new]];
     cache = [NSMutableDictionary new];
     
     return self;
@@ -67,6 +68,7 @@
                 currentIntervalQuants += foundInterval.quantsLength;
                 double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ + foundInterval.speedFactor * 100;
                 MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence andQuantsLength:currentIntervalQuants andError:barError andTotalQuantsLength:realQuantsLength];
+                [self.registeredBars addObject:bar];
                 [bars addObject:bar];
             }
             MKRProcessedInterval *foundInterval = [self calculateIntervalWithLeft:self.features[j].start andRight:self.features[j].end andBarErrorPtr:&totalBarError];
@@ -78,6 +80,7 @@
             currentIntervalQuants += foundInterval.quantsLength;
             double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ + foundInterval.speedFactor * 100;
             MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence andQuantsLength:currentIntervalQuants andError:barError andTotalQuantsLength:realQuantsLength];
+            [self.registeredBars addObject:bar];
             [bars addObject:bar];
         }
     }
@@ -91,14 +94,23 @@
 
 -(MKRBar *)getBarWithQuantsLength:(NSNumber *)quantsLength {
     NSMutableArray<MKRBar *> *bars = [self getBarsWithQuantsLength:quantsLength];
+    MKRBar *result = nil;
     for (NSInteger i = 0; i < [bars count]; i++) {
         if (!bars[i].used) {
-            [bars[i] setUsed:YES];
-            return bars[i];
+            result = bars[i];
+            break;
         }
     }
     
-    return [bars count] > 0 ? bars[0] : nil;
+    if (!result) {
+        result = [bars count] > 0 ? bars[0] : nil;
+    }
+    
+    if (result) {
+        [result setUsed:YES];
+    }
+    
+    return result;
 }
 
 @end

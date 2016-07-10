@@ -15,6 +15,7 @@
 @property (nonatomic) double MSPQ;
 @property (nonatomic) NSInteger QPB;
 @property (nonatomic) NSMutableArray<MKRInterval *> *features;
+@property (nonatomic) NSMutableArray<MKRBar *> *registeredBars;
 
 -(instancetype)initWithFeaturesIntervals:(NSMutableArray<MKRInterval *> *)features andMSPQ:(double)MSPQ andQPB:(NSInteger)QPB;
 

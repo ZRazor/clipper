@@ -19,7 +19,7 @@ static NSInteger globalIdentifier = 0;
 
 @implementation MKRBar
 
--(instancetype)initWithSequence:(NSMutableArray *)sequence andQuantsLength:(NSInteger)quantsLength andError:(double)error andTotalQuantsLength:(NSInteger)totalQuantsLength {
+-(instancetype)initWithSequence:(NSMutableArray<MKRProcessedInterval *> *)sequence andQuantsLength:(NSInteger)quantsLength andError:(double)error andTotalQuantsLength:(NSInteger)totalQuantsLength {
     self = [super init];
     if (!self) {
         return nil;
