@@ -19,7 +19,7 @@ static int const kMKRAudioBitDepth = 16;
  * - Higher values are for use with a fixed-position mic or any application with voice buried in ambient noise.
  * - Defaults to 0
  */
-static int const kMKRVadSensitivity = 0;
+static int const kMKRVadSensitivity = 40;
 /**
  * Set the maximum length of time recorded by the VAD in ms
  * Set to -1 for no timeout
