@@ -80,16 +80,15 @@
         CMTime barCursor = kCMTimeZero;
         for (NSInteger j = 0; j < [bar.sequence count]; j++) {
             MKRProcessedInterval *interval = bar.sequence[j];
-            CMTime intervalStart = CMTimeMakeWithSeconds(interval.start / 1000.0, 1000.0);
-            CMTime intervalEnd = CMTimeMakeWithSeconds(interval.end / 1000.0, 1000.0);
-            CMTimeRange range = CMTimeRangeMake(intervalStart, intervalEnd);
+            CMTime intervalStart = CMTimeMakeWithSeconds(interval.start / 1000.0, 60000.0);
+            CMTime intervalEnd = CMTimeMakeWithSeconds(interval.end / 1000.0, 60000.0);
+            CMTimeRange range = CMTimeRangeMake(intervalStart, CMTimeSubtract(intervalEnd, intervalStart));
             [barComposition insertTimeRange:range ofAsset:original atTime:barCursor error:nil];
-            NSLog(@"bar length = %f", CMTimeGetSeconds([barComposition duration]));
             
-            CMTime notProcessedEnd = CMTimeAdd(barCursor, CMTimeSubtract(intervalEnd, intervalStart));
-            CMTimeRange rangeInBar = CMTimeRangeMake(barCursor, notProcessedEnd);
-            CMTime neededDuration = CMTimeMakeWithSeconds(interval.length * interval.speedFactor / 1000.0, 1000);
+            CMTimeRange rangeInBar = CMTimeRangeMake(barCursor, CMTimeSubtract(intervalEnd, intervalStart));
+            CMTime neededDuration = CMTimeMakeWithSeconds(interval.warpedMsLength / 1000.0, 60000);
             [barComposition scaleTimeRange:rangeInBar toDuration:neededDuration];
+            NSLog(@"bar length = %f", CMTimeGetSeconds([barComposition duration]));
             barCursor = CMTimeAdd(barCursor, neededDuration);
         }
         [barsAssets setObject:barComposition forKey:@(bar.identifier)];
