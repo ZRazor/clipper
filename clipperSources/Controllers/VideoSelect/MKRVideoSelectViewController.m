@@ -62,16 +62,16 @@
     [self.moviePlayerOld setContentURL:videoURL];
     [self.moviePlayerOld prepareToPlay];
     [self handleVideo:videoURL withCallback:^(NSURL *newVideoURL) {
-        [self.moviePlayerNew setContentURL:videoURL];
-        [self.videoSwitch setOn:YES];
-        [self.moviePlayerNew prepareToPlay];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.moviePlayerNew setContentURL:newVideoURL];
+            [self.videoSwitch setOn:YES];
+            [self.moviePlayerNew prepareToPlay];
+        });
     }];
 
 }
 
 - (void)handleVideo:(NSURL *)videoURL withCallback:(void (^)(NSURL *newVideoURL))callback {
-    //TODO do all the stuff here
-
     AVAsset *avAsset = [AVAsset assetWithURL:videoURL];
     NSError *error = nil;
     AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:avAsset error:&error];
@@ -138,13 +138,55 @@
     if (![track fillScenes]) {
         NSLog(@"Track scenes filling failed");
     }
+    
+    AVMutableComposition *result = [track processVideo:avAsset];
+    AVAssetExportSession *export = [[AVAssetExportSession alloc] initWithAsset:result presetName:AVAssetExportPresetMediumQuality];
+    export.outputFileType = AVFileTypeMPEG4;
 
-    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask ,YES);
     NSString* documentsPath = paths[0];
-    NSString *destPath = [documentsPath stringByAppendingPathComponent:[videoURL lastPathComponent]];
-    [fileManager copyItemAtPath:[videoURL path] toPath:destPath error:&error];
-    callback([NSURL fileURLWithPath:destPath]);    
+    
+    NSString *UUID = [[NSUUID UUID] UUIDString];
+    NSString *exportURL = [NSString stringWithFormat:@"%@/export_%@.mp4", documentsPath, UUID];
+    NSURL *outputURL = [NSURL fileURLWithPath:exportURL];
+    export.outputURL = outputURL;
+    
+    
+    [export exportAsynchronouslyWithCompletionHandler:^{
+        int exportStatus = export.status;
+        switch (exportStatus) {
+            case AVAssetExportSessionStatusFailed: {
+                NSError *exportError = export.error;
+                NSLog(@"AVAssetExportSessionStatusFailed: %@", exportError);
+                break;
+            }
+            case AVAssetExportSessionStatusCompleted: {
+                NSLog(@"AVAssetExportSessionStatusCompleted--");
+                callback(outputURL);
+                break;
+            }
+            case AVAssetExportSessionStatusUnknown: {
+                NSLog(@"AVAssetExportSessionStatusUnknown");
+                break;
+            }
+            case AVAssetExportSessionStatusExporting: {
+                NSLog (@"AVAssetExportSessionStatusExporting");
+                break;
+            }
+            case AVAssetExportSessionStatusCancelled: {
+                NSLog(@"AVAssetExportSessionStatusCancelled");
+                break;
+            }
+            case AVAssetExportSessionStatusWaiting: {
+                NSLog(@"AVAssetExportSessionStatusWaiting");
+                break;
+            }
+            default: {
+                NSLog(@"didn't get export status");
+                break;
+            }
+        }
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
