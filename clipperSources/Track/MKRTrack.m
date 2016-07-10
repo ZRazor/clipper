@@ -69,7 +69,7 @@
     return YES;
 }
 
--(AVMutableComposition *)processVideo:(AVAsset *)original {
+-(AVMutableComposition *)processVideo:(AVAsset *)original andAudio:(AVAsset *)playback {
     NSMutableDictionary *barsAssets = [NSMutableDictionary new];
     for (NSInteger i = 0; i < [barManager.registeredBars count]; i++) {
         MKRBar *bar = barManager.registeredBars[i];
@@ -107,6 +107,10 @@
             resultCursor = CMTimeAdd(resultCursor, [barAsset duration]);
         }
     }
+    
+    AVAssetTrack *playbackAssetTrack = [playback tracksWithMediaType:AVMediaTypeAudio][0];
+    AVMutableCompositionTrack *playbackTrack = [result addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [playback duration]) ofTrack:playbackAssetTrack atTime:kCMTimeZero error:nil];
     
     NSLog(@"result track duration = %f", CMTimeGetSeconds([result duration]));
     
