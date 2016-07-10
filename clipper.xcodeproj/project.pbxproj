@@ -20,6 +20,7 @@
 		D71346851D3119CB00B9EDC3 /* 01.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71346841D3119CB00B9EDC3 /* 01.plist */; };
 		D76621721D2F95CC00E0A402 /* MKRSceneA.m in Sources */ = {isa = PBXBuildFile; fileRef = D76621711D2F95CC00E0A402 /* MKRSceneA.m */; };
 		D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */; };
+		D76F1D1A1D325152000132A1 /* 01.wav in Resources */ = {isa = PBXBuildFile; fileRef = D76F1D191D325152000132A1 /* 01.wav */; };
 		D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */; };
 		D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C71D2F48A90095F5D6 /* MKRBar.m */; };
 		D7E5F3CB1D2F48B00095F5D6 /* MKRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3CA1D2F48B00095F5D6 /* MKRScene.m */; };
@@ -50,6 +51,7 @@
 		D76621711D2F95CC00E0A402 /* MKRSceneA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneA.m; sourceTree = "<group>"; };
 		D76621731D2F9DE200E0A402 /* MKRProcessedInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRProcessedInterval.h; sourceTree = "<group>"; };
 		D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRProcessedInterval.m; sourceTree = "<group>"; };
+		D76F1D191D325152000132A1 /* 01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 01.wav; sourceTree = "<group>"; };
 		D7E5F3C31D2F489C0095F5D6 /* MKRTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTrack.h; sourceTree = "<group>"; };
 		D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRTrack.m; sourceTree = "<group>"; };
 		D7E5F3C61D2F48A90095F5D6 /* MKRBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRBar.h; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		D71346831D3119CB00B9EDC3 /* tracks */ = {
 			isa = PBXGroup;
 			children = (
+				D76F1D191D325152000132A1 /* 01.wav */,
 				D71346841D3119CB00B9EDC3 /* 01.plist */,
 			);
 			path = tracks;
@@ -265,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D76F1D1A1D325152000132A1 /* 01.wav in Resources */,
 				3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */,
 				3AB3BA021D2CD5CE0062D19D /* Assets.xcassets in Resources */,
 				3AB3BA001D2CD5CE0062D19D /* Main.storyboard in Resources */,
