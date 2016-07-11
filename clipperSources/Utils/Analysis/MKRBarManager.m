@@ -68,7 +68,7 @@
                 }
                 [currentIntervalSequence addObject:foundInterval];
                 currentIntervalQuants += foundInterval.quantsLength;
-                double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ + foundInterval.speedFactor * 100;
+                double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ + foundInterval.speedFactor * 10;
                 MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence andQuantsLength:currentIntervalQuants andError:barError andTotalQuantsLength:realQuantsLength];
                 [self.registeredBars addObject:bar];
                 [bars addObject:bar];
@@ -80,7 +80,7 @@
             mergeLeftMs = foundInterval.end;
             [currentIntervalSequence addObject:foundInterval];
             currentIntervalQuants += foundInterval.quantsLength;
-            double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ + foundInterval.speedFactor * 100;
+            double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ + foundInterval.speedFactor * 10;
             MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence andQuantsLength:currentIntervalQuants andError:barError andTotalQuantsLength:realQuantsLength];
             [self.registeredBars addObject:bar];
             [bars addObject:bar];

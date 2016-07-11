@@ -14,10 +14,10 @@
 	</array>
 	<key>Scenes</key>
 	<array>
-		<string>SceneA</string>
-		<string>SceneA</string>
-		<string>SceneB</string>
-		<string>SceneA</string>
+		<string>MKRSceneA</string>
+		<string>MKRSceneA</string>
+		<string>MKRSceneB</string>
+		<string>MKRSceneA</string>
 	</array>
 	<key>BPM</key>
 	<integer>180</integer>

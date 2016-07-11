@@ -10,6 +10,7 @@
 #import "MKRScene.h"
 #import "MKRSceneA.h"
 #import "MKRSceneB.h"
+#import "MKRSceneC.h"
 
 @implementation MKRTrack {
     NSMutableArray<MKRScene *> *scenes;
@@ -35,13 +36,9 @@
     NSMutableArray<NSNumber *> *metaDataStructure = [metaData mutableArrayValueForKey:@"Structure"];
     NSInteger identifier = 0;
     for (NSString *metaDataScene in metaDataScenes) {
-        MKRScene *scene;
-        //TODO: refactor using scene factory
-        if ([metaDataScene isEqualToString:@"SceneA"]) {
-            scene = [[MKRSceneA alloc] initWithIdentifier:identifier++];
-        } else if ([metaDataScene isEqualToString:@"SceneB"]) {
-            scene = [[MKRSceneB alloc] initWithIdentifier:identifier++];
-        } else {
+        Class sceneClass = NSClassFromString(metaDataScene);
+        MKRScene *scene = [[sceneClass alloc] initWithIdentifier:identifier++];
+        if (!scene) {
             @throw ([NSException exceptionWithName:@"Unknown scene type" reason:@"Unknown scene type in track meta data" userInfo:nil]);
         }
         [scenes addObject:scene];

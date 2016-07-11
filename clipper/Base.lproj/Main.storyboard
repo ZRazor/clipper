@@ -6,7 +6,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Clipper-->
+        <!--Video Select View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MKRVideoSelectViewController" sceneMemberID="viewController">
@@ -65,7 +65,8 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Clipper" id="1Q8-3z-ZXW">
+                    <navigationItem key="navigationItem" id="1Q8-3z-ZXW">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" style="plain" id="yML-Xv-I3I">
                             <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="qaA-0p-qHW">
                                 <rect key="frame" x="16" y="6" width="51" height="31"/>
@@ -75,6 +76,14 @@
                                 </connections>
                             </switch>
                         </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="KcW-Ud-ukz">
+                            <rect key="frame" x="99.5" y="7" width="121" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="1"/>
+                                <segment title="2"/>
+                            </segments>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="F3g-Hm-ErZ">
                             <connections>
                                 <action selector="selectVideoClick:" destination="BYZ-38-t0r" id="0mn-oV-C7i"/>
@@ -84,6 +93,7 @@
                     <connections>
                         <outlet property="moviePlaceViewNew" destination="6KV-Kf-52w" id="VHN-E0-4zN"/>
                         <outlet property="moviePlaceViewOld" destination="8jA-3r-3XB" id="cH2-nj-Ca1"/>
+                        <outlet property="selectTrackSegmentedControl" destination="KcW-Ud-ukz" id="VyP-09-qNL"/>
                         <outlet property="videoSwitch" destination="qaA-0p-qHW" id="GGI-eb-oy3"/>
                     </connections>
                 </viewController>

@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *moviePlaceViewOld;
 @property (weak, nonatomic) IBOutlet UIView *moviePlaceViewNew;
 @property (weak, nonatomic) IBOutlet UISwitch *videoSwitch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *selectTrackSegmentedControl;
 
 - (IBAction)changeVideoAction:(UISwitch *)sender;
 
@@ -135,7 +136,8 @@
     
     NSLog(@"VAD complete, found %lu speech intervals", [speechIntervals count]);
     
-    NSString *trackMetaDataPath = [[NSBundle mainBundle] pathForResource:@"01" ofType:@"plist"];
+    NSString *trackName = self.selectTrackSegmentedControl.selectedSegmentIndex == 0 ? @"01" : @"02";
+    NSString *trackMetaDataPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"plist"];
     MKRTrack *track = [[MKRTrack alloc] initWithMetaDataPath:trackMetaDataPath andFeaturesInterval:speechIntervals];
     if (![track fillScenes]) {
         NSLog(@"Track scenes filling failed");
@@ -143,7 +145,7 @@
         return;
     }
     
-    NSString *playbackPath = [[NSBundle mainBundle] pathForResource:@"01" ofType:@"wav"];
+    NSString *playbackPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"wav"];
     AVAsset *playback = [AVAsset assetWithURL:[NSURL fileURLWithPath:playbackPath]];
     
     AVMutableComposition *result = [track processVideo:avAsset andAudio:playback];

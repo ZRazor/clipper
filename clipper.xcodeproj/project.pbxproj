@@ -21,6 +21,10 @@
 		D76621721D2F95CC00E0A402 /* MKRSceneA.m in Sources */ = {isa = PBXBuildFile; fileRef = D76621711D2F95CC00E0A402 /* MKRSceneA.m */; };
 		D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */; };
 		D76F1D1A1D325152000132A1 /* 01.wav in Resources */ = {isa = PBXBuildFile; fileRef = D76F1D191D325152000132A1 /* 01.wav */; };
+		D7D04B4B1D3392D400E606F9 /* 02.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7D04B4A1D3392D400E606F9 /* 02.plist */; };
+		D7D04B4D1D33933D00E606F9 /* 02.wav in Resources */ = {isa = PBXBuildFile; fileRef = D7D04B4C1D33933D00E606F9 /* 02.wav */; };
+		D7D04B501D33934E00E606F9 /* MKRSceneC.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D04B4F1D33934E00E606F9 /* MKRSceneC.m */; };
+		D7D04B531D3397C000E606F9 /* MKRSceneD.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D04B521D3397C000E606F9 /* MKRSceneD.m */; };
 		D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */; };
 		D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C71D2F48A90095F5D6 /* MKRBar.m */; };
 		D7E5F3CB1D2F48B00095F5D6 /* MKRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3CA1D2F48B00095F5D6 /* MKRScene.m */; };
@@ -52,6 +56,12 @@
 		D76621731D2F9DE200E0A402 /* MKRProcessedInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRProcessedInterval.h; sourceTree = "<group>"; };
 		D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRProcessedInterval.m; sourceTree = "<group>"; };
 		D76F1D191D325152000132A1 /* 01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 01.wav; sourceTree = "<group>"; };
+		D7D04B4A1D3392D400E606F9 /* 02.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 02.plist; sourceTree = "<group>"; };
+		D7D04B4C1D33933D00E606F9 /* 02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 02.wav; sourceTree = "<group>"; };
+		D7D04B4E1D33934E00E606F9 /* MKRSceneC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneC.h; sourceTree = "<group>"; };
+		D7D04B4F1D33934E00E606F9 /* MKRSceneC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneC.m; sourceTree = "<group>"; };
+		D7D04B511D3397C000E606F9 /* MKRSceneD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneD.h; sourceTree = "<group>"; };
+		D7D04B521D3397C000E606F9 /* MKRSceneD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneD.m; sourceTree = "<group>"; };
 		D7E5F3C31D2F489C0095F5D6 /* MKRTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTrack.h; sourceTree = "<group>"; };
 		D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRTrack.m; sourceTree = "<group>"; };
 		D7E5F3C61D2F48A90095F5D6 /* MKRBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRBar.h; sourceTree = "<group>"; };
@@ -174,8 +184,10 @@
 		D71346831D3119CB00B9EDC3 /* tracks */ = {
 			isa = PBXGroup;
 			children = (
+				D7D04B4C1D33933D00E606F9 /* 02.wav */,
 				D76F1D191D325152000132A1 /* 01.wav */,
 				D71346841D3119CB00B9EDC3 /* 01.plist */,
+				D7D04B4A1D3392D400E606F9 /* 02.plist */,
 			);
 			path = tracks;
 			sourceTree = "<group>";
@@ -197,6 +209,10 @@
 				D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */,
 				D713467B1D30F7C400B9EDC3 /* MKRSceneB.h */,
 				D713467C1D30F7C400B9EDC3 /* MKRSceneB.m */,
+				D7D04B4E1D33934E00E606F9 /* MKRSceneC.h */,
+				D7D04B4F1D33934E00E606F9 /* MKRSceneC.m */,
+				D7D04B511D3397C000E606F9 /* MKRSceneD.h */,
+				D7D04B521D3397C000E606F9 /* MKRSceneD.m */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -269,9 +285,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D76F1D1A1D325152000132A1 /* 01.wav in Resources */,
+				D7D04B4D1D33933D00E606F9 /* 02.wav in Resources */,
 				3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */,
 				3AB3BA021D2CD5CE0062D19D /* Assets.xcassets in Resources */,
 				3AB3BA001D2CD5CE0062D19D /* Main.storyboard in Resources */,
+				D7D04B4B1D3392D400E606F9 /* 02.plist in Resources */,
 				D71346851D3119CB00B9EDC3 /* 01.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,8 +303,10 @@
 			files = (
 				D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */,
 				3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */,
+				D7D04B531D3397C000E606F9 /* MKRSceneD.m in Sources */,
 				D7E5F3CB1D2F48B00095F5D6 /* MKRScene.m in Sources */,
 				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
+				D7D04B501D33934E00E606F9 /* MKRSceneC.m in Sources */,
 				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
 				D713467D1D30F7C400B9EDC3 /* MKRSceneB.m in Sources */,
