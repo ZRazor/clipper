@@ -61,17 +61,19 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.moviePlayerOld setContentURL:videoURL];
     [self.moviePlayerOld prepareToPlay];
-    [self handleVideo:videoURL withCallback:^(NSURL *newVideoURL) {
+    [self handleVideo:videoURL onSuccess:^(NSURL *newVideoURL) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.moviePlayerNew setContentURL:newVideoURL];
             [self.videoSwitch setOn:YES];
             [self.moviePlayerNew prepareToPlay];
         });
+    } onFailure:^(NSError *error) {
+        return;
     }];
 
 }
 
-- (void)handleVideo:(NSURL *)videoURL withCallback:(void (^)(NSURL *newVideoURL))callback {
+- (void)handleVideo:(NSURL *)videoURL onSuccess:(void (^)(NSURL *newVideoURL))success onFailure:(void (^)(NSError *error))failure {
     AVAsset *avAsset = [AVAsset assetWithURL:videoURL];
     NSError *error = nil;
     AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:avAsset error:&error];
@@ -137,6 +139,7 @@
     MKRTrack *track = [[MKRTrack alloc] initWithMetaDataPath:trackMetaDataPath andFeaturesInterval:speechIntervals];
     if (![track fillScenes]) {
         NSLog(@"Track scenes filling failed");
+        failure([NSError errorWithDomain:@"MayakRed" code:0 userInfo:nil]);
     }
     
     NSString *playbackPath = [[NSBundle mainBundle] pathForResource:@"01" ofType:@"wav"];
@@ -161,15 +164,17 @@
             case AVAssetExportSessionStatusFailed: {
                 NSError *exportError = export.error;
                 NSLog(@"AVAssetExportSessionStatusFailed: %@", exportError);
+                failure([NSError errorWithDomain:@"MayakRed" code:1 userInfo:nil]);
                 break;
             }
             case AVAssetExportSessionStatusCompleted: {
                 NSLog(@"AVAssetExportSessionStatusCompleted--");
-                callback(outputURL);
+                success(outputURL);
                 break;
             }
             case AVAssetExportSessionStatusUnknown: {
                 NSLog(@"AVAssetExportSessionStatusUnknown");
+                failure([NSError errorWithDomain:@"MayakRed" code:2 userInfo:nil]);
                 break;
             }
             case AVAssetExportSessionStatusExporting: {
@@ -178,6 +183,7 @@
             }
             case AVAssetExportSessionStatusCancelled: {
                 NSLog(@"AVAssetExportSessionStatusCancelled");
+                failure([NSError errorWithDomain:@"MayakRed" code:3 userInfo:nil]);
                 break;
             }
             case AVAssetExportSessionStatusWaiting: {
@@ -186,6 +192,7 @@
             }
             default: {
                 NSLog(@"didn't get export status");
+                failure([NSError errorWithDomain:@"MayakRed" code:4 userInfo:nil]);
                 break;
             }
         }
