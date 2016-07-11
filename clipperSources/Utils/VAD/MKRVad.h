@@ -11,7 +11,7 @@
 #import "MKRCVad.h"
 #import "MKRInterval.h"
 
-static int const kMKRAudioSampleRate = 16000;
+static int const kMKRAudioSampleRate = 44100;
 static int const kMKRAudioBitDepth = 16;
 /**
  * Set VAD sensitivity (0-100):
