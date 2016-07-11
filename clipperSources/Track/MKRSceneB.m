@@ -11,11 +11,12 @@
 @implementation MKRSceneB
 
 -(BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
-    MKRBar *bar = [barManager getBarWithQuantsLength:@(8 * barManager.MSPQ)];
+    MKRBar *bar = [barManager getBarWithQuantsLength:@(8 * barManager.QPB)];
     if (bar == nil) {
         return NO;
     }
     [self.bars addObject:bar];
+    
     return YES;
 }
 
