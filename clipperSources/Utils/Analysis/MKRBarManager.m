@@ -29,11 +29,9 @@
 
 -(NSMutableArray<MKRBar *> *)getBarsWithQuantsLength:(NSNumber *)quantsLength {
     if (cache[quantsLength] == nil) {
-        NSLog(@"MKRBarManager.getBarsWithQuantsLength has no cache for quantsLength %lu", [quantsLength longValue]);
         [cache setObject:[self getBarsImplWithQuantsLength:quantsLength] forKey:quantsLength];
     }
     NSMutableArray<MKRBar *> *result = [cache objectForKey:quantsLength];
-    NSLog(@"MKRBarManager.getBarsWithQuantsLength return %lu bars", [result count]);
     return result;
 }
 
@@ -45,7 +43,7 @@
     *barErrorPtr += fabs(warpedMsLength - msLength);
     MKRProcessedInterval *interval = [[MKRProcessedInterval alloc] initWithStart:left andEnd:right andSpeedFactor:speedFactor andQuantsLength:quantsLength andMsLength:msLength andWarpedMsLength:warpedMsLength];
     
-    NSLog(@"w: %f ms: %f, q: %f, sx: %f", warpedMsLength, msLength, quantsLength, speedFactor);
+//    NSLog(@"w: %f ms: %f, q: %f, sx: %f", warpedMsLength, msLength, quantsLength, speedFactor);
     
     return interval;
     

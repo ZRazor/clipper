@@ -85,7 +85,6 @@
             CMTimeRange rangeInBar = CMTimeRangeMake(barCursor, CMTimeSubtract(intervalEnd, intervalStart));
             CMTime neededDuration = CMTimeMakeWithSeconds(interval.warpedMsLength / 1000.0, 60000);
             [barComposition scaleTimeRange:rangeInBar toDuration:neededDuration];
-            NSLog(@"bar length = %f", CMTimeGetSeconds([barComposition duration]));
             barCursor = CMTimeAdd(barCursor, neededDuration);
         }
         [barsAssets setObject:barComposition forKey:@(bar.identifier)];

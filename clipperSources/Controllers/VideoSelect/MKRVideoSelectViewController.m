@@ -149,17 +149,16 @@
     AVAsset *playback = [AVAsset assetWithURL:[NSURL fileURLWithPath:playbackPath]];
     
     AVMutableComposition *result = [track processVideo:avAsset andAudio:playback];
-    AVAssetExportSession *export = [[AVAssetExportSession alloc] initWithAsset:result presetName:AVAssetExportPresetMediumQuality];
-    export.outputFileType = AVFileTypeMPEG4;
+    AVAssetExportSession *export = [[AVAssetExportSession alloc] initWithAsset:result presetName:AVAssetExportPresetHighestQuality];
+    export.outputFileType = AVFileTypeQuickTimeMovie;
 
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask ,YES);
     NSString* documentsPath = paths[0];
     
     NSString *UUID = [[NSUUID UUID] UUIDString];
-    NSString *exportURL = [NSString stringWithFormat:@"%@/export_%@.mp4", documentsPath, UUID];
+    NSString *exportURL = [NSString stringWithFormat:@"%@/export_%@.mov", documentsPath, UUID];
     NSURL *outputURL = [NSURL fileURLWithPath:exportURL];
     export.outputURL = outputURL;
-    
     
     [export exportAsynchronouslyWithCompletionHandler:^{
         int exportStatus = export.status;
