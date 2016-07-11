@@ -140,6 +140,7 @@
     if (![track fillScenes]) {
         NSLog(@"Track scenes filling failed");
         failure([NSError errorWithDomain:@"MayakRed" code:0 userInfo:nil]);
+        return;
     }
     
     NSString *playbackPath = [[NSBundle mainBundle] pathForResource:@"01" ofType:@"wav"];
