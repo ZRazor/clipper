@@ -98,7 +98,7 @@
     NSLog(@"-----------COMPOSING-----------");
     CMTime resultCursor = kCMTimeZero;
     for (MKRScene *scene in structure) {
-        [scene makeComposition:result withBarAssets:barsAssets andWithResultCursorPtr:&resultCursor];
+        [scene makeComposition:result withBarAssets:barsAssets andWithResultCursorPtr:&resultCursor andWithMSPQ:self.MSPQ];
     }
     
     AVAssetTrack *playbackAssetTrack = [playback tracksWithMediaType:AVMediaTypeAudio][0];
