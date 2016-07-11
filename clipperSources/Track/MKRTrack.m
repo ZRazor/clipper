@@ -98,18 +98,7 @@
     NSLog(@"-----------COMPOSING-----------");
     CMTime resultCursor = kCMTimeZero;
     for (MKRScene *scene in structure) {
-        NSLog(@"scene identifier = %ld", scene.identifier);
-        for (MKRBar *bar in scene.bars) {
-            AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
-            if (barAsset == nil) {
-                @throw([NSException exceptionWithName:@"Bar asset not found" reason:@"Bar asset not found" userInfo:nil]);
-            }
-            CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);
-            [result insertTimeRange:barTimeRange ofAsset:barAsset atTime:resultCursor error:nil];
-            resultCursor = CMTimeAdd(resultCursor, [barAsset duration]);
-            
-            NSLog(@"bar id: %ld d: %f, td: %f", bar.identifier, CMTimeGetSeconds(barAsset.duration), CMTimeGetSeconds(resultCursor));
-        }
+        [scene makeComposition:result withBarAssets:barsAssets andWithResultCursorPtr:&resultCursor];
     }
     
     AVAssetTrack *playbackAssetTrack = [playback tracksWithMediaType:AVMediaTypeAudio][0];

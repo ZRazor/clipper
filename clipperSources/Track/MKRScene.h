@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MKRBarManager.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface MKRScene : NSObject
 
@@ -16,5 +17,6 @@
 
 -(instancetype)initWithIdentifier:(NSInteger)identifier;
 -(BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager;
+-(void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr;
 
 @end

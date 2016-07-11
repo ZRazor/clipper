@@ -31,4 +31,19 @@
     @throw([NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override this method in subclass" userInfo:nil]);
 }
 
+-(void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr {
+    NSLog(@"scene identifier = %ld", self.identifier);
+    for (MKRBar *bar in self.bars) {
+        AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
+        if (barAsset == nil) {
+            @throw([NSException exceptionWithName:@"Bar asset not found" reason:@"Bar asset not found" userInfo:nil]);
+        }
+        CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);
+        [composition insertTimeRange:barTimeRange ofAsset:barAsset atTime:*resultCursorPtr error:nil];
+        *resultCursorPtr = CMTimeAdd(*resultCursorPtr, [barAsset duration]);
+
+        NSLog(@"bar id: %ld d: %f, td: %f", bar.identifier, CMTimeGetSeconds(barAsset.duration), CMTimeGetSeconds(*resultCursorPtr));
+    }
+}
+
 @end
