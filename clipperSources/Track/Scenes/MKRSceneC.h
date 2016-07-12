@@ -6,6 +6,10 @@
 //  Copyright © 2016 mayak. All rights reserved.
 //
 
+/*!
+ @class MKRSceneC
+ @abstract renders [^32beats(A)]
+*/
 #import <Foundation/Foundation.h>
 #import "MKRScene.h"
 

@@ -95,6 +95,7 @@
     CMTime resultCursor = kCMTimeZero;
     for (MKRScene *scene in structure) {
         [scene makeComposition:result withBarAssets:barsAssets andWithResultCursorPtr:&resultCursor andWithMSPQ:self.MSPQ];
+        NSLog(@"scene id = %ld total duration = %f", scene.identifier, CMTimeGetSeconds(resultCursor));
     }
     
     AVAssetTrack *playbackAssetTrack = [playback tracksWithMediaType:AVMediaTypeAudio][0];

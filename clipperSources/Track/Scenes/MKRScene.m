@@ -32,13 +32,13 @@
 }
 
 -(void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(NSInteger)MSPQ {
-    NSLog(@"scene identifier = %ld", self.identifier);
+//    NSLog(@"scene identifier = %ld", self.identifier);
     for (MKRBar *bar in self.bars) {
         AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
         CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);
         [self makeCompositionBar:composition withBarAsset:barAsset andWithBar:bar andWithResultCursorPtr:resultCursorPtr andWithMSPQ:MSPQ andWithBarRange:barTimeRange usingAutoComplete:YES];
 
-        NSLog(@"bar id: %ld d: %f td: %f ql: %ld tql: %ld", bar.identifier, CMTimeGetSeconds(barAsset.duration), CMTimeGetSeconds(*resultCursorPtr), bar.quantsLength, bar.totalQuantsLength);
+//        NSLog(@"bar id: %ld d: %f td: %f ql: %ld tql: %ld", bar.identifier, CMTimeGetSeconds(barAsset.duration), CMTimeGetSeconds(*resultCursorPtr), bar.quantsLength, bar.totalQuantsLength);
     }
 }
 
