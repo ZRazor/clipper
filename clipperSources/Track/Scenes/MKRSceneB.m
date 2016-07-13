@@ -20,7 +20,7 @@
     return YES;
 }
 
--(void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(NSInteger)MSPQ {
+-(void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
     NSLog(@"scene identifier = %ld", self.identifier);
     MKRBar *bar = self.bars[0];
     CMTime barStart = *resultCursorPtr;

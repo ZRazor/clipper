@@ -10,7 +10,7 @@
 
 @implementation MKRSceneF
 
--(BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
+- (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
     MKRBar *bar = [barManager getBarWithQuantsLength:@(2 * barManager.QPB)];
     if (!bar) {
         return NO;
@@ -19,7 +19,7 @@
     return YES;
 }
 
--(void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(NSInteger)MSPQ {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
     MKRBar *bar = self.bars[0];
     AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
     CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);

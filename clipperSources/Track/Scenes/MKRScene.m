@@ -16,7 +16,7 @@
 
 @implementation MKRScene
 
--(instancetype)initWithIdentifier:(NSInteger)identifier {
+- (instancetype)initWithIdentifier:(NSInteger)identifier {
     self = [super init];
     if (!self) {
         return nil;
@@ -27,11 +27,11 @@
     return self;
 }
 
--(BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
+- (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
     @throw([NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override this method in subclass" userInfo:nil]);
 }
 
--(void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(NSInteger)MSPQ {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
 //    NSLog(@"scene identifier = %ld", self.identifier);
     for (MKRBar *bar in self.bars) {
         AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
@@ -42,7 +42,7 @@
     }
 }
 
--(void)makeCompositionBar:(AVMutableComposition *)composition withBarAsset:(AVMutableComposition *)barAsset andWithBar:(MKRBar *)bar andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(NSInteger)MSPQ andWithBarRange:(CMTimeRange)barTimeRange usingAutoComplete:(BOOL)autoComplete {
+- (void)makeCompositionBar:(AVMutableComposition *)composition withBarAsset:(AVMutableComposition *)barAsset andWithBar:(MKRBar *)bar andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ andWithBarRange:(CMTimeRange)barTimeRange usingAutoComplete:(BOOL)autoComplete {
     
     if (barAsset == nil) {
         @throw([NSException exceptionWithName:@"Bar asset not found" reason:@"Bar asset not found" userInfo:nil]);
@@ -57,7 +57,10 @@
 }
 
 -(void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr {
-    CMTimeRange barTimeRange = CMTimeRangeMake(startAt, duration);
+    NSLog(@"Insert: [%f, %f] of [%f] at [%f]", CMTimeGetSeconds(startAt), CMTimeGetSeconds(duration), CMTimeGetSeconds(asset.duration), CMTimeGetSeconds(*resultCursorPtr));
+    CMTime realDuration = CMTimeMinimum(duration, asset.duration);
+    CMTimeRange barTimeRange = CMTimeRangeMake(startAt, realDuration);
+    
     [composition insertTimeRange:barTimeRange ofAsset:asset atTime:*resultCursorPtr error:nil];
     *resultCursorPtr = CMTimeAdd(*resultCursorPtr, duration);
 }
