@@ -12,8 +12,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MKRVad.h"
 #import "MKRTrack.h"
-#import "MKRExportProcessor.h"
+#import "MKRScene.h"
+#import "MKRBarManager.h"
+#import "MKRBar.h"
+#import "MKRCustomVideoCompositor.h"
 #import "MKRScenesFillManager.h"
+#import "MKRExportProcessor.h"
 
 
 @interface MKRVideoSelectViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -69,9 +73,6 @@
 
     NSString *trackName = self.selectTrackSegmentedControl.selectedSegmentIndex == 0 ? @"01" : @"02";
 
-    NSString *playbackPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"wav"];
-    AVAsset *playback = [AVAsset assetWithURL:[NSURL fileURLWithPath:playbackPath]];
-
     MKRScenesFillManager *scenesFillManager = [[MKRScenesFillManager alloc] initWithMetaDataPath:[[NSBundle mainBundle]
             pathForResource:trackName ofType:@"plist"]];
 
@@ -81,6 +82,14 @@
         failure([NSError errorWithDomain:@"MayakRed" code:0 userInfo:nil]);
         return;
     }
+    
+    NSString *playbackPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"wav"];
+    AVAsset *playback = [AVAsset assetWithURL:[NSURL fileURLWithPath:playbackPath]];
+    
+    AVMutableComposition *result = [track processVideo:avAsset andAudio:playback];
+    
+    AVAssetExportSession *export = [[AVAssetExportSession alloc] initWithAsset:result presetName:AVAssetExportPresetHighestQuality];
+    export.outputFileType = AVFileTypeQuickTimeMovie;
 
     AVMutableComposition *resultAsset = [track processVideo:avAsset andAudio:playback];
     [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset onSuccess:success onFailure:failure];

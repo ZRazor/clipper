@@ -20,6 +20,8 @@
 		58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */; };
 		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
+		742DFC061D360C80007BE11C /* MKRCustomVideoCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = 742DFC051D360C80007BE11C /* MKRCustomVideoCompositor.m */; };
+		745A4C221D34EA850031D5F4 /* MKRVideoFXService.m in Sources */ = {isa = PBXBuildFile; fileRef = 745A4C211D34EA850031D5F4 /* MKRVideoFXService.m */; };
 		D71346851D3119CB00B9EDC3 /* 01.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71346841D3119CB00B9EDC3 /* 01.plist */; };
 		D763B3DE1D34C95E00D9669E /* MKRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3CF1D34C95E00D9669E /* MKRScene.m */; };
 		D763B3DF1D34C95E00D9669E /* MKRSceneA.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3D11D34C95E00D9669E /* MKRSceneA.m */; };
@@ -63,6 +65,10 @@
 		58AAAF04ECC3873696FAF6D8 /* MKRExportProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRExportProcessor.h; sourceTree = "<group>"; };
 		58AAAFADD1C239374EB36C98 /* MKRScenesFillManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRScenesFillManager.h; sourceTree = "<group>"; };
 		58AAAFB31421FAF140184D43 /* MKRCVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCVad.h; sourceTree = "<group>"; };
+		742DFC041D360C80007BE11C /* MKRCustomVideoCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKRCustomVideoCompositor.h; path = Video/MKRCustomVideoCompositor.h; sourceTree = "<group>"; };
+		742DFC051D360C80007BE11C /* MKRCustomVideoCompositor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKRCustomVideoCompositor.m; path = Video/MKRCustomVideoCompositor.m; sourceTree = "<group>"; };
+		745A4C201D34EA850031D5F4 /* MKRVideoFXService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKRVideoFXService.h; path = Video/FX/MKRVideoFXService.h; sourceTree = "<group>"; };
+		745A4C211D34EA850031D5F4 /* MKRVideoFXService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKRVideoFXService.m; path = Video/FX/MKRVideoFXService.m; sourceTree = "<group>"; };
 		D71346841D3119CB00B9EDC3 /* 01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 01.plist; sourceTree = "<group>"; };
 		D763B3CE1D34C95E00D9669E /* MKRScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRScene.h; sourceTree = "<group>"; };
 		D763B3CF1D34C95E00D9669E /* MKRScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRScene.m; sourceTree = "<group>"; };
@@ -208,12 +214,32 @@
 		58AAAE3E60EC6A81FCC3071F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				745A4C231D34EA890031D5F4 /* Video */,
 				D7E5F3CC1D2F48D10095F5D6 /* Analysis */,
 				58AAA18E58E2FC73F249ECB2 /* VAD */,
 				58AAAD62AC4E9C3E96DBF492 /* PostProcess */,
 				58AAAA337504D5449F17E4CA /* PreProcess */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		745A4C1F1D34EA2E0031D5F4 /* FX */ = {
+			isa = PBXGroup;
+			children = (
+				745A4C201D34EA850031D5F4 /* MKRVideoFXService.h */,
+				745A4C211D34EA850031D5F4 /* MKRVideoFXService.m */,
+			);
+			name = FX;
+			sourceTree = "<group>";
+		};
+		745A4C231D34EA890031D5F4 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				745A4C1F1D34EA2E0031D5F4 /* FX */,
+				742DFC041D360C80007BE11C /* MKRCustomVideoCompositor.h */,
+				742DFC051D360C80007BE11C /* MKRCustomVideoCompositor.m */,
+			);
+			name = Video;
 			sourceTree = "<group>";
 		};
 		D71346821D3119CB00B9EDC3 /* assets */ = {
@@ -370,7 +396,9 @@
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
 				D763B3E41D34C95E00D9669E /* MKRSceneE.m in Sources */,
 				D763B3DE1D34C95E00D9669E /* MKRScene.m in Sources */,
+				745A4C221D34EA850031D5F4 /* MKRVideoFXService.m in Sources */,
 				D7E5F3D21D2F49D80095F5D6 /* MKRInterval.m in Sources */,
+				742DFC061D360C80007BE11C /* MKRCustomVideoCompositor.m in Sources */,
 				3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */,
 				D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */,
 				D763B3E01D34C95E00D9669E /* MKRSceneA1.m in Sources */,

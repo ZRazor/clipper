@@ -35,6 +35,7 @@
 //    NSLog(@"scene identifier = %ld", self.identifier);
     for (MKRBar *bar in self.bars) {
         AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
+    
         CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);
         [self makeCompositionBar:composition withBarAsset:barAsset andWithBar:bar andWithResultCursorPtr:resultCursorPtr andWithMSPQ:MSPQ andWithBarRange:barTimeRange usingAutoComplete:YES];
 
