@@ -14,14 +14,14 @@
 }
 
 - (NSMutableArray<MKRInterval *> *)gotAudioWithSamples:(NSData *)samples andAudioMsDuration:(NSInteger)msDuration {
-    UInt32 size = (UInt32)[samples length];
+    UInt32 size = (UInt32)[samples length] / sizeof(short);
     short *bytes = (short*)[samples bytes];
     NSMutableArray<MKRInterval *> *intervals = [NSMutableArray new];
     double speechStartsAtMs = -1;
     double speechEndsAtMs = -1;
     double msInSample = ((double)msDuration) / size;
 
-    for (int sampleOffset = 0; sampleOffset + self->vad_state->samples_per_frame < size / 2; sampleOffset += self->vad_state->samples_per_frame) {
+    for (int sampleOffset = 0; sampleOffset + self->vad_state->samples_per_frame < size; sampleOffset += self->vad_state->samples_per_frame) {
         int nonZero = 0;
 
         //check to make sure buffer actually has audio data

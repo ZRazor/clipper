@@ -98,9 +98,14 @@
     }
     NSLog(@"nominalFrameRate: %f", audioTrack.nominalFrameRate);
 
-    NSMutableDictionary* audioReadSettings = [NSMutableDictionary dictionary];
-    [audioReadSettings setValue:@(kAudioFormatLinearPCM)
-                         forKey:AVFormatIDKey];
+    NSDictionary* audioReadSettings = @{
+                                        AVSampleRateKey: @16000,
+                                        AVLinearPCMBitDepthKey: @16,
+                                        AVFormatIDKey: @(kAudioFormatLinearPCM),
+                                        AVLinearPCMIsFloatKey: @NO
+                                        };
+//    [audioReadSettings setValue:@(kAudioFormatLinearPCM)
+//                         forKey:AVFormatIDKey];
 
     AVAssetReaderTrackOutput* readerOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:audioTrack outputSettings:audioReadSettings];
     [reader addOutput:readerOutput];
@@ -135,6 +140,9 @@
     NSMutableArray<MKRInterval *> *speechIntervals = [vad gotAudioWithSamples:audioData andAudioMsDuration:audioMsDuration];
     
     NSLog(@"VAD complete, found %lu speech intervals", [speechIntervals count]);
+    for (MKRInterval *interval in speechIntervals) {
+        NSLog(@"[%f, %f]", interval.start / 1000.0, interval.end / 1000.0);
+    }
     
     NSString *trackName = self.selectTrackSegmentedControl.selectedSegmentIndex == 0 ? @"01" : @"02";
     NSString *trackMetaDataPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"plist"];

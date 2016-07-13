@@ -19,13 +19,13 @@ static int const kMKRAudioBitDepth = 16;
  * - Higher values are for use with a fixed-position mic or any application with voice buried in ambient noise.
  * - Defaults to 0
  */
-static int const kMKRVadSensitivity = 20;
+static int const kMKRVadSensitivity = 99;
 /**
  * Set the maximum length of time recorded by the VAD in ms
  * Set to -1 for no timeout
  * Defaults to 7000
  */
-static int const kMKRVadTimeout = -1;
+static int const kMKRVadTimeout = 3000;
 
 @interface MKRVad : NSObject
 
