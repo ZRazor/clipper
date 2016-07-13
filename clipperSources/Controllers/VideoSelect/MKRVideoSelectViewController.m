@@ -32,6 +32,7 @@
 - (IBAction)changeVideoAction:(UISwitch *)sender;
 
 - (IBAction)selectVideoClick:(UIBarButtonItem *)sender;
+- (IBAction)saveButtonClick:(id)sender;
 
 @end
 
@@ -152,5 +153,9 @@
 
     [videoPicker setVideoQuality:UIImagePickerControllerQualityTypeHigh];
     [self presentViewController:videoPicker animated:YES completion:nil];
+}
+
+- (IBAction)saveButtonClick:(id)sender {
+    UISaveVideoAtPathToSavedPhotosAlbum(self.moviePlayerNew.contentURL.path, nil, NULL, NULL);
 }
 @end

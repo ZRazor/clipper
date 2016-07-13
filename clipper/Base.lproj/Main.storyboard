@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="N3a-9P-FTB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="N3a-9P-FTB">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -45,11 +45,27 @@
                                     <constraint firstAttribute="width" secondItem="6KV-Kf-52w" secondAttribute="height" multiplier="16:9" id="Fd8-qu-3Vg"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6I3-Qa-N7O">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.63137254899999995" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="lUM-qM-4z8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="СОХРАНИТЬ">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZRA-9k-rM6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="8jA-3r-3XB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4Qm-lG-2B9"/>
                             <constraint firstItem="6KV-Kf-52w" firstAttribute="top" secondItem="8jA-3r-3XB" secondAttribute="bottom" id="BGb-4v-5Ur"/>
+                            <constraint firstItem="6I3-Qa-N7O" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HBi-ye-Wwy"/>
+                            <constraint firstAttribute="trailing" secondItem="6I3-Qa-N7O" secondAttribute="trailing" id="KEc-ON-wvQ"/>
                             <constraint firstItem="Pal-sN-rsl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="M8K-2N-z2D"/>
                             <constraint firstItem="Pal-sN-rsl" firstAttribute="top" secondItem="8jA-3r-3XB" secondAttribute="bottom" id="PE2-NV-MUR"/>
                             <constraint firstAttribute="trailing" secondItem="Pal-sN-rsl" secondAttribute="trailing" id="U9O-Yo-vYg"/>
@@ -57,6 +73,7 @@
                             <constraint firstAttribute="trailing" secondItem="8jA-3r-3XB" secondAttribute="trailing" id="US5-5G-DFt"/>
                             <constraint firstItem="6KV-Kf-52w" firstAttribute="top" secondItem="Pal-sN-rsl" secondAttribute="bottom" id="YpX-KA-kH5"/>
                             <constraint firstItem="6KV-Kf-52w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Zwt-w8-pMP"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6I3-Qa-N7O" secondAttribute="bottom" id="dMH-i6-R4J"/>
                             <constraint firstItem="8jA-3r-3XB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="eB1-sE-Sfi"/>
                         </constraints>
                         <variation key="default">
