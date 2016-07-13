@@ -47,7 +47,8 @@
     if (barAsset == nil) {
         @throw([NSException exceptionWithName:@"Bar asset not found" reason:@"Bar asset not found" userInfo:nil]);
     }
-    [self insertTimeRange:composition ofAsset:barAsset startAt:barTimeRange.start duration:barTimeRange.duration resultCursorPtr:resultCursorPtr];
+    CMTime realDuration = CMTimeSubtract(barTimeRange.duration, CMTimeMakeWithSeconds(0.0000001f, 6000000));
+    [self insertTimeRange:composition ofAsset:barAsset startAt:barTimeRange.start duration:realDuration resultCursorPtr:resultCursorPtr];
     
     if (bar.totalQuantsLength > bar.quantsLength && autoComplete) {
         NSInteger quantsRemainder = bar.totalQuantsLength - bar.quantsLength;
@@ -58,7 +59,7 @@
 
 -(void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr {
     NSLog(@"Insert: [%f, %f] of [%f] at [%f]", CMTimeGetSeconds(startAt), CMTimeGetSeconds(duration), CMTimeGetSeconds(asset.duration), CMTimeGetSeconds(*resultCursorPtr));
-    CMTime realDuration = CMTimeMinimum(duration, asset.duration);
+    CMTime realDuration = CMTimeSubtract(CMTimeMinimum(duration, asset.duration), CMTimeMakeWithSeconds(0.0000001f, 6000000));
     CMTimeRange barTimeRange = CMTimeRangeMake(startAt, realDuration);
     
     [composition insertTimeRange:barTimeRange ofAsset:asset atTime:*resultCursorPtr error:nil];

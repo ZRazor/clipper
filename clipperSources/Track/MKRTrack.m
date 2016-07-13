@@ -82,7 +82,7 @@
             NSLog(@"%f [%ld, %ld] q=%ld wms=%f", CMTimeGetSeconds(barCursor), interval.start, interval.end, interval.quantsLength, interval.warpedMsLength / 1000.0);
             CMTime intervalStart = CMTimeMakeWithSeconds(interval.start / 1000.0, 60000.0);
             CMTime intervalEnd = CMTimeMakeWithSeconds(interval.end / 1000.0, 60000.0);
-            CMTimeRange range = CMTimeRangeMake(intervalStart, CMTimeSubtract(intervalEnd, intervalStart));
+            CMTimeRange range = CMTimeRangeMake(intervalStart, CMTimeSubtract(CMTimeSubtract(intervalEnd, intervalStart), CMTimeMakeWithSeconds(0.0000001f, 6000000)));
             [barComposition insertTimeRange:range ofAsset:original atTime:barCursor error:nil];
 
             CMTimeRange rangeInBar = CMTimeRangeMake(barCursor, CMTimeSubtract(intervalEnd, intervalStart));

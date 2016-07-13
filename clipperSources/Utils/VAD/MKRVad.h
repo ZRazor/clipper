@@ -25,7 +25,7 @@ static int const kMKRVadSensitivity = 99;
  * Set to -1 for no timeout
  * Defaults to 7000
  */
-static int const kMKRVadTimeout = 500;
+static int const kMKRVadTimeout = 1000;
 
 @interface MKRVad : NSObject
 
