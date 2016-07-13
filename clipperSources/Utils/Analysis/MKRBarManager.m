@@ -37,7 +37,7 @@
 
 -(MKRProcessedInterval *)calculateIntervalWithLeft:(double)left andRight:(double)right andBarErrorPtr:(double *)barErrorPtr {
     double msLength = right - left;
-    double quantsLength = round(msLength / self.MSPQ);
+    double quantsLength = MAX(round(msLength / self.MSPQ), 1);
     double warpedMsLength = quantsLength * self.MSPQ;
     double speedFactor = msLength / warpedMsLength;
     *barErrorPtr += fabs(warpedMsLength - msLength);

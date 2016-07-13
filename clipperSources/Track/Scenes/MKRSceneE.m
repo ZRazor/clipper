@@ -10,7 +10,7 @@
 
 @implementation MKRSceneE
 
--(BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
+- (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
     MKRBar *bar = [barManager getBarWithQuantsLength:@(4 * barManager.QPB)];
     if (!bar) {
         return NO;
@@ -19,15 +19,13 @@
     return YES;
 }
 
--(void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(NSInteger)MSPQ {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
     MKRBar *bar = self.bars[0];
     AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
     CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);
-    CMTime barStartAt = *resultCursorPtr;
-    [self makeCompositionBar:composition withBarAsset:barAsset andWithBar:bar andWithResultCursorPtr:resultCursorPtr andWithMSPQ:MSPQ andWithBarRange:barTimeRange usingAutoComplete:YES];
-    
-    CMTime processedBarDuration = CMTimeSubtract(*resultCursorPtr, barStartAt);
-    [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:processedBarDuration resultCursorPtr:resultCursorPtr];
+    for (int i = 0; i < 2; i++ ) {
+        [self makeCompositionBar:composition withBarAsset:barAsset andWithBar:bar andWithResultCursorPtr:resultCursorPtr andWithMSPQ:MSPQ andWithBarRange:barTimeRange usingAutoComplete:YES];
+    }
 }
 
 @end

@@ -68,6 +68,7 @@
 
 -(AVMutableComposition *)processVideo:(AVAsset *)original andAudio:(AVAsset *)playback {
     NSMutableDictionary *barsAssets = [NSMutableDictionary new];
+    NSLog(@"-----------BARS FILLING-----------");
     for (NSInteger i = 0; i < [barManager.registeredBars count]; i++) {
         MKRBar *bar = barManager.registeredBars[i];
         if (!bar.used) {
@@ -75,13 +76,15 @@
         }
         AVMutableComposition *barComposition = [AVMutableComposition composition];
         CMTime barCursor = kCMTimeZero;
+        NSLog(@"bar.identifier = %ld", bar.identifier);
         for (NSInteger j = 0; j < [bar.sequence count]; j++) {
             MKRProcessedInterval *interval = bar.sequence[j];
+            NSLog(@"%f [%ld, %ld] q=%ld wms=%f", CMTimeGetSeconds(barCursor), interval.start, interval.end, interval.quantsLength, interval.warpedMsLength / 1000.0);
             CMTime intervalStart = CMTimeMakeWithSeconds(interval.start / 1000.0, 60000.0);
             CMTime intervalEnd = CMTimeMakeWithSeconds(interval.end / 1000.0, 60000.0);
             CMTimeRange range = CMTimeRangeMake(intervalStart, CMTimeSubtract(intervalEnd, intervalStart));
             [barComposition insertTimeRange:range ofAsset:original atTime:barCursor error:nil];
-            
+
             CMTimeRange rangeInBar = CMTimeRangeMake(barCursor, CMTimeSubtract(intervalEnd, intervalStart));
             CMTime neededDuration = CMTimeMakeWithSeconds(interval.warpedMsLength / 1000.0, 60000);
             [barComposition scaleTimeRange:rangeInBar toDuration:neededDuration];
@@ -93,9 +96,12 @@
     AVMutableComposition *result = [AVMutableComposition composition];
     NSLog(@"-----------COMPOSING-----------");
     CMTime resultCursor = kCMTimeZero;
+    [result insertEmptyTimeRange:CMTimeRangeMake(kCMTimeZero, playback.duration)];
+    
     for (MKRScene *scene in structure) {
+        NSLog(@"start scene id: %s %ld at %f", object_getClassName(scene), scene.identifier, CMTimeGetSeconds(resultCursor));
         [scene makeComposition:result withBarAssets:barsAssets andWithResultCursorPtr:&resultCursor andWithMSPQ:self.MSPQ];
-        NSLog(@"scene id = %ld total duration = %f", scene.identifier, CMTimeGetSeconds(resultCursor));
+        NSLog(@"end scene at %f", CMTimeGetSeconds(resultCursor));
     }
     
     AVAssetTrack *playbackAssetTrack = [playback tracksWithMediaType:AVMediaTypeAudio][0];
