@@ -12,25 +12,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MKRVad.h"
 #import "MKRTrack.h"
-#import "MKRScene.h"
-#import "MKRBarManager.h"
-#import "MKRBar.h"
-#import "MKRAudioPostProcessor.h"
-#import "MKRRawDataProcessor.h"
 #import "MKRExportProcessor.h"
 #import "MKRScenesFillManager.h"
 
 
 @interface MKRVideoSelectViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property MPMoviePlayerController *moviePlayerOld;
-@property MPMoviePlayerController *moviePlayerNew;
-@property (weak, nonatomic) IBOutlet UIView *moviePlaceViewOld;
-@property (weak, nonatomic) IBOutlet UIView *moviePlaceViewNew;
-@property (weak, nonatomic) IBOutlet UISwitch *videoSwitch;
+@property MPMoviePlayerController *moviePlayer;
+@property (weak, nonatomic) IBOutlet UIView *moviePlaceView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *selectTrackSegmentedControl;
-
-- (IBAction)changeVideoAction:(UISwitch *)sender;
 
 - (IBAction)selectVideoClick:(UIBarButtonItem *)sender;
 - (IBAction)saveButtonClick:(id)sender;
@@ -41,12 +31,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setMoviePlayerOld:[[MPMoviePlayerController alloc] init]];
-    [self.moviePlaceViewOld addSubview:self.moviePlayerOld.view];
-    [self.moviePlayerOld setShouldAutoplay:NO];
-    [self setMoviePlayerNew:[[MPMoviePlayerController alloc] init]];
-    [self.moviePlaceViewNew addSubview:self.moviePlayerNew.view];
-    [self.moviePlayerNew setShouldAutoplay:NO];
+    [self setMoviePlayer:[[MPMoviePlayerController alloc] init]];
+    [self.moviePlaceView addSubview:self.moviePlayer.view];
+    [self.moviePlayer setShouldAutoplay:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,24 +43,20 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self.moviePlayerOld.view setFrame:self.moviePlaceViewOld.bounds];
-    [self.moviePlayerNew.view setFrame:self.moviePlaceViewNew.bounds];
+    [self.moviePlayer.view setFrame:self.moviePlaceView.bounds];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [self.moviePlayer stop];
     NSURL *videoURL = info[UIImagePickerControllerMediaURL];
     NSLog(@"VideoURL = %@", videoURL);
     [picker dismissViewControllerAnimated:YES completion:NULL];
-    [self.moviePlayerOld setContentURL:videoURL];
-    [self.moviePlayerOld prepareToPlay];
     [self handleVideo:videoURL onSuccess:^(NSURL *newVideoURL) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.moviePlayerOld stop];
-            [self.moviePlayerNew setContentURL:newVideoURL];
-            [self.videoSwitch setOn:YES];
-            [self.moviePlayerNew prepareToPlay];
+            [self.moviePlayer setContentURL:newVideoURL];
+            [self.moviePlayer prepareToPlay];
         });
     } onFailure:^(NSError *error) {
         return;
@@ -119,16 +102,6 @@
 
 #pragma mark - User actions
 
-- (IBAction)changeVideoAction:(UISwitch *)sender {
-    if (sender.isOn) {
-        [self.moviePlayerOld stop];
-        [self.moviePlayerNew prepareToPlay];
-    } else {
-        [self.moviePlayerNew stop];
-        [self.moviePlayerOld prepareToPlay];
-    }
-}
-
 - (IBAction)selectVideoClick:(UIBarButtonItem *)sender {
     // Present videos from which to choose
     UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
@@ -143,6 +116,6 @@
 }
 
 - (IBAction)saveButtonClick:(id)sender {
-    UISaveVideoAtPathToSavedPhotosAlbum(self.moviePlayerNew.contentURL.path, nil, NULL, NULL);
+    UISaveVideoAtPathToSavedPhotosAlbum(self.moviePlayer.contentURL.path, nil, NULL, NULL);
 }
 @end
