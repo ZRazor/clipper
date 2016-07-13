@@ -15,6 +15,9 @@
 #import "MKRScene.h"
 #import "MKRBarManager.h"
 #import "MKRBar.h"
+#import "MKRAudioPostProcessor.h"
+#import "MKRRawDataProcessor.h"
+
 
 @interface MKRVideoSelectViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -76,62 +79,15 @@
 
 - (void)handleVideo:(NSURL *)videoURL onSuccess:(void (^)(NSURL *newVideoURL))success onFailure:(void (^)(NSError *error))failure {
     AVAsset *avAsset = [AVAsset assetWithURL:videoURL];
-    NSError *error = nil;
-    AVAssetReader *reader = [[AVAssetReader alloc] initWithAsset:avAsset error:&error];
     NSArray *audioTracks = [avAsset tracksWithMediaType:AVMediaTypeAudio];
     AVAssetTrack *audioTrack = audioTracks[0];
-    NSLog(@"Track ID: %d", audioTrack.trackID);
-    NSArray* formatDesc = audioTrack.formatDescriptions;
-    for(unsigned int i = 0; i < [formatDesc count]; ++i) {
-        CMAudioFormatDescriptionRef item = (__bridge CMAudioFormatDescriptionRef) formatDesc[i];
-        const AudioStreamBasicDescription* bobTheDesc = CMAudioFormatDescriptionGetStreamBasicDescription (item);
-        NSLog(@"mSampleRate: %lf",bobTheDesc->mSampleRate);
-        NSLog(@"mFormatID: %u",(unsigned int)bobTheDesc->mFormatID);
-        NSLog(@"mFormatFlags: %u",(unsigned int)bobTheDesc->mFormatFlags);
-        NSLog(@"mBytesPerPacket: %u",(unsigned int)bobTheDesc->mBytesPerPacket);
-        NSLog(@"mFramesPerPacket: %u",(unsigned int)bobTheDesc->mFramesPerPacket);
-        NSLog(@"mBytesPerFrame: %u",(unsigned int)bobTheDesc->mBytesPerFrame);
-        NSLog(@"mChannelsPerFrame: %u",(unsigned int)bobTheDesc->mChannelsPerFrame);
-        NSLog(@"mBitsPerChannel: %u",(unsigned int)bobTheDesc->mBitsPerChannel);
-        NSLog(@"mReserved: %u",(unsigned int)bobTheDesc->mReserved);
-        NSLog(@"-------");
-    }
-    NSLog(@"nominalFrameRate: %f", audioTrack.nominalFrameRate);
 
-    NSDictionary* audioReadSettings = @{
-                                        AVSampleRateKey: @16000,
-                                        AVLinearPCMBitDepthKey: @16,
-                                        AVFormatIDKey: @(kAudioFormatLinearPCM),
-                                        AVLinearPCMIsFloatKey: @NO
-                                        };
-//    [audioReadSettings setValue:@(kAudioFormatLinearPCM)
-//                         forKey:AVFormatIDKey];
-
-    AVAssetReaderTrackOutput* readerOutput = [AVAssetReaderTrackOutput assetReaderTrackOutputWithTrack:audioTrack outputSettings:audioReadSettings];
-    [reader addOutput:readerOutput];
-    [reader startReading];
-
-    CMSampleBufferRef sample = [readerOutput copyNextSampleBuffer];
-    NSMutableData *audioData =[[NSMutableData alloc] init];
-    while (sample != NULL) {
-        if (sample == NULL)
-            continue;
-        AudioBufferList audioBufferList;
-        CMBlockBufferRef blockBuffer = CMSampleBufferGetDataBuffer( sample );
-        CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sample, NULL, &audioBufferList, sizeof(audioBufferList), NULL, NULL, 0, &blockBuffer);
-
-        for (int y = 0; y < audioBufferList.mNumberBuffers; y++) {
-            AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
-            Float32 *frame = (Float32*)audioBuffer.mData;
-            [audioData appendBytes:frame length:audioBuffer.mDataByteSize];
-        }
-        CFRelease(blockBuffer);
-        blockBuffer=NULL;
-        CFRelease(sample);
-        sample = [readerOutput copyNextSampleBuffer];
-    }
-
-    NSLog(@"Finish decoding audio");
+    NSData *audioData = [MKRRawDataProcessor audioRawDataForTrack:audioTrack withReaderSettings:@{
+            AVSampleRateKey: @16000,
+            AVLinearPCMBitDepthKey: @16,
+            AVFormatIDKey: @(kAudioFormatLinearPCM),
+            AVLinearPCMIsFloatKey: @NO
+    }];
     
     CMTime audioDuration = avAsset.duration;
     NSInteger audioMsDuration = round(CMTimeGetSeconds(audioDuration) * 1000);
@@ -157,8 +113,10 @@
     AVAsset *playback = [AVAsset assetWithURL:[NSURL fileURLWithPath:playbackPath]];
     
     AVMutableComposition *result = [track processVideo:avAsset andAudio:playback];
+    AVMutableAudioMix *audioMix = [MKRAudioPostProcessor postProcessAudioForMutableComposition:result];
     AVAssetExportSession *export = [[AVAssetExportSession alloc] initWithAsset:result presetName:AVAssetExportPresetHighestQuality];
-    export.outputFileType = AVFileTypeQuickTimeMovie;
+    [export setOutputFileType:AVFileTypeQuickTimeMovie];
+    [export setAudioMix:audioMix];
 
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask ,YES);
     NSString* documentsPath = paths[0];

@@ -14,6 +14,8 @@
 		3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3BA031D2CD5CE0062D19D /* LaunchScreen.storyboard */; };
 		3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */; };
 		58AAA040886A724D9945554E /* README.MD in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAE5350D8F9BD1ACE429C /* README.MD */; };
+		58AAA43C429EBF8AEFFF0D11 /* MKRAudioPostProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA8CC84525834040B3479 /* MKRAudioPostProcessor.m */; };
+		58AAA4B25E713B88C8A85767 /* MKRRawDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */; };
 		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
 		D71346851D3119CB00B9EDC3 /* 01.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71346841D3119CB00B9EDC3 /* 01.plist */; };
@@ -46,9 +48,13 @@
 		3AB3BA061D2CD5CE0062D19D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AB3BA0C1D2CD8270062D19D /* MKRVideoSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVideoSelectViewController.h; sourceTree = "<group>"; };
 		3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVideoSelectViewController.m; sourceTree = "<group>"; };
+		58AAA13346A0E3B2C2DBC798 /* MKRAudioPostProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioPostProcessor.h; sourceTree = "<group>"; };
+		58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRRawDataProcessor.m; sourceTree = "<group>"; };
+		58AAA8CC84525834040B3479 /* MKRAudioPostProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioPostProcessor.m; sourceTree = "<group>"; };
 		58AAAA340F82A110339BAA56 /* MKRVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVad.m; sourceTree = "<group>"; };
 		58AAAB935C8B7FE6E7E27DF0 /* MKRVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVad.h; sourceTree = "<group>"; };
 		58AAACD1FA4D58090C4CD60E /* MKRCVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCVad.m; sourceTree = "<group>"; };
+		58AAAD01955A4571E9DEF1E5 /* MKRRawDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRRawDataProcessor.h; sourceTree = "<group>"; };
 		58AAAE5350D8F9BD1ACE429C /* README.MD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = "<group>"; };
 		58AAAFB31421FAF140184D43 /* MKRCVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCVad.h; sourceTree = "<group>"; };
 		D71346841D3119CB00B9EDC3 /* 01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 01.plist; sourceTree = "<group>"; };
@@ -154,6 +160,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		58AAAA337504D5449F17E4CA /* PreProcess */ = {
+			isa = PBXGroup;
+			children = (
+				58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */,
+				58AAAD01955A4571E9DEF1E5 /* MKRRawDataProcessor.h */,
+			);
+			path = PreProcess;
+			sourceTree = "<group>";
+		};
 		58AAAB7EBAA750EF408542C4 /* VideoSelect */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,11 +188,22 @@
 			path = clipperSources;
 			sourceTree = "<group>";
 		};
+		58AAAD62AC4E9C3E96DBF492 /* PostProcess */ = {
+			isa = PBXGroup;
+			children = (
+				58AAA8CC84525834040B3479 /* MKRAudioPostProcessor.m */,
+				58AAA13346A0E3B2C2DBC798 /* MKRAudioPostProcessor.h */,
+			);
+			path = PostProcess;
+			sourceTree = "<group>";
+		};
 		58AAAE3E60EC6A81FCC3071F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				D7E5F3CC1D2F48D10095F5D6 /* Analysis */,
 				58AAA18E58E2FC73F249ECB2 /* VAD */,
+				58AAAD62AC4E9C3E96DBF492 /* PostProcess */,
+				58AAAA337504D5449F17E4CA /* PreProcess */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -280,7 +306,7 @@
 				TargetAttributes = {
 					3AB3B9F11D2CD5CE0062D19D = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = Z2PHG96DRQ;
+						DevelopmentTeam = 44FPHB4323;
 					};
 				};
 			};
@@ -343,6 +369,8 @@
 				D763B3DF1D34C95E00D9669E /* MKRSceneA.m in Sources */,
 				D763B3E11D34C95E00D9669E /* MKRSceneB.m in Sources */,
 				58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */,
+				58AAA43C429EBF8AEFFF0D11 /* MKRAudioPostProcessor.m in Sources */,
+				58AAA4B25E713B88C8A85767 /* MKRRawDataProcessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
