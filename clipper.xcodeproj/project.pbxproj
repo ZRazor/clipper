@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A49F55C1D362F0000DBF7CA /* MKRCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49F55B1D362F0000DBF7CA /* MKRCameraViewController.m */; };
 		3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3B9F61D2CD5CE0062D19D /* main.m */; };
 		3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3B9F91D2CD5CE0062D19D /* MKRAppDelegate.m */; };
 		3AB3BA001D2CD5CE0062D19D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3B9FE1D2CD5CE0062D19D /* Main.storyboard */; };
@@ -40,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A49F55A1D362F0000DBF7CA /* MKRCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCameraViewController.h; sourceTree = "<group>"; };
+		3A49F55B1D362F0000DBF7CA /* MKRCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCameraViewController.m; sourceTree = "<group>"; };
 		3AB3B9F21D2CD5CE0062D19D /* clipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = clipper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB3B9F61D2CD5CE0062D19D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3AB3B9F81D2CD5CE0062D19D /* MKRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKRAppDelegate.h; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 			children = (
 				3AB3BA0C1D2CD8270062D19D /* MKRVideoSelectViewController.h */,
 				3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */,
+				3A49F55A1D362F0000DBF7CA /* MKRCameraViewController.h */,
+				3A49F55B1D362F0000DBF7CA /* MKRCameraViewController.m */,
 			);
 			path = VideoSelect;
 			sourceTree = "<group>";
@@ -366,6 +371,7 @@
 				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
 				D763B3E51D34C95E00D9669E /* MKRSceneF.m in Sources */,
 				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,
+				3A49F55C1D362F0000DBF7CA /* MKRCameraViewController.m in Sources */,
 				D763B3E31D34C95E00D9669E /* MKRSceneD.m in Sources */,
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
 				D763B3E41D34C95E00D9669E /* MKRSceneE.m in Sources */,
