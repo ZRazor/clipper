@@ -119,6 +119,12 @@ void wv_detector_cvad_clean(s_wv_detector_cvad_state *cvad_state);
 
 void wv_detector_cvad_set_sensitivity(s_wv_detector_cvad_state *cvad_state, int sensitivity);
 
+
+/*
+ Set VAD speech timeout
+ */
+void wv_detector_cvad_set_speech_timeout(s_wv_detector_cvad_state *cvad_state, int speech_timeout);
+
 /*
  Set the reference values of the energy, most dominant frequency componant and the spectral flatness measure.
  The threshold value is then set based on the "background" reference levels

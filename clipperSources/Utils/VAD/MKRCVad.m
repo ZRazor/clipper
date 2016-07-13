@@ -120,6 +120,11 @@ void wv_detector_cvad_clean(s_wv_detector_cvad_state *cvad_state)
     free(cvad_state);
 }
 
+void wv_detector_cvad_set_speech_timeout(s_wv_detector_cvad_state *cvad_state, int speech_timeout)
+{
+    cvad_state->max_speech_time = speech_timeout;
+}
+
 void wv_detector_cvad_set_sensitivity(s_wv_detector_cvad_state *cvad_state, int sensitivity)
 {
     float sensitivity_frac = MAX(0,MIN(100,sensitivity))/100.0;

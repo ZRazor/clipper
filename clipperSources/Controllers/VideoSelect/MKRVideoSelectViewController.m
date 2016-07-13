@@ -18,6 +18,7 @@
 #import "MKRAudioPostProcessor.h"
 #import "MKRRawDataProcessor.h"
 #import "MKRExportProcessor.h"
+#import "MKRScenesFillManager.h"
 
 
 @interface MKRVideoSelectViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -69,6 +70,7 @@
     [self.moviePlayerOld prepareToPlay];
     [self handleVideo:videoURL onSuccess:^(NSURL *newVideoURL) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.moviePlayerOld stop];
             [self.moviePlayerNew setContentURL:newVideoURL];
             [self.videoSwitch setOn:YES];
             [self.moviePlayerNew prepareToPlay];
@@ -81,39 +83,22 @@
 
 - (void)handleVideo:(NSURL *)videoURL onSuccess:(void (^)(NSURL *newVideoURL))success onFailure:(void (^)(NSError *error))failure {
     AVAsset *avAsset = [AVAsset assetWithURL:videoURL];
-    NSArray *audioTracks = [avAsset tracksWithMediaType:AVMediaTypeAudio];
-    AVAssetTrack *audioTrack = audioTracks[0];
 
-    NSData *audioData = [MKRRawDataProcessor audioRawDataForTrack:audioTrack withReaderSettings:@{
-            AVSampleRateKey: @16000,
-            AVLinearPCMBitDepthKey: @16,
-            AVFormatIDKey: @(kAudioFormatLinearPCM),
-            AVLinearPCMIsFloatKey: @NO
-    }];
-    
-    CMTime audioDuration = avAsset.duration;
-    NSInteger audioMsDuration = round(CMTimeGetSeconds(audioDuration) * 1000);
-    
-    MKRVad *vad = [[MKRVad alloc] init];
-    NSMutableArray<MKRInterval *> *speechIntervals = [vad gotAudioWithSamples:audioData andAudioMsDuration:audioMsDuration];
-    
-    NSLog(@"VAD complete, found %lu speech intervals", [speechIntervals count]);
-    for (MKRInterval *interval in speechIntervals) {
-        NSLog(@"[%f, %f]", interval.start / 1000.0, interval.end / 1000.0);
-    }
-    
     NSString *trackName = self.selectTrackSegmentedControl.selectedSegmentIndex == 0 ? @"01" : @"02";
-    NSString *trackMetaDataPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"plist"];
-    MKRTrack *track = [[MKRTrack alloc] initWithMetaDataPath:trackMetaDataPath andFeaturesInterval:speechIntervals];
-    if (![track fillScenes]) {
+
+    NSString *playbackPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"wav"];
+    AVAsset *playback = [AVAsset assetWithURL:[NSURL fileURLWithPath:playbackPath]];
+
+    MKRScenesFillManager *scenesFillManager = [[MKRScenesFillManager alloc] initWithMetaDataPath:[[NSBundle mainBundle]
+            pathForResource:trackName ofType:@"plist"]];
+
+    MKRTrack *track = [scenesFillManager tryToFillScenesWithAsset:avAsset];
+    if (!track) {
         NSLog(@"Track scenes filling failed");
         failure([NSError errorWithDomain:@"MayakRed" code:0 userInfo:nil]);
         return;
     }
-    
-    NSString *playbackPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"wav"];
-    AVAsset *playback = [AVAsset assetWithURL:[NSURL fileURLWithPath:playbackPath]];
-    
+
     AVMutableComposition *resultAsset = [track processVideo:avAsset andAudio:playback];
     [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset onSuccess:success onFailure:failure];
 }
@@ -136,8 +121,10 @@
 
 - (IBAction)changeVideoAction:(UISwitch *)sender {
     if (sender.isOn) {
+        [self.moviePlayerOld stop];
         [self.moviePlayerNew prepareToPlay];
     } else {
+        [self.moviePlayerNew stop];
         [self.moviePlayerOld prepareToPlay];
     }
 }
