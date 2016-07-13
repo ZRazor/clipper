@@ -50,6 +50,21 @@
         } else if ( detected_speech == 0) {
             if (speechStartsAtMs != -1) {
                 speechEndsAtMs = sampleOffset * msInSample;
+                int startSample = (int)(speechStartsAtMs / msInSample);
+                short maxValue = abs(bytes[startSample]);
+                int maxValueSampleNum = startSample;
+                
+                int j = startSample;
+                int windowSize = MIN(1000, sampleOffset - startSample);
+                for (j = 0; j < windowSize; j++) {
+                    short value = abs(bytes[j + startSample]);
+                    if (value > maxValue) {
+                        maxValue = value;
+                        maxValueSampleNum = j + startSample;
+                    }
+                }
+                
+                speechStartsAtMs = maxValueSampleNum * msInSample;
                 MKRInterval *foundInterval = [[MKRInterval alloc] initWithStart:speechStartsAtMs andEnd:speechEndsAtMs];
                 [intervals addObject:foundInterval];
                 speechStartsAtMs = -1;
