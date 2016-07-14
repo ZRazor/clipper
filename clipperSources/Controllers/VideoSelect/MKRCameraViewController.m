@@ -7,7 +7,7 @@
 //
 
 #import "MKRCameraViewController.h"
-#import "MKRVideoSelectViewController.h"
+#import "MKRVideoProcessViewController.h"
 #import "MKRRecordButton.h"
 #import "UIColor+MKRColor.h"
 #import <Photos/PHAsset.h>
@@ -170,8 +170,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:kMKRSelectVideoIdentifier]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        [(MKRVideoSelectViewController *)navController.visibleViewController setVideoUrl:pickedVideoUrl];
+        [(MKRVideoProcessViewController *)segue.destinationViewController setAssetUrl:pickedVideoUrl];
     }
 }
 
