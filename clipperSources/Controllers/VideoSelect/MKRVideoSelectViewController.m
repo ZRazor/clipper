@@ -24,6 +24,7 @@
 
 - (IBAction)saveButtonClick:(id)sender;
 - (IBAction)playButtonClick:(id)sender;
+- (IBAction)closeButtonClick:(id)sender;
 
 @end
 
@@ -101,5 +102,9 @@
     } onFailure:^(NSError *error) {
         return;
     }];
+}
+
+- (IBAction)closeButtonClick:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 @end

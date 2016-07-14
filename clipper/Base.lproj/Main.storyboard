@@ -58,6 +58,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="1Q8-3z-ZXW">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="uue-Qm-w5U">
+                            <color key="tintColor" red="0.0" green="0.63137254899999995" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="closeButtonClick:" destination="BYZ-38-t0r" id="n3r-cz-psy"/>
+                            </connections>
+                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" id="KcW-Ud-ukz">
                             <rect key="frame" x="99.5" y="7" width="121" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

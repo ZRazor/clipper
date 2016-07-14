@@ -59,7 +59,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
                                                     cancelButtonTitle:@"OK"
                                                     otherButtonTitles: nil];
 
-        [myAlertView show];
+//        [myAlertView show];
 
     } else {
         [self setPicker:[[UIImagePickerController alloc] init]];
