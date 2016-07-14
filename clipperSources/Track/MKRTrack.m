@@ -80,13 +80,13 @@
         for (NSInteger j = 0; j < [bar.sequence count]; j++) {
             MKRProcessedInterval *interval = bar.sequence[j];
             NSLog(@"%f [%ld, %ld] q=%ld wms=%f", CMTimeGetSeconds(barCursor), interval.start, interval.end, interval.quantsLength, interval.warpedMsLength / 1000.0);
-            CMTime intervalStart = CMTimeMakeWithSeconds(interval.start / 1000.0, 60000.0);
-            CMTime intervalEnd = CMTimeMakeWithSeconds(interval.end / 1000.0, 60000.0);
-            CMTimeRange range = CMTimeRangeMake(intervalStart, CMTimeSubtract(CMTimeSubtract(intervalEnd, intervalStart), CMTimeMakeWithSeconds(0.0000001f, 6000000)));
+            CMTime intervalStart = CMTimeMakeWithSeconds(interval.start / 1000.0, 600000.0);
+            CMTime intervalEnd = CMTimeMakeWithSeconds(interval.end / 1000.0, 600000.0);
+            CMTimeRange range = CMTimeRangeMake(intervalStart, CMTimeSubtract(intervalEnd, intervalStart));
             [barComposition insertTimeRange:range ofAsset:original atTime:barCursor error:nil];
 
             CMTimeRange rangeInBar = CMTimeRangeMake(barCursor, CMTimeSubtract(intervalEnd, intervalStart));
-            CMTime neededDuration = CMTimeMakeWithSeconds(interval.warpedMsLength / 1000.0, 60000);
+            CMTime neededDuration = CMTimeMakeWithSeconds(interval.warpedMsLength / 1000.0, 600000);
             [barComposition scaleTimeRange:rangeInBar toDuration:neededDuration];
             barCursor = CMTimeAdd(barCursor, neededDuration);
         }
@@ -105,7 +105,7 @@
     }
     
     AVAssetTrack *playbackAssetTrack = [playback tracksWithMediaType:AVMediaTypeAudio][0];
-    AVMutableCompositionTrack *playbackTrack = [result addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *playbackTrack = [result addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:4];
     [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [playback duration]) ofTrack:playbackAssetTrack atTime:kCMTimeZero error:nil];
     
     NSLog(@"result track duration = %f", CMTimeGetSeconds([result duration]));

@@ -26,6 +26,7 @@
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
 		58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */; };
 		D71346851D3119CB00B9EDC3 /* 01.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71346841D3119CB00B9EDC3 /* 01.plist */; };
+		D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D71CA5E91D3752850055EB85 /* AVFoundation.framework */; };
 		D763B3DE1D34C95E00D9669E /* MKRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3CF1D34C95E00D9669E /* MKRScene.m */; };
 		D763B3DF1D34C95E00D9669E /* MKRSceneA.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3D11D34C95E00D9669E /* MKRSceneA.m */; };
 		D763B3E01D34C95E00D9669E /* MKRSceneA1.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3D31D34C95E00D9669E /* MKRSceneA1.m */; };
@@ -79,6 +80,8 @@
 		58AAAFADD1C239374EB36C98 /* MKRScenesFillManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRScenesFillManager.h; sourceTree = "<group>"; };
 		58AAAFB31421FAF140184D43 /* MKRCVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCVad.h; sourceTree = "<group>"; };
 		D71346841D3119CB00B9EDC3 /* 01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 01.plist; sourceTree = "<group>"; };
+		D71CA5E91D3752850055EB85 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D71CA5ED1D37593D0055EB85 /* blank_1080p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = blank_1080p.mp4; sourceTree = "<group>"; };
 		D763B3CE1D34C95E00D9669E /* MKRScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRScene.h; sourceTree = "<group>"; };
 		D763B3CF1D34C95E00D9669E /* MKRScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRScene.m; sourceTree = "<group>"; };
 		D763B3D01D34C95E00D9669E /* MKRSceneA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneA.h; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +142,7 @@
 		3AB3B9E91D2CD5CE0062D19D = {
 			isa = PBXGroup;
 			children = (
+				D71CA5E91D3752850055EB85 /* AVFoundation.framework */,
 				D71346821D3119CB00B9EDC3 /* assets */,
 				3AB3B9F41D2CD5CE0062D19D /* clipper */,
 				3AB3B9F31D2CD5CE0062D19D /* Products */,
@@ -261,6 +266,7 @@
 		D71346821D3119CB00B9EDC3 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				D71CA5ED1D37593D0055EB85 /* blank_1080p.mp4 */,
 				D71346831D3119CB00B9EDC3 /* tracks */,
 			);
 			path = assets;
