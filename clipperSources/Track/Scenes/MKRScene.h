@@ -33,4 +33,6 @@
 
 - (void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr;
 
+- (void)insertEmptyInComposition:(AVMutableComposition *)composition startAt:(CMTime)startAt duration:(CMTime)duration;
+
 @end
