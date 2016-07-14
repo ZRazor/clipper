@@ -16,14 +16,20 @@
 @interface MKRCameraViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cameraView;
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
+@property (weak, nonatomic) IBOutlet UIButton *flashButton;
 @property (nonatomic) UIImagePickerController *picker;
 - (IBAction)libraryButtonClick:(id)sender;
+- (IBAction)switchCameraClick:(id)sender;
+- (IBAction)settingsClick:(id)sender;
+- (IBAction)changeFlashClick:(id)sender;
 @end
 
 static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 
 @implementation MKRCameraViewController {
     NSURL *pickedVideoUrl;
+    UIImagePickerControllerCameraDevice pickerCameraDevice;
+    UIImagePickerControllerCameraFlashMode pickerFlashMode;
 }
 
 - (void)viewDidLoad {
@@ -53,21 +59,25 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
 
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+        UIAlertView *cameraAlert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                               message:@"Device has no camera"
                                                              delegate:nil
                                                     cancelButtonTitle:@"OK"
                                                     otherButtonTitles: nil];
 
-//        [myAlertView show];
+//        [cameraAlert show];
 
     } else {
+        pickerCameraDevice = UIImagePickerControllerCameraDeviceRear;
+        pickerFlashMode = UIImagePickerControllerCameraFlashModeOff;
+
         [self setPicker:[[UIImagePickerController alloc] init]];
         [self.picker setSourceType:UIImagePickerControllerSourceTypeCamera];
         [self.picker setMediaTypes:@[(NSString *) kUTTypeMovie, (NSString *) kUTTypeAVIMovie, (NSString *) kUTTypeVideo, (NSString *) kUTTypeMPEG4]];
         [self.picker setVideoQuality:UIImagePickerControllerQualityTypeHigh];
+        [self.picker setCameraFlashMode:pickerFlashMode];
         [self.picker setCameraCaptureMode:UIImagePickerControllerCameraCaptureModeVideo];
-        [self.picker setCameraDevice:UIImagePickerControllerCameraDeviceRear];
+        [self.picker setCameraDevice:pickerCameraDevice];
         [self.picker setShowsCameraControls:NO];
         [self.picker setNavigationBarHidden:YES];
         [self.picker setToolbarHidden:YES];
@@ -98,6 +108,9 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     }
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 
 #pragma mark - User Actions
 
@@ -108,5 +121,40 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     [videoPicker setMediaTypes:@[(NSString *) kUTTypeMovie, (NSString *) kUTTypeAVIMovie, (NSString *) kUTTypeVideo, (NSString *) kUTTypeMPEG4]];
     [videoPicker setVideoQuality:UIImagePickerControllerQualityTypeHigh];
     [self presentViewController:videoPicker animated:YES completion:nil];
+}
+
+- (IBAction)switchCameraClick:(id)sender {
+    if (pickerCameraDevice == UIImagePickerControllerCameraDeviceRear) {
+        pickerCameraDevice = UIImagePickerControllerCameraDeviceFront;
+        [self.flashButton setBackgroundImage:[UIImage imageNamed:@"flash_off"] forState:UIControlStateNormal];
+    }
+    else {
+        pickerCameraDevice = UIImagePickerControllerCameraDeviceRear;
+        if (pickerFlashMode == UIImagePickerControllerCameraFlashModeOff) {
+            [self.flashButton setBackgroundImage:[UIImage imageNamed:@"flash_off"] forState:UIControlStateNormal];
+        } else if (pickerFlashMode == UIImagePickerControllerCameraFlashModeAuto) {
+            [self.flashButton setBackgroundImage:[UIImage imageNamed:@"flash_auto"] forState:UIControlStateNormal];
+        } else if (pickerFlashMode == UIImagePickerControllerCameraFlashModeOn) {
+            [self.flashButton setBackgroundImage:[UIImage imageNamed:@"flash_on"] forState:UIControlStateNormal];
+        }
+    }
+    [self.picker setCameraDevice:pickerCameraDevice];
+}
+
+- (IBAction)settingsClick:(id)sender {
+}
+
+- (IBAction)changeFlashClick:(id)sender {
+    if (pickerFlashMode == UIImagePickerControllerCameraFlashModeOff) {
+        pickerFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+        [self.flashButton setBackgroundImage:[UIImage imageNamed:@"flash_auto"] forState:UIControlStateNormal];
+    } else if (pickerFlashMode == UIImagePickerControllerCameraFlashModeAuto) {
+        pickerFlashMode = UIImagePickerControllerCameraFlashModeOn;
+        [self.flashButton setBackgroundImage:[UIImage imageNamed:@"flash_on"] forState:UIControlStateNormal];
+    } else if (pickerFlashMode == UIImagePickerControllerCameraFlashModeOn) {
+        pickerFlashMode = UIImagePickerControllerCameraFlashModeOff;
+        [self.flashButton setBackgroundImage:[UIImage imageNamed:@"flash_off"] forState:UIControlStateNormal];
+    }
+    [self.picker setCameraFlashMode:pickerFlashMode];
 }
 @end
