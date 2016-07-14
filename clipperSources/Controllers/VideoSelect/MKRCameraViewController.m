@@ -198,6 +198,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 
 - (IBAction)libraryButtonClick:(id)sender {
     UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
+    [videoPicker.navigationBar setTintColor:[UIColor mkr_mainColor]];
     [videoPicker setDelegate:self]; // ensure you set the delegate so when a video is chosen the right method can be called
     [videoPicker setModalPresentationStyle:UIModalPresentationCurrentContext];
     [videoPicker setMediaTypes:@[(NSString *) kUTTypeMovie, (NSString *) kUTTypeAVIMovie, (NSString *) kUTTypeVideo, (NSString *) kUTTypeMPEG4]];

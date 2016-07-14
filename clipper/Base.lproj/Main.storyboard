@@ -267,6 +267,42 @@
                                             <action selector="backButtonClick:" destination="iAZ-yW-FBg" eventType="touchUpInside" id="y2J-dr-PdU"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pip-87-zt2">
+                                        <rect key="frame" x="200" y="23" width="120" height="25"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3I-Zf-gJG">
+                                                <rect key="frame" x="75" y="0.0" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="KJv-9W-Oxw"/>
+                                                    <constraint firstAttribute="width" constant="25" id="tca-OR-tZ0"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="export"/>
+                                                <connections>
+                                                    <action selector="exportButtonClick:" destination="iAZ-yW-FBg" eventType="touchUpInside" id="AmN-lN-7iI"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fA8-Zh-pmh">
+                                                <rect key="frame" x="15" y="0.0" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="Ggw-h0-dqv"/>
+                                                    <constraint firstAttribute="height" constant="25" id="Qyj-mr-HJh"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="save"/>
+                                                <connections>
+                                                    <action selector="saveToCameraRollClick:" destination="iAZ-yW-FBg" eventType="touchUpInside" id="Y0V-94-NCf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="a3I-Zf-gJG" secondAttribute="trailing" constant="20" id="8xm-B0-9Yc"/>
+                                            <constraint firstAttribute="height" constant="25" id="CHI-kc-dB6"/>
+                                            <constraint firstItem="fA8-Zh-pmh" firstAttribute="top" secondItem="pip-87-zt2" secondAttribute="top" id="Lf3-px-qFl"/>
+                                            <constraint firstAttribute="width" constant="120" id="asD-9J-2at"/>
+                                            <constraint firstItem="a3I-Zf-gJG" firstAttribute="top" secondItem="pip-87-zt2" secondAttribute="top" id="g5c-6f-Su4"/>
+                                            <constraint firstItem="a3I-Zf-gJG" firstAttribute="leading" secondItem="fA8-Zh-pmh" secondAttribute="trailing" constant="35" id="yne-G6-kEM"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -275,6 +311,8 @@
                                     <constraint firstItem="532-mr-wDU" firstAttribute="leading" secondItem="dNT-Hn-J3Y" secondAttribute="leading" id="WTP-8D-b7e"/>
                                     <constraint firstAttribute="bottom" secondItem="532-mr-wDU" secondAttribute="bottom" id="YBQ-GK-BS4"/>
                                     <constraint firstAttribute="trailing" secondItem="532-mr-wDU" secondAttribute="trailing" id="gR3-hc-C1s"/>
+                                    <constraint firstAttribute="trailing" secondItem="pip-87-zt2" secondAttribute="trailing" id="k7b-b7-fOq"/>
+                                    <constraint firstItem="532-mr-wDU" firstAttribute="top" secondItem="pip-87-zt2" secondAttribute="bottom" constant="22" id="r7s-cY-Vjy"/>
                                     <constraint firstItem="532-mr-wDU" firstAttribute="top" secondItem="aa1-en-Nec" secondAttribute="bottom" constant="22" id="uFY-mK-zjM"/>
                                 </constraints>
                             </view>
@@ -319,6 +357,8 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="532-mr-wDU" id="6yG-kQ-0XO"/>
+                        <outlet property="exportView" destination="pip-87-zt2" id="GTJ-6F-DT2"/>
+                        <outlet property="exportViewRightConstraint" destination="k7b-b7-fOq" id="zml-bt-N2G"/>
                         <outlet property="loadingImageView" destination="YWX-ph-Ivs" id="xnk-fm-X9f"/>
                         <outlet property="loadingView" destination="sSj-Eh-VdY" id="VQt-se-DXH"/>
                     </connections>
@@ -424,9 +464,11 @@
     <resources>
         <image name="back" width="50" height="25"/>
         <image name="close" width="25" height="25"/>
+        <image name="export" width="25" height="25"/>
         <image name="flash_off" width="25" height="25"/>
         <image name="loading" width="50" height="50"/>
         <image name="locked" width="50" height="50"/>
+        <image name="save" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <image name="switch_camera" width="25" height="25"/>
     </resources>

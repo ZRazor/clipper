@@ -20,8 +20,12 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingImageView;
+@property (weak, nonatomic) IBOutlet UIView *exportView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *exportViewRightConstraint;
 @property (nonatomic) AVPlayerViewController *playerViewController;
 - (IBAction)backButtonClick:(id)sender;
+- (IBAction)exportButtonClick:(id)sender;
+- (IBAction)saveToCameraRollClick:(id)sender;
 
 @end
 
@@ -30,10 +34,13 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 
 @implementation MKRVideoProcessViewController {
     NSURL *assetUrl;
+    NSURL *clippedVideoUrl;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.exportView setHidden:YES];
+    [self.view layoutIfNeeded];
     [self animateLoadingImageViewWithAngle:M_PI];
 }
 
@@ -99,19 +106,37 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
     [self.collectionView setUserInteractionEnabled:NO];
     [self.loadingView setHidden:NO];
+    [self hideExportView];
     void (^finishBlock)() = ^void () {
         [self.collectionView setUserInteractionEnabled:YES];
         [self.loadingView setHidden:YES];
+        [self showExportView];
     };
     [self handleVideo:assetUrl withTrackName:trackName onSuccess:^(NSURL *newVideoURL) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.playerViewController setPlayer:[AVPlayer playerWithURL:newVideoURL]];
+            clippedVideoUrl = newVideoURL;
+            [self.playerViewController setPlayer:[AVPlayer playerWithURL:clippedVideoUrl]];
             finishBlock();
         });
     } onFailure:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             finishBlock();
         });
+    }];
+}
+
+- (void)hideExportView {
+    [self.exportViewRightConstraint setConstant:-120];
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)showExportView {
+    [self.exportView setHidden:NO];
+    [self.exportViewRightConstraint setConstant:0];
+    [UIView animateWithDuration:1.0 animations:^{
+        [self.view layoutIfNeeded];
     }];
 }
 
@@ -137,4 +162,45 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 - (IBAction)backButtonClick:(id)sender {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+- (IBAction)exportButtonClick:(id)sender {
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+            initWithActivityItems:@[@"Yo, Check it out! It is awesome!", clippedVideoUrl] applicationActivities:nil];
+    NSArray *excludeActivities = @[
+            UIActivityTypeAirDrop,
+            UIActivityTypePrint,
+            UIActivityTypeSaveToCameraRoll,
+            UIActivityTypePostToFlickr,
+            UIActivityTypePostToVimeo,
+            UIActivityTypePostToFacebook
+    ];
+
+    [activityVC setExcludedActivityTypes:excludeActivities];
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
+- (IBAction)saveToCameraRollClick:(id)sender {
+    if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(clippedVideoUrl.path)) {
+        UISaveVideoAtPathToSavedPhotosAlbum(clippedVideoUrl.path,self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    }
+}
+
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Yo"
+                                 message:@"Clipped video is saved to your camera roll"
+                          preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                            [alert dismissViewControllerAnimated:YES completion:nil];
+
+                        }];
+
+        [alert addAction:ok];
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+}
+
+
+
 @end
