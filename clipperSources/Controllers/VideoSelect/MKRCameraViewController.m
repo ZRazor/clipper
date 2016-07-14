@@ -34,12 +34,12 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     NSURL *pickedVideoUrl;
     UIImagePickerControllerCameraDevice pickerCameraDevice;
     UIImagePickerControllerCameraFlashMode pickerFlashMode;
+    BOOL cameraPermissions;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self checkPermissions];
-    [self setUpInterface];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,16 +50,27 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 - (void)checkPermissions {
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusAuthorized) {
-        // all is ok
+        cameraPermissions = YES;
+        [self setUpInterface];
+    } else if (authStatus == AVAuthorizationStatusNotDetermined){
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            cameraPermissions = granted;
+            [self setUpInterface];
+        }];
     } else {
+        cameraPermissions = NO;
+        [self setUpInterface];
+    }
+}
+
+- (void)setUpInterface {
+    if (!cameraPermissions) {
         NSLog(@"No permissions for video");
         [self.lockedCameraImageView setHidden:NO];
         [self.recordButton setEnabled:NO];
         NSLog(@"Enabled %d", self.recordButton.enabled);
     }
-}
 
-- (void)setUpInterface {
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
     [fetchOptions setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]]];
     PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeVideo options:fetchOptions];
