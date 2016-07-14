@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *flashButton;
 @property (weak, nonatomic) IBOutlet UIImageView *lockedCameraImageView;
 @property (weak, nonatomic) IBOutlet MKRRecordButton *recordButton;
+@property (weak, nonatomic) IBOutlet UIButton *switchCameraButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (nonatomic) UIImagePickerController *picker;
 - (IBAction)libraryButtonClick:(id)sender;
 - (IBAction)switchCameraClick:(id)sender;
@@ -40,11 +42,25 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self checkPermissions];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                 object:[UIDevice currentDevice]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.picker.cameraDevice != pickerCameraDevice) {
+        NSLog(@"Updating cameraStates");
+        pickerCameraDevice = self.picker.cameraDevice;
+        pickerFlashMode = self.picker.cameraFlashMode;
+        [self updateFlashButtonState];
+    }
 }
 
 - (void)checkPermissions {
@@ -61,6 +77,34 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
         cameraPermissions = NO;
         [self setUpInterface];
     }
+}
+
+- (void) orientationChanged:(NSNotification *)note {
+    UIDevice * device = note.object;
+    CGFloat angle = 0;
+    switch(device.orientation) {
+        case UIDeviceOrientationPortrait:
+            break;
+
+        case UIDeviceOrientationLandscapeLeft:
+            angle = 90.f * M_PI / 180.f;
+            /* start special animation */
+            break;
+
+        case UIDeviceOrientationLandscapeRight:
+            angle = -90.f * M_PI / 180.f;
+            break;
+
+        default:
+            break;
+    };
+
+    [UIView animateWithDuration:0.5 animations:^{
+        self.libraryButton.transform = CGAffineTransformMakeRotation(angle);
+        self.switchCameraButton.transform = CGAffineTransformMakeRotation(angle);
+        self.flashButton.transform = CGAffineTransformMakeRotation(angle);
+        self.settingsButton.transform = CGAffineTransformMakeRotation(angle);
+    }];
 }
 
 - (void)setUpInterface {
@@ -108,7 +152,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
         //self.picker.cameraViewTransform = CGAffineTransformMakeTranslation(0.0, 71.0);
 
         [self.picker setDelegate:self];
-        [self.cameraView setClipsToBounds:YES];
+//        [self.cameraView setClipsToBounds:YES];
         [self.cameraView addSubview:self.picker.view];
     }
 }
