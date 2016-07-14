@@ -10,4 +10,5 @@
 
 @interface MKRVideoSelectViewController : UIViewController
 
+- (void)setVideoUrl:(NSURL *)vUrl;
 @end

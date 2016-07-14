@@ -30,8 +30,9 @@
     }
     if (bar.totalQuantsLength > bar.quantsLength) {
         NSInteger quantsRemainder = bar.totalQuantsLength - bar.quantsLength;
-        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 60000);
-        *resultCursorPtr = CMTimeAdd(*resultCursorPtr, remainder);
+        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 600000);
+        [self insertEmptyInComposition:composition startAt:*resultCursorPtr duration:remainder];
+        *resultCursorPtr = CMTimeAdd(*resultCursorPtr, remainder);        
     }
 //    
 ////    AVMutableVideoComposition *video = [barAsset tracksWithMediaType:AVMediaTypeVideo][0] ;
