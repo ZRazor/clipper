@@ -10,8 +10,11 @@
 
 @implementation MKRProcessedInterval
 
--(instancetype)initWithStart:(NSInteger)start andEnd:(NSInteger)end andSpeedFactor:(double)speedFactor andQuantsLength:(NSInteger)quantsLength andMsLength:(double)msLength andWarpedMsLength:(double)warpedMsLength {
-    self = [super initWithStart:start andEnd:end];
+-(instancetype)initWithStart:(NSInteger)start andEnd:(NSInteger)end andAverageGain:(double)averageGain
+              andSpeedFactor:(double)speedFactor
+             andQuantsLength:(NSInteger)quantsLength andMsLength:(double)msLength
+           andWarpedMsLength:(double)warpedMsLength {
+    self = [super initWithStart:start andEnd:end andAverageGain:averageGain];
     if (!self) {
         return nil;
     }

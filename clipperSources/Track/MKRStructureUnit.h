@@ -7,7 +7,6 @@
 
 @class MKRScene;
 
-
 @interface MKRStructureUnit : NSObject
 
 - (instancetype)initWithScene:(MKRScene *)aScene;
