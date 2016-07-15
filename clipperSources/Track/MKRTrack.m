@@ -11,10 +11,11 @@
 #import "MKRSceneA.h"
 #import "MKRSceneB.h"
 #import "MKRSceneC.h"
+#import "MKRStructureUnit.h"
 
 @implementation MKRTrack {
     NSMutableArray<MKRScene *> *scenes;
-    NSMutableArray<MKRScene *> *structure;
+    NSMutableArray<MKRStructureUnit *> *structure;
     MKRBarManager *barManager;
 }
 
@@ -24,7 +25,7 @@
         return nil;
     }
     scenes = [NSMutableArray<MKRScene *> new];
-    structure = [NSMutableArray<MKRScene *> new];
+    structure = [NSMutableArray<MKRStructureUnit *> new];
     
     NSDictionary *metaData = [[NSDictionary alloc] initWithContentsOfFile:metaDataPath];
     [self setBPM:[[metaData valueForKey:@"BPM"] longValue]];
@@ -47,7 +48,8 @@
         if ([scenes count] <= [structureSceneIdentifier longValue] || [structureSceneIdentifier longValue] < 0) {
             @throw ([NSException exceptionWithName:@"Unknown scene identifier" reason:@"Unknown scene identifier in track structure" userInfo:nil]);
         }
-        [structure addObject:scenes[[structureSceneIdentifier longValue]]];
+        MKRStructureUnit *structureUnit = [[MKRStructureUnit alloc] initWithScene:scenes[[structureSceneIdentifier longValue]]];
+        [structure addObject:structureUnit];
     }
     
     return self;
@@ -97,10 +99,15 @@
     NSLog(@"-----------COMPOSING-----------");
     CMTime resultCursor = kCMTimeZero;
     
-    for (MKRScene *scene in structure) {
-        NSLog(@"start scene id: %s %ld at %f", object_getClassName(scene), scene.identifier, CMTimeGetSeconds(resultCursor));
+    for (MKRStructureUnit *structureUnit in structure) {
+        MKRScene *scene = [structureUnit getScene];
+        Float64 startTime = CMTimeGetSeconds(resultCursor);
+        NSLog(@"start scene id: %s %ld at %f", object_getClassName(scene), scene.identifier, startTime);
         [scene makeComposition:result withBarAssets:barsAssets andWithResultCursorPtr:&resultCursor andWithMSPQ:self.MSPQ];
-        NSLog(@"end scene at %f", CMTimeGetSeconds(resultCursor));
+        Float64 endTime = CMTimeGetSeconds(resultCursor);
+        NSLog(@"end scene at %f", endTime);
+        [structureUnit setTimeIntervalWithStartTime:startTime andEndTime:endTime];
+
     }
     
     return result;
