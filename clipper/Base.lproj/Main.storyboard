@@ -225,11 +225,20 @@
                                                                 <constraint firstItem="MA0-gD-hpY" firstAttribute="leading" secondItem="tK8-UR-6A6" secondAttribute="leading" id="tnI-OT-mqM"/>
                                                             </constraints>
                                                         </view>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music" translatesAutoresizingMaskIntoConstraints="NO" id="QBd-Uq-vna">
+                                                            <rect key="frame" x="20" y="5" width="50" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="50" id="1je-ud-UUn"/>
+                                                                <constraint firstAttribute="width" constant="50" id="ELV-rF-kSY"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
+                                                    <constraint firstItem="QBd-Uq-vna" firstAttribute="top" secondItem="lrN-kw-9SP" secondAttribute="top" constant="5" id="DTR-He-wVI"/>
+                                                    <constraint firstItem="QBd-Uq-vna" firstAttribute="centerX" secondItem="lrN-kw-9SP" secondAttribute="centerX" id="ag0-dO-YcV"/>
                                                     <constraint firstItem="tK8-UR-6A6" firstAttribute="leading" secondItem="lrN-kw-9SP" secondAttribute="leading" id="ghM-wv-T0v"/>
                                                     <constraint firstAttribute="trailing" secondItem="tK8-UR-6A6" secondAttribute="trailing" id="sIG-Ql-coC"/>
                                                     <constraint firstAttribute="bottom" secondItem="tK8-UR-6A6" secondAttribute="bottom" id="vOj-UC-ryq"/>
@@ -332,8 +341,8 @@
                                             <constraint firstAttribute="height" constant="50" id="WJj-8p-4r8"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Клипаем видео" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvv-o5-vyl">
-                                        <rect key="frame" x="98.5" y="232" width="124" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clipping video..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvv-o5-vyl">
+                                        <rect key="frame" x="99" y="232" width="123" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -385,6 +394,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="gZM-mg-hxc">
+                            <rect key="frame" x="0.0" y="205" width="320" height="41"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mayak_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZW4-ml-pSz">
+                                    <rect key="frame" x="110" y="14" width="100" height="14"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="14" id="Moz-1N-aAY"/>
+                                        <constraint firstAttribute="width" constant="100" id="X85-r7-Cnn"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="ZW4-ml-pSz" firstAttribute="centerX" secondItem="gZM-mg-hxc" secondAttribute="centerX" id="7O9-Ib-fn0"/>
+                                <constraint firstItem="ZW4-ml-pSz" firstAttribute="top" secondItem="gZM-mg-hxc" secondAttribute="top" constant="14" id="vmd-IE-Pdx"/>
+                            </constraints>
+                        </view>
                         <sections>
                             <tableViewSection id="4ks-5X-aI1">
                                 <cells>
@@ -403,7 +430,7 @@
                                                     </constraints>
                                                     <color key="onTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Какой-то непонятный свитч" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vW7-l3-TMM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохранять видео с камеры" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vW7-l3-TMM">
                                                     <rect key="frame" x="15" y="12" width="233" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="dwd-V1-alm"/>
@@ -419,6 +446,40 @@
                                                 <constraint firstItem="oCD-fl-OOT" firstAttribute="top" secondItem="ecj-Ih-0Cw" secondAttribute="top" constant="7" id="gko-qX-8f2"/>
                                                 <constraint firstItem="vW7-l3-TMM" firstAttribute="leading" secondItem="ecj-Ih-0Cw" secondAttribute="leading" constant="15" id="lwf-fB-EFj"/>
                                                 <constraint firstAttribute="trailing" secondItem="oCD-fl-OOT" secondAttribute="trailing" constant="15" id="yuZ-RS-UDE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="V0g-kp-UEJ">
+                                        <rect key="frame" x="0.0" y="143" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V0g-kp-UEJ" id="X2O-8Z-6cI">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZyU-Er-xh9">
+                                                    <rect key="frame" x="256" y="7" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="Iao-GT-oGS"/>
+                                                        <constraint firstAttribute="width" constant="49" id="NgK-yf-B7o"/>
+                                                    </constraints>
+                                                    <color key="onTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохранять готовые видео" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uA-1O-IGu">
+                                                    <rect key="frame" x="15" y="12" width="233" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="3gI-Ck-OhZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZyU-Er-xh9" firstAttribute="leading" secondItem="2uA-1O-IGu" secondAttribute="trailing" constant="8" id="1uf-kn-iSu"/>
+                                                <constraint firstItem="2uA-1O-IGu" firstAttribute="leading" secondItem="X2O-8Z-6cI" secondAttribute="leading" constant="15" id="5kb-kP-iQ6"/>
+                                                <constraint firstItem="ZyU-Er-xh9" firstAttribute="top" secondItem="X2O-8Z-6cI" secondAttribute="top" constant="7" id="7bp-X8-XrO"/>
+                                                <constraint firstItem="2uA-1O-IGu" firstAttribute="top" secondItem="X2O-8Z-6cI" secondAttribute="top" constant="12" id="8Oq-WE-kTd"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZyU-Er-xh9" secondAttribute="trailing" constant="15" id="Kcf-Iu-Tc8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -477,6 +538,8 @@
         <image name="flash_off" width="25" height="25"/>
         <image name="loading" width="50" height="50"/>
         <image name="locked" width="50" height="50"/>
+        <image name="mayak_logo" width="100" height="14"/>
+        <image name="music" width="50" height="50"/>
         <image name="save" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <image name="share" width="25" height="25"/>

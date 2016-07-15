@@ -145,7 +145,19 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
         });
     } onFailure:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [collectionView deselectItemAtIndexPath:indexPath animated:YES];
             finishBlock();
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                           message:@"Video is too short for this track :("
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+
+            }];
+
+            [alert addAction:ok];
+            [self presentViewController:alert animated:YES completion:nil];
         });
     }];
 }

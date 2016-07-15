@@ -107,12 +107,17 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     }];
 }
 
+- (void)disableCamera {
+    [self.lockedCameraImageView setHidden:NO];
+    [self.recordButton setEnabled:NO];
+    [self.flashButton setEnabled:NO];
+    [self.switchCameraButton setEnabled:NO];
+}
+
 - (void)setUpInterface {
     if (!cameraPermissions) {
         NSLog(@"No permissions for video");
-        [self.lockedCameraImageView setHidden:NO];
-        [self.recordButton setEnabled:NO];
-        NSLog(@"Enabled %d", self.recordButton.enabled);
+        [self disableCamera];
     }
 
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
@@ -134,6 +139,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         NSLog(@"No camera on simulator!");
+        [self disableCamera];
     } else {
         pickerCameraDevice = UIImagePickerControllerCameraDeviceRear;
         pickerFlashMode = UIImagePickerControllerCameraFlashModeOff;
@@ -148,6 +154,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
         [self.picker setShowsCameraControls:NO];
         [self.picker setNavigationBarHidden:YES];
         [self.picker setToolbarHidden:YES];
+        [self.picker setDelegate:self];
         //TODO add transfor
         //self.picker.cameraViewTransform = CGAffineTransformMakeTranslation(0.0, 71.0);
 
@@ -161,7 +168,10 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     pickedVideoUrl = info[UIImagePickerControllerMediaURL];
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self performSegueWithIdentifier:kMKRSelectVideoIdentifier sender:self];
+}
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
@@ -230,11 +240,13 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 }
 
 - (IBAction)recordButtonClick:(MKRRecordButton *)sender {
-    NSLog(@"Enabled %d", self.recordButton.enabled);
     [sender clickRecording];
+    [sender setHighlighted:NO];
     if (sender.isRecording) {
+        [self.libraryButton setEnabled:NO];
         [self.picker startVideoCapture];
     } else {
+        [self.libraryButton setEnabled:YES];
         [self.picker stopVideoCapture];
     }
 }
