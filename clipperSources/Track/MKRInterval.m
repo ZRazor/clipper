@@ -12,18 +12,20 @@
 
 @property (readwrite, nonatomic) NSInteger start;
 @property (readwrite, nonatomic) NSInteger end;
+@property (readwrite, nonatomic) double averageGain;
 
 @end
 
 @implementation MKRInterval
 
-- (instancetype)initWithStart:(NSInteger)start andEnd:(NSInteger)end {
+- (instancetype)initWithStart:(NSInteger)start andEnd:(NSInteger)end andAverageGain:(double)averageGain {
     self = [super init];
     if (!self) {
         return nil;
     }
     [self setStart:start];
     [self setEnd:end];
+    [self setAverageGain:averageGain];
     
     return self;
 }

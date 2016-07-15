@@ -11,10 +11,11 @@
 #import "MKRSceneA.h"
 #import "MKRSceneB.h"
 #import "MKRSceneC.h"
+#import "MKRStructureUnit.h"
 
 @implementation MKRTrack {
     NSMutableArray<MKRScene *> *scenes;
-    NSMutableArray<MKRScene *> *structure;
+    NSMutableArray<MKRStructureUnit *> *structure;
     MKRBarManager *barManager;
 }
 
@@ -24,7 +25,7 @@
         return nil;
     }
     scenes = [NSMutableArray<MKRScene *> new];
-    structure = [NSMutableArray<MKRScene *> new];
+    structure = [NSMutableArray<MKRStructureUnit *> new];
     
     NSDictionary *metaData = [[NSDictionary alloc] initWithContentsOfFile:metaDataPath];
     [self setBPM:[[metaData valueForKey:@"BPM"] longValue]];
@@ -47,7 +48,8 @@
         if ([scenes count] <= [structureSceneIdentifier longValue] || [structureSceneIdentifier longValue] < 0) {
             @throw ([NSException exceptionWithName:@"Unknown scene identifier" reason:@"Unknown scene identifier in track structure" userInfo:nil]);
         }
-        [structure addObject:scenes[[structureSceneIdentifier longValue]]];
+        MKRStructureUnit *structureUnit = [[MKRStructureUnit alloc] initWithScene:scenes[[structureSceneIdentifier longValue]]];
+        [structure addObject:structureUnit];
     }
     
     return self;
@@ -66,7 +68,7 @@
     return YES;
 }
 
--(AVMutableComposition *)processVideo:(AVAsset *)original andAudio:(AVAsset *)playback {
+-(AVMutableComposition *)processVideo:(AVAsset *)original {
     NSMutableDictionary *barsAssets = [NSMutableDictionary new];
     NSLog(@"-----------BARS FILLING-----------");
     for (NSInteger i = 0; i < [barManager.registeredBars count]; i++) {
@@ -96,19 +98,17 @@
     AVMutableComposition *result = [AVMutableComposition composition];
     NSLog(@"-----------COMPOSING-----------");
     CMTime resultCursor = kCMTimeZero;
-    [result insertEmptyTimeRange:CMTimeRangeMake(kCMTimeZero, playback.duration)];
     
-    for (MKRScene *scene in structure) {
-        NSLog(@"start scene id: %s %ld at %f", object_getClassName(scene), scene.identifier, CMTimeGetSeconds(resultCursor));
+    for (MKRStructureUnit *structureUnit in structure) {
+        MKRScene *scene = [structureUnit getScene];
+        Float64 startTime = CMTimeGetSeconds(resultCursor);
+        NSLog(@"start scene id: %s %ld at %f", object_getClassName(scene), scene.identifier, startTime);
         [scene makeComposition:result withBarAssets:barsAssets andWithResultCursorPtr:&resultCursor andWithMSPQ:self.MSPQ];
-        NSLog(@"end scene at %f", CMTimeGetSeconds(resultCursor));
+        Float64 endTime = CMTimeGetSeconds(resultCursor);
+        NSLog(@"end scene at %f", endTime);
+        [structureUnit setTimeIntervalWithStartTime:startTime andEndTime:endTime];
+
     }
-    
-    AVAssetTrack *playbackAssetTrack = [playback tracksWithMediaType:AVMediaTypeAudio][0];
-    AVMutableCompositionTrack *playbackTrack = [result addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:4];
-    [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [playback duration]) ofTrack:playbackAssetTrack atTime:kCMTimeZero error:nil];
-    
-    NSLog(@"result track duration = %f", CMTimeGetSeconds([result duration]));
     
     return result;
 }

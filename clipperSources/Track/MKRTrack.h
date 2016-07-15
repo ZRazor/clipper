@@ -18,6 +18,6 @@
 
 -(instancetype)initWithMetaDataPath:(NSString *)metaDataPath andFeaturesInterval:(NSMutableArray<MKRInterval *> *)features;
 -(BOOL)fillScenes;
--(AVMutableComposition *)processVideo:(AVAsset *)original andAudio:(AVAsset *)playback;
+-(AVMutableComposition *)processVideo:(AVAsset *)original;
 
 @end

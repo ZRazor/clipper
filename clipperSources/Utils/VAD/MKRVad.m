@@ -80,17 +80,25 @@ static int const kMKRAudioBitDepth = 16;
     double speechStartsAtMs = -1;
     double speechEndsAtMs = -1;
     double msInSample = (msDuration) / size;
+    double gainSum = 0;
+    double framesCount = 0;
 
     for (int sampleOffset = 0; sampleOffset + self->vad_state->samples_per_frame < size; sampleOffset += self->vad_state->samples_per_frame) {
         int nonZero = 0;
 
-        //check to make sure buffer actually has audio data
+        //check to make sure buffer actually has audio data and calc gain sum for frame
+        double tmpGainSum = 0;
+        double tmpSamplesCount = 0;
         for(int i = 0; i < self->vad_state->samples_per_frame; i++) {
             if (bytes[sampleOffset + i] != 0) {
                 nonZero = 1;
-                break;
+//                break;
             }
+            tmpGainSum += abs(bytes[sampleOffset + i]);
+            tmpSamplesCount++;
         }
+        gainSum += tmpGainSum / tmpSamplesCount;
+        framesCount++;
 
         //skip frame if it has nothing
         if(!nonZero) {
@@ -123,12 +131,17 @@ static int const kMKRAudioBitDepth = 16;
                         maxValueSampleNum = j + startSample;
                     }
                 }
+
+                double averageGain = gainSum/framesCount;
+                NSLog(@"Average gain %lf", averageGain);
                 
                 speechStartsAtMs = maxValueSampleNum * msInSample;
-                MKRInterval *foundInterval = [[MKRInterval alloc] initWithStart:speechStartsAtMs andEnd:speechEndsAtMs];
+                MKRInterval *foundInterval = [[MKRInterval alloc] initWithStart:speechStartsAtMs andEnd:speechEndsAtMs andAverageGain:averageGain];
                 [intervals addObject:foundInterval];
                 speechStartsAtMs = -1;
                 speechEndsAtMs = -1;
+                framesCount = 0;
+                gainSum = 0;
             } else {
                 NSLog(@"Some problem found: double detect_speech == 0!");
             }

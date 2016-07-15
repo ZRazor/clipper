@@ -11,14 +11,17 @@
 		3A46E7081D375253008E037A /* MKRRecordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A46E7071D375253008E037A /* MKRRecordButton.m */; };
 		3A46E70C1D375831008E037A /* MKRSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A46E70B1D375831008E037A /* MKRSettingsTableViewController.m */; };
 		3A49F55C1D362F0000DBF7CA /* MKRCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49F55B1D362F0000DBF7CA /* MKRCameraViewController.m */; };
+		3A83B6351D3795F500470942 /* MKRVideoProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A83B6341D3795F500470942 /* MKRVideoProcessViewController.m */; };
+		3A83B6381D37984B00470942 /* MKRTrackCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A83B6371D37984B00470942 /* MKRTrackCollectionViewCell.m */; };
+		3A83B63A1D379B1D00470942 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A83B6391D379B1D00470942 /* AVKit.framework */; };
 		3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3B9F61D2CD5CE0062D19D /* main.m */; };
 		3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3B9F91D2CD5CE0062D19D /* MKRAppDelegate.m */; };
 		3AB3BA001D2CD5CE0062D19D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3B9FE1D2CD5CE0062D19D /* Main.storyboard */; };
 		3AB3BA021D2CD5CE0062D19D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3BA011D2CD5CE0062D19D /* Assets.xcassets */; };
 		3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3BA031D2CD5CE0062D19D /* LaunchScreen.storyboard */; };
-		3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */; };
 		58AAA040886A724D9945554E /* README.MD in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAE5350D8F9BD1ACE429C /* README.MD */; };
 		58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAABECDDA957863529FB9A /* MKRScenesFillManager.m */; };
+		58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */; };
 		58AAA43C429EBF8AEFFF0D11 /* MKRAudioPostProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA8CC84525834040B3479 /* MKRAudioPostProcessor.m */; };
 		58AAA4B25E713B88C8A85767 /* MKRRawDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */; };
 		58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */; };
@@ -29,6 +32,7 @@
 		58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */; };
 		D71346851D3119CB00B9EDC3 /* 01.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71346841D3119CB00B9EDC3 /* 01.plist */; };
 		D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D71CA5E91D3752850055EB85 /* AVFoundation.framework */; };
+		D71CA5F01D37713B0055EB85 /* MKRAudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */; };
 		D763B3DE1D34C95E00D9669E /* MKRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3CF1D34C95E00D9669E /* MKRScene.m */; };
 		D763B3DF1D34C95E00D9669E /* MKRSceneA.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3D11D34C95E00D9669E /* MKRSceneA.m */; };
 		D763B3E01D34C95E00D9669E /* MKRSceneA1.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3D31D34C95E00D9669E /* MKRSceneA1.m */; };
@@ -56,6 +60,11 @@
 		3A46E70B1D375831008E037A /* MKRSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSettingsTableViewController.m; sourceTree = "<group>"; };
 		3A49F55A1D362F0000DBF7CA /* MKRCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCameraViewController.h; sourceTree = "<group>"; };
 		3A49F55B1D362F0000DBF7CA /* MKRCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCameraViewController.m; sourceTree = "<group>"; };
+		3A83B6331D3795F500470942 /* MKRVideoProcessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVideoProcessViewController.h; sourceTree = "<group>"; };
+		3A83B6341D3795F500470942 /* MKRVideoProcessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVideoProcessViewController.m; sourceTree = "<group>"; };
+		3A83B6361D37984B00470942 /* MKRTrackCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTrackCollectionViewCell.h; sourceTree = "<group>"; };
+		3A83B6371D37984B00470942 /* MKRTrackCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRTrackCollectionViewCell.m; sourceTree = "<group>"; };
+		3A83B6391D379B1D00470942 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		3AB3B9F21D2CD5CE0062D19D /* clipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = clipper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB3B9F61D2CD5CE0062D19D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3AB3B9F81D2CD5CE0062D19D /* MKRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKRAppDelegate.h; sourceTree = "<group>"; };
@@ -64,11 +73,11 @@
 		3AB3BA011D2CD5CE0062D19D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AB3BA041D2CD5CE0062D19D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AB3BA061D2CD5CE0062D19D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3AB3BA0C1D2CD8270062D19D /* MKRVideoSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVideoSelectViewController.h; sourceTree = "<group>"; };
-		3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVideoSelectViewController.m; sourceTree = "<group>"; };
 		58AAA13346A0E3B2C2DBC798 /* MKRAudioPostProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioPostProcessor.h; sourceTree = "<group>"; };
+		58AAA16D0DC5CB28BF2E46D4 /* MKRStructureUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRStructureUnit.h; sourceTree = "<group>"; };
 		58AAA2A57B8A798C87CF8B34 /* UIColor+MKRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MKRColor.h"; sourceTree = "<group>"; };
 		58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRRawDataProcessor.m; sourceTree = "<group>"; };
+		58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRStructureUnit.m; sourceTree = "<group>"; };
 		58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRExportProcessor.m; sourceTree = "<group>"; };
 		58AAA8CC84525834040B3479 /* MKRAudioPostProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioPostProcessor.m; sourceTree = "<group>"; };
 		58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MKRColor.m"; sourceTree = "<group>"; };
@@ -88,6 +97,8 @@
 		D71346841D3119CB00B9EDC3 /* 01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 01.plist; sourceTree = "<group>"; };
 		D71CA5E91D3752850055EB85 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D71CA5ED1D37593D0055EB85 /* blank_1080p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = blank_1080p.mp4; sourceTree = "<group>"; };
+		D71CA5EE1D37713B0055EB85 /* MKRAudioProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioProcessor.h; sourceTree = "<group>"; };
+		D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioProcessor.m; sourceTree = "<group>"; };
 		D763B3CE1D34C95E00D9669E /* MKRScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRScene.h; sourceTree = "<group>"; };
 		D763B3CF1D34C95E00D9669E /* MKRScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRScene.m; sourceTree = "<group>"; };
 		D763B3D01D34C95E00D9669E /* MKRSceneA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneA.h; sourceTree = "<group>"; };
@@ -124,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A83B63A1D379B1D00470942 /* AVKit.framework in Frameworks */,
 				D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +160,7 @@
 		3AB3B9E91D2CD5CE0062D19D = {
 			isa = PBXGroup;
 			children = (
+				3A83B6391D379B1D00470942 /* AVKit.framework */,
 				D71CA5E91D3752850055EB85 /* AVFoundation.framework */,
 				D71346821D3119CB00B9EDC3 /* assets */,
 				3AB3B9F41D2CD5CE0062D19D /* clipper */,
@@ -207,11 +220,22 @@
 			path = VAD;
 			sourceTree = "<group>";
 		};
+		58AAA47F375A22FCF0D2E8B2 /* VideoProcess */ = {
+			isa = PBXGroup;
+			children = (
+				3A83B6331D3795F500470942 /* MKRVideoProcessViewController.h */,
+				3A83B6341D3795F500470942 /* MKRVideoProcessViewController.m */,
+				58AAADB56C53EC87D46D0A33 /* Views */,
+			);
+			path = VideoProcess;
+			sourceTree = "<group>";
+		};
 		58AAA98146A845B5B5C3A4DD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				58AAAB7EBAA750EF408542C4 /* VideoSelect */,
 				58AAA0C62307137D6A26E227 /* Settings */,
+				58AAA47F375A22FCF0D2E8B2 /* VideoProcess */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -228,8 +252,6 @@
 		58AAAB7EBAA750EF408542C4 /* VideoSelect */ = {
 			isa = PBXGroup;
 			children = (
-				3AB3BA0C1D2CD8270062D19D /* MKRVideoSelectViewController.h */,
-				3AB3BA0D1D2CD8270062D19D /* MKRVideoSelectViewController.m */,
 				3A49F55A1D362F0000DBF7CA /* MKRCameraViewController.h */,
 				3A49F55B1D362F0000DBF7CA /* MKRCameraViewController.m */,
 			);
@@ -254,8 +276,19 @@
 				58AAA13346A0E3B2C2DBC798 /* MKRAudioPostProcessor.h */,
 				58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */,
 				58AAAF04ECC3873696FAF6D8 /* MKRExportProcessor.h */,
+				D71CA5EE1D37713B0055EB85 /* MKRAudioProcessor.h */,
+				D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */,
 			);
 			path = PostProcess;
+			sourceTree = "<group>";
+		};
+		58AAADB56C53EC87D46D0A33 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A83B6361D37984B00470942 /* MKRTrackCollectionViewCell.h */,
+				3A83B6371D37984B00470942 /* MKRTrackCollectionViewCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		58AAAE3E60EC6A81FCC3071F /* Utils */ = {
@@ -344,6 +377,8 @@
 				D7E5F3D11D2F49D80095F5D6 /* MKRInterval.m */,
 				D76621731D2F9DE200E0A402 /* MKRProcessedInterval.h */,
 				D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */,
+				58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */,
+				58AAA16D0DC5CB28BF2E46D4 /* MKRStructureUnit.h */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -437,9 +472,11 @@
 				D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */,
 				D763B3E21D34C95E00D9669E /* MKRSceneC.m in Sources */,
 				3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */,
+				3A83B6381D37984B00470942 /* MKRTrackCollectionViewCell.m in Sources */,
 				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
 				D763B3E51D34C95E00D9669E /* MKRSceneF.m in Sources */,
 				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,
+				3A83B6351D3795F500470942 /* MKRVideoProcessViewController.m in Sources */,
 				3A49F55C1D362F0000DBF7CA /* MKRCameraViewController.m in Sources */,
 				D763B3E31D34C95E00D9669E /* MKRSceneD.m in Sources */,
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
@@ -457,6 +494,7 @@
 				3A46E7051D3740E8008E037A /* CALayer+RuntimeAttribute.m in Sources */,
 				D763B3DF1D34C95E00D9669E /* MKRSceneA.m in Sources */,
 				3A46E7081D375253008E037A /* MKRRecordButton.m in Sources */,
+				D71CA5F01D37713B0055EB85 /* MKRAudioProcessor.m in Sources */,
 				D763B3E11D34C95E00D9669E /* MKRSceneB.m in Sources */,
 				58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */,
 				58AAA43C429EBF8AEFFF0D11 /* MKRAudioPostProcessor.m in Sources */,
@@ -464,6 +502,7 @@
 				58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */,
 				58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */,
 				58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */,
+				58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

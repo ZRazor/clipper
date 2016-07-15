@@ -18,6 +18,8 @@
 #import "MKRCustomVideoCompositor.h"
 #import "MKRScenesFillManager.h"
 #import "MKRExportProcessor.h"
+#import "MKRScenesFillManager.h"
+#import "MKRAudioProcessor.h"
 
 
 @interface MKRVideoSelectViewController ()
@@ -64,6 +66,8 @@
 
     NSString *trackName = self.selectTrackSegmentedControl.selectedSegmentIndex == 0 ? @"01" : @"02";
 
+    NSString *playbackPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"wav"];
+
     MKRScenesFillManager *scenesFillManager = [[MKRScenesFillManager alloc] initWithMetaDataPath:[[NSBundle mainBundle]
             pathForResource:trackName ofType:@"plist"]];
 
@@ -82,8 +86,33 @@
     AVAssetExportSession *export = [[AVAssetExportSession alloc] initWithAsset:result presetName:AVAssetExportPresetHighestQuality];
     export.outputFileType = AVFileTypeQuickTimeMovie;
 
-    AVMutableComposition *resultAsset = [track processVideo:avAsset andAudio:playback];
-    [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset layerInstructions:nil onSuccess:success onFailure:failure];
+    AVMutableComposition *resultAsset = [track processVideo:avAsset];
+    [MKRExportProcessor exportAudioFromMutableCompositionToDocuments:resultAsset onSuccess:^(NSURL *assetUrl) {
+        MKRAudioProcessor *audioProcessor = [[MKRAudioProcessor alloc] initWithOriginalPath:assetUrl.path andPlaybackPath:playbackPath];
+        [audioProcessor processTrack:track andPlaybackFilePath:playbackPath withOriginalFilePath:assetUrl.path completion:^(NSURL *audioURL) {
+            NSArray<AVCompositionTrack *> *audioTracks = [resultAsset tracksWithMediaType:AVMediaTypeAudio];
+            for (AVCompositionTrack *audioTrack in audioTracks) {
+                [resultAsset removeTrack:audioTrack];
+            }
+            
+            AVAsset *realAudio = [AVAsset assetWithURL:audioURL];
+            
+            NSLog(@"result asset duration = %f, realAudio duration = %f", CMTimeGetSeconds(resultAsset.duration), CMTimeGetSeconds(realAudio.duration));
+            NSArray<AVAssetTrack *> *realAudioTracks = [realAudio tracksWithMediaType:AVMediaTypeAudio];
+            int trackId = 10;
+            for (AVAssetTrack *audioTrack in realAudioTracks) {
+                AVMutableCompositionTrack *playbackTrack = [resultAsset addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:trackId++];
+//                CMTime startOffset = CMTimeSubtract(CMTimeMaximum(resultAsset.duration, realAudio.duration), CMTimeMinimum(resultAsset.duration, realAudio.duration));
+                [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, realAudio.duration) ofTrack:audioTrack atTime:kCMTimeZero error:nil];
+            }
+            [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset onSuccess:success onFailure:failure];
+        } failure:^(NSError *error) {
+            NSLog(@"error = %@", error);
+        }];
+    } onFailure:failure];
+    
+
+//    [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset onSuccess:success onFailure:failure];
 }
 
 /*

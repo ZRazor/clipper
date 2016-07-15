@@ -35,13 +35,20 @@
     return result;
 }
 
--(MKRProcessedInterval *)calculateIntervalWithLeft:(double)left andRight:(double)right andBarErrorPtr:(double *)barErrorPtr {
+-(MKRProcessedInterval *)calculateIntervalWithLeft:(double)left andRight:(double)right andAverageGain:(double)averageGain andBarErrorPtr:(double *)barErrorPtr {
     double msLength = right - left;
     double quantsLength = MAX(round(msLength / self.MSPQ), 1);
     double warpedMsLength = quantsLength * self.MSPQ;
     double speedFactor = msLength / warpedMsLength;
     *barErrorPtr += fabs(warpedMsLength - msLength);
-    MKRProcessedInterval *interval = [[MKRProcessedInterval alloc] initWithStart:left andEnd:right andSpeedFactor:speedFactor andQuantsLength:quantsLength andMsLength:msLength andWarpedMsLength:warpedMsLength];
+    MKRProcessedInterval *interval = [[MKRProcessedInterval alloc] initWithStart:left
+                                                                          andEnd:right
+                                                                  andAverageGain:averageGain
+                                                                  andSpeedFactor:speedFactor
+                                                                 andQuantsLength:quantsLength
+                                                                     andMsLength:msLength
+                                                               andWarpedMsLength:warpedMsLength
+    ];
     
     return interval;
     
@@ -58,7 +65,8 @@
         for (int j = i; j < [self.features count]; j++) {
             double leftMs = self.features[j].start;
             if (leftMs - mergeLeftMs > 0) {
-                MKRProcessedInterval *foundInterval = [self calculateIntervalWithLeft:mergeLeftMs andRight:leftMs andBarErrorPtr:&totalBarError];
+                //TODO calc gain for non-voiced intervals
+                MKRProcessedInterval *foundInterval = [self calculateIntervalWithLeft:mergeLeftMs andRight:leftMs andAverageGain:0 andBarErrorPtr:&totalBarError];
                 if (currentIntervalQuants + foundInterval.quantsLength > realQuantsLength) {
                     break;
                 }
@@ -69,7 +77,7 @@
                 [self.registeredBars addObject:bar];
                 [bars addObject:bar];
             }
-            MKRProcessedInterval *foundInterval = [self calculateIntervalWithLeft:self.features[j].start andRight:self.features[j].end andBarErrorPtr:&totalBarError];
+            MKRProcessedInterval *foundInterval = [self calculateIntervalWithLeft:self.features[j].start andRight:self.features[j].end andAverageGain:self.features[j].averageGain andBarErrorPtr:&totalBarError];
             if (currentIntervalQuants + foundInterval.quantsLength > realQuantsLength) {
                 break;
             }

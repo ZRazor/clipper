@@ -12,6 +12,7 @@
 
 @property (readonly, nonatomic) NSInteger start;
 @property (readonly, nonatomic) NSInteger end;
+@property (readonly, nonatomic) double averageGain;
 
 /*!
  @abstract
@@ -19,6 +20,6 @@
  */
 - (NSInteger)length;
 
-- (instancetype)initWithStart:(NSInteger)start andEnd:(NSInteger)end;
+- (instancetype)initWithStart:(NSInteger)start andEnd:(NSInteger)end andAverageGain:(double)averageGain;
 
 @end

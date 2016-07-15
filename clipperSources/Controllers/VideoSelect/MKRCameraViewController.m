@@ -7,7 +7,7 @@
 //
 
 #import "MKRCameraViewController.h"
-#import "MKRVideoSelectViewController.h"
+#import "MKRVideoProcessViewController.h"
 #import "MKRRecordButton.h"
 #import "UIColor+MKRColor.h"
 #import <Photos/PHAsset.h>
@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *flashButton;
 @property (weak, nonatomic) IBOutlet UIImageView *lockedCameraImageView;
 @property (weak, nonatomic) IBOutlet MKRRecordButton *recordButton;
+@property (weak, nonatomic) IBOutlet UIButton *switchCameraButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (nonatomic) UIImagePickerController *picker;
 - (IBAction)libraryButtonClick:(id)sender;
 - (IBAction)switchCameraClick:(id)sender;
@@ -40,11 +42,25 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self checkPermissions];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                 object:[UIDevice currentDevice]];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.picker.cameraDevice != pickerCameraDevice) {
+        NSLog(@"Updating cameraStates");
+        pickerCameraDevice = self.picker.cameraDevice;
+        pickerFlashMode = self.picker.cameraFlashMode;
+        [self updateFlashButtonState];
+    }
 }
 
 - (void)checkPermissions {
@@ -63,12 +79,45 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     }
 }
 
+- (void) orientationChanged:(NSNotification *)note {
+    UIDevice * device = note.object;
+    CGFloat angle = 0;
+    switch(device.orientation) {
+        case UIDeviceOrientationPortrait:
+            break;
+
+        case UIDeviceOrientationLandscapeLeft:
+            angle = 90.f * M_PI / 180.f;
+            /* start special animation */
+            break;
+
+        case UIDeviceOrientationLandscapeRight:
+            angle = -90.f * M_PI / 180.f;
+            break;
+
+        default:
+            break;
+    };
+
+    [UIView animateWithDuration:0.5 animations:^{
+        self.libraryButton.transform = CGAffineTransformMakeRotation(angle);
+        self.switchCameraButton.transform = CGAffineTransformMakeRotation(angle);
+        self.flashButton.transform = CGAffineTransformMakeRotation(angle);
+        self.settingsButton.transform = CGAffineTransformMakeRotation(angle);
+    }];
+}
+
+- (void)disableCamera {
+    [self.lockedCameraImageView setHidden:NO];
+    [self.recordButton setEnabled:NO];
+    [self.flashButton setEnabled:NO];
+    [self.switchCameraButton setEnabled:NO];
+}
+
 - (void)setUpInterface {
     if (!cameraPermissions) {
         NSLog(@"No permissions for video");
-        [self.lockedCameraImageView setHidden:NO];
-        [self.recordButton setEnabled:NO];
-        NSLog(@"Enabled %d", self.recordButton.enabled);
+        [self disableCamera];
     }
 
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
@@ -90,6 +139,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         NSLog(@"No camera on simulator!");
+        [self disableCamera];
     } else {
         pickerCameraDevice = UIImagePickerControllerCameraDeviceRear;
         pickerFlashMode = UIImagePickerControllerCameraFlashModeOff;
@@ -104,11 +154,12 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
         [self.picker setShowsCameraControls:NO];
         [self.picker setNavigationBarHidden:YES];
         [self.picker setToolbarHidden:YES];
+        [self.picker setDelegate:self];
         //TODO add transfor
         //self.picker.cameraViewTransform = CGAffineTransformMakeTranslation(0.0, 71.0);
 
         [self.picker setDelegate:self];
-        [self.cameraView setClipsToBounds:YES];
+//        [self.cameraView setClipsToBounds:YES];
         [self.cameraView addSubview:self.picker.view];
     }
 }
@@ -117,7 +168,10 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     pickedVideoUrl = info[UIImagePickerControllerMediaURL];
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self performSegueWithIdentifier:kMKRSelectVideoIdentifier sender:self];
+}
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
@@ -126,8 +180,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:kMKRSelectVideoIdentifier]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        [(MKRVideoSelectViewController *)navController.visibleViewController setVideoUrl:pickedVideoUrl];
+        [(MKRVideoProcessViewController *)segue.destinationViewController setAssetUrl:pickedVideoUrl];
     }
 }
 
@@ -155,6 +208,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 
 - (IBAction)libraryButtonClick:(id)sender {
     UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
+    [videoPicker.navigationBar setTintColor:[UIColor mkr_mainColor]];
     [videoPicker setDelegate:self]; // ensure you set the delegate so when a video is chosen the right method can be called
     [videoPicker setModalPresentationStyle:UIModalPresentationCurrentContext];
     [videoPicker setMediaTypes:@[(NSString *) kUTTypeMovie, (NSString *) kUTTypeAVIMovie, (NSString *) kUTTypeVideo, (NSString *) kUTTypeMPEG4]];
@@ -186,11 +240,13 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 }
 
 - (IBAction)recordButtonClick:(MKRRecordButton *)sender {
-    NSLog(@"Enabled %d", self.recordButton.enabled);
     [sender clickRecording];
+    [sender setHighlighted:NO];
     if (sender.isRecording) {
+        [self.libraryButton setEnabled:NO];
         [self.picker startVideoCapture];
     } else {
+        [self.libraryButton setEnabled:YES];
         [self.picker stopVideoCapture];
     }
 }
