@@ -21,6 +21,7 @@
 		3AB3BA051D2CD5CE0062D19D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3BA031D2CD5CE0062D19D /* LaunchScreen.storyboard */; };
 		58AAA040886A724D9945554E /* README.MD in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAE5350D8F9BD1ACE429C /* README.MD */; };
 		58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAABECDDA957863529FB9A /* MKRScenesFillManager.m */; };
+		58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */; };
 		58AAA43C429EBF8AEFFF0D11 /* MKRAudioPostProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA8CC84525834040B3479 /* MKRAudioPostProcessor.m */; };
 		58AAA4B25E713B88C8A85767 /* MKRRawDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */; };
 		58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */; };
@@ -71,8 +72,10 @@
 		3AB3BA041D2CD5CE0062D19D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AB3BA061D2CD5CE0062D19D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58AAA13346A0E3B2C2DBC798 /* MKRAudioPostProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioPostProcessor.h; sourceTree = "<group>"; };
+		58AAA16D0DC5CB28BF2E46D4 /* MKRStructureUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRStructureUnit.h; sourceTree = "<group>"; };
 		58AAA2A57B8A798C87CF8B34 /* UIColor+MKRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MKRColor.h"; sourceTree = "<group>"; };
 		58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRRawDataProcessor.m; sourceTree = "<group>"; };
+		58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRStructureUnit.m; sourceTree = "<group>"; };
 		58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRExportProcessor.m; sourceTree = "<group>"; };
 		58AAA8CC84525834040B3479 /* MKRAudioPostProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioPostProcessor.m; sourceTree = "<group>"; };
 		58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MKRColor.m"; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				D7E5F3D11D2F49D80095F5D6 /* MKRInterval.m */,
 				D76621731D2F9DE200E0A402 /* MKRProcessedInterval.h */,
 				D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */,
+				58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */,
+				58AAA16D0DC5CB28BF2E46D4 /* MKRStructureUnit.h */,
 			);
 			path = Track;
 			sourceTree = "<group>";
@@ -394,7 +399,7 @@
 				TargetAttributes = {
 					3AB3B9F11D2CD5CE0062D19D = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = Z2PHG96DRQ;
+						DevelopmentTeam = 44FPHB4323;
 					};
 				};
 			};
@@ -468,6 +473,7 @@
 				58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */,
 				58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */,
 				58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */,
+				58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
