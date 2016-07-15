@@ -30,8 +30,8 @@
 #define DETECTOR_CVAD_FRAMES_INIT 40 /* number of frames to use to initialize values */
 #define DETECTOR_CVAD_E_TH_COEFF_LOW_BAND 2.5f     /* Energy threshold coefficient */
 #define DETECTOR_CVAD_E_TH_COEFF_UPPER_BANDS 2.0f     /* Energy threshold coefficient */
-#define DETECTOR_CVAD_SFM_TH 3.0f   /* Spectral Flatness Measure threshold */
-#define DETECTOR_CVAD_DFC_TH 250.0f   /* most Dominant Frequency Component threshold */
+#define DETECTOR_CVAD_SFM_TH 5.0f   /* Spectral Flatness Measure threshold */
+#define DETECTOR_CVAD_DFC_TH 180.0f   /* most Dominant Frequency Component threshold */
 #define DETECTOR_CVAD_MIN_ZERO_CROSSINGS 5   /* fewest zero crossings for speech */
 #define DETECTOR_CVAD_MAX_ZERO_CROSSINGS 15  /* maximum zero crossings for speech */
 #define DETECTOR_CVAD_RESULT_MEMORY 130 /* number of frame results to keep in memory */
@@ -121,7 +121,8 @@ void wv_detector_cvad_set_sensitivity(s_wv_detector_cvad_state *cvad_state, int 
 
 
 /*
- Set VAD speech timeout
+ Set VAD speech timeout (-1-7000)
+ - Defaults to 7000
  */
 void wv_detector_cvad_set_speech_timeout(s_wv_detector_cvad_state *cvad_state, int speech_timeout);
 
