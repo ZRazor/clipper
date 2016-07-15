@@ -7,5 +7,9 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface MKRExportProcessor : NSObject
+
 + (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure;
++ (void)exportAudioFromMutableCompositionToDocuments:(AVMutableComposition *)asset onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure;
++ (NSURL *)generateFilePathWithFormat:(NSString *)formatName;
+
 @end

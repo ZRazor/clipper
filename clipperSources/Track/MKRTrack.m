@@ -66,7 +66,7 @@
     return YES;
 }
 
--(AVMutableComposition *)processVideo:(AVAsset *)original andAudio:(AVAsset *)playback {
+-(AVMutableComposition *)processVideo:(AVAsset *)original {
     NSMutableDictionary *barsAssets = [NSMutableDictionary new];
     NSLog(@"-----------BARS FILLING-----------");
     for (NSInteger i = 0; i < [barManager.registeredBars count]; i++) {
@@ -96,19 +96,12 @@
     AVMutableComposition *result = [AVMutableComposition composition];
     NSLog(@"-----------COMPOSING-----------");
     CMTime resultCursor = kCMTimeZero;
-    [result insertEmptyTimeRange:CMTimeRangeMake(kCMTimeZero, playback.duration)];
     
     for (MKRScene *scene in structure) {
         NSLog(@"start scene id: %s %ld at %f", object_getClassName(scene), scene.identifier, CMTimeGetSeconds(resultCursor));
         [scene makeComposition:result withBarAssets:barsAssets andWithResultCursorPtr:&resultCursor andWithMSPQ:self.MSPQ];
         NSLog(@"end scene at %f", CMTimeGetSeconds(resultCursor));
     }
-    
-    AVAssetTrack *playbackAssetTrack = [playback tracksWithMediaType:AVMediaTypeAudio][0];
-    AVMutableCompositionTrack *playbackTrack = [result addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:4];
-    [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, [playback duration]) ofTrack:playbackAssetTrack atTime:kCMTimeZero error:nil];
-    
-    NSLog(@"result track duration = %f", CMTimeGetSeconds([result duration]));
     
     return result;
 }
