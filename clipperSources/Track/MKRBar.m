@@ -34,4 +34,15 @@ static NSInteger globalIdentifier = 0;
     return self;
 }
 
+- (double)getAverageGainForSequence {
+    if (![self.sequence count]) {
+        return 0;
+    }
+    double gainSum = 0;
+    for (MKRProcessedInterval *interval in self.sequence) {
+        gainSum += interval.averageGain;
+    }
+    return gainSum / [self.sequence count];
+}
+
 @end

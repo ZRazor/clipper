@@ -20,6 +20,7 @@
 -(instancetype)initWithFeaturesIntervals:(NSMutableArray<MKRInterval *> *)features andMSPQ:(double)MSPQ andQPB:(NSInteger)QPB;
 
 -(NSMutableArray<MKRBar *> *)getBarsWithQuantsLength:(NSNumber *)quantsLength;
--(MKRBar *)getBarWithQuantsLength:(NSNumber *)quantsLength;
+
+- (MKRBar *)getBarWithQuantsLength:(NSNumber *)quantsLength withHighestGain:(BOOL)highestGain;
 
 @end

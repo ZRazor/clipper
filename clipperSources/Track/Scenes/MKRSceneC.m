@@ -11,7 +11,7 @@
 @implementation MKRSceneC
 
 - (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
-    MKRBar *bar = [barManager getBarWithQuantsLength:@(8 * 4 * barManager.QPB)];
+    MKRBar *bar = [barManager getBarWithQuantsLength:@(8 * 4 * barManager.QPB) withHighestGain:NO];
     if (bar == nil) {
         return NO;
     }

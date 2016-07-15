@@ -92,14 +92,35 @@
     }
     
     [bars sortUsingComparator:^NSComparisonResult(MKRBar *obj1, MKRBar *obj2) {
-        return obj1.error >= obj2.error;
+        if (obj1.error > obj2.error) {
+            return NSOrderedDescending;
+        }
+
+        if (obj1.error < obj2.error) {
+            return NSOrderedAscending;
+        }
+        return NSOrderedSame;
     }];
     
     return bars;
 }
 
--(MKRBar *)getBarWithQuantsLength:(NSNumber *)quantsLength {
-    NSMutableArray<MKRBar *> *bars = [self getBarsWithQuantsLength:quantsLength];
+-(MKRBar *)getBarWithQuantsLength:(NSNumber *)quantsLength withHighestGain:(BOOL)highestGain {
+    NSMutableArray<MKRBar *> *bars = [[self getBarsWithQuantsLength:quantsLength] mutableCopy];
+    if (highestGain) {
+        [bars sortUsingComparator:^NSComparisonResult(MKRBar *obj1, MKRBar *obj2) {
+            double gain1 = [obj1 getAverageGainForSequence];
+            double gain2 = [obj2 getAverageGainForSequence];
+            if (gain1 > gain2) {
+                return NSOrderedAscending;
+            }
+
+            if (gain1 < gain2) {
+                return NSOrderedDescending;
+            }
+            return NSOrderedSame;
+        }];
+    }
     MKRBar *result = nil;
     for (NSInteger i = 0; i < [bars count]; i++) {
         if (!bars[i].used) {
@@ -114,6 +135,10 @@
     
     if (result) {
         [result setUsed:YES];
+    }
+    
+    if (highestGain) {
+        NSLog(@"Selected Bar with gain %lf", [result getAverageGainForSequence]);
     }
     
     return result;

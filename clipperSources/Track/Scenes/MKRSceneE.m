@@ -11,7 +11,7 @@
 @implementation MKRSceneE
 
 - (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
-    MKRBar *bar = [barManager getBarWithQuantsLength:@(4 * barManager.QPB)];
+    MKRBar *bar = [barManager getBarWithQuantsLength:@(4 * barManager.QPB) withHighestGain:NO];
     if (!bar) {
         return NO;
     }
