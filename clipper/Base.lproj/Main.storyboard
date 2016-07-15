@@ -276,7 +276,7 @@
                                                     <constraint firstAttribute="height" constant="25" id="KJv-9W-Oxw"/>
                                                     <constraint firstAttribute="width" constant="25" id="tca-OR-tZ0"/>
                                                 </constraints>
-                                                <state key="normal" backgroundImage="export"/>
+                                                <state key="normal" backgroundImage="share"/>
                                                 <connections>
                                                     <action selector="exportButtonClick:" destination="iAZ-yW-FBg" eventType="touchUpInside" id="AmN-lN-7iI"/>
                                                 </connections>
@@ -357,10 +357,12 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="532-mr-wDU" id="6yG-kQ-0XO"/>
+                        <outlet property="exportButton" destination="a3I-Zf-gJG" id="Cga-LW-Ha2"/>
                         <outlet property="exportView" destination="pip-87-zt2" id="GTJ-6F-DT2"/>
                         <outlet property="exportViewRightConstraint" destination="k7b-b7-fOq" id="zml-bt-N2G"/>
                         <outlet property="loadingImageView" destination="YWX-ph-Ivs" id="xnk-fm-X9f"/>
                         <outlet property="loadingView" destination="sSj-Eh-VdY" id="VQt-se-DXH"/>
+                        <outlet property="saveToCameraRollButton" destination="fA8-Zh-pmh" id="M0F-aX-glu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tzA-uZ-bvq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -464,12 +466,12 @@
     <resources>
         <image name="back" width="50" height="25"/>
         <image name="close" width="25" height="25"/>
-        <image name="export" width="25" height="25"/>
         <image name="flash_off" width="25" height="25"/>
         <image name="loading" width="50" height="50"/>
         <image name="locked" width="50" height="50"/>
         <image name="save" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
+        <image name="share" width="25" height="25"/>
         <image name="switch_camera" width="25" height="25"/>
     </resources>
 </document>

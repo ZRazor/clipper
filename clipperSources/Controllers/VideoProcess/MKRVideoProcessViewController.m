@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UIImageView *loadingImageView;
 @property (weak, nonatomic) IBOutlet UIView *exportView;
+@property (weak, nonatomic) IBOutlet UIButton *saveToCameraRollButton;
+@property (weak, nonatomic) IBOutlet UIButton *exportButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *exportViewRightConstraint;
 @property (nonatomic) AVPlayerViewController *playerViewController;
 - (IBAction)backButtonClick:(id)sender;
@@ -110,12 +112,12 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     void (^finishBlock)() = ^void () {
         [self.collectionView setUserInteractionEnabled:YES];
         [self.loadingView setHidden:YES];
-        [self showExportView];
     };
     [self handleVideo:assetUrl withTrackName:trackName onSuccess:^(NSURL *newVideoURL) {
         dispatch_async(dispatch_get_main_queue(), ^{
             clippedVideoUrl = newVideoURL;
             [self.playerViewController setPlayer:[AVPlayer playerWithURL:clippedVideoUrl]];
+            [self showExportView];
             finishBlock();
         });
     } onFailure:^(NSError *error) {
@@ -164,6 +166,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 }
 
 - (IBAction)exportButtonClick:(id)sender {
+    [self.exportButton setEnabled:NO];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]
             initWithActivityItems:@[@"Yo, Check it out! It is awesome!", clippedVideoUrl] applicationActivities:nil];
     NSArray *excludeActivities = @[
@@ -176,19 +179,30 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     ];
 
     [activityVC setExcludedActivityTypes:excludeActivities];
-    [self presentViewController:activityVC animated:YES completion:nil];
+    [self presentViewController:activityVC animated:YES completion:^(){
+        [self.exportButton setEnabled:YES];
+    }];
 }
 
 - (IBAction)saveToCameraRollClick:(id)sender {
     if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(clippedVideoUrl.path)) {
+        [self.saveToCameraRollButton setEnabled:NO];
         UISaveVideoAtPathToSavedPhotosAlbum(clippedVideoUrl.path,self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
     }
 }
 
 - (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Yo"
-                                 message:@"Clipped video is saved to your camera roll"
+        [self.saveToCameraRollButton setEnabled:YES];
+        NSString *msgTitle = @"Yo";
+        NSString *msgSubtitle = @"Clipped video is saved to your camera roll";
+        if (error) {
+            msgTitle = @"Error";
+            msgSubtitle = [error localizedDescription];
+        }
+
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:msgTitle
+                                 message:msgSubtitle
                           preferredStyle:UIAlertControllerStyleAlert];
 
         UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
