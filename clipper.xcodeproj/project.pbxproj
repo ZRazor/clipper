@@ -31,6 +31,11 @@
 		D71346851D3119CB00B9EDC3 /* 01.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71346841D3119CB00B9EDC3 /* 01.plist */; };
 		D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D71CA5E91D3752850055EB85 /* AVFoundation.framework */; };
 		D71CA5F01D37713B0055EB85 /* MKRAudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */; };
+		D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA4E1D3B61A50061769A /* MKRAudioUnit.m */; };
+		D761DA521D3B61E40061769A /* MKRAUAudioFilePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA511D3B61E40061769A /* MKRAUAudioFilePlayer.m */; };
+		D761DA551D3B66410061769A /* MKRAUMixer.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA541D3B66410061769A /* MKRAUMixer.m */; };
+		D761DA581D3B66B30061769A /* MKRAUGenericOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA571D3B66B30061769A /* MKRAUGenericOutput.m */; };
+		D761DA5B1D3B67190061769A /* MKRAUTimePitch.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA5A1D3B67190061769A /* MKRAUTimePitch.m */; };
 		D763B3DE1D34C95E00D9669E /* MKRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3CF1D34C95E00D9669E /* MKRScene.m */; };
 		D763B3DF1D34C95E00D9669E /* MKRSceneA.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3D11D34C95E00D9669E /* MKRSceneA.m */; };
 		D763B3E01D34C95E00D9669E /* MKRSceneA1.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3D31D34C95E00D9669E /* MKRSceneA1.m */; };
@@ -93,6 +98,16 @@
 		D71CA5ED1D37593D0055EB85 /* blank_1080p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = blank_1080p.mp4; sourceTree = "<group>"; };
 		D71CA5EE1D37713B0055EB85 /* MKRAudioProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioProcessor.h; sourceTree = "<group>"; };
 		D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioProcessor.m; sourceTree = "<group>"; };
+		D761DA4D1D3B61A50061769A /* MKRAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioUnit.h; sourceTree = "<group>"; };
+		D761DA4E1D3B61A50061769A /* MKRAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioUnit.m; sourceTree = "<group>"; };
+		D761DA501D3B61E40061769A /* MKRAUAudioFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAUAudioFilePlayer.h; sourceTree = "<group>"; };
+		D761DA511D3B61E40061769A /* MKRAUAudioFilePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAUAudioFilePlayer.m; sourceTree = "<group>"; };
+		D761DA531D3B66410061769A /* MKRAUMixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAUMixer.h; sourceTree = "<group>"; };
+		D761DA541D3B66410061769A /* MKRAUMixer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAUMixer.m; sourceTree = "<group>"; };
+		D761DA561D3B66B30061769A /* MKRAUGenericOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAUGenericOutput.h; sourceTree = "<group>"; };
+		D761DA571D3B66B30061769A /* MKRAUGenericOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAUGenericOutput.m; sourceTree = "<group>"; };
+		D761DA591D3B67190061769A /* MKRAUTimePitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAUTimePitch.h; sourceTree = "<group>"; };
+		D761DA5A1D3B67190061769A /* MKRAUTimePitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAUTimePitch.m; sourceTree = "<group>"; };
 		D763B3CE1D34C95E00D9669E /* MKRScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRScene.h; sourceTree = "<group>"; };
 		D763B3CF1D34C95E00D9669E /* MKRScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRScene.m; sourceTree = "<group>"; };
 		D763B3D01D34C95E00D9669E /* MKRSceneA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneA.h; sourceTree = "<group>"; };
@@ -266,6 +281,7 @@
 		58AAAD62AC4E9C3E96DBF492 /* PostProcess */ = {
 			isa = PBXGroup;
 			children = (
+				D761DA4C1D3B618C0061769A /* AudioUnits */,
 				58AAA8CC84525834040B3479 /* MKRAudioPostProcessor.m */,
 				58AAA13346A0E3B2C2DBC798 /* MKRAudioPostProcessor.h */,
 				58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */,
@@ -314,6 +330,23 @@
 				D7D04B4A1D3392D400E606F9 /* 02.plist */,
 			);
 			path = tracks;
+			sourceTree = "<group>";
+		};
+		D761DA4C1D3B618C0061769A /* AudioUnits */ = {
+			isa = PBXGroup;
+			children = (
+				D761DA4D1D3B61A50061769A /* MKRAudioUnit.h */,
+				D761DA4E1D3B61A50061769A /* MKRAudioUnit.m */,
+				D761DA501D3B61E40061769A /* MKRAUAudioFilePlayer.h */,
+				D761DA511D3B61E40061769A /* MKRAUAudioFilePlayer.m */,
+				D761DA531D3B66410061769A /* MKRAUMixer.h */,
+				D761DA541D3B66410061769A /* MKRAUMixer.m */,
+				D761DA561D3B66B30061769A /* MKRAUGenericOutput.h */,
+				D761DA571D3B66B30061769A /* MKRAUGenericOutput.m */,
+				D761DA591D3B67190061769A /* MKRAUTimePitch.h */,
+				D761DA5A1D3B67190061769A /* MKRAUTimePitch.m */,
+			);
+			path = AudioUnits;
 			sourceTree = "<group>";
 		};
 		D763B3CD1D34C92F00D9669E /* Scenes */ = {
@@ -399,7 +432,7 @@
 				TargetAttributes = {
 					3AB3B9F11D2CD5CE0062D19D = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 44FPHB4323;
+						DevelopmentTeam = Z2PHG96DRQ;
 					};
 				};
 			};
@@ -445,9 +478,12 @@
 			files = (
 				D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */,
 				D763B3E21D34C95E00D9669E /* MKRSceneC.m in Sources */,
+				D761DA5B1D3B67190061769A /* MKRAUTimePitch.m in Sources */,
 				3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */,
 				3A83B6381D37984B00470942 /* MKRTrackCollectionViewCell.m in Sources */,
+				D761DA581D3B66B30061769A /* MKRAUGenericOutput.m in Sources */,
 				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
+				D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */,
 				D763B3E51D34C95E00D9669E /* MKRSceneF.m in Sources */,
 				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,
 				3A83B6351D3795F500470942 /* MKRVideoProcessViewController.m in Sources */,
@@ -457,10 +493,12 @@
 				D763B3E41D34C95E00D9669E /* MKRSceneE.m in Sources */,
 				3A46E70C1D375831008E037A /* MKRSettingsTableViewController.m in Sources */,
 				D763B3DE1D34C95E00D9669E /* MKRScene.m in Sources */,
+				D761DA521D3B61E40061769A /* MKRAUAudioFilePlayer.m in Sources */,
 				D7E5F3D21D2F49D80095F5D6 /* MKRInterval.m in Sources */,
 				D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */,
 				D763B3E01D34C95E00D9669E /* MKRSceneA1.m in Sources */,
 				58AAA040886A724D9945554E /* README.MD in Sources */,
+				D761DA551D3B66410061769A /* MKRAUMixer.m in Sources */,
 				58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */,
 				3A46E7051D3740E8008E037A /* CALayer+RuntimeAttribute.m in Sources */,
 				D763B3DF1D34C95E00D9669E /* MKRSceneA.m in Sources */,
