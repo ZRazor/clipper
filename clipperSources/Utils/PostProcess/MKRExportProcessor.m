@@ -24,8 +24,14 @@
     return URL;
 }
 
-+ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure {
++ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset prefferedTransform:(CGAffineTransform)transform onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure {
 //    AVMutableAudioMix *audioMix = [MKRAudioPostProcessor postProcessAudioForMutableComposition:asset];
+    AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] lastObject];
+    AVMutableCompositionTrack *compositionVideoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].lastObject;
+    if (videoTrack && compositionVideoTrack) {
+        [compositionVideoTrack setPreferredTransform:transform];
+    }
+
     AVAssetExportSession *export = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
     [export setOutputFileType:AVFileTypeQuickTimeMovie];
 //    [export setAudioMix:audioMix];
@@ -138,6 +144,33 @@
         }
     }];
     
+}
+
++ (BOOL)isVideoPortrait:(AVAsset *)asset {
+    BOOL isPortrait = NO;
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    if ([tracks count]) {
+        AVAssetTrack *videoTrack = tracks[0];
+        CGAffineTransform t = videoTrack.preferredTransform;
+        // Portrait
+        if (t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0) {
+            isPortrait = YES;
+        }
+        // PortraitUpsideDown
+        if (t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0) {
+
+            isPortrait = YES;
+        }
+        // LandscapeRight
+        if (t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0) {
+            isPortrait = NO;
+        }
+        // LandscapeLeft
+        if (t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0) {
+            isPortrait = NO;
+        }
+    }
+    return isPortrait;
 }
 
 @end

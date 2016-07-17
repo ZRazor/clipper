@@ -102,7 +102,13 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
                     //                CMTime startOffset = CMTimeSubtract(CMTimeMaximum(resultAsset.duration, realAudio.duration), CMTimeMinimum(resultAsset.duration, realAudio.duration));
                     [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, realAudio.duration) ofTrack:audioTrack atTime:kCMTimeZero error:nil];
                 }
-                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset onSuccess:success onFailure:failure];
+                CGAffineTransform transform = avAsset.preferredTransform;
+                NSArray *tracks = [avAsset tracksWithMediaType:AVMediaTypeVideo];
+                if ([tracks count]) {
+                    AVAssetTrack *videoTrack = tracks[0];
+                    transform = videoTrack.preferredTransform;
+                }
+                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset prefferedTransform:transform onSuccess:success onFailure:failure];
             } failure:^(NSError *error) {
                 NSLog(@"error = %@", error);
             }];
