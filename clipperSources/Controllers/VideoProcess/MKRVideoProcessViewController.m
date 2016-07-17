@@ -137,6 +137,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
     [self.collectionView setUserInteractionEnabled:NO];
     [self.loadingView setHidden:NO];
+    [self.playerViewController.player pause];
     [self hideExportView];
     void (^finishBlock)() = ^void () {
         [self.collectionView setUserInteractionEnabled:YES];
@@ -203,6 +204,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 #pragma mark - User Actions
 
 - (IBAction)backButtonClick:(id)sender {
+    [self.playerViewController setPlayer:nil];
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 

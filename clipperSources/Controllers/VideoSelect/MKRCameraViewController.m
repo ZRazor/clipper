@@ -41,7 +41,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self checkPermissions];
+    [self checkCameraPermissions];
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
@@ -63,23 +63,31 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     }
 }
 
-- (void)checkPermissions {
+- (void)checkCameraPermissions {
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusAuthorized) {
         cameraPermissions = YES;
-        [self setUpInterface];
+        [self checkCameraRollPermissions];
     } else if (authStatus == AVAuthorizationStatusNotDetermined){
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
             cameraPermissions = granted;
-            [self setUpInterface];
+            [self checkCameraRollPermissions];
         }];
     } else {
         cameraPermissions = NO;
-        [self setUpInterface];
+        [self checkCameraRollPermissions];
     }
 }
 
-- (void) orientationChanged:(NSNotification *)note {
+- (void)checkCameraRollPermissions {
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setUpInterface];
+        });
+    }];
+}
+
+- (void)orientationChanged:(NSNotification *)note {
     UIDevice * device = note.object;
     CGFloat angle = 0;
     switch(device.orientation) {
@@ -125,17 +133,18 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeVideo options:fetchOptions];
     PHAsset *lastAsset = [fetchResult lastObject];
     if (!lastAsset) {
-        [self.libraryButton setBackgroundColor:[UIColor mkr_lightGrayColor]];
+        [self.libraryButton setBackgroundImage:[UIImage imageNamed:@"video"] forState:UIControlStateNormal];
+    } else {
+        [[PHImageManager defaultManager] requestImageForAsset:lastAsset
+                                                   targetSize:CGSizeMake(50, 50)
+                                                  contentMode:PHImageContentModeAspectFill
+                                                      options:nil
+                                                resultHandler:^(UIImage *result, NSDictionary *info) {
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        [self.libraryButton setBackgroundImage:result forState:UIControlStateNormal];
+                                                    });
+                                                }];
     }
-    [[PHImageManager defaultManager] requestImageForAsset:lastAsset
-                                               targetSize:CGSizeMake(50, 50)
-                                              contentMode:PHImageContentModeAspectFill
-                                                  options:nil
-                                            resultHandler:^(UIImage *result, NSDictionary *info) {
-                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                    [self.libraryButton setBackgroundImage:result forState:UIControlStateNormal];
-                                                });
-                                            }];
 
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         NSLog(@"No camera on simulator!");
@@ -155,18 +164,18 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
         [self.picker setNavigationBarHidden:YES];
         [self.picker setToolbarHidden:YES];
         [self.picker setDelegate:self];
-        //TODO add transfor
-        //self.picker.cameraViewTransform = CGAffineTransformMakeTranslation(0.0, 71.0);
 
         [self.picker setDelegate:self];
-//        [self.cameraView setClipsToBounds:YES];
         [self.cameraView addSubview:self.picker.view];
     }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     pickedVideoUrl = info[UIImagePickerControllerMediaURL];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    NSLog(@"Start closing");
+    [picker dismissViewControllerAnimated:YES completion:^(){
+        NSLog(@"Completed");
+    }];
     [self performSegueWithIdentifier:kMKRSelectVideoIdentifier sender:self];
 }
 
