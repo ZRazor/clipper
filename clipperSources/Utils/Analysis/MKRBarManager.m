@@ -121,9 +121,17 @@
             return NSOrderedSame;
         }];
     }
+    
+    BOOL preferNotUsed = !highestGain;
+    
     MKRBar *result = nil;
     for (NSInteger i = 0; i < [bars count]; i++) {
-        if (!bars[i].used) {
+        if (preferNotUsed) {
+            if (!bars[i].used) {
+                result = bars[i];
+                break;
+            }
+        } else {
             result = bars[i];
             break;
         }
