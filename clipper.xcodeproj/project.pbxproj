@@ -36,6 +36,8 @@
 		D761DA551D3B66410061769A /* MKRAUMixer.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA541D3B66410061769A /* MKRAUMixer.m */; };
 		D761DA581D3B66B30061769A /* MKRAUGenericOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA571D3B66B30061769A /* MKRAUGenericOutput.m */; };
 		D761DA5B1D3B67190061769A /* MKRAUTimePitch.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA5A1D3B67190061769A /* MKRAUTimePitch.m */; };
+		D761DA621D3B7F280061769A /* MKRAutomationLane.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA611D3B7F280061769A /* MKRAutomationLane.m */; };
+		D761DA681D3B82750061769A /* MKRAutomationPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA671D3B82750061769A /* MKRAutomationPoint.m */; };
 		D763B3DE1D34C95E00D9669E /* MKRScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3CF1D34C95E00D9669E /* MKRScene.m */; };
 		D763B3DF1D34C95E00D9669E /* MKRSceneA.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3D11D34C95E00D9669E /* MKRSceneA.m */; };
 		D763B3E01D34C95E00D9669E /* MKRSceneA1.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3D31D34C95E00D9669E /* MKRSceneA1.m */; };
@@ -108,6 +110,11 @@
 		D761DA571D3B66B30061769A /* MKRAUGenericOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAUGenericOutput.m; sourceTree = "<group>"; };
 		D761DA591D3B67190061769A /* MKRAUTimePitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAUTimePitch.h; sourceTree = "<group>"; };
 		D761DA5A1D3B67190061769A /* MKRAUTimePitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAUTimePitch.m; sourceTree = "<group>"; };
+		D761DA601D3B7F280061769A /* MKRAutomationLane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAutomationLane.h; sourceTree = "<group>"; };
+		D761DA611D3B7F280061769A /* MKRAutomationLane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAutomationLane.m; sourceTree = "<group>"; };
+		D761DA661D3B82750061769A /* MKRAutomationPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAutomationPoint.h; sourceTree = "<group>"; };
+		D761DA671D3B82750061769A /* MKRAutomationPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAutomationPoint.m; sourceTree = "<group>"; };
+		D761DA691D3B86300061769A /* MKRAudioUnits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKRAudioUnits.h; sourceTree = "<group>"; };
 		D763B3CE1D34C95E00D9669E /* MKRScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRScene.h; sourceTree = "<group>"; };
 		D763B3CF1D34C95E00D9669E /* MKRScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRScene.m; sourceTree = "<group>"; };
 		D763B3D01D34C95E00D9669E /* MKRSceneA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneA.h; sourceTree = "<group>"; };
@@ -345,8 +352,20 @@
 				D761DA571D3B66B30061769A /* MKRAUGenericOutput.m */,
 				D761DA591D3B67190061769A /* MKRAUTimePitch.h */,
 				D761DA5A1D3B67190061769A /* MKRAUTimePitch.m */,
+				D761DA691D3B86300061769A /* MKRAudioUnits.h */,
 			);
 			path = AudioUnits;
+			sourceTree = "<group>";
+		};
+		D761DA5C1D3B7E9A0061769A /* Automation */ = {
+			isa = PBXGroup;
+			children = (
+				D761DA601D3B7F280061769A /* MKRAutomationLane.h */,
+				D761DA611D3B7F280061769A /* MKRAutomationLane.m */,
+				D761DA661D3B82750061769A /* MKRAutomationPoint.h */,
+				D761DA671D3B82750061769A /* MKRAutomationPoint.m */,
+			);
+			path = Automation;
 			sourceTree = "<group>";
 		};
 		D763B3CD1D34C92F00D9669E /* Scenes */ = {
@@ -375,6 +394,7 @@
 		D7E5F3C21D2F48920095F5D6 /* Track */ = {
 			isa = PBXGroup;
 			children = (
+				D761DA5C1D3B7E9A0061769A /* Automation */,
 				D763B3CD1D34C92F00D9669E /* Scenes */,
 				D7E5F3C31D2F489C0095F5D6 /* MKRTrack.h */,
 				D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */,
@@ -486,6 +506,7 @@
 				D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */,
 				D763B3E51D34C95E00D9669E /* MKRSceneF.m in Sources */,
 				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,
+				D761DA681D3B82750061769A /* MKRAutomationPoint.m in Sources */,
 				3A83B6351D3795F500470942 /* MKRVideoProcessViewController.m in Sources */,
 				3A49F55C1D362F0000DBF7CA /* MKRCameraViewController.m in Sources */,
 				D763B3E31D34C95E00D9669E /* MKRSceneD.m in Sources */,
@@ -504,6 +525,7 @@
 				D763B3DF1D34C95E00D9669E /* MKRSceneA.m in Sources */,
 				3A46E7081D375253008E037A /* MKRRecordButton.m in Sources */,
 				D71CA5F01D37713B0055EB85 /* MKRAudioProcessor.m in Sources */,
+				D761DA621D3B7F280061769A /* MKRAutomationLane.m in Sources */,
 				D763B3E11D34C95E00D9669E /* MKRSceneB.m in Sources */,
 				58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */,
 				58AAA43C429EBF8AEFFF0D11 /* MKRAudioPostProcessor.m in Sources */,

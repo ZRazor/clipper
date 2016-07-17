@@ -12,6 +12,7 @@
 */
 #import <Foundation/Foundation.h>
 #import "MKRScene.h"
+#import "MKRAudioUnits.h"
 
 @interface MKRSceneF : MKRScene
 

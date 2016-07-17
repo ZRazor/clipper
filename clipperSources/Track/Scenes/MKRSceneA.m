@@ -11,7 +11,7 @@
 
 @implementation MKRSceneA
 
--(instancetype)initWithIdentifier:(NSInteger)identifier {
+- (instancetype)initWithIdentifier:(NSInteger)identifier {
     self = [super initWithIdentifier:identifier];
     if (!self) {
         return nil;
@@ -20,7 +20,7 @@
     return self;
 }
 
--(BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
+- (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
     MKRBar *bar1 = [barManager getBarWithQuantsLength:@(self.barsCount * 4 * barManager.QPB) withHighestGain:NO];
     MKRBar *bar2 = [barManager getBarWithQuantsLength:@(self.barsCount * 4 * barManager.QPB) withHighestGain:NO];
     if (bar1 == nil || bar2 == nil) {

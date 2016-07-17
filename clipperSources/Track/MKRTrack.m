@@ -19,7 +19,7 @@
     MKRBarManager *barManager;
 }
 
--(instancetype)initWithMetaDataPath:(NSString *)metaDataPath andFeaturesInterval:(NSMutableArray<MKRInterval *> *)features{
+- (instancetype)initWithMetaDataPath:(NSString *)metaDataPath andFeaturesInterval:(NSMutableArray<MKRInterval *> *)features{
     self = [super init];
     if (!self) {
         return nil;
@@ -55,11 +55,11 @@
     return self;
 }
 
--(void)calcMSPQ {
+- (void)calcMSPQ {
     [self setMSPQ:(1000.0 * 60.0  / self.BPM / self.QPB)];
 }
 
--(BOOL)fillScenes {
+- (BOOL)fillScenes {
     for (MKRScene *scene in scenes) {
         if (![scene fillBarsWithBarManager:barManager]) {
             return NO;
@@ -68,7 +68,13 @@
     return YES;
 }
 
--(AVMutableComposition *)processVideo:(AVAsset *)original {
+- (void)prepareAutomations {
+    [self setAutomations:[[NSMutableArray alloc] init]];
+    MKRAutomationLane *timePitchPitch = [[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_TimePitch andParameterID:kNewTimePitchParam_Pitch];
+    [self.automations addObject:timePitchPitch];
+}
+
+- (AVMutableComposition *)processVideo:(AVAsset *)original {
     NSMutableDictionary *barsAssets = [NSMutableDictionary new];
     NSLog(@"-----------BARS FILLING-----------");
     for (NSInteger i = 0; i < [barManager.registeredBars count]; i++) {
@@ -98,12 +104,13 @@
     AVMutableComposition *result = [AVMutableComposition composition];
     NSLog(@"-----------COMPOSING-----------");
     CMTime resultCursor = kCMTimeZero;
+    [self prepareAutomations];
     
     for (MKRStructureUnit *structureUnit in structure) {
         MKRScene *scene = [structureUnit getScene];
         Float64 startTime = CMTimeGetSeconds(resultCursor);
         NSLog(@"start scene id: %s %ld at %f", object_getClassName(scene), scene.identifier, startTime);
-        [scene makeComposition:result withBarAssets:barsAssets andWithResultCursorPtr:&resultCursor andWithMSPQ:self.MSPQ];
+        [scene makeComposition:result withBarAssets:barsAssets andResultCursorPtr:&resultCursor andMSPQ:self.MSPQ andAutomations:self.automations];
         Float64 endTime = CMTimeGetSeconds(resultCursor);
         NSLog(@"end scene at %f", endTime);
         [structureUnit setTimeIntervalWithStartTime:startTime andEndTime:endTime];

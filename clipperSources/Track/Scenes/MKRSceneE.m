@@ -19,7 +19,7 @@
     return YES;
 }
 
-- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray *)automations {
     MKRBar *bar = self.bars[0];
     AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
     CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);

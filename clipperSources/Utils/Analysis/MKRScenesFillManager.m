@@ -48,7 +48,7 @@
         NSLog(@"Try to fill scenes with %d timeout", timeout.intValue);
         [vad setVadTimeout:timeout.intValue];
         NSMutableArray<MKRInterval *> *speechIntervals = [vad findSpeechIntervals];
-        NSLog(@"VAD complete, found %u speech intervals", [speechIntervals count]);
+        NSLog(@"VAD complete, found %lu speech intervals", [speechIntervals count]);
         for (MKRInterval *interval in speechIntervals) {
             NSLog(@"[%f, %f]", interval.start / 1000.0, interval.end / 1000.0);
         }

@@ -51,4 +51,8 @@
     return AudioUnitGetProperty(_unit, propertyId, scope, 0, data, size);
 }
 
+- (OSStatus)setParameter:(AudioUnitParameterID)parameterId to:(Float64)value {
+    return AudioUnitSetParameter(_unit, parameterId, kAudioUnitScope_Global, 0, value, 0);
+}
+
 @end

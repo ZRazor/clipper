@@ -12,15 +12,16 @@
 #import "MKRAUMixer.h"
 #import "MKRAUGenericOutput.h"
 #import "MKRAUTimePitch.h"
-
-OSStatus OSSTATUS = noErr;
-#define OSSTATUS_CHECK if (OSSTATUS != 0) [NSException raise:NSInternalInconsistencyException format:@"OSStatus error: %d", (int)OSSTATUS];
+#import "MKRAudioUnits.h"
 
 const NSInteger kMKRUnit_GIO = 0;
 const NSInteger kMKRUnit_OriginalPlayer = 1;
 const NSInteger kMKRUnit_PlaybackPlayer = 2;
 const NSInteger kMKRUnit_TimePitch = 3;
 const NSInteger kMKRUnit_Mixer = 4;
+
+OSStatus OSSTATUS = noErr;
+#define OSSTATUS_CHECK if (OSSTATUS != 0) [NSException raise:NSInternalInconsistencyException format:@"OSStatus error: %d", (int)OSSTATUS];
 
 
 @interface MKRAudioProcessor()
@@ -150,16 +151,54 @@ const NSInteger kMKRUnit_Mixer = 4;
     inTimeStamp.mFlags = kAudioTimeStampSampleTimeValid;
     UInt32 busNumber = 0;
     UInt32 numberFrames = 512;
+    CMTime timeInIteration = CMTimeMakeWithSeconds(numberFrames / self.sampleRate, 600000);
     inTimeStamp.mSampleTime = 0;
     int channelCount = 2;
     
     int totalFrames = self.maxSampleTime;
+    NSLog(@"totalframes = %d aprox time = %f", totalFrames, totalFrames / self.sampleRate);
+
+    CMTime currentTime = kCMTimeInvalid;
     while (totalFrames > 0) {
-//        if (totalFrames / numberFrames > 26880 / 1000 * self.sampleRate && totalFrames / numberFrames < 38400 / 1000 * self.sampleRate) {
-//            OSSTATUS = AudioUnitSetParameter(self.timePitchUnit, kNewTimePitchParam_Pitch, kAudioUnitScope_Global, 0, (i += 10) % 2400, 0); OSSTATUS_CHECK
-//        } else if (totalFrames / numberFrames > 38400 / 1000 * self.sampleRate) {
-//            OSSTATUS = AudioUnitSetParameter(self.timePitchUnit, kNewTimePitchParam_Pitch, kAudioUnitScope_Global, 0, 0, 0); OSSTATUS_CHECK
-//        }
+        currentTime = CMTimeMakeWithSeconds((self.maxSampleTime - totalFrames) / self.sampleRate, 600000);
+        for (MKRAutomationLane *lane in track.automations) {
+            MKRAutomationPoint *previousPoint = [lane getPointBefore:currentTime];
+            MKRAutomationPoint *nextPoint = [lane getPointAfterOrAt:currentTime];
+            if (!nextPoint && !previousPoint) {
+                continue;
+            }
+            
+            if (!previousPoint) {
+                CMTime delta = CMTimeSubtract(nextPoint.position, currentTime);
+                if (CMTimeGetSeconds(delta) <= CMTimeGetSeconds(timeInIteration)) {
+                    MKRAudioUnit *unit = [self.units objectForKey:@(lane.audioUnitIdentifier)];
+                    OSSTATUS = [unit setParameter:lane.parameterID to:[nextPoint.value floatValue]]; OSSTATUS_CHECK
+                }
+                continue;
+            }
+            if (!nextPoint) {
+                MKRAudioUnit *unit = [self.units objectForKey:@(lane.audioUnitIdentifier)];
+                OSSTATUS = [unit setParameter:lane.parameterID to:[previousPoint.value floatValue]]; OSSTATUS_CHECK
+                continue;
+            }
+            
+            if (nextPoint && previousPoint) {
+                NSNumber *previousValue = previousPoint.value;
+                NSNumber *nextValue = nextPoint.value;
+                Float64 delta = [nextValue floatValue] - [previousValue floatValue];
+                Float64 duration = CMTimeGetSeconds(CMTimeSubtract(nextPoint.position, previousPoint.position)) * 1000.0;
+                Float64 offset = CMTimeGetSeconds(CMTimeSubtract(currentTime, previousPoint.position)) * 1000.0;
+                Float64 value;
+                if (delta != 0) {
+                    value = [previousValue floatValue] + delta * (offset / duration);
+                } else {
+                    value = [nextValue floatValue];
+                }
+                MKRAudioUnit *unit = [self.units objectForKey:@(lane.audioUnitIdentifier)];
+                OSSTATUS = [unit setParameter:lane.parameterID to:value]; OSSTATUS_CHECK
+            }
+        }
+        
         if (totalFrames < numberFrames) {
             numberFrames = totalFrames;
         } else {
@@ -177,7 +216,8 @@ const NSInteger kMKRUnit_Mixer = 4;
         }
         
         OSSTATUS = AudioUnitRender(GIO.unit, &flags, &inTimeStamp, busNumber, numberFrames, bufferList); OSSTATUS_CHECK
-        inTimeStamp.mSampleTime++;
+        inTimeStamp.mSampleTime += numberFrames;
+//        lastTime = currentMs;
         
         OSSTATUS = ExtAudioFileWrite(extAudioFile, numberFrames, bufferList); OSSTATUS_CHECK
     }

@@ -10,7 +10,7 @@
 
 @implementation MKRSceneA1
 
--(instancetype)initWithIdentifier:(NSInteger)identifier {
+- (instancetype)initWithIdentifier:(NSInteger)identifier {
     self = [super initWithIdentifier:identifier];
     if (!self) {
         return nil;

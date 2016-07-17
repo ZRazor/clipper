@@ -19,7 +19,7 @@
     return YES;
 }
 
-- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray *)automations {
     MKRBar *bar = self.bars[0];
     AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
     CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);
@@ -36,6 +36,15 @@
         [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:bar025 resultCursorPtr:resultCursorPtr];
     }
     
+    MKRAutomationLane *pitchAutomation;
+    for (MKRAutomationLane *automation in automations) {
+        if (automation.audioUnitIdentifier == kMKRUnit_TimePitch && automation.parameterID == kNewTimePitchParam_Pitch) {
+            pitchAutomation = automation;
+            break;
+        }
+    }
+    [pitchAutomation addPointAt:*resultCursorPtr withValue:@0];
+    
     CMTime bar0125 = CMTimeMultiplyByRatio(bar025, 1, 2);
     for (int i = 0; i < 8; i++) {
         [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:bar0125 resultCursorPtr:resultCursorPtr];
@@ -45,6 +54,9 @@
     for (int i = 0; i < 16; i++) {
         [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:bar00625 resultCursorPtr:resultCursorPtr];
     }
+    
+    [pitchAutomation addPointAt:*resultCursorPtr withValue:@2400];
+    [pitchAutomation addPointAt:CMTimeAdd(*resultCursorPtr, CMTimeMakeWithSeconds(0.001, 600000)) withValue:@0];
 }
 
 @end

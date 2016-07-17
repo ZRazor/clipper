@@ -14,6 +14,7 @@
 #import <Foundation/Foundation.h>
 #import "MKRBarManager.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MKRAutomationLane.h"
 
 @interface MKRScene : NSObject
 
@@ -27,7 +28,7 @@
 /*!
   @abstract this method appends part of the composition to result and shifts resultCursorPtr
 */
-- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ;
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray<MKRAutomationLane *> *)automations;
 
 - (void)makeCompositionBar:(AVMutableComposition *)composition withBarAsset:(AVMutableComposition *)barAsset andWithBar:(MKRBar *)bar andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ andWithBarRange:(CMTimeRange)barTimeRange usingAutoComplete:(BOOL)autoComplete;
 

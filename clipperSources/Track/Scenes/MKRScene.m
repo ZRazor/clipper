@@ -33,7 +33,7 @@ static AVAsset *blank;
     @throw([NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override this method in subclass" userInfo:nil]);
 }
 
-- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray *)automations {
 //    NSLog(@"scene identifier = %ld", self.identifier);
     for (MKRBar *bar in self.bars) {
         AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
@@ -61,7 +61,7 @@ static AVAsset *blank;
     }
 }
 
--(void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr {
+- (void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr {
     NSLog(@"Insert: [%f, %f] of [%f] at [%f]", CMTimeGetSeconds(startAt), CMTimeGetSeconds(duration), CMTimeGetSeconds(asset.duration), CMTimeGetSeconds(*resultCursorPtr));
     CMTime realDuration = CMTimeSubtract(CMTimeMinimum(duration, asset.duration), CMTimeMakeWithSeconds(1 / 1000.0, 600000));
     NSLog(@"RD: %f D: %f", CMTimeGetSeconds(realDuration), CMTimeGetSeconds(duration));
