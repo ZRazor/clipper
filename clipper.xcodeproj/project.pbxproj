@@ -23,6 +23,7 @@
 		58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAABECDDA957863529FB9A /* MKRScenesFillManager.m */; };
 		58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */; };
 		58AAA4B25E713B88C8A85767 /* MKRRawDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */; };
+		58AAA7A106472D6CF0147BB1 /* MKRSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA1F666FAD27950E05021 /* MKRSettingsManager.m */; };
 		58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */; };
 		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
@@ -79,6 +80,7 @@
 		3AB3BA041D2CD5CE0062D19D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AB3BA061D2CD5CE0062D19D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58AAA16D0DC5CB28BF2E46D4 /* MKRStructureUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRStructureUnit.h; sourceTree = "<group>"; };
+		58AAA1F666FAD27950E05021 /* MKRSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSettingsManager.m; sourceTree = "<group>"; };
 		58AAA2A57B8A798C87CF8B34 /* UIColor+MKRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MKRColor.h"; sourceTree = "<group>"; };
 		58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRRawDataProcessor.m; sourceTree = "<group>"; };
 		58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRStructureUnit.m; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MKRColor.m"; sourceTree = "<group>"; };
 		58AAAA340F82A110339BAA56 /* MKRVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVad.m; sourceTree = "<group>"; };
 		58AAAB935C8B7FE6E7E27DF0 /* MKRVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVad.h; sourceTree = "<group>"; };
+		58AAABD5461E53C1292D33A8 /* MKRSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSettingsManager.h; sourceTree = "<group>"; };
 		58AAABECDDA957863529FB9A /* MKRScenesFillManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRScenesFillManager.m; sourceTree = "<group>"; };
 		58AAACD1FA4D58090C4CD60E /* MKRCVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCVad.m; sourceTree = "<group>"; };
 		58AAAD01955A4571E9DEF1E5 /* MKRRawDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRRawDataProcessor.h; sourceTree = "<group>"; };
@@ -246,6 +249,15 @@
 			path = VideoProcess;
 			sourceTree = "<group>";
 		};
+		58AAA56E67EC826C911B7BF6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				58AAA1F666FAD27950E05021 /* MKRSettingsManager.m */,
+				58AAABD5461E53C1292D33A8 /* MKRSettingsManager.h */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		58AAA98146A845B5B5C3A4DD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +325,7 @@
 				58AAA18E58E2FC73F249ECB2 /* VAD */,
 				58AAAD62AC4E9C3E96DBF492 /* PostProcess */,
 				58AAAA337504D5449F17E4CA /* PreProcess */,
+				58AAA56E67EC826C911B7BF6 /* Settings */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -452,7 +465,7 @@
 				TargetAttributes = {
 					3AB3B9F11D2CD5CE0062D19D = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = Z2PHG96DRQ;
+						DevelopmentTeam = 44FPHB4323;
 					};
 				};
 			};
@@ -534,6 +547,7 @@
 				58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */,
 				58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */,
 				58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */,
+				58AAA7A106472D6CF0147BB1 /* MKRSettingsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

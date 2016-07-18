@@ -15,7 +15,8 @@
 #import "MKRAudioProcessor.h"
 #import "MKRTrack.h"
 #import "MKRVolumeAnalyzer.h"
-
+#import "MKRSettingsManager.h"
+#import <Photos/PHPhotoLibrary.h>
 
 @interface MKRVideoProcessViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -150,6 +151,13 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
             clippedVideoUrl = newVideoURL;
             [self.playerViewController setPlayer:[AVPlayer playerWithURL:clippedVideoUrl]];
             [self showExportView];
+            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+                if (status == PHAuthorizationStatusAuthorized && [MKRSettingsManager getBoolValueForKey:kMKRSaveClippedVideoKey]) {
+                    if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(newVideoURL.path)) {
+                        UISaveVideoAtPathToSavedPhotosAlbum(newVideoURL.path, nil, NULL, NULL);
+                    }
+                }
+            }];
             finishBlock();
         });
     } onFailure:^(NSError *error) {

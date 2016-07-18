@@ -10,6 +10,7 @@
 #import "MKRVideoProcessViewController.h"
 #import "MKRRecordButton.h"
 #import "UIColor+MKRColor.h"
+#import "MKRSettingsManager.h"
 #import <Photos/PHAsset.h>
 #import <Photos/PHFetchOptions.h>
 #import <Photos/PHImageManager.h>
@@ -36,11 +37,14 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     NSURL *pickedVideoUrl;
     UIImagePickerControllerCameraDevice pickerCameraDevice;
     UIImagePickerControllerCameraFlashMode pickerFlashMode;
-    BOOL cameraPermissions;
+    BOOL videoPermissions;
+    BOOL cameraRollPermissions;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    videoPermissions = NO;
+    cameraRollPermissions = NO;
     [self checkCameraPermissions];
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:)
@@ -66,15 +70,15 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 - (void)checkCameraPermissions {
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusAuthorized) {
-        cameraPermissions = YES;
+        videoPermissions = YES;
         [self checkCameraRollPermissions];
-    } else if (authStatus == AVAuthorizationStatusNotDetermined){
+    } else if (authStatus == AVAuthorizationStatusNotDetermined) {
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-            cameraPermissions = granted;
+            videoPermissions = granted;
             [self checkCameraRollPermissions];
         }];
     } else {
-        cameraPermissions = NO;
+        videoPermissions = NO;
         [self checkCameraRollPermissions];
     }
 }
@@ -82,6 +86,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 - (void)checkCameraRollPermissions {
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            cameraRollPermissions = status == PHAuthorizationStatusAuthorized;
             [self setUpInterface];
         });
     }];
@@ -108,10 +113,10 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     };
 
     [UIView animateWithDuration:0.5 animations:^{
-        self.libraryButton.transform = CGAffineTransformMakeRotation(angle);
-        self.switchCameraButton.transform = CGAffineTransformMakeRotation(angle);
-        self.flashButton.transform = CGAffineTransformMakeRotation(angle);
-        self.settingsButton.transform = CGAffineTransformMakeRotation(angle);
+        [self.libraryButton setTransform:CGAffineTransformMakeRotation(angle)];
+        [self.switchCameraButton setTransform:CGAffineTransformMakeRotation(angle)];
+        [self.flashButton setTransform:CGAffineTransformMakeRotation(angle)];
+        [self.settingsButton setTransform:CGAffineTransformMakeRotation(angle)];
     }];
 }
 
@@ -123,7 +128,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 }
 
 - (void)setUpInterface {
-    if (!cameraPermissions) {
+    if (!videoPermissions) {
         NSLog(@"No permissions for video");
         [self disableCamera];
     }
@@ -172,9 +177,13 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     pickedVideoUrl = info[UIImagePickerControllerMediaURL];
-    NSLog(@"Start closing");
+    if (cameraRollPermissions && picker == self.picker && [MKRSettingsManager getBoolValueForKey:kMKRSaveOriginalVideoKey]) {
+        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(pickedVideoUrl.path)) {
+            UISaveVideoAtPathToSavedPhotosAlbum(pickedVideoUrl.path, nil, NULL, NULL);
+        }
+    }
     [picker dismissViewControllerAnimated:YES completion:^(){
-        NSLog(@"Completed");
+
     }];
     [self performSegueWithIdentifier:kMKRSelectVideoIdentifier sender:self];
 }

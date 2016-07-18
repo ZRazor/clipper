@@ -429,6 +429,9 @@
                                                         <constraint firstAttribute="height" constant="31" id="cqg-Pf-o19"/>
                                                     </constraints>
                                                     <color key="onTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="saveOriginalVideoChange:" destination="9hd-Ql-aou" eventType="valueChanged" id="sgG-C0-rJp"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохранять видео с камеры" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vW7-l3-TMM">
                                                     <rect key="frame" x="15" y="12" width="233" height="21"/>
@@ -463,6 +466,9 @@
                                                         <constraint firstAttribute="width" constant="49" id="NgK-yf-B7o"/>
                                                     </constraints>
                                                     <color key="onTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="saveClippedVideoChange:" destination="9hd-Ql-aou" eventType="valueChanged" id="2wB-pg-OmU"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохранять готовые видео" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uA-1O-IGu">
                                                     <rect key="frame" x="15" y="12" width="233" height="21"/>
@@ -492,14 +498,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Настройки" id="0oJ-LS-iw4">
-                        <barButtonItem key="leftBarButtonItem" image="close" id="cpB-T9-z9o">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="wqV-zl-ctt">
                             <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="closeButtonClick:" destination="9hd-Ql-aou" id="IOA-Er-WbO"/>
+                                <action selector="closeButtonClick:" destination="9hd-Ql-aou" id="mkS-hQ-Abw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="saveClippedVideoSwitch" destination="ZyU-Er-xh9" id="8Du-7X-YqW"/>
+                        <outlet property="saveOriginalVideoSwitch" destination="oCD-fl-OOT" id="Xfn-4O-QkJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lfG-xL-ajR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -534,7 +544,6 @@
     </scenes>
     <resources>
         <image name="back" width="50" height="25"/>
-        <image name="close" width="25" height="25"/>
         <image name="flash_off" width="25" height="25"/>
         <image name="loading" width="50" height="50"/>
         <image name="locked" width="50" height="50"/>
