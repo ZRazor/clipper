@@ -4,7 +4,6 @@
 //
 
 #import "MKRExportProcessor.h"
-#import "MKRAudioPostProcessor.h"
 
 
 @implementation MKRExportProcessor {
@@ -19,13 +18,11 @@
     NSString *UUID = [[NSUUID UUID] UUIDString];
     NSString *name = [NSString stringWithFormat:@"export_%@.%@", UUID, formatName];
     NSURL *URL = [NSURL fileURLWithPath:[documentsPath stringByAppendingPathComponent:name]];
-//    NSString *path = [NSString stringWithFormat:@"%@/export_%@.%@", documentsPath, UUID, formatName];
     
     return URL;
 }
 
 + (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset prefferedTransform:(CGAffineTransform)transform onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure {
-//    AVMutableAudioMix *audioMix = [MKRAudioPostProcessor postProcessAudioForMutableComposition:asset];
     AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] lastObject];
     AVMutableCompositionTrack *compositionVideoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].lastObject;
     if (videoTrack && compositionVideoTrack) {
@@ -34,13 +31,7 @@
 
     AVAssetExportSession *export = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
     [export setOutputFileType:AVFileTypeQuickTimeMovie];
-//    [export setAudioMix:audioMix];
-
-//    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask ,YES);
-//    NSString* documentsPath = paths[0];
-
-//    NSString *UUID = [[NSUUID UUID] UUIDString];
-//    NSString *exportURL = [NSString stringWithFormat:@"%@/export_%@.mov", documentsPath, UUID];
+    
     NSURL *outputURL = [self generateFilePathWithFormat:@"mov"];
     export.outputURL = outputURL;
 
