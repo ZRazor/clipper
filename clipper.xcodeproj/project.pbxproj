@@ -48,6 +48,7 @@
 		D763B3E51D34C95E00D9669E /* MKRSceneF.m in Sources */ = {isa = PBXBuildFile; fileRef = D763B3DD1D34C95E00D9669E /* MKRSceneF.m */; };
 		D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */; };
 		D76F1D1A1D325152000132A1 /* 01.wav in Resources */ = {isa = PBXBuildFile; fileRef = D76F1D191D325152000132A1 /* 01.wav */; };
+		D77B836D1D3C56BE00FFE311 /* MKRVolumeAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B836C1D3C56BE00FFE311 /* MKRVolumeAnalyzer.m */; };
 		D7D04B4B1D3392D400E606F9 /* 02.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7D04B4A1D3392D400E606F9 /* 02.plist */; };
 		D7D04B4D1D33933D00E606F9 /* 02.wav in Resources */ = {isa = PBXBuildFile; fileRef = D7D04B4C1D33933D00E606F9 /* 02.wav */; };
 		D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */; };
@@ -134,6 +135,8 @@
 		D76621731D2F9DE200E0A402 /* MKRProcessedInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRProcessedInterval.h; sourceTree = "<group>"; };
 		D76621741D2F9DE200E0A402 /* MKRProcessedInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRProcessedInterval.m; sourceTree = "<group>"; };
 		D76F1D191D325152000132A1 /* 01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 01.wav; sourceTree = "<group>"; };
+		D77B836B1D3C56BE00FFE311 /* MKRVolumeAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVolumeAnalyzer.h; sourceTree = "<group>"; };
+		D77B836C1D3C56BE00FFE311 /* MKRVolumeAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVolumeAnalyzer.m; sourceTree = "<group>"; };
 		D7D04B4A1D3392D400E606F9 /* 02.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 02.plist; sourceTree = "<group>"; };
 		D7D04B4C1D33933D00E606F9 /* 02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 02.wav; sourceTree = "<group>"; };
 		D7E5F3C31D2F489C0095F5D6 /* MKRTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTrack.h; sourceTree = "<group>"; };
@@ -417,6 +420,8 @@
 				D7E5F3CE1D2F49110095F5D6 /* MKRBarManager.m */,
 				58AAABECDDA957863529FB9A /* MKRScenesFillManager.m */,
 				58AAAFADD1C239374EB36C98 /* MKRScenesFillManager.h */,
+				D77B836B1D3C56BE00FFE311 /* MKRVolumeAnalyzer.h */,
+				D77B836C1D3C56BE00FFE311 /* MKRVolumeAnalyzer.m */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -501,6 +506,7 @@
 				D761DA5B1D3B67190061769A /* MKRAUTimePitch.m in Sources */,
 				3AB3B9FA1D2CD5CE0062D19D /* MKRAppDelegate.m in Sources */,
 				3A83B6381D37984B00470942 /* MKRTrackCollectionViewCell.m in Sources */,
+				D77B836D1D3C56BE00FFE311 /* MKRVolumeAnalyzer.m in Sources */,
 				D761DA581D3B66B30061769A /* MKRAUGenericOutput.m in Sources */,
 				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
 				D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */,

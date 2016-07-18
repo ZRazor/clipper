@@ -30,6 +30,7 @@ OSStatus OSSTATUS = noErr;
 @property (nonatomic) Float64 sampleRate;
 @property (nonatomic) AudioStreamBasicDescription stereoStreamFormat864;
 @property (nonatomic) Float64 maxSampleTime;
+@property (nonatomic) Float64 volumeRatio;
 @property (nonatomic) NSString *originalPath;
 @property (nonatomic) NSString *playbackPath;
 
@@ -37,11 +38,12 @@ OSStatus OSSTATUS = noErr;
 
 @implementation MKRAudioProcessor
 
-- (instancetype)initWithOriginalPath:(NSString *)originalPath andPlaybackPath:(NSString *)playbackPath {
+- (instancetype)initWithOriginalPath:(NSString *)originalPath andPlaybackPath:(NSString *)playbackPath andO2PRatio:(Float64)volumeRatio {
     self = [super init];
     if (!self) {
         return nil;
     }
+    [self setVolumeRatio:volumeRatio];
     [self setSampleRate:44100.0];
     [self setMaxSampleTime:0];
     [self setOriginalPath:originalPath];
@@ -106,6 +108,8 @@ OSStatus OSSTATUS = noErr;
     OSSTATUS = [mixer setInputMeteringMode:1]; OSSTATUS_CHECK
     OSSTATUS = [mixer setGlobalMaximumFramesPerSlice:4096]; OSSTATUS_CHECK
     OSSTATUS = [mixer setOutputStreamFormat:_stereoStreamFormat864]; OSSTATUS_CHECK
+    OSSTATUS = [mixer setParameter:kMultiChannelMixerParam_Volume inScope:kAudioUnitScope_Input ofElement:0 to:1.f]; OSSTATUS_CHECK
+    OSSTATUS = [mixer setParameter:kMultiChannelMixerParam_Volume inScope:kAudioUnitScope_Input ofElement:1 to:1.f * self.volumeRatio]; OSSTATUS_CHECK
     
     OSSTATUS = AUGraphInitialize(self.graph); OSSTATUS_CHECK
     
@@ -172,13 +176,13 @@ OSStatus OSSTATUS = noErr;
                 CMTime delta = CMTimeSubtract(nextPoint.position, currentTime);
                 if (CMTimeGetSeconds(delta) <= CMTimeGetSeconds(timeInIteration)) {
                     MKRAudioUnit *unit = [self.units objectForKey:@(lane.audioUnitIdentifier)];
-                    OSSTATUS = [unit setParameter:lane.parameterID to:[nextPoint.value floatValue]]; OSSTATUS_CHECK
+                    OSSTATUS = [unit setParameter:lane.parameterID inScope:kAudioUnitScope_Global to:[nextPoint.value floatValue]]; OSSTATUS_CHECK
                 }
                 continue;
             }
             if (!nextPoint) {
                 MKRAudioUnit *unit = [self.units objectForKey:@(lane.audioUnitIdentifier)];
-                OSSTATUS = [unit setParameter:lane.parameterID to:[previousPoint.value floatValue]]; OSSTATUS_CHECK
+                OSSTATUS = [unit setParameter:lane.parameterID inScope:kAudioUnitScope_Global to:[previousPoint.value floatValue]]; OSSTATUS_CHECK
                 continue;
             }
             
@@ -195,7 +199,7 @@ OSStatus OSSTATUS = noErr;
                     value = [nextValue floatValue];
                 }
                 MKRAudioUnit *unit = [self.units objectForKey:@(lane.audioUnitIdentifier)];
-                OSSTATUS = [unit setParameter:lane.parameterID to:value]; OSSTATUS_CHECK
+                OSSTATUS = [unit setParameter:lane.parameterID inScope:kAudioUnitScope_Global to:value]; OSSTATUS_CHECK
             }
         }
         

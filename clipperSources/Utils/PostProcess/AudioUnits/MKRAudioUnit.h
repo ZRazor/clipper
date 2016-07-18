@@ -28,6 +28,8 @@
 
 - (OSStatus)getProperty:(AudioUnitPropertyID)propertyId inScope:(AudioUnitScope)scope to:(void * _Nonnull)data withSize:(UInt32 * _Nonnull)size;
 
-- (OSStatus)setParameter:(AudioUnitParameterID)parameterId to:(Float64)value;
+- (OSStatus)setParameter:(AudioUnitParameterID)parameterId inScope:(AudioUnitScope)scope to:(Float64)value;
+
+- (OSStatus)setParameter:(AudioUnitParameterID)parameterId inScope:(AudioUnitScope)scope ofElement:(AudioUnitElement)element to:(Float64)value;
 
 @end

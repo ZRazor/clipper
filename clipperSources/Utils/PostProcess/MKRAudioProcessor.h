@@ -16,6 +16,6 @@
 
 - (void)processTrack:(MKRTrack *)track andPlaybackFilePath:(NSString *)playbackPath withOriginalFilePath:(NSString *)originalPath completion:(void (^)(NSURL *audioURL))completionBlock failure:(void (^)(NSError *error))failureBlock;
 
-- (instancetype)initWithOriginalPath:(NSString *)originalPath andPlaybackPath:(NSString *)playbackPath;
+- (instancetype)initWithOriginalPath:(NSString *)originalPath andPlaybackPath:(NSString *)playbackPath andO2PRatio:(Float64)volumeRatio;
 
 @end

@@ -14,6 +14,7 @@
 #import "MKRExportProcessor.h"
 #import "MKRAudioProcessor.h"
 #import "MKRTrack.h"
+#import "MKRVolumeAnalyzer.h"
 
 
 @interface MKRVideoProcessViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -85,7 +86,9 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
         
         AVMutableComposition *resultAsset = [track processVideo:avAsset];
         [MKRExportProcessor exportAudioFromMutableCompositionToDocuments:resultAsset onSuccess:^(NSURL *newAssetUrl) {
-            MKRAudioProcessor *audioProcessor = [[MKRAudioProcessor alloc] initWithOriginalPath:newAssetUrl.path andPlaybackPath:playbackPath];
+            Float64 volumeRatio = [MKRVolumeAnalyzer getAudioAverageVolumesRatioOfA:newAssetUrl andB:[NSURL fileURLWithPath:playbackPath]];
+            MKRAudioProcessor *audioProcessor = [[MKRAudioProcessor alloc] initWithOriginalPath:newAssetUrl.path andPlaybackPath:playbackPath andO2PRatio:volumeRatio];
+            
             [audioProcessor processTrack:track andPlaybackFilePath:playbackPath withOriginalFilePath:newAssetUrl.path completion:^(NSURL *audioURL) {
                 NSArray<AVCompositionTrack *> *audioTracks = [resultAsset tracksWithMediaType:AVMediaTypeAudio];
                 for (AVCompositionTrack *audioTrack in audioTracks) {
@@ -99,7 +102,6 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
                 int trackId = 10;
                 for (AVAssetTrack *audioTrack in realAudioTracks) {
                     AVMutableCompositionTrack *playbackTrack = [resultAsset addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:trackId++];
-                    //                CMTime startOffset = CMTimeSubtract(CMTimeMaximum(resultAsset.duration, realAudio.duration), CMTimeMinimum(resultAsset.duration, realAudio.duration));
                     [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, realAudio.duration) ofTrack:audioTrack atTime:kCMTimeZero error:nil];
                 }
                 CGAffineTransform transform = avAsset.preferredTransform;
