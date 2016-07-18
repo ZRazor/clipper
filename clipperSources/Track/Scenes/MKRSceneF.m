@@ -36,7 +36,7 @@
         [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:bar025 resultCursorPtr:resultCursorPtr];
     }
     
-    MKRAutomationLane *pitchAutomation = [self automationFor:kMKRUnit_TimePitch andParameter:kNewTimePitchParam_Pitch in:automations];
+    MKRAutomationLane *pitchAutomation = [MKRScene automationFor:kMKRUnit_TimePitch andParameter:kNewTimePitchParam_Pitch in:automations];
     [pitchAutomation addPointAt:*resultCursorPtr withValue:@0];
     
     CMTime bar0125 = CMTimeMultiplyByRatio(bar025, 1, 2);

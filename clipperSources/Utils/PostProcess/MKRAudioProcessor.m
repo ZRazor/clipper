@@ -13,6 +13,8 @@
 #import "MKRAUGenericOutput.h"
 #import "MKRAUTimePitch.h"
 #import "MKRAULowpass.h"
+#import "MKRAUDistortion.h"
+#import "MKRAUDelay.h"
 #import "MKRAudioUnits.h"
 
 const NSInteger kMKRUnit_GIO = 0;
@@ -21,6 +23,8 @@ const NSInteger kMKRUnit_PlaybackPlayer = 2;
 const NSInteger kMKRUnit_TimePitch = 3;
 const NSInteger kMKRUnit_Mixer = 4;
 const NSInteger kMKRUnit_Lowpass = 5;
+const NSInteger kMKRUnit_Distortion = 6;
+const NSInteger kMKRUnit_Delay = 7;
 
 OSStatus OSSTATUS = noErr;
 #define OSSTATUS_CHECK if (OSSTATUS != 0) [NSException raise:NSInternalInconsistencyException format:@"OSStatus error: %d", (int)OSSTATUS];
@@ -87,7 +91,9 @@ OSStatus OSSTATUS = noErr;
                @(kMKRUnit_Mixer): [[MKRAUMixer alloc] initWithIdentifier:kMKRUnit_Mixer],
                @(kMKRUnit_GIO): [[MKRAUGenericOutput alloc] initWithIdentifier:kMKRUnit_GIO],
                @(kMKRUnit_TimePitch): [[MKRAUTimePitch alloc] initWithIdentifier:kMKRUnit_TimePitch],
-               @(kMKRUnit_Lowpass): [[MKRAULowpass alloc] initWithIdentifier:kMKRUnit_Lowpass]
+               @(kMKRUnit_Lowpass): [[MKRAULowpass alloc] initWithIdentifier:kMKRUnit_Lowpass],
+               @(kMKRUnit_Distortion): [[MKRAUDistortion alloc] initWithIdentifier:kMKRUnit_Distortion],
+               @(kMKRUnit_Delay): [[MKRAUDelay alloc] initWithIdentifier:kMKRUnit_Delay]
                };
     
     [self.units enumerateKeysAndObjectsUsingBlock:^(NSNumber * _Nonnull key, MKRAudioUnit * _Nonnull obj, BOOL * _Nonnull stop) {
@@ -101,7 +107,9 @@ OSStatus OSSTATUS = noErr;
     }];
     
     [self connect:kMKRUnit_OriginalPlayer output:0 to:kMKRUnit_TimePitch input:0];
-    [self connect:kMKRUnit_TimePitch output:0 to:kMKRUnit_Lowpass input:0];
+    [self connect:kMKRUnit_TimePitch output:0 to:kMKRUnit_Distortion input:0];
+    [self connect:kMKRUnit_Distortion output:0 to:kMKRUnit_Delay input:0];
+    [self connect:kMKRUnit_Delay output:0 to:kMKRUnit_Lowpass input:0];
     [self connect:kMKRUnit_Lowpass output:0 to:kMKRUnit_Mixer input:0];
     [self connect:kMKRUnit_PlaybackPlayer output:0 to:kMKRUnit_Mixer input:1];
     [self connect:kMKRUnit_Mixer output:0 to:kMKRUnit_GIO input:0];
@@ -114,6 +122,12 @@ OSStatus OSSTATUS = noErr;
     OSSTATUS = [mixer setOutputStreamFormat:_stereoStreamFormat864]; OSSTATUS_CHECK
     OSSTATUS = [mixer setParameter:kMultiChannelMixerParam_Volume inScope:kAudioUnitScope_Input ofElement:0 to:1.f]; OSSTATUS_CHECK
     OSSTATUS = [mixer setParameter:kMultiChannelMixerParam_Volume inScope:kAudioUnitScope_Input ofElement:1 to:1.f * self.volumeRatio]; OSSTATUS_CHECK
+    
+    MKRAUDistortion *distortion = (MKRAUDistortion *)[self.units objectForKey:@(kMKRUnit_Distortion)];
+    OSSTATUS = [distortion setParameter:kDistortionParam_FinalMix inScope:kAudioUnitScope_Global to:0]; OSSTATUS_CHECK
+    
+    MKRAUDelay *delay = (MKRAUDelay *)[self.units objectForKey:@(kMKRUnit_Delay)];
+    OSSTATUS = [delay setParameter:kDelayParam_WetDryMix inScope:kAudioUnitScope_Global to:0]; OSSTATUS_CHECK
     
     OSSTATUS = AUGraphInitialize(self.graph); OSSTATUS_CHECK
     
@@ -158,7 +172,7 @@ OSStatus OSSTATUS = noErr;
     memset(&inTimeStamp, 0, sizeof(inTimeStamp));
     inTimeStamp.mFlags = kAudioTimeStampSampleTimeValid;
     UInt32 busNumber = 0;
-    UInt32 numberFrames = 512;
+    UInt32 numberFrames = 16;
     CMTime timeInIteration = CMTimeMakeWithSeconds(numberFrames / self.sampleRate, 600000);
     inTimeStamp.mSampleTime = 0;
     int channelCount = 2;

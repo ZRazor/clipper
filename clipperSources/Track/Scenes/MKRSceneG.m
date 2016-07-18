@@ -23,10 +23,12 @@
 - (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray *)automations {
     MKRBar *bar = self.bars[0];
     AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
-    MKRAutomationLane *pitchAutomation = [self automationFor:kMKRUnit_TimePitch andParameter:kNewTimePitchParam_Pitch in:automations];
+    MKRAutomationLane *pitchAutomation = [MKRScene automationFor:kMKRUnit_TimePitch andParameter:kNewTimePitchParam_Pitch in:automations];
+    MKRAutomationLane *distAutomation = [MKRScene automationFor:kMKRUnit_Distortion andParameter:kDistortionParam_FinalMix in:automations];
     
     CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);
     CMTime barStartAt = *resultCursorPtr;
+    [distAutomation addPointAt:barStartAt withValue:@10];
 
     [self makeCompositionBar:composition withBarAsset:barAsset andWithBar:bar andWithResultCursorPtr:resultCursorPtr andWithMSPQ:MSPQ andWithBarRange:barTimeRange usingAutoComplete:YES];
     
@@ -44,11 +46,12 @@
     for (int i = 0; i < 8; i++) {
         [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:bar0125 resultCursorPtr:resultCursorPtr];
         if (i == 2) {
-            [pitchAutomation addPointAt:*resultCursorPtr withValue:@1200];
+            [pitchAutomation addPointAt:*resultCursorPtr withValue:@2400];
         }
     }
     
     [pitchAutomation addPointAt:*resultCursorPtr withValue:@0];
+    [distAutomation addPointAt:*resultCursorPtr withValue:@0];
     [pitchAutomation addPointAt:CMTimeAdd(*resultCursorPtr, CMTimeMakeWithSeconds(0.001, 600000)) withValue:@0];
 }
 

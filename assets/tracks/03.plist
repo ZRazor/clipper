@@ -14,16 +14,14 @@
             <integer>0</integer>
             <integer>1</integer>
             <integer>2</integer>
-            <integer>3</integer>
-            <integer>4</integer>
+            <integer>0</integer>
+            <integer>1</integer>
         </array>
         <key>Scenes</key>
         <array>
             <string>MKRSceneA2</string>
             <string>MKRSceneA2</string>
             <string>MKRSceneG</string>
-            <string>MKRSceneA2</string>
-            <string>MKRSceneA2</string>
         </array>
         <key>BPM</key>
         <integer>160</integer>

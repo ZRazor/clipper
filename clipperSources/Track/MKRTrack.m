@@ -73,6 +73,8 @@
     [self.automations addObject:[[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_TimePitch andParameterID:kNewTimePitchParam_Pitch]];
     [self.automations addObject:[[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_Lowpass andParameterID:kLowPassParam_CutoffFrequency]];
     [self.automations addObject:[[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_Lowpass andParameterID:kLowPassParam_Resonance]];
+    [self.automations addObject:[[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_Distortion andParameterID:kDistortionParam_FinalMix]];
+    [self.automations addObject:[[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_Delay andParameterID:kDelayParam_WetDryMix]];
 }
 
 - (AVMutableComposition *)processVideo:(AVAsset *)original {
@@ -115,8 +117,11 @@
         Float64 endTime = CMTimeGetSeconds(resultCursor);
         NSLog(@"end scene at %f", endTime);
         [structureUnit setTimeIntervalWithStartTime:startTime andEndTime:endTime];
-
     }
+    
+    MKRAutomationLane *dm = [MKRScene automationFor:kMKRUnit_Delay andParameter:kDelayParam_WetDryMix in:self.automations];
+    [dm addPointAt:CMTimeSubtract(resultCursor, CMTimeMakeWithSeconds(2, 600000)) withValue:@50];
+    [dm addPointAt:resultCursor withValue:@100];
     
     return result;
 }
