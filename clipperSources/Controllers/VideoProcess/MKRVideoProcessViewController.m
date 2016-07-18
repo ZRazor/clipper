@@ -16,6 +16,7 @@
 #import "MKRTrack.h"
 #import "MKRVolumeAnalyzer.h"
 #import "MKRSettingsManager.h"
+#import "MKRTrackManager.h"
 #import <Photos/PHPhotoLibrary.h>
 
 @interface MKRVideoProcessViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -40,10 +41,12 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 @implementation MKRVideoProcessViewController {
     NSURL *assetUrl;
     NSURL *clippedVideoUrl;
+    MKRTrackManager *trackManager;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    trackManager = [[MKRTrackManager alloc] init];
     [self.exportView setHidden:YES];
     [self.view layoutIfNeeded];
     [self animateLoadingImageViewWithAngle:M_PI];
@@ -73,10 +76,9 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         AVAsset *avAsset = [AVAsset assetWithURL:videoURL];
-        NSString *playbackPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"wav"];
+        NSString *playbackPath = [trackManager pathForPlayback:trackName];
         
-        MKRScenesFillManager *scenesFillManager = [[MKRScenesFillManager alloc] initWithMetaDataPath:[[NSBundle mainBundle]
-                                                                                                      pathForResource:trackName ofType:@"plist"]];
+        MKRScenesFillManager *scenesFillManager = [[MKRScenesFillManager alloc] initWithMetaDataPath:[trackManager pathForMetaDesc:trackName]];
         
         MKRTrack *track = [scenesFillManager tryToFillScenesWithAsset:avAsset];
         if (!track) {
@@ -122,26 +124,12 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 3;
+    return [trackManager tracksCount];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MKRTrackCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMKRTrackCellIdentifier forIndexPath:indexPath];
-    NSString *trackName;
-    switch (indexPath.row) {
-        case 0:
-            trackName = @"01";
-            break;
-        case 1:
-            trackName = @"02";
-            break;
-        case 2:
-            trackName = @"03";
-            break;
-        default:
-            trackName = @"02";
-    }
-//    NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
+    NSString *trackName = [trackManager trackNameForRow:indexPath.row];
     [cell.trackTitleLabel setText:trackName];
     return cell;
 }
@@ -151,21 +139,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *trackName;
-    switch (indexPath.row) {
-        case 0:
-            trackName = @"01";
-            break;
-        case 1:
-            trackName = @"02";
-            break;
-        case 2:
-            trackName = @"03";
-            break;
-        default:
-            trackName = @"02";
-    }
-//    NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
+    NSString *trackName = [trackManager trackNameForRow:indexPath.row];
     [self.collectionView setUserInteractionEnabled:NO];
     [self.loadingView setHidden:NO];
     [self.playerViewController.player pause];
