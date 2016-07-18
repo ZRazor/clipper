@@ -107,7 +107,17 @@
         Float64 endTime = CMTimeGetSeconds(resultCursor);
         NSLog(@"end scene at %f", endTime);
         [structureUnit setTimeIntervalWithStartTime:startTime andEndTime:endTime];
+        
+    }
+    
+    return result;
+}
 
+- (NSArray<AVMutableVideoCompositionInstruction *>*)getVideoLayerInstartions {
+    NSMutableArray<AVMutableVideoCompositionInstruction *>* result = [NSMutableArray array];
+    for (MKRStructureUnit *structureUnit in structure) {
+        MKRScene *scene = [structureUnit getScene];
+        [result addObjectsFromArray:[scene  getPostVideoLayerInstractins]];
     }
     
     return result;

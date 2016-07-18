@@ -47,4 +47,8 @@
     }
 }
 
+- (NSArray<AVMutableVideoCompositionInstruction *>*)getPostVideoLayerInstractins {
+    return @[];
+}
+
 @end

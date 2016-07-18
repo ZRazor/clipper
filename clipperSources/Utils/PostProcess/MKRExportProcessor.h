@@ -13,7 +13,6 @@
                                   onSuccess:(void (^)(NSURL *assertUrl))success
                                   onFailure:(void (^)(NSError *error))failure;
 
-+ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure;
 + (void)exportAudioFromMutableCompositionToDocuments:(AVMutableComposition *)asset onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure;
 + (NSURL *)generateFilePathWithFormat:(NSString *)formatName;
 

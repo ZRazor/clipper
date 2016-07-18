@@ -5,6 +5,7 @@
 
 #import "MKRExportProcessor.h"
 #import "MKRAudioPostProcessor.h"
+#import "MKRCustomVideoCompositor.h"
 
 
 @implementation MKRExportProcessor {
@@ -57,17 +58,13 @@
     videoComposition.frameDuration = CMTimeMakeWithSeconds(1.0 / videoAssetTrack.nominalFrameRate, videoAssetTrack.naturalTimeScale); //Считаем fps для рендера
     videoComposition.renderSize = videoAssetTrack.naturalSize;
     videoComposition.instructions = @[videoCompositionInstruction];
+    videoComposition.customVideoCompositorClass = [MKRCustomVideoCompositor class];
 
     AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:composition
                                       presetName:AVAssetExportPresetHighestQuality];
     
-    //Пути экспорта
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask ,YES);
-    NSString* documentsPath = paths[0];
     
-    NSString *UUID = [[NSUUID UUID] UUIDString];
-    NSString *exportURL = [NSString stringWithFormat:@"%@/export_%@.m4a", documentsPath, UUID];
-    NSURL *outputURL = [NSURL fileURLWithPath:exportURL];
+    NSURL *outputURL = [self generateFilePathWithFormat:@"m4a"];
     
     //Настраиваем экспорт
     exportSession.outputURL = outputURL;

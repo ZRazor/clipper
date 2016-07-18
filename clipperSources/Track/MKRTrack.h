@@ -16,8 +16,10 @@
 @property (nonatomic) NSInteger QPB;
 @property (nonatomic) double MSPQ;
 
--(instancetype)initWithMetaDataPath:(NSString *)metaDataPath andFeaturesInterval:(NSMutableArray<MKRInterval *> *)features;
--(BOOL)fillScenes;
--(AVMutableComposition *)processVideo:(AVAsset *)original;
+- (instancetype)initWithMetaDataPath:(NSString *)metaDataPath andFeaturesInterval:(NSMutableArray<MKRInterval *> *)features;
+- (BOOL)fillScenes;
+- (AVMutableComposition *)processVideo:(AVAsset *)original;
+- (NSArray<AVMutableVideoCompositionInstruction *>*)getVideoLayerInstartions;
+
 
 @end

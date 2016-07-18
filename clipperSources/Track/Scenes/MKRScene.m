@@ -95,4 +95,5 @@ static AVAsset *blank;
         [composition scaleTimeRange:CMTimeRangeMake(startAt, blank.duration) toDuration:duration];
     }
 }
+
 @end

@@ -35,4 +35,6 @@
 
 - (void)insertEmptyInComposition:(AVMutableComposition *)composition startAt:(CMTime)startAt duration:(CMTime)duration;
 
+- (NSArray<AVMutableVideoCompositionInstruction *>*)getPostVideoLayerInstractins;
+
 @end

@@ -27,9 +27,17 @@
 		58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */; };
 		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
+		58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */; };
 		742DFC061D360C80007BE11C /* MKRCustomVideoCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = 742DFC051D360C80007BE11C /* MKRCustomVideoCompositor.m */; };
 		745A4C221D34EA850031D5F4 /* MKRVideoFXService.m in Sources */ = {isa = PBXBuildFile; fileRef = 745A4C211D34EA850031D5F4 /* MKRVideoFXService.m */; };
-		58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */; };
+		74E422AE1D3C64CA005CECC5 /* MKRRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E422AD1D3C64CA005CECC5 /* MKRRenderer.m */; };
+		74E422B11D3C6BC1005CECC5 /* MKROpenGLRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E422B01D3C6BC1005CECC5 /* MKROpenGLRenderer.m */; };
+		74E422B31D3C6CD7005CECC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E422B21D3C6CD7005CECC5 /* CoreGraphics.framework */; };
+		74E422B51D3C6D48005CECC5 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E422B41D3C6D48005CECC5 /* CoreVideo.framework */; };
+		74E422B81D3C82A5005CECC5 /* MKRCustomVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E422B71D3C82A5005CECC5 /* MKRCustomVideoCompositionInstruction.m */; };
+		74E422BA1D3CA4CF005CECC5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E422B91D3CA4CF005CECC5 /* OpenGLES.framework */; };
+		74E422BC1D3CA4D8005CECC5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E422BB1D3CA4D8005CECC5 /* QuartzCore.framework */; };
+		74E422BE1D3CA4EE005CECC5 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E422BD1D3CA4EE005CECC5 /* CoreMedia.framework */; };
 		D71346851D3119CB00B9EDC3 /* 01.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71346841D3119CB00B9EDC3 /* 01.plist */; };
 		D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D71CA5E91D3752850055EB85 /* AVFoundation.framework */; };
 		D71CA5F01D37713B0055EB85 /* MKRAudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */; };
@@ -94,6 +102,17 @@
 		742DFC051D360C80007BE11C /* MKRCustomVideoCompositor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKRCustomVideoCompositor.m; path = Video/MKRCustomVideoCompositor.m; sourceTree = "<group>"; };
 		745A4C201D34EA850031D5F4 /* MKRVideoFXService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKRVideoFXService.h; path = Video/FX/MKRVideoFXService.h; sourceTree = "<group>"; };
 		745A4C211D34EA850031D5F4 /* MKRVideoFXService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKRVideoFXService.m; path = Video/FX/MKRVideoFXService.m; sourceTree = "<group>"; };
+		74E422AC1D3C64CA005CECC5 /* MKRRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKRRenderer.h; path = Video/MKRRenderer.h; sourceTree = "<group>"; };
+		74E422AD1D3C64CA005CECC5 /* MKRRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKRRenderer.m; path = Video/MKRRenderer.m; sourceTree = "<group>"; };
+		74E422AF1D3C6BC1005CECC5 /* MKROpenGLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKROpenGLRenderer.h; path = Video/MKROpenGLRenderer.h; sourceTree = "<group>"; };
+		74E422B01D3C6BC1005CECC5 /* MKROpenGLRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKROpenGLRenderer.m; path = Video/MKROpenGLRenderer.m; sourceTree = "<group>"; };
+		74E422B21D3C6CD7005CECC5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		74E422B41D3C6D48005CECC5 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		74E422B61D3C82A5005CECC5 /* MKRCustomVideoCompositionInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKRCustomVideoCompositionInstruction.h; path = Video/MKRCustomVideoCompositionInstruction.h; sourceTree = "<group>"; };
+		74E422B71D3C82A5005CECC5 /* MKRCustomVideoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKRCustomVideoCompositionInstruction.m; path = Video/MKRCustomVideoCompositionInstruction.m; sourceTree = "<group>"; };
+		74E422B91D3CA4CF005CECC5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		74E422BB1D3CA4D8005CECC5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		74E422BD1D3CA4EE005CECC5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D71346841D3119CB00B9EDC3 /* 01.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 01.plist; sourceTree = "<group>"; };
 		D71CA5E91D3752850055EB85 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D71CA5ED1D37593D0055EB85 /* blank_1080p.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = blank_1080p.mp4; sourceTree = "<group>"; };
@@ -135,6 +154,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74E422BE1D3CA4EE005CECC5 /* CoreMedia.framework in Frameworks */,
+				74E422BC1D3CA4D8005CECC5 /* QuartzCore.framework in Frameworks */,
+				74E422BA1D3CA4CF005CECC5 /* OpenGLES.framework in Frameworks */,
+				74E422B51D3C6D48005CECC5 /* CoreVideo.framework in Frameworks */,
+				74E422B31D3C6CD7005CECC5 /* CoreGraphics.framework in Frameworks */,
 				3A83B63A1D379B1D00470942 /* AVKit.framework in Frameworks */,
 				D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */,
 			);
@@ -160,6 +184,11 @@
 		3AB3B9E91D2CD5CE0062D19D = {
 			isa = PBXGroup;
 			children = (
+				74E422BD1D3CA4EE005CECC5 /* CoreMedia.framework */,
+				74E422BB1D3CA4D8005CECC5 /* QuartzCore.framework */,
+				74E422B91D3CA4CF005CECC5 /* OpenGLES.framework */,
+				74E422B41D3C6D48005CECC5 /* CoreVideo.framework */,
+				74E422B21D3C6CD7005CECC5 /* CoreGraphics.framework */,
 				3A83B6391D379B1D00470942 /* AVKit.framework */,
 				D71CA5E91D3752850055EB85 /* AVFoundation.framework */,
 				D71346821D3119CB00B9EDC3 /* assets */,
@@ -318,6 +347,12 @@
 				745A4C1F1D34EA2E0031D5F4 /* FX */,
 				742DFC041D360C80007BE11C /* MKRCustomVideoCompositor.h */,
 				742DFC051D360C80007BE11C /* MKRCustomVideoCompositor.m */,
+				74E422AC1D3C64CA005CECC5 /* MKRRenderer.h */,
+				74E422AD1D3C64CA005CECC5 /* MKRRenderer.m */,
+				74E422AF1D3C6BC1005CECC5 /* MKROpenGLRenderer.h */,
+				74E422B01D3C6BC1005CECC5 /* MKROpenGLRenderer.m */,
+				74E422B61D3C82A5005CECC5 /* MKRCustomVideoCompositionInstruction.h */,
+				74E422B71D3C82A5005CECC5 /* MKRCustomVideoCompositionInstruction.m */,
 			);
 			name = Video;
 			sourceTree = "<group>";
@@ -425,7 +460,7 @@
 				TargetAttributes = {
 					3AB3B9F11D2CD5CE0062D19D = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 44FPHB4323;
+						DevelopmentTeam = KJWPEX5SPQ;
 					};
 				};
 			};
@@ -477,8 +512,10 @@
 				D763B3E51D34C95E00D9669E /* MKRSceneF.m in Sources */,
 				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,
 				3A83B6351D3795F500470942 /* MKRVideoProcessViewController.m in Sources */,
+				74E422B11D3C6BC1005CECC5 /* MKROpenGLRenderer.m in Sources */,
 				3A49F55C1D362F0000DBF7CA /* MKRCameraViewController.m in Sources */,
 				D763B3E31D34C95E00D9669E /* MKRSceneD.m in Sources */,
+				74E422B81D3C82A5005CECC5 /* MKRCustomVideoCompositionInstruction.m in Sources */,
 				3AB3B9F71D2CD5CE0062D19D /* main.m in Sources */,
 				D763B3E41D34C95E00D9669E /* MKRSceneE.m in Sources */,
 				3A46E70C1D375831008E037A /* MKRSettingsTableViewController.m in Sources */,
@@ -486,7 +523,6 @@
 				745A4C221D34EA850031D5F4 /* MKRVideoFXService.m in Sources */,
 				D7E5F3D21D2F49D80095F5D6 /* MKRInterval.m in Sources */,
 				742DFC061D360C80007BE11C /* MKRCustomVideoCompositor.m in Sources */,
-				3AB3BA0E1D2CD8270062D19D /* MKRVideoSelectViewController.m in Sources */,
 				D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */,
 				D763B3E01D34C95E00D9669E /* MKRSceneA1.m in Sources */,
 				58AAA040886A724D9945554E /* README.MD in Sources */,
@@ -499,6 +535,7 @@
 				58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */,
 				58AAA43C429EBF8AEFFF0D11 /* MKRAudioPostProcessor.m in Sources */,
 				58AAA4B25E713B88C8A85767 /* MKRRawDataProcessor.m in Sources */,
+				74E422AE1D3C64CA005CECC5 /* MKRRenderer.m in Sources */,
 				58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */,
 				58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */,
 				58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */,
@@ -613,6 +650,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "";
@@ -621,7 +659,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.cliper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -632,6 +670,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "";
@@ -640,7 +679,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.cliper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

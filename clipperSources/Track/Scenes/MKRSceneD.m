@@ -34,4 +34,8 @@
     [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:processedBarDuration resultCursorPtr:resultCursorPtr];
 }
 
+- (NSArray<AVMutableVideoCompositionInstruction *>*)getPostVideoLayerInstractins {
+    return @[];
+}
+
 @end

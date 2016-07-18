@@ -15,6 +15,7 @@
 #import "MKRAudioProcessor.h"
 #import "MKRTrack.h"
 
+@class AVMutableVideoCompositionInstruction;
 
 @interface MKRVideoProcessViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -84,6 +85,8 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
         }
         
         AVMutableComposition *resultAsset = [track processVideo:avAsset];
+        NSArray<AVMutableVideoCompositionInstruction *>* instructionsResult = [track getVideoLayerInstartions];
+        
         [MKRExportProcessor exportAudioFromMutableCompositionToDocuments:resultAsset onSuccess:^(NSURL *newAssetUrl) {
             MKRAudioProcessor *audioProcessor = [[MKRAudioProcessor alloc] initWithOriginalPath:newAssetUrl.path andPlaybackPath:playbackPath];
             [audioProcessor processTrack:track andPlaybackFilePath:playbackPath withOriginalFilePath:newAssetUrl.path completion:^(NSURL *audioURL) {
@@ -102,7 +105,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
                     //                CMTime startOffset = CMTimeSubtract(CMTimeMaximum(resultAsset.duration, realAudio.duration), CMTimeMinimum(resultAsset.duration, realAudio.duration));
                     [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, realAudio.duration) ofTrack:audioTrack atTime:kCMTimeZero error:nil];
                 }
-                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset layerInstructions:nil onSuccess:success onFailure:failure];
+                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset layerInstructions:instructionsResult onSuccess:success onFailure:failure];
             } failure:^(NSError *error) {
                 NSLog(@"error = %@", error);
             }];

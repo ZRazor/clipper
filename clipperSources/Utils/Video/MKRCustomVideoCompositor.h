@@ -11,4 +11,6 @@
 
 @interface MKRCustomVideoCompositor : NSObject <AVVideoCompositing>
 
-@end
+@end;
+
+
