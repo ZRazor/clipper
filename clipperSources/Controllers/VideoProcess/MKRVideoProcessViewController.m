@@ -122,12 +122,26 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 2;
+    return 3;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MKRTrackCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMKRTrackCellIdentifier forIndexPath:indexPath];
-    NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
+    NSString *trackName;
+    switch (indexPath.row) {
+        case 0:
+            trackName = @"01";
+            break;
+        case 1:
+            trackName = @"02";
+            break;
+        case 2:
+            trackName = @"03";
+            break;
+        default:
+            trackName = @"02";
+    }
+//    NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
     [cell.trackTitleLabel setText:trackName];
     return cell;
 }
@@ -137,7 +151,21 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
+    NSString *trackName;
+    switch (indexPath.row) {
+        case 0:
+            trackName = @"01";
+            break;
+        case 1:
+            trackName = @"02";
+            break;
+        case 2:
+            trackName = @"03";
+            break;
+        default:
+            trackName = @"02";
+    }
+//    NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
     [self.collectionView setUserInteractionEnabled:NO];
     [self.loadingView setHidden:NO];
     [self.playerViewController.player pause];
