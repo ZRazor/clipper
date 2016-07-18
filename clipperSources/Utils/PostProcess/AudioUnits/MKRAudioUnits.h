@@ -14,5 +14,6 @@ extern const NSInteger kMKRUnit_OriginalPlayer;
 extern const NSInteger kMKRUnit_PlaybackPlayer;
 extern const NSInteger kMKRUnit_TimePitch;
 extern const NSInteger kMKRUnit_Mixer;
+extern const NSInteger kMKRUnit_Lowpass;
 
 #endif /* MKRAudioUnits_h */

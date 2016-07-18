@@ -123,7 +123,7 @@ static int const kMKRAudioBitDepth = 16;
                 int maxValueSampleNum = startSample;
                 
                 int j = startSample;
-                int windowSize = MIN(1000, sampleOffset - startSample);
+                int windowSize = MIN(300, sampleOffset - startSample);
                 for (j = 0; j < windowSize; j++) {
                     short value = abs(bytes[j + startSample]);
                     if (value > maxValue) {

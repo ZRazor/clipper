@@ -36,13 +36,7 @@
         [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:bar025 resultCursorPtr:resultCursorPtr];
     }
     
-    MKRAutomationLane *pitchAutomation;
-    for (MKRAutomationLane *automation in automations) {
-        if (automation.audioUnitIdentifier == kMKRUnit_TimePitch && automation.parameterID == kNewTimePitchParam_Pitch) {
-            pitchAutomation = automation;
-            break;
-        }
-    }
+    MKRAutomationLane *pitchAutomation = [self automationFor:kMKRUnit_TimePitch andParameter:kNewTimePitchParam_Pitch in:automations];
     [pitchAutomation addPointAt:*resultCursorPtr withValue:@0];
     
     CMTime bar0125 = CMTimeMultiplyByRatio(bar025, 1, 2);

@@ -94,4 +94,15 @@ static AVAsset *blank;
         [composition scaleTimeRange:CMTimeRangeMake(startAt, blank.duration) toDuration:duration];
     }
 }
+
+- (MKRAutomationLane *)automationFor:(NSInteger)audioUnitIdentifier andParameter:(AudioUnitParameterID)parameter in:(NSMutableArray<MKRAutomationLane *> *)automations {
+    for (MKRAutomationLane *automation in automations) {
+        if (automation.audioUnitIdentifier == audioUnitIdentifier && automation.parameterID == parameter) {
+            return automation;
+        }
+    }
+    
+    return nil;
+}
+
 @end

@@ -30,6 +30,7 @@
 		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
 		58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */; };
+		D700F64A1D3CC47F0074194D /* MKRAULowpass.m in Sources */ = {isa = PBXBuildFile; fileRef = D700F6491D3CC47F0074194D /* MKRAULowpass.m */; };
 		D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D71CA5E91D3752850055EB85 /* AVFoundation.framework */; };
 		D71CA5F01D37713B0055EB85 /* MKRAudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */; };
 		D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA4E1D3B61A50061769A /* MKRAudioUnit.m */; };
@@ -99,6 +100,8 @@
 		58AAAF04ECC3873696FAF6D8 /* MKRExportProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRExportProcessor.h; sourceTree = "<group>"; };
 		58AAAFADD1C239374EB36C98 /* MKRScenesFillManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRScenesFillManager.h; sourceTree = "<group>"; };
 		58AAAFB31421FAF140184D43 /* MKRCVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCVad.h; sourceTree = "<group>"; };
+		D700F6481D3CC47F0074194D /* MKRAULowpass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAULowpass.h; sourceTree = "<group>"; };
+		D700F6491D3CC47F0074194D /* MKRAULowpass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAULowpass.m; sourceTree = "<group>"; };
 		D71CA5E91D3752850055EB85 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D71CA5EE1D37713B0055EB85 /* MKRAudioProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioProcessor.h; sourceTree = "<group>"; };
 		D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioProcessor.m; sourceTree = "<group>"; };
@@ -335,6 +338,8 @@
 		D761DA4C1D3B618C0061769A /* AudioUnits */ = {
 			isa = PBXGroup;
 			children = (
+				D700F6481D3CC47F0074194D /* MKRAULowpass.h */,
+				D700F6491D3CC47F0074194D /* MKRAULowpass.m */,
 				D761DA4D1D3B61A50061769A /* MKRAudioUnit.h */,
 				D761DA4E1D3B61A50061769A /* MKRAudioUnit.m */,
 				D761DA501D3B61E40061769A /* MKRAUAudioFilePlayer.h */,
@@ -531,6 +536,7 @@
 				58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */,
 				58AAA4B25E713B88C8A85767 /* MKRRawDataProcessor.m in Sources */,
 				58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */,
+				D700F64A1D3CC47F0074194D /* MKRAULowpass.m in Sources */,
 				58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */,
 				58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */,
 				58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */,

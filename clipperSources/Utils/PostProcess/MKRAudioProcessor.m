@@ -12,6 +12,7 @@
 #import "MKRAUMixer.h"
 #import "MKRAUGenericOutput.h"
 #import "MKRAUTimePitch.h"
+#import "MKRAULowpass.h"
 #import "MKRAudioUnits.h"
 
 const NSInteger kMKRUnit_GIO = 0;
@@ -19,6 +20,7 @@ const NSInteger kMKRUnit_OriginalPlayer = 1;
 const NSInteger kMKRUnit_PlaybackPlayer = 2;
 const NSInteger kMKRUnit_TimePitch = 3;
 const NSInteger kMKRUnit_Mixer = 4;
+const NSInteger kMKRUnit_Lowpass = 5;
 
 OSStatus OSSTATUS = noErr;
 #define OSSTATUS_CHECK if (OSSTATUS != 0) [NSException raise:NSInternalInconsistencyException format:@"OSStatus error: %d", (int)OSSTATUS];
@@ -84,7 +86,8 @@ OSStatus OSSTATUS = noErr;
                @(kMKRUnit_PlaybackPlayer): [[MKRAUAudioFilePlayer alloc] initWithIdentifier:kMKRUnit_PlaybackPlayer],
                @(kMKRUnit_Mixer): [[MKRAUMixer alloc] initWithIdentifier:kMKRUnit_Mixer],
                @(kMKRUnit_GIO): [[MKRAUGenericOutput alloc] initWithIdentifier:kMKRUnit_GIO],
-               @(kMKRUnit_TimePitch): [[MKRAUTimePitch alloc] initWithIdentifier:kMKRUnit_TimePitch]
+               @(kMKRUnit_TimePitch): [[MKRAUTimePitch alloc] initWithIdentifier:kMKRUnit_TimePitch],
+               @(kMKRUnit_Lowpass): [[MKRAULowpass alloc] initWithIdentifier:kMKRUnit_Lowpass]
                };
     
     [self.units enumerateKeysAndObjectsUsingBlock:^(NSNumber * _Nonnull key, MKRAudioUnit * _Nonnull obj, BOOL * _Nonnull stop) {
@@ -98,7 +101,8 @@ OSStatus OSSTATUS = noErr;
     }];
     
     [self connect:kMKRUnit_OriginalPlayer output:0 to:kMKRUnit_TimePitch input:0];
-    [self connect:kMKRUnit_TimePitch output:0 to:kMKRUnit_Mixer input:0];
+    [self connect:kMKRUnit_TimePitch output:0 to:kMKRUnit_Lowpass input:0];
+    [self connect:kMKRUnit_Lowpass output:0 to:kMKRUnit_Mixer input:0];
     [self connect:kMKRUnit_PlaybackPlayer output:0 to:kMKRUnit_Mixer input:1];
     [self connect:kMKRUnit_Mixer output:0 to:kMKRUnit_GIO input:0];
     

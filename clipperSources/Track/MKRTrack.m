@@ -70,8 +70,9 @@
 
 - (void)prepareAutomations {
     [self setAutomations:[[NSMutableArray alloc] init]];
-    MKRAutomationLane *timePitchPitch = [[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_TimePitch andParameterID:kNewTimePitchParam_Pitch];
-    [self.automations addObject:timePitchPitch];
+    [self.automations addObject:[[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_TimePitch andParameterID:kNewTimePitchParam_Pitch]];
+    [self.automations addObject:[[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_Lowpass andParameterID:kLowPassParam_CutoffFrequency]];
+    [self.automations addObject:[[MKRAutomationLane alloc] initWithAudioUnitIdentifier:kMKRUnit_Lowpass andParameterID:kLowPassParam_Resonance]];
 }
 
 - (AVMutableComposition *)processVideo:(AVAsset *)original {

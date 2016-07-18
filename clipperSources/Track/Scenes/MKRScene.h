@@ -23,6 +23,8 @@
 
 - (instancetype)initWithIdentifier:(NSInteger)identifier;
 
+- (MKRAutomationLane *)automationFor:(NSInteger)audioUnitIdentifier andParameter:(AudioUnitParameterID)parameter in:(NSMutableArray<MKRAutomationLane *> *)automations;
+
 - (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager;
 
 /*!
