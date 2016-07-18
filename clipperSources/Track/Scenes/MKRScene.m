@@ -53,7 +53,7 @@ static AVAsset *blank;
     
     if (bar.totalQuantsLength > bar.quantsLength && autoComplete) {
         NSInteger quantsRemainder = bar.totalQuantsLength - bar.quantsLength;
-        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 600000);
+        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 6000000);
         [self insertEmptyInComposition:composition startAt:*resultCursorPtr duration:remainder];
 //        [composition insertEmptyTimeRange:CMTimeRangeMake(*resultCursorPtr, remainder)];
         *resultCursorPtr = CMTimeAdd(*resultCursorPtr, remainder);
@@ -63,7 +63,7 @@ static AVAsset *blank;
 
 - (void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr {
     NSLog(@"Insert: [%f, %f] of [%f] at [%f]", CMTimeGetSeconds(startAt), CMTimeGetSeconds(duration), CMTimeGetSeconds(asset.duration), CMTimeGetSeconds(*resultCursorPtr));
-    CMTime realDuration = CMTimeSubtract(CMTimeMinimum(duration, asset.duration), CMTimeMakeWithSeconds(1 / 1000.0, 600000));
+    CMTime realDuration = CMTimeSubtract(CMTimeMinimum(duration, asset.duration), CMTimeMakeWithSeconds(1 / 1000.0, 6000000));
     NSLog(@"RD: %f D: %f", CMTimeGetSeconds(realDuration), CMTimeGetSeconds(duration));
     CMTimeRange barTimeRange = CMTimeRangeMake(startAt, realDuration);
     NSLog(@"BarTimeRange = [%f, %f]", CMTimeGetSeconds(barTimeRange.start), CMTimeGetSeconds(barTimeRange.duration));

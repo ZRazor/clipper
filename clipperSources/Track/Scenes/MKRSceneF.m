@@ -50,7 +50,7 @@
     }
     
     [pitchAutomation addPointAt:*resultCursorPtr withValue:@2400];
-    [pitchAutomation addPointAt:CMTimeAdd(*resultCursorPtr, CMTimeMakeWithSeconds(0.001, 600000)) withValue:@0];
+    [pitchAutomation addPointAt:CMTimeAdd(*resultCursorPtr, CMTimeMakeWithSeconds(0.001, 6000000)) withValue:@0];
 }
 
 @end

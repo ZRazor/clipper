@@ -91,13 +91,13 @@
         for (NSInteger j = 0; j < [bar.sequence count]; j++) {
             MKRProcessedInterval *interval = bar.sequence[j];
             NSLog(@"%f [%ld, %ld] q=%ld wms=%f", CMTimeGetSeconds(barCursor), interval.start, interval.end, interval.quantsLength, interval.warpedMsLength / 1000.0);
-            CMTime intervalStart = CMTimeMakeWithSeconds(interval.start / 1000.0, 600000.0);
-            CMTime intervalEnd = CMTimeMakeWithSeconds(interval.end / 1000.0, 600000.0);
+            CMTime intervalStart = CMTimeMakeWithSeconds(interval.start / 1000.0, 6000000.0);
+            CMTime intervalEnd = CMTimeMakeWithSeconds(interval.end / 1000.0, 6000000.0);
             CMTimeRange range = CMTimeRangeMake(intervalStart, CMTimeSubtract(intervalEnd, intervalStart));
             [barComposition insertTimeRange:range ofAsset:original atTime:barCursor error:nil];
 
             CMTimeRange rangeInBar = CMTimeRangeMake(barCursor, CMTimeSubtract(intervalEnd, intervalStart));
-            CMTime neededDuration = CMTimeMakeWithSeconds(interval.warpedMsLength / 1000.0, 600000);
+            CMTime neededDuration = CMTimeMakeWithSeconds(interval.warpedMsLength / 1000.0, 6000000);
             [barComposition scaleTimeRange:rangeInBar toDuration:neededDuration];
             barCursor = CMTimeAdd(barCursor, neededDuration);
         }
@@ -120,7 +120,7 @@
     }
     
     MKRAutomationLane *dm = [MKRScene automationFor:kMKRUnit_Delay andParameter:kDelayParam_WetDryMix in:self.automations];
-    [dm addPointAt:CMTimeSubtract(resultCursor, CMTimeMakeWithSeconds(2, 600000)) withValue:@50];
+    [dm addPointAt:CMTimeSubtract(resultCursor, CMTimeMakeWithSeconds(2, 6000000)) withValue:@50];
     [dm addPointAt:resultCursor withValue:@100];
     
     return result;

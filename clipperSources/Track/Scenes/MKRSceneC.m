@@ -29,7 +29,7 @@
     }
     if (bar.totalQuantsLength > bar.quantsLength) {
         NSInteger quantsRemainder = bar.totalQuantsLength - bar.quantsLength;
-        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 600000);
+        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 6000000);
         [self insertEmptyInComposition:composition startAt:*resultCursorPtr duration:remainder];
         *resultCursorPtr = CMTimeAdd(*resultCursorPtr, remainder);        
     }
