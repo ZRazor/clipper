@@ -119,10 +119,6 @@
         [structureUnit setTimeIntervalWithStartTime:startTime andEndTime:endTime];
     }
     
-    MKRAutomationLane *dm = [MKRScene automationFor:kMKRUnit_Delay andParameter:kDelayParam_WetDryMix in:self.automations];
-    [dm addPointAt:CMTimeSubtract(resultCursor, CMTimeMakeWithSeconds(2, 6000000)) withValue:@50];
-    [dm addPointAt:resultCursor withValue:@100];
-    
     return result;
 }
 

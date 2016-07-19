@@ -32,6 +32,7 @@
 		D700F64D1D3CC52D0074194D /* MKRAUDistortion.m in Sources */ = {isa = PBXBuildFile; fileRef = D700F64C1D3CC52D0074194D /* MKRAUDistortion.m */; };
 		D700F64E1D3CC8BE0074194D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AB3B9FE1D2CD5CE0062D19D /* Main.storyboard */; };
 		D700F6511D3CD1930074194D /* MKRAUDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = D700F6501D3CD1930074194D /* MKRAUDelay.m */; };
+		D715B8021D3E0D5100CE3112 /* MKRSceneTrack04.m in Sources */ = {isa = PBXBuildFile; fileRef = D715B8011D3E0D5100CE3112 /* MKRSceneTrack04.m */; };
 		D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D71CA5E91D3752850055EB85 /* AVFoundation.framework */; };
 		D71CA5F01D37713B0055EB85 /* MKRAudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */; };
 		D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA4E1D3B61A50061769A /* MKRAudioUnit.m */; };
@@ -107,6 +108,8 @@
 		D700F64C1D3CC52D0074194D /* MKRAUDistortion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAUDistortion.m; sourceTree = "<group>"; };
 		D700F64F1D3CD1930074194D /* MKRAUDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAUDelay.h; sourceTree = "<group>"; };
 		D700F6501D3CD1930074194D /* MKRAUDelay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAUDelay.m; sourceTree = "<group>"; };
+		D715B8001D3E0D5100CE3112 /* MKRSceneTrack04.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneTrack04.h; sourceTree = "<group>"; };
+		D715B8011D3E0D5100CE3112 /* MKRSceneTrack04.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneTrack04.m; sourceTree = "<group>"; };
 		D71CA5E91D3752850055EB85 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D71CA5EE1D37713B0055EB85 /* MKRAudioProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioProcessor.h; sourceTree = "<group>"; };
 		D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioProcessor.m; sourceTree = "<group>"; };
@@ -398,6 +401,8 @@
 				D77B83761D3CA90800FFE311 /* MKRSceneG.m */,
 				D77B83781D3CABB500FFE311 /* MKRSceneA2.h */,
 				D77B83791D3CABB500FFE311 /* MKRSceneA2.m */,
+				D715B8001D3E0D5100CE3112 /* MKRSceneTrack04.h */,
+				D715B8011D3E0D5100CE3112 /* MKRSceneTrack04.m */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -546,6 +551,7 @@
 				58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */,
 				D700F64A1D3CC47F0074194D /* MKRAULowpass.m in Sources */,
 				58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */,
+				D715B8021D3E0D5100CE3112 /* MKRSceneTrack04.m in Sources */,
 				D700F64D1D3CC52D0074194D /* MKRAUDistortion.m in Sources */,
 				58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */,
 				58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */,
