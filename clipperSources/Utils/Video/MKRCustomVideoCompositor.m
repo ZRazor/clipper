@@ -20,6 +20,10 @@
     dispatch_queue_t					_renderContextQueue;
     AVVideoCompositionRenderContext*	_renderContext;
     CVPixelBufferRef					_previousBuffer;
+    CIFilter*                           _filter;
+    CIContext *_context;
+    
+    double count;
 }
 
 @property (nonatomic, strong) MKROpenGLRenderer *oglRenderer;
@@ -42,6 +46,18 @@
         _previousBuffer = nil;
         _renderContextDidChange = NO;
         self.oglRenderer = [[MKRRenderer alloc] init];
+
+//        _filter = [CIFilter filterWithName:@"CIColorMonochrome"];
+//        [_filter setValue:@0.8f forKey:kCIInputIntensityKey];
+        
+        
+//        _filter = [CIFilter filterWithName:@"CITriangleKaleidoscope"];
+        
+        
+        _context = [CIContext contextWithOptions:nil];
+        
+        count = 1.0;
+
     }
     return self;
 }
@@ -123,7 +139,6 @@ static Float64 factorForTimeInRange(CMTime time, CMTimeRange range) /* 0.0 -> 1.
     
 //     Source pixel buffers are used as inputs while rendering the transition
     CVPixelBufferRef foregroundSourceBuffer = [request sourceFrameByTrackID:1];
-    CVPixelBufferRef backgroundSourceBuffer = [request sourceFrameByTrackID:1];
     
     // Destination pixel buffer into which we render the output
     dstPixels = [_renderContext newPixelBuffer];
@@ -141,25 +156,18 @@ static Float64 factorForTimeInRange(CMTime time, CMTimeRange range) /* 0.0 -> 1.
 //
         _renderContextDidChange = NO;
     }
-//
-    [_oglRenderer renderPixelBuffer:dstPixels usingForegroundSourceBuffer:foregroundSourceBuffer andBackgroundSourceBuffer:backgroundSourceBuffer forTweenFactor:tweenFactor];
     
+    [_oglRenderer renderPixelBuffer:dstPixels usingSourceBuffer:foregroundSourceBuffer];
     
-    
-    
-//    CIImage *sourceImage = [CIImage imageWithCVPixelBuffer:foregroundSourceBuffer options:nil];
-    
-//    CIFilter *filter = [CIFilter filterWithName:@"CIColorMonochrome"];
-//    CIImage *result = [filter valueForKey:kCIOutputImageKey];
+//    CIImage *sourceImage = [CIImage imageWithCVPixelBuffer:dstPixels options:nil];
+//    [_filter setValue:sourceImage forKey:kCIInputImageKey];
+//    [_context render:[_filter outputImage] toCVPixelBuffer:dstPixels];
 //    
+//    [_filter setValue:@(count) forKey:kCIInputWidthKey];
 //    
-//    CVPixelBufferRef pixelBuffer = NULL;
-//    CVReturn status = CVPixelBufferCreate(kCFAllocatorDefault,
-//                                          320,
-//                                          640,
-//                                          kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange,
-//                                          (__bridge CFDictionaryRef) @{(__bridge NSString *) kCVPixelBufferIOSurfacePropertiesKey: @{}},
-//                                          &pixelBuffer);
+//    count+=6;
+//    count = MIN(700, count);
+    
     
     return dstPixels;
 }
