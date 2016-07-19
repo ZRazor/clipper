@@ -49,14 +49,16 @@ static AVAsset *blank;
     if (barAsset == nil) {
         @throw([NSException exceptionWithName:@"Bar asset not found" reason:@"Bar asset not found" userInfo:nil]);
     }
+    CMTime startAt = *resultCursorPtr;
     [self insertTimeRange:composition ofAsset:barAsset startAt:barTimeRange.start duration:barTimeRange.duration resultCursorPtr:resultCursorPtr];
     
     if (bar.totalQuantsLength > bar.quantsLength && autoComplete) {
         NSInteger quantsRemainder = bar.totalQuantsLength - bar.quantsLength;
         CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 6000000);
-        [self insertEmptyInComposition:composition startAt:*resultCursorPtr duration:remainder];
+        [self insertTimeRange:composition ofAsset:composition startAt:startAt duration:remainder resultCursorPtr:resultCursorPtr];
+//        [self insertEmptyInComposition:composition startAt:*resultCursorPtr duration:remainder];
 //        [composition insertEmptyTimeRange:CMTimeRangeMake(*resultCursorPtr, remainder)];
-        *resultCursorPtr = CMTimeAdd(*resultCursorPtr, remainder);
+//        *resultCursorPtr = CMTimeAdd(*resultCursorPtr, remainder);
         NSLog(@"Shift cursor to %f", CMTimeGetSeconds(*resultCursorPtr));
     }
 }
