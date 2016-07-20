@@ -29,7 +29,6 @@
 		58AAAE6C2D9E50DBD5FFEA55 /* MKRCVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACD1FA4D58090C4CD60E /* MKRCVad.m */; };
 		58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */; };
 		742DFC061D360C80007BE11C /* MKRCustomVideoCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = 742DFC051D360C80007BE11C /* MKRCustomVideoCompositor.m */; };
-		745A4C221D34EA850031D5F4 /* MKRVideoFXService.m in Sources */ = {isa = PBXBuildFile; fileRef = 745A4C211D34EA850031D5F4 /* MKRVideoFXService.m */; };
 		74E422AE1D3C64CA005CECC5 /* MKRRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E422AD1D3C64CA005CECC5 /* MKRRenderer.m */; };
 		74E422B11D3C6BC1005CECC5 /* MKROpenGLRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E422B01D3C6BC1005CECC5 /* MKROpenGLRenderer.m */; };
 		74E422B31D3C6CD7005CECC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E422B21D3C6CD7005CECC5 /* CoreGraphics.framework */; };
@@ -100,8 +99,6 @@
 		58AAAFB31421FAF140184D43 /* MKRCVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCVad.h; sourceTree = "<group>"; };
 		742DFC041D360C80007BE11C /* MKRCustomVideoCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKRCustomVideoCompositor.h; path = Video/MKRCustomVideoCompositor.h; sourceTree = "<group>"; };
 		742DFC051D360C80007BE11C /* MKRCustomVideoCompositor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKRCustomVideoCompositor.m; path = Video/MKRCustomVideoCompositor.m; sourceTree = "<group>"; };
-		745A4C201D34EA850031D5F4 /* MKRVideoFXService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKRVideoFXService.h; path = Video/FX/MKRVideoFXService.h; sourceTree = "<group>"; };
-		745A4C211D34EA850031D5F4 /* MKRVideoFXService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKRVideoFXService.m; path = Video/FX/MKRVideoFXService.m; sourceTree = "<group>"; };
 		74E422AC1D3C64CA005CECC5 /* MKRRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKRRenderer.h; path = Video/MKRRenderer.h; sourceTree = "<group>"; };
 		74E422AD1D3C64CA005CECC5 /* MKRRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKRRenderer.m; path = Video/MKRRenderer.m; sourceTree = "<group>"; };
 		74E422AF1D3C6BC1005CECC5 /* MKROpenGLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKROpenGLRenderer.h; path = Video/MKROpenGLRenderer.h; sourceTree = "<group>"; };
@@ -332,19 +329,9 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		745A4C1F1D34EA2E0031D5F4 /* FX */ = {
-			isa = PBXGroup;
-			children = (
-				745A4C201D34EA850031D5F4 /* MKRVideoFXService.h */,
-				745A4C211D34EA850031D5F4 /* MKRVideoFXService.m */,
-			);
-			name = FX;
-			sourceTree = "<group>";
-		};
 		745A4C231D34EA890031D5F4 /* Video */ = {
 			isa = PBXGroup;
 			children = (
-				745A4C1F1D34EA2E0031D5F4 /* FX */,
 				742DFC041D360C80007BE11C /* MKRCustomVideoCompositor.h */,
 				742DFC051D360C80007BE11C /* MKRCustomVideoCompositor.m */,
 				74E422AC1D3C64CA005CECC5 /* MKRRenderer.h */,
@@ -460,7 +447,7 @@
 				TargetAttributes = {
 					3AB3B9F11D2CD5CE0062D19D = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = KJWPEX5SPQ;
+						DevelopmentTeam = Z2PHG96DRQ;
 					};
 				};
 			};
@@ -520,7 +507,6 @@
 				D763B3E41D34C95E00D9669E /* MKRSceneE.m in Sources */,
 				3A46E70C1D375831008E037A /* MKRSettingsTableViewController.m in Sources */,
 				D763B3DE1D34C95E00D9669E /* MKRScene.m in Sources */,
-				745A4C221D34EA850031D5F4 /* MKRVideoFXService.m in Sources */,
 				D7E5F3D21D2F49D80095F5D6 /* MKRInterval.m in Sources */,
 				742DFC061D360C80007BE11C /* MKRCustomVideoCompositor.m in Sources */,
 				D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */,
@@ -659,7 +645,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.cliper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -679,7 +665,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.cliper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mayak.clipper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
