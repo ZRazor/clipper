@@ -9,7 +9,6 @@
 #import "MKRVad.h"
 
 static int const kMKRAudioSampleRate = 16000;
-static int const kMKRAudioBitDepth = 16;
 
 @implementation MKRVad {
     s_wv_detector_cvad_state *vad_state;

@@ -8,6 +8,7 @@
 
 #import "MKRSceneTrack04.h"
 #import "MKRAudioUnits.h"
+#import "MKRColorInvertFilterInstruction.h"
 
 @implementation MKRSceneTrack04
 
@@ -27,7 +28,7 @@
     return YES;
 }
 
-- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray<MKRAutomationLane *> *)automations {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray<MKRAutomationLane *> *)automations andFiltersManager:(MKRFiltersManager *)filtersManager {
     CMTime start = *resultCursorPtr;
     AVMutableComposition *longAsset = [barsAssets objectForKey:@(self.bars[0].identifier)];
     [self makeCompositionBar:composition withBarAsset:longAsset andWithBar:self.bars[0] andWithResultCursorPtr:resultCursorPtr andWithMSPQ:MSPQ andWithBarRange:CMTimeRangeMake(kCMTimeZero, longAsset.duration) usingAutoComplete:YES];
@@ -83,6 +84,8 @@
     [dist addPointAt:CMTimeMakeWithSeconds(8, 600000) withValue:@40];
     [dist addPointAt:CMTimeMakeWithSeconds(11.7, 600000) withValue:@40];
     [dist addPointAt:CMTimeMakeWithSeconds(12, 600000) withValue:@0];
+    
+    [filtersManager addInstruction:[[MKRColorInvertFilterInstruction alloc] initWithStartTime:8000 andEndTime:12000]];
 }
 
 @end

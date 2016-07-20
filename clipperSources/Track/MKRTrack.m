@@ -114,7 +114,7 @@
         MKRScene *scene = [structureUnit getScene];
         Float64 startTime = CMTimeGetSeconds(resultCursor);
         NSLog(@"start scene id: %s %ld at %f", object_getClassName(scene), scene.identifier, startTime);
-        [scene makeComposition:result withBarAssets:barsAssets andResultCursorPtr:&resultCursor andMSPQ:self.MSPQ andAutomations:self.automations];
+        [scene makeComposition:result withBarAssets:barsAssets andResultCursorPtr:&resultCursor andMSPQ:self.MSPQ andAutomations:self.automations andFiltersManager:self.filtersManager];
         Float64 endTime = CMTimeGetSeconds(resultCursor);
         NSLog(@"end scene at %f", endTime);
         [structureUnit setTimeIntervalWithStartTime:startTime andEndTime:endTime];
