@@ -5,14 +5,6 @@
 
 #import "MKRFilterInstruction.h"
 
-@interface MKRFilterInstruction()
-
-@property (nonatomic) CIFilter *filter;
-@property (nonatomic) double startTime;
-@property (nonatomic) double endTime;
-
-@end
-
 @implementation MKRFilterInstruction {
 
 }

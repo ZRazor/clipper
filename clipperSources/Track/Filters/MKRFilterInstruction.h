@@ -8,6 +8,9 @@
 
 @interface MKRFilterInstruction : NSObject
 
+@property (nonatomic) double startTime;
+@property (nonatomic) double endTime;
+
 - (instancetype)initWithStartTime:(double)startTime andEndTime:(double)endTime;
 
 - (void)prepareFilters;

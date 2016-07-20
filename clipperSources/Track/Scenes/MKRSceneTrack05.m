@@ -40,8 +40,6 @@
     CMTime d05 = CMTimeMultiplyByRatio(d1, 1, 2);
     CMTime d025 = CMTimeMultiplyByRatio(d05, 1, 2);
     CMTime d075 = CMTimeMultiplyByRatio(d025, 3, 1);
-    CMTime d0125 = CMTimeMultiplyByRatio(d025, 1, 2);
-    CMTime d00625 = CMTimeMultiplyByRatio(d0125, 1, 2);
     
     for (int i = 0; i < 3; i++) {
         [self insertTimeRange:composition ofAsset:composition startAt:start duration:d025 resultCursorPtr:resultCursorPtr];

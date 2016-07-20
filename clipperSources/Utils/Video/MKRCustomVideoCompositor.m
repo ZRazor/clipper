@@ -120,11 +120,11 @@
 
 #pragma mark - Utilities
 
-static Float64 factorForTimeInRange(CMTime time, CMTimeRange range) /* 0.0 -> 1.0 */
-{
-    CMTime elapsed = CMTimeSubtract(time, range.start);
-    return CMTimeGetSeconds(elapsed) / CMTimeGetSeconds(range.duration);
-}
+//static Float64 factorForTimeInRange(CMTime time, CMTimeRange range) /* 0.0 -> 1.0 */
+//{
+//    CMTime elapsed = CMTimeSubtract(time, range.start);
+//    return CMTimeGetSeconds(elapsed) / CMTimeGetSeconds(range.duration);
+//}
 
 - (CVPixelBufferRef)newRenderedPixelBufferForRequest:(AVAsynchronousVideoCompositionRequest *)request error:(NSError **)errOut
 {

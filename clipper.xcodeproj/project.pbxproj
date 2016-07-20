@@ -64,6 +64,7 @@
 		D7CEF4BA1D3F5E79001ECB09 /* MKROpenGLRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4B51D3F5E79001ECB09 /* MKROpenGLRenderer.m */; };
 		D7CEF4BB1D3F5E79001ECB09 /* MKRRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4B71D3F5E79001ECB09 /* MKRRenderer.m */; };
 		D7CEF4BE1D3F724D001ECB09 /* MKRSceneTrack05.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4BD1D3F724D001ECB09 /* MKRSceneTrack05.m */; };
+		D7CEF4C11D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4C01D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.m */; };
 		D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */; };
 		D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C71D2F48A90095F5D6 /* MKRBar.m */; };
 		D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3CE1D2F49110095F5D6 /* MKRBarManager.m */; };
@@ -182,6 +183,8 @@
 		D7CEF4B71D3F5E79001ECB09 /* MKRRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRRenderer.m; sourceTree = "<group>"; };
 		D7CEF4BC1D3F724D001ECB09 /* MKRSceneTrack05.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneTrack05.h; sourceTree = "<group>"; };
 		D7CEF4BD1D3F724D001ECB09 /* MKRSceneTrack05.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneTrack05.m; sourceTree = "<group>"; };
+		D7CEF4BF1D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRZoomBlurFilterInstruction.h; sourceTree = "<group>"; };
+		D7CEF4C01D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRZoomBlurFilterInstruction.m; sourceTree = "<group>"; };
 		D7E5F3C31D2F489C0095F5D6 /* MKRTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTrack.h; sourceTree = "<group>"; };
 		D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRTrack.m; sourceTree = "<group>"; };
 		D7E5F3C61D2F48A90095F5D6 /* MKRBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRBar.h; sourceTree = "<group>"; };
@@ -312,6 +315,8 @@
 				58AAAA7AF9E33C6835C8E1E5 /* MKRBloomFilterInstruction.h */,
 				58AAA6766D65BFC484CE3A72 /* MKRBumpDistortionFilterInstruction.m */,
 				58AAA78E8DF36951FC3FD0D4 /* MKRBumpDistortionFilterInstruction.h */,
+				D7CEF4BF1D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.h */,
+				D7CEF4C01D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.m */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -632,6 +637,7 @@
 				58AAAB873D786CE11A7EC469 /* MKRFiltersManager.m in Sources */,
 				58AAA489E909334F9BBF3A3C /* MKRFilterInstruction.m in Sources */,
 				58AAA463018AFE275FBDCAB9 /* MKRColorInvertFilterInstruction.m in Sources */,
+				D7CEF4C11D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.m in Sources */,
 				58AAA3E48A615D53DE249BC7 /* MKRBloomFilterInstruction.m in Sources */,
 				58AAA76E564B0E22EB56B00C /* MKRBumpDistortionFilterInstruction.m in Sources */,
 			);

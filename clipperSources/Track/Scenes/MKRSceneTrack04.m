@@ -8,7 +8,7 @@
 
 #import "MKRSceneTrack04.h"
 #import "MKRAudioUnits.h"
-#import "MKRColorInvertFilterInstruction.h"
+#import "MKRZoomBlurFilterInstruction.h"
 
 @implementation MKRSceneTrack04
 
@@ -85,7 +85,7 @@
     [dist addPointAt:CMTimeMakeWithSeconds(11.7, 600000) withValue:@40];
     [dist addPointAt:CMTimeMakeWithSeconds(12, 600000) withValue:@0];
     
-    [filtersManager addInstruction:[[MKRColorInvertFilterInstruction alloc] initWithStartTime:8000 andEndTime:12000]];
+    [filtersManager addInstruction:[[MKRZoomBlurFilterInstruction alloc] initWithStartTime:6000 andEndTime:8000]];
 }
 
 @end
