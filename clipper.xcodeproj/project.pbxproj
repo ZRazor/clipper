@@ -40,6 +40,7 @@
 		D715B8021D3E0D5100CE3112 /* MKRSceneTrack04.m in Sources */ = {isa = PBXBuildFile; fileRef = D715B8011D3E0D5100CE3112 /* MKRSceneTrack04.m */; };
 		D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D71CA5E91D3752850055EB85 /* AVFoundation.framework */; };
 		D71CA5F01D37713B0055EB85 /* MKRAudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */; };
+		D75894B81D3F8B270088135D /* MKRColorGlitchInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D75894B71D3F8B270088135D /* MKRColorGlitchInstruction.m */; };
 		D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA4E1D3B61A50061769A /* MKRAudioUnit.m */; };
 		D761DA521D3B61E40061769A /* MKRAUAudioFilePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA511D3B61E40061769A /* MKRAUAudioFilePlayer.m */; };
 		D761DA551D3B66410061769A /* MKRAUMixer.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA541D3B66410061769A /* MKRAUMixer.m */; };
@@ -65,6 +66,7 @@
 		D7CEF4BB1D3F5E79001ECB09 /* MKRRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4B71D3F5E79001ECB09 /* MKRRenderer.m */; };
 		D7CEF4BE1D3F724D001ECB09 /* MKRSceneTrack05.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4BD1D3F724D001ECB09 /* MKRSceneTrack05.m */; };
 		D7CEF4C11D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4C01D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.m */; };
+		D7CEF4C41D3F85E5001ECB09 /* MKRColorPosterizeFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4C31D3F85E5001ECB09 /* MKRColorPosterizeFilterInstruction.m */; };
 		D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */; };
 		D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3C71D2F48A90095F5D6 /* MKRBar.m */; };
 		D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E5F3CE1D2F49110095F5D6 /* MKRBarManager.m */; };
@@ -134,6 +136,8 @@
 		D71CA5E91D3752850055EB85 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D71CA5EE1D37713B0055EB85 /* MKRAudioProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioProcessor.h; sourceTree = "<group>"; };
 		D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioProcessor.m; sourceTree = "<group>"; };
+		D75894B61D3F8B270088135D /* MKRColorGlitchInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRColorGlitchInstruction.h; sourceTree = "<group>"; };
+		D75894B71D3F8B270088135D /* MKRColorGlitchInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRColorGlitchInstruction.m; sourceTree = "<group>"; };
 		D761DA4D1D3B61A50061769A /* MKRAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioUnit.h; sourceTree = "<group>"; };
 		D761DA4E1D3B61A50061769A /* MKRAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioUnit.m; sourceTree = "<group>"; };
 		D761DA501D3B61E40061769A /* MKRAUAudioFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAUAudioFilePlayer.h; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 		D7CEF4BD1D3F724D001ECB09 /* MKRSceneTrack05.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneTrack05.m; sourceTree = "<group>"; };
 		D7CEF4BF1D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRZoomBlurFilterInstruction.h; sourceTree = "<group>"; };
 		D7CEF4C01D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRZoomBlurFilterInstruction.m; sourceTree = "<group>"; };
+		D7CEF4C21D3F85E5001ECB09 /* MKRColorPosterizeFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRColorPosterizeFilterInstruction.h; sourceTree = "<group>"; };
+		D7CEF4C31D3F85E5001ECB09 /* MKRColorPosterizeFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRColorPosterizeFilterInstruction.m; sourceTree = "<group>"; };
 		D7E5F3C31D2F489C0095F5D6 /* MKRTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTrack.h; sourceTree = "<group>"; };
 		D7E5F3C41D2F489C0095F5D6 /* MKRTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRTrack.m; sourceTree = "<group>"; };
 		D7E5F3C61D2F48A90095F5D6 /* MKRBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRBar.h; sourceTree = "<group>"; };
@@ -317,6 +323,10 @@
 				58AAA78E8DF36951FC3FD0D4 /* MKRBumpDistortionFilterInstruction.h */,
 				D7CEF4BF1D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.h */,
 				D7CEF4C01D3F7D9F001ECB09 /* MKRZoomBlurFilterInstruction.m */,
+				D7CEF4C21D3F85E5001ECB09 /* MKRColorPosterizeFilterInstruction.h */,
+				D7CEF4C31D3F85E5001ECB09 /* MKRColorPosterizeFilterInstruction.m */,
+				D75894B61D3F8B270088135D /* MKRColorGlitchInstruction.h */,
+				D75894B71D3F8B270088135D /* MKRColorGlitchInstruction.m */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -596,9 +606,11 @@
 				D7CEF4BA1D3F5E79001ECB09 /* MKROpenGLRenderer.m in Sources */,
 				D761DA581D3B66B30061769A /* MKRAUGenericOutput.m in Sources */,
 				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
+				D75894B81D3F8B270088135D /* MKRColorGlitchInstruction.m in Sources */,
 				D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */,
 				D77B837A1D3CABB500FFE311 /* MKRSceneA2.m in Sources */,
 				D763B3E51D34C95E00D9669E /* MKRSceneF.m in Sources */,
+				D7CEF4C41D3F85E5001ECB09 /* MKRColorPosterizeFilterInstruction.m in Sources */,
 				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,
 				D761DA681D3B82750061769A /* MKRAutomationPoint.m in Sources */,
 				3A83B6351D3795F500470942 /* MKRVideoProcessViewController.m in Sources */,

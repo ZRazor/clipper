@@ -9,6 +9,8 @@
 #import "MKRSceneTrack04.h"
 #import "MKRAudioUnits.h"
 #import "MKRZoomBlurFilterInstruction.h"
+#import "MKRColorPosterizeFilterInstruction.h"
+#import "MKRColorGlitchInstruction.h"
 
 @implementation MKRSceneTrack04
 
@@ -86,6 +88,8 @@
     [dist addPointAt:CMTimeMakeWithSeconds(12, 600000) withValue:@0];
     
     [filtersManager addInstruction:[[MKRZoomBlurFilterInstruction alloc] initWithStartTime:6000 andEndTime:8000]];
+    [filtersManager addInstruction:[[MKRColorPosterizeFilterInstruction alloc] initWithStartTime:8000 andEndTime:16000]];
+    [filtersManager addInstruction:[[MKRColorGlitchInstruction alloc] initWithStartTime:3500 andEndTime:4000]];
 }
 
 @end

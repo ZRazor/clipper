@@ -23,7 +23,7 @@
     Float64 totalDuration = fabs(self.endTime - self.startTime);
     Float64 currentDuration = time - self.startTime;
     Float64 part = currentDuration / totalDuration;
-    Float64 maxAmount = 50;
+    Float64 maxAmount = 30;
     Float64 currentAmount = 0;
     
     if (part < 0.25) {
