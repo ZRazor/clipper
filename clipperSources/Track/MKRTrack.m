@@ -26,13 +26,14 @@
     }
     scenes = [NSMutableArray<MKRScene *> new];
     structure = [NSMutableArray<MKRStructureUnit *> new];
-    
+    [self setFiltersManager:[[MKRFiltersManager alloc] init]];
+
     NSDictionary *metaData = [[NSDictionary alloc] initWithContentsOfFile:metaDataPath];
     [self setBPM:[[metaData valueForKey:@"BPM"] longValue]];
     [self setQPB:[[metaData valueForKey:@"QPB"] longValue]];
     [self calcMSPQ];
     barManager = [[MKRBarManager alloc] initWithFeaturesIntervals:features andMSPQ:self.MSPQ andQPB:self.QPB];
-    
+
     NSMutableArray<NSString *> *metaDataScenes = [metaData mutableArrayValueForKey:@"Scenes"];
     NSMutableArray<NSNumber *> *metaDataStructure = [metaData mutableArrayValueForKey:@"Structure"];
     NSInteger identifier = 0;
@@ -51,7 +52,7 @@
         MKRStructureUnit *structureUnit = [[MKRStructureUnit alloc] initWithScene:scenes[[structureSceneIdentifier longValue]]];
         [structure addObject:structureUnit];
     }
-    
+
     return self;
 }
 
