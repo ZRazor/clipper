@@ -10,6 +10,7 @@
 #import "MKRAudioUnits.h"
 #import "MKRTemperatureAndTintFilterInstruction.h"
 #import "MKRColorGlitchInstruction.h"
+#import "MKRBumpDistortionFilterInstruction.h"
 
 @implementation MKRSceneTrack05
 
@@ -61,6 +62,8 @@
     
     [filtersManager addInstruction:[[MKRTemperatureAndTintFilterInstruction alloc] initWithStartTime:0 andEndTime:8000]];
     [filtersManager addInstruction:[[MKRColorGlitchInstruction alloc] initWithStartTime:2000 andEndTime:4000]];
+    [filtersManager addInstruction:[[MKRBumpDistortionFilterInstruction alloc] initWithStartTime:6000 andEndTime:8000]];
+    [filtersManager addInstruction:[[MKRBumpDistortionFilterInstruction alloc] initWithStartTime:14000 andEndTime:16000]];
 }
 
 @end
