@@ -21,7 +21,7 @@
 }
 
 
-+ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset prefferedTransform:(CGAffineTransform)transform onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure {
++ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset prefferedTransform:(CGAffineTransform)transform withFiltersManager:(MKRFiltersManager *)filtersManager onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure {
 
     AVMutableCompositionTrack *compositionVideoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].lastObject;
     if (compositionVideoTrack) {
@@ -63,6 +63,7 @@
     exportSession.outputURL = outputURL;
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
     exportSession.videoComposition = videoComposition;
+    [(MKRCustomVideoCompositor *)exportSession.customVideoCompositor setFiltersManager:filtersManager];
     
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
                 int exportStatus = exportSession.status;

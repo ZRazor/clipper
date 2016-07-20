@@ -5,10 +5,11 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import "MKRFiltersManager.h"
 
 @interface MKRExportProcessor : NSObject
 
-+ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset prefferedTransform:(CGAffineTransform)transform onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure;
++ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset prefferedTransform:(CGAffineTransform)transform withFiltersManager:(MKRFiltersManager *)filtersManager onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure;
 
 + (void)exportAudioFromMutableCompositionToDocuments:(AVMutableComposition *)asset onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure;
 

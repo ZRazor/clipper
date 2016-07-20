@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import "MKRFiltersManager.h"
 
 @interface MKRCustomVideoCompositor : NSObject <AVVideoCompositing>
+
+@property (nonatomic) MKRFiltersManager *filtersManager;
 
 @end;
 

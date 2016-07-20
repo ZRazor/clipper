@@ -159,6 +159,11 @@ static Float64 factorForTimeInRange(CMTime time, CMTimeRange range) /* 0.0 -> 1.
     
     [_oglRenderer renderPixelBuffer:dstPixels usingSourceBuffer:foregroundSourceBuffer];
     
+    double currentMs = CMTimeGetSeconds(request.compositionTime) * 1000.0;
+    
+    [self.filtersManager applyFiltersToBuffer:dstPixels atMs:currentMs];
+    
+    
 //    CIImage *sourceImage = [CIImage imageWithCVPixelBuffer:dstPixels options:nil];
 //    [_filter setValue:sourceImage forKey:kCIInputImageKey];
 //    [_context render:[_filter outputImage] toCVPixelBuffer:dstPixels];
