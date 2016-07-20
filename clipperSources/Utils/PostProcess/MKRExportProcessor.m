@@ -4,13 +4,9 @@
 //
 
 #import "MKRExportProcessor.h"
-#import "MKRAudioPostProcessor.h"
 #import "MKRCustomVideoCompositor.h"
 
-
 @implementation MKRExportProcessor {
-
-
 }
 
 + (NSURL *)generateFilePathWithFormat:(NSString *)formatName {
@@ -20,43 +16,40 @@
     NSString *UUID = [[NSUUID UUID] UUIDString];
     NSString *name = [NSString stringWithFormat:@"export_%@.%@", UUID, formatName];
     NSURL *URL = [NSURL fileURLWithPath:[documentsPath stringByAppendingPathComponent:name]];
-//    NSString *path = [NSString stringWithFormat:@"%@/export_%@.%@", documentsPath, UUID, formatName];
     
     return URL;
 }
 
-+ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset
-                          layerInstructions:(NSArray<AVMutableVideoCompositionInstruction *> *)instructions
-                                  onSuccess:(void (^)(NSURL *assertUrl))success
-                                  onFailure:(void (^)(NSError *error))failure {
+
++ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset prefferedTransform:(CGAffineTransform)transform onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure {
+
+    AVMutableCompositionTrack *compositionVideoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].lastObject;
+    if (compositionVideoTrack) {
+        [compositionVideoTrack setPreferredTransform:transform];
+    }
     
-    AVMutableAudioMix *audioMix = [MKRAudioPostProcessor postProcessAudioForMutableComposition:asset];
     
-    AVAssetTrack *videoAssetTrack = [asset tracksWithMediaType:AVMediaTypeVideo][0];
     AVMutableComposition *composition = [AVMutableComposition composition];
     [composition insertTimeRange:CMTimeRangeMake(kCMTimeZero, [asset duration])
                          ofAsset:asset
                           atTime:kCMTimeZero
                            error:nil];
-    
-    AVMutableCompositionTrack *videoTrack = [composition mutableTrackCompatibleWithTrack:videoAssetTrack];
-    
-    CMTime newDuration = CMTimeMakeWithSeconds(CMTimeGetSeconds(asset.duration), videoAssetTrack.naturalTimeScale);
-    
+
+    AVMutableCompositionTrack *videoTrack = [composition mutableTrackCompatibleWithTrack:compositionVideoTrack];
+
+    CMTime newDuration = CMTimeMakeWithSeconds(CMTimeGetSeconds(asset.duration), compositionVideoTrack.naturalTimeScale);
+
     [composition scaleTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
                      toDuration:newDuration];
 
     AVMutableVideoCompositionLayerInstruction *instruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
-    [instruction setOpacityRampFromStartOpacity:0.0 toEndOpacity:1.0 timeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), CMTimeMakeWithSeconds(3, 1))];
-    [instruction setTransform:videoAssetTrack.preferredTransform atTime:kCMTimeZero];
-    
     AVMutableVideoCompositionInstruction *videoCompositionInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     videoCompositionInstruction.layerInstructions = @[instruction];
     videoCompositionInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, newDuration);
     
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
-    videoComposition.frameDuration = CMTimeMakeWithSeconds(1.0 / videoAssetTrack.nominalFrameRate, videoAssetTrack.naturalTimeScale); //Считаем fps для рендера
-    videoComposition.renderSize = videoAssetTrack.naturalSize;
+    videoComposition.frameDuration = CMTimeMakeWithSeconds(1.0 / compositionVideoTrack.nominalFrameRate, compositionVideoTrack.naturalTimeScale); //Считаем fps для рендера
+    videoComposition.renderSize = compositionVideoTrack.naturalSize;
     videoComposition.instructions = @[videoCompositionInstruction];
     videoComposition.customVideoCompositorClass = [MKRCustomVideoCompositor class];
 
@@ -64,13 +57,12 @@
                                       presetName:AVAssetExportPresetHighestQuality];
     
     
-    NSURL *outputURL = [self generateFilePathWithFormat:@"m4a"];
+    NSURL *outputURL = [self generateFilePathWithFormat:@"mov"];
     
     //Настраиваем экспорт
     exportSession.outputURL = outputURL;
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
     exportSession.videoComposition = videoComposition;
-    exportSession.audioMix = audioMix;
     
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
                 int exportStatus = exportSession.status;
@@ -171,6 +163,33 @@
             }
         }
     }];
+}
+
++ (BOOL)isVideoPortrait:(AVAsset *)asset {
+    BOOL isPortrait = NO;
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    if ([tracks count]) {
+        AVAssetTrack *videoTrack = tracks[0];
+        CGAffineTransform t = videoTrack.preferredTransform;
+        // Portrait
+        if (t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0) {
+            isPortrait = YES;
+        }
+        // PortraitUpsideDown
+        if (t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0) {
+
+            isPortrait = YES;
+        }
+        // LandscapeRight
+        if (t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0) {
+            isPortrait = NO;
+        }
+        // LandscapeLeft
+        if (t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0) {
+            isPortrait = NO;
+        }
+    }
+    return isPortrait;
 }
 
 @end

@@ -33,7 +33,7 @@ static AVAsset *blank;
     @throw([NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override this method in subclass" userInfo:nil]);
 }
 
-- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray *)automations andFiltersManager:(MKRFiltersManager *)filtersManager {
 //    NSLog(@"scene identifier = %ld", self.identifier);
     for (MKRBar *bar in self.bars) {
         AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
@@ -50,21 +50,23 @@ static AVAsset *blank;
     if (barAsset == nil) {
         @throw([NSException exceptionWithName:@"Bar asset not found" reason:@"Bar asset not found" userInfo:nil]);
     }
+    CMTime startAt = *resultCursorPtr;
     [self insertTimeRange:composition ofAsset:barAsset startAt:barTimeRange.start duration:barTimeRange.duration resultCursorPtr:resultCursorPtr];
     
     if (bar.totalQuantsLength > bar.quantsLength && autoComplete) {
         NSInteger quantsRemainder = bar.totalQuantsLength - bar.quantsLength;
-        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 600000);
-        [self insertEmptyInComposition:composition startAt:*resultCursorPtr duration:remainder];
+        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 6000000);
+        [self insertTimeRange:composition ofAsset:composition startAt:startAt duration:remainder resultCursorPtr:resultCursorPtr];
+//        [self insertEmptyInComposition:composition startAt:*resultCursorPtr duration:remainder];
 //        [composition insertEmptyTimeRange:CMTimeRangeMake(*resultCursorPtr, remainder)];
-        *resultCursorPtr = CMTimeAdd(*resultCursorPtr, remainder);
+//        *resultCursorPtr = CMTimeAdd(*resultCursorPtr, remainder);
         NSLog(@"Shift cursor to %f", CMTimeGetSeconds(*resultCursorPtr));
     }
 }
 
--(void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr {
+- (void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr {
     NSLog(@"Insert: [%f, %f] of [%f] at [%f]", CMTimeGetSeconds(startAt), CMTimeGetSeconds(duration), CMTimeGetSeconds(asset.duration), CMTimeGetSeconds(*resultCursorPtr));
-    CMTime realDuration = CMTimeSubtract(CMTimeMinimum(duration, asset.duration), CMTimeMakeWithSeconds(1 / 1000.0, 600000));
+    CMTime realDuration = CMTimeSubtract(CMTimeMinimum(duration, asset.duration), CMTimeMakeWithSeconds(1 / 1000.0, 6000000));
     NSLog(@"RD: %f D: %f", CMTimeGetSeconds(realDuration), CMTimeGetSeconds(duration));
     CMTimeRange barTimeRange = CMTimeRangeMake(startAt, realDuration);
     NSLog(@"BarTimeRange = [%f, %f]", CMTimeGetSeconds(barTimeRange.start), CMTimeGetSeconds(barTimeRange.duration));
@@ -94,6 +96,16 @@ static AVAsset *blank;
         [composition insertTimeRange:CMTimeRangeMake(kCMTimeZero, blank.duration) ofAsset:blank atTime:startAt error:nil];
         [composition scaleTimeRange:CMTimeRangeMake(startAt, blank.duration) toDuration:duration];
     }
+}
+
++ (MKRAutomationLane *)automationFor:(NSInteger)audioUnitIdentifier andParameter:(AudioUnitParameterID)parameter in:(NSMutableArray<MKRAutomationLane *> *)automations {
+    for (MKRAutomationLane *automation in automations) {
+        if (automation.audioUnitIdentifier == audioUnitIdentifier && automation.parameterID == parameter) {
+            return automation;
+        }
+    }
+    
+    return nil;
 }
 
 @end

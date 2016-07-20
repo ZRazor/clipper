@@ -20,4 +20,5 @@
 
 - (instancetype)initWithSequence:(NSMutableArray<MKRProcessedInterval *> *)sequence andQuantsLength:(NSInteger)quantsLength andError:(double)error andTotalQuantsLength:(NSInteger)totalQuantsLength;
 
+- (double)getAverageGainForSequence;
 @end

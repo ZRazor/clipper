@@ -7,6 +7,7 @@
 //
 
 #import "MKRAppDelegate.h"
+#import "MKRSettingsManager.h"
 
 @interface MKRAppDelegate ()
 
@@ -16,6 +17,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [MKRSettingsManager checkDefaultSettings];
     // Override point for customization after application launch.
     return YES;
 }

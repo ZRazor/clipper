@@ -10,8 +10,8 @@
 
 @implementation MKRSceneB
 
--(BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
-    MKRBar *bar = [barManager getBarWithQuantsLength:@(4 * 2 * barManager.QPB)];
+- (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
+    MKRBar *bar = [barManager getBarWithQuantsLength:@(4 * 2 * barManager.QPB) withHighestGain:NO];
     if (bar == nil) {
         return NO;
     }
@@ -20,7 +20,7 @@
     return YES;
 }
 
--(void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray *)automations andFiltersManager:(MKRFiltersManager *)filtersManager {
     NSLog(@"scene identifier = %ld", self.identifier);
     MKRBar *bar = self.bars[0];
     CMTime barStart = *resultCursorPtr;

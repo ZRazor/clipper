@@ -16,7 +16,6 @@
 @property (nonatomic) NSInteger quantsLength;
 @property (nonatomic) double msLength;
 @property (nonatomic) double warpedMsLength;
-@property (nonatomic) double averageGain;
 
 -(instancetype)initWithStart:(NSInteger)start andEnd:(NSInteger)end
               andAverageGain:(double)averageGain

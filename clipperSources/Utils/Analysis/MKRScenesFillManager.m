@@ -42,13 +42,14 @@
     NSInteger audioMsDuration = round(CMTimeGetSeconds(audioDuration) * 1000);
 
     MKRVad *vad = [[MKRVad alloc] initWithAudioSamples:audioData andAudioMsDuration:audioMsDuration];
-    NSArray *timeouts = @[@3000, @2000, @1000, @500, @300, @100, @50];
+    NSArray *timeouts = @[@3000, @2000, @1000, @500, @300];
 
-    for (NSNumber *timeout in timeouts) {
+    for (int i = 0; i < [timeouts count]; i++) {
+        NSNumber *timeout = timeouts[i];
         NSLog(@"Try to fill scenes with %d timeout", timeout.intValue);
         [vad setVadTimeout:timeout.intValue];
         NSMutableArray<MKRInterval *> *speechIntervals = [vad findSpeechIntervals];
-        NSLog(@"VAD complete, found %u speech intervals", [speechIntervals count]);
+        NSLog(@"VAD complete, found %lu speech intervals", [speechIntervals count]);
         for (MKRInterval *interval in speechIntervals) {
             NSLog(@"[%f, %f]", interval.start / 1000.0, interval.end / 1000.0);
         }
@@ -57,7 +58,7 @@
             return track;
         }
     }
-
+    
     return nil;
 
 }

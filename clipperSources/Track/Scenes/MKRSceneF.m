@@ -11,7 +11,7 @@
 @implementation MKRSceneF
 
 - (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager {
-    MKRBar *bar = [barManager getBarWithQuantsLength:@(2 * barManager.QPB)];
+    MKRBar *bar = [barManager getBarWithQuantsLength:@(2 * barManager.QPB) withHighestGain:YES];
     if (!bar) {
         return NO;
     }
@@ -19,7 +19,7 @@
     return YES;
 }
 
-- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ {
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray *)automations andFiltersManager:(MKRFiltersManager *)filtersManager {
     MKRBar *bar = self.bars[0];
     AVMutableComposition *barAsset = [barsAssets objectForKey:@(bar.identifier)];
     CMTimeRange barTimeRange = CMTimeRangeMake(kCMTimeZero, barAsset.duration);
@@ -36,6 +36,9 @@
         [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:bar025 resultCursorPtr:resultCursorPtr];
     }
     
+    MKRAutomationLane *pitchAutomation = [MKRScene automationFor:kMKRUnit_TimePitch andParameter:kNewTimePitchParam_Pitch in:automations];
+    [pitchAutomation addPointAt:*resultCursorPtr withValue:@0];
+    
     CMTime bar0125 = CMTimeMultiplyByRatio(bar025, 1, 2);
     for (int i = 0; i < 8; i++) {
         [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:bar0125 resultCursorPtr:resultCursorPtr];
@@ -45,6 +48,9 @@
     for (int i = 0; i < 16; i++) {
         [self insertTimeRange:composition ofAsset:composition startAt:barStartAt duration:bar00625 resultCursorPtr:resultCursorPtr];
     }
+    
+    [pitchAutomation addPointAt:*resultCursorPtr withValue:@2400];
+    [pitchAutomation addPointAt:CMTimeAdd(*resultCursorPtr, CMTimeMakeWithSeconds(0.001, 6000000)) withValue:@0];
 }
 
 - (NSArray<AVMutableVideoCompositionInstruction *>*)getPostVideoLayerInstractins {

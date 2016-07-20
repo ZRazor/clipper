@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GM1-an-33d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GM1-an-33d">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -312,11 +312,24 @@
                                             <constraint firstItem="a3I-Zf-gJG" firstAttribute="leading" secondItem="fA8-Zh-pmh" secondAttribute="trailing" constant="35" id="yne-G6-kEM"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4g-WH-eho">
+                                        <rect key="frame" x="81" y="23" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="bNq-Ld-g6f"/>
+                                            <constraint firstAttribute="width" constant="25" id="llz-w2-flY"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="unmute"/>
+                                        <connections>
+                                            <action selector="muteButtonClick:" destination="iAZ-yW-FBg" eventType="touchUpInside" id="4fT-gn-4jH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="aa1-en-Nec" firstAttribute="leading" secondItem="dNT-Hn-J3Y" secondAttribute="leading" constant="15" id="18v-FU-5gW"/>
                                     <constraint firstAttribute="height" constant="170" id="9lp-x3-REF"/>
+                                    <constraint firstItem="M4g-WH-eho" firstAttribute="leading" secondItem="aa1-en-Nec" secondAttribute="trailing" constant="16" id="Pd8-E8-Efj"/>
+                                    <constraint firstItem="532-mr-wDU" firstAttribute="top" secondItem="M4g-WH-eho" secondAttribute="bottom" constant="22" id="PnY-oU-Zjb"/>
                                     <constraint firstItem="532-mr-wDU" firstAttribute="leading" secondItem="dNT-Hn-J3Y" secondAttribute="leading" id="WTP-8D-b7e"/>
                                     <constraint firstAttribute="bottom" secondItem="532-mr-wDU" secondAttribute="bottom" id="YBQ-GK-BS4"/>
                                     <constraint firstAttribute="trailing" secondItem="532-mr-wDU" secondAttribute="trailing" id="gR3-hc-C1s"/>
@@ -342,7 +355,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clipping video..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvv-o5-vyl">
-                                        <rect key="frame" x="99" y="232" width="123" height="20.5"/>
+                                        <rect key="frame" x="99" y="232" width="123" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -379,6 +392,7 @@
                         <outlet property="exportViewRightConstraint" destination="k7b-b7-fOq" id="zml-bt-N2G"/>
                         <outlet property="loadingImageView" destination="YWX-ph-Ivs" id="xnk-fm-X9f"/>
                         <outlet property="loadingView" destination="sSj-Eh-VdY" id="VQt-se-DXH"/>
+                        <outlet property="muteButton" destination="M4g-WH-eho" id="ft0-Fh-i1g"/>
                         <outlet property="saveToCameraRollButton" destination="fA8-Zh-pmh" id="M0F-aX-glu"/>
                     </connections>
                 </viewController>
@@ -393,7 +407,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="A4D-dR-5pA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="gZM-mg-hxc">
                             <rect key="frame" x="0.0" y="205" width="320" height="41"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -419,7 +433,7 @@
                                         <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HAm-qI-qfn" id="ecj-Ih-0Cw">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCD-fl-OOT">
@@ -429,6 +443,9 @@
                                                         <constraint firstAttribute="height" constant="31" id="cqg-Pf-o19"/>
                                                     </constraints>
                                                     <color key="onTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="saveOriginalVideoChange:" destination="9hd-Ql-aou" eventType="valueChanged" id="sgG-C0-rJp"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохранять видео с камеры" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vW7-l3-TMM">
                                                     <rect key="frame" x="15" y="12" width="233" height="21"/>
@@ -436,7 +453,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="dwd-V1-alm"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -453,7 +470,7 @@
                                         <rect key="frame" x="0.0" y="143" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V0g-kp-UEJ" id="X2O-8Z-6cI">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZyU-Er-xh9">
@@ -463,6 +480,9 @@
                                                         <constraint firstAttribute="width" constant="49" id="NgK-yf-B7o"/>
                                                     </constraints>
                                                     <color key="onTintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="saveClippedVideoChange:" destination="9hd-Ql-aou" eventType="valueChanged" id="2wB-pg-OmU"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохранять готовые видео" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uA-1O-IGu">
                                                     <rect key="frame" x="15" y="12" width="233" height="21"/>
@@ -470,7 +490,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="3gI-Ck-OhZ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -492,14 +512,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Настройки" id="0oJ-LS-iw4">
-                        <barButtonItem key="leftBarButtonItem" image="close" id="cpB-T9-z9o">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="wqV-zl-ctt">
                             <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="closeButtonClick:" destination="9hd-Ql-aou" id="IOA-Er-WbO"/>
+                                <action selector="closeButtonClick:" destination="9hd-Ql-aou" id="mkS-hQ-Abw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="saveClippedVideoSwitch" destination="ZyU-Er-xh9" id="8Du-7X-YqW"/>
+                        <outlet property="saveOriginalVideoSwitch" destination="oCD-fl-OOT" id="Xfn-4O-QkJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lfG-xL-ajR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -534,7 +558,6 @@
     </scenes>
     <resources>
         <image name="back" width="50" height="25"/>
-        <image name="close" width="25" height="25"/>
         <image name="flash_off" width="25" height="25"/>
         <image name="loading" width="50" height="50"/>
         <image name="locked" width="50" height="50"/>
@@ -544,5 +567,6 @@
         <image name="settings" width="25" height="25"/>
         <image name="share" width="25" height="25"/>
         <image name="switch_camera" width="25" height="25"/>
+        <image name="unmute" width="25" height="25"/>
     </resources>
 </document>

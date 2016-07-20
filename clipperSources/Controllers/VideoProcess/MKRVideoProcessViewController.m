@@ -15,7 +15,13 @@
 #import "MKRAudioProcessor.h"
 #import "MKRTrack.h"
 
-@class AVMutableVideoCompositionInstruction;
+@class AVMutableVideoCompositionInstruction; //???
+
+#import "MKRVolumeAnalyzer.h"
+#import "MKRSettingsManager.h"
+#import "MKRTrackManager.h"
+#import <Photos/PHPhotoLibrary.h>
+
 
 @interface MKRVideoProcessViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -26,10 +32,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveToCameraRollButton;
 @property (weak, nonatomic) IBOutlet UIButton *exportButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *exportViewRightConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *muteButton;
 @property (nonatomic) AVPlayerViewController *playerViewController;
 - (IBAction)backButtonClick:(id)sender;
 - (IBAction)exportButtonClick:(id)sender;
 - (IBAction)saveToCameraRollClick:(id)sender;
+- (IBAction)muteButtonClick:(id)sender;
 
 @end
 
@@ -39,10 +47,14 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 @implementation MKRVideoProcessViewController {
     NSURL *assetUrl;
     NSURL *clippedVideoUrl;
+    BOOL isMuted;
+    MKRTrackManager *trackManager;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isMuted = NO;
+    trackManager = [[MKRTrackManager alloc] init];
     [self.exportView setHidden:YES];
     [self.view layoutIfNeeded];
     [self animateLoadingImageViewWithAngle:M_PI];
@@ -72,10 +84,9 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         AVAsset *avAsset = [AVAsset assetWithURL:videoURL];
-        NSString *playbackPath = [[NSBundle mainBundle] pathForResource:trackName ofType:@"wav"];
+        NSString *playbackPath = [trackManager pathForPlayback:trackName];
         
-        MKRScenesFillManager *scenesFillManager = [[MKRScenesFillManager alloc] initWithMetaDataPath:[[NSBundle mainBundle]
-                                                                                                      pathForResource:trackName ofType:@"plist"]];
+        MKRScenesFillManager *scenesFillManager = [[MKRScenesFillManager alloc] initWithMetaDataPath:[trackManager pathForMetaDesc:trackName]];
         
         MKRTrack *track = [scenesFillManager tryToFillScenesWithAsset:avAsset];
         if (!track) {
@@ -85,10 +96,12 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
         }
         
         AVMutableComposition *resultAsset = [track processVideo:avAsset];
-        NSArray<AVMutableVideoCompositionInstruction *>* instructionsResult = [track getVideoLayerInstartions];
+//        NSArray<AVMutableVideoCompositionInstruction *>* instructionsResult = [track getVideoLayerInstartions];
         
         [MKRExportProcessor exportAudioFromMutableCompositionToDocuments:resultAsset onSuccess:^(NSURL *newAssetUrl) {
-            MKRAudioProcessor *audioProcessor = [[MKRAudioProcessor alloc] initWithOriginalPath:newAssetUrl.path andPlaybackPath:playbackPath];
+            Float64 volumeRatio = [MKRVolumeAnalyzer getAudioAverageVolumesRatioOfA:newAssetUrl andB:[NSURL fileURLWithPath:playbackPath]];
+            MKRAudioProcessor *audioProcessor = [[MKRAudioProcessor alloc] initWithOriginalPath:newAssetUrl.path andPlaybackPath:playbackPath andO2PRatio:volumeRatio withoutSpeech:isMuted];
+            
             [audioProcessor processTrack:track andPlaybackFilePath:playbackPath withOriginalFilePath:newAssetUrl.path completion:^(NSURL *audioURL) {
                 NSArray<AVCompositionTrack *> *audioTracks = [resultAsset tracksWithMediaType:AVMediaTypeAudio];
                 for (AVCompositionTrack *audioTrack in audioTracks) {
@@ -102,10 +115,15 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
                 int trackId = 10;
                 for (AVAssetTrack *audioTrack in realAudioTracks) {
                     AVMutableCompositionTrack *playbackTrack = [resultAsset addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:trackId++];
-                    //                CMTime startOffset = CMTimeSubtract(CMTimeMaximum(resultAsset.duration, realAudio.duration), CMTimeMinimum(resultAsset.duration, realAudio.duration));
                     [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, realAudio.duration) ofTrack:audioTrack atTime:kCMTimeZero error:nil];
                 }
-                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset layerInstructions:instructionsResult onSuccess:success onFailure:failure];
+                CGAffineTransform transform = avAsset.preferredTransform;
+                NSArray *tracks = [avAsset tracksWithMediaType:AVMediaTypeVideo];
+                if ([tracks count]) {
+                    AVAssetTrack *videoTrack = tracks[0];
+                    transform = videoTrack.preferredTransform;
+                }
+                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset prefferedTransform:transform onSuccess:success onFailure:failure];
             } failure:^(NSError *error) {
                 NSLog(@"error = %@", error);
             }];
@@ -116,12 +134,12 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 2;
+    return [trackManager tracksCount];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MKRTrackCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMKRTrackCellIdentifier forIndexPath:indexPath];
-    NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
+    NSString *trackName = [trackManager trackNameForRow:indexPath.row];
     [cell.trackTitleLabel setText:trackName];
     return cell;
 }
@@ -131,19 +149,29 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *trackName = indexPath.row == 0 ? @"01" : @"02";
+    NSString *trackName = [trackManager trackNameForRow:indexPath.row];
     [self.collectionView setUserInteractionEnabled:NO];
     [self.loadingView setHidden:NO];
+    [self.playerViewController.player pause];
     [self hideExportView];
+    [self.muteButton setEnabled:NO];
     void (^finishBlock)() = ^void () {
         [self.collectionView setUserInteractionEnabled:YES];
         [self.loadingView setHidden:YES];
+        [self.muteButton setEnabled:YES];
     };
     [self handleVideo:assetUrl withTrackName:trackName onSuccess:^(NSURL *newVideoURL) {
         dispatch_async(dispatch_get_main_queue(), ^{
             clippedVideoUrl = newVideoURL;
             [self.playerViewController setPlayer:[AVPlayer playerWithURL:clippedVideoUrl]];
             [self showExportView];
+            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+                if (status == PHAuthorizationStatusAuthorized && [MKRSettingsManager getBoolValueForKey:kMKRSaveClippedVideoKey]) {
+                    if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(newVideoURL.path)) {
+                        UISaveVideoAtPathToSavedPhotosAlbum(newVideoURL.path, nil, NULL, NULL);
+                    }
+                }
+            }];
             finishBlock();
         });
     } onFailure:^(NSError *error) {
@@ -200,6 +228,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 #pragma mark - User Actions
 
 - (IBAction)backButtonClick:(id)sender {
+    [self.playerViewController setPlayer:nil];
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -226,6 +255,14 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(clippedVideoUrl.path)) {
         [self.saveToCameraRollButton setEnabled:NO];
         UISaveVideoAtPathToSavedPhotosAlbum(clippedVideoUrl.path,self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    }
+}
+
+- (IBAction)muteButtonClick:(id)sender {
+    isMuted = !isMuted;
+    [self.muteButton setBackgroundImage:[UIImage imageNamed:isMuted ? @"mute" : @"unmute"] forState:UIControlStateNormal];
+    if ([self.collectionView.indexPathsForSelectedItems count] > 0) {
+        [self.collectionView deselectItemAtIndexPath:self.collectionView.indexPathsForSelectedItems[0] animated:YES];
     }
 }
 

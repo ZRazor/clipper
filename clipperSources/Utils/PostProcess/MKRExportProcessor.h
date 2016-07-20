@@ -8,12 +8,12 @@
 
 @interface MKRExportProcessor : NSObject
 
-+ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset
-                          layerInstructions:(NSArray<AVMutableVideoCompositionInstruction *> *)instructions
-                                  onSuccess:(void (^)(NSURL *assertUrl))success
-                                  onFailure:(void (^)(NSError *error))failure;
++ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset prefferedTransform:(CGAffineTransform)transform onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure;
 
 + (void)exportAudioFromMutableCompositionToDocuments:(AVMutableComposition *)asset onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure;
+
++ (BOOL)isVideoPortrait:(AVAsset *)asset;
+
 + (NSURL *)generateFilePathWithFormat:(NSString *)formatName;
 
 @end

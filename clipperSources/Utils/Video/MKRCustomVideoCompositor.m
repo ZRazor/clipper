@@ -133,9 +133,9 @@ static Float64 factorForTimeInRange(CMTime time, CMTimeRange range) /* 0.0 -> 1.
     // tweenFactor indicates how far within that timeRange are we rendering this frame. This is normalized to vary between 0.0 and 1.0.
     // 0.0 indicates the time at first frame in that videoComposition timeRange
     // 1.0 indicates the time at last frame in that videoComposition timeRange
-    float tweenFactor = factorForTimeInRange(request.compositionTime, request.videoCompositionInstruction.timeRange);
-    
-    MKRCustomVideoCompositionInstruction *currentInstruction = request.videoCompositionInstruction;
+//    float tweenFactor = factorForTimeInRange(request.compositionTime, request.videoCompositionInstruction.timeRange);
+//    
+//    MKRCustomVideoCompositionInstruction *currentInstruction = request.videoCompositionInstruction;
     
 //     Source pixel buffers are used as inputs while rendering the transition
     CVPixelBufferRef foregroundSourceBuffer = [request sourceFrameByTrackID:1];

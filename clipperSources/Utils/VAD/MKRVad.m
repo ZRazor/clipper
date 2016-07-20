@@ -9,7 +9,6 @@
 #import "MKRVad.h"
 
 static int const kMKRAudioSampleRate = 16000;
-static int const kMKRAudioBitDepth = 16;
 
 @implementation MKRVad {
     s_wv_detector_cvad_state *vad_state;
@@ -123,7 +122,7 @@ static int const kMKRAudioBitDepth = 16;
                 int maxValueSampleNum = startSample;
                 
                 int j = startSample;
-                int windowSize = MIN(1000, sampleOffset - startSample);
+                int windowSize = MIN(300, sampleOffset - startSample);
                 for (j = 0; j < windowSize; j++) {
                     short value = abs(bytes[j + startSample]);
                     if (value > maxValue) {

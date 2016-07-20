@@ -14,6 +14,8 @@
 #import <Foundation/Foundation.h>
 #import "MKRBarManager.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MKRAutomationLane.h"
+#import "MKRFiltersManager.h"
 
 @interface MKRScene : NSObject
 
@@ -22,19 +24,19 @@
 
 - (instancetype)initWithIdentifier:(NSInteger)identifier;
 
++ (MKRAutomationLane *)automationFor:(NSInteger)audioUnitIdentifier andParameter:(AudioUnitParameterID)parameter in:(NSMutableArray<MKRAutomationLane *> *)automations;
+
 - (BOOL)fillBarsWithBarManager:(MKRBarManager *)barManager;
 
 /*!
   @abstract this method appends part of the composition to result and shifts resultCursorPtr
 */
-- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ;
+- (void)makeComposition:(AVMutableComposition *)composition withBarAssets:(NSMutableDictionary *)barsAssets andResultCursorPtr:(CMTime *)resultCursorPtr andMSPQ:(double)MSPQ andAutomations:(NSMutableArray<MKRAutomationLane *> *)automations andFiltersManager:(MKRFiltersManager *)filtersManager;
 
 - (void)makeCompositionBar:(AVMutableComposition *)composition withBarAsset:(AVMutableComposition *)barAsset andWithBar:(MKRBar *)bar andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ andWithBarRange:(CMTimeRange)barTimeRange usingAutoComplete:(BOOL)autoComplete;
 
 - (void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr;
 
 - (void)insertEmptyInComposition:(AVMutableComposition *)composition startAt:(CMTime)startAt duration:(CMTime)duration;
-
-- (NSArray<AVMutableVideoCompositionInstruction *>*)getPostVideoLayerInstractins;
 
 @end
