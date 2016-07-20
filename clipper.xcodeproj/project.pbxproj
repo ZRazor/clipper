@@ -22,9 +22,11 @@
 		58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAABECDDA957863529FB9A /* MKRScenesFillManager.m */; };
 		58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */; };
 		58AAA2A4625621C94258A471 /* MKRTrackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA5B7380E0D017B008CFD /* MKRTrackManager.m */; };
+		58AAA3E48A615D53DE249BC7 /* MKRBloomFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAACED4ACF2013C45178A9 /* MKRBloomFilterInstruction.m */; };
 		58AAA463018AFE275FBDCAB9 /* MKRColorInvertFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAF6DF9977CB1E15DDC57 /* MKRColorInvertFilterInstruction.m */; };
 		58AAA489E909334F9BBF3A3C /* MKRFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA7F720FF79335A6FCF27 /* MKRFilterInstruction.m */; };
 		58AAA4B25E713B88C8A85767 /* MKRRawDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA329BD28D95F1C3FC80E /* MKRRawDataProcessor.m */; };
+		58AAA76E564B0E22EB56B00C /* MKRBumpDistortionFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA6766D65BFC484CE3A72 /* MKRBumpDistortionFilterInstruction.m */; };
 		58AAA7A106472D6CF0147BB1 /* MKRSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA1F666FAD27950E05021 /* MKRSettingsManager.m */; };
 		58AAA9380D54677C89FE42B0 /* MKRExportProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */; };
 		58AAA944BF373CF8914810C9 /* MKRVad.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AAAA340F82A110339BAA56 /* MKRVad.m */; };
@@ -98,16 +100,20 @@
 		58AAA51E2C1B1A12CD9F387B /* MKRStructureUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRStructureUnit.m; sourceTree = "<group>"; };
 		58AAA5B7380E0D017B008CFD /* MKRTrackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRTrackManager.m; sourceTree = "<group>"; };
 		58AAA6132DB39666B84CD649 /* MKRColorInvertFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRColorInvertFilterInstruction.h; sourceTree = "<group>"; };
+		58AAA6766D65BFC484CE3A72 /* MKRBumpDistortionFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRBumpDistortionFilterInstruction.m; sourceTree = "<group>"; };
+		58AAA78E8DF36951FC3FD0D4 /* MKRBumpDistortionFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRBumpDistortionFilterInstruction.h; sourceTree = "<group>"; };
 		58AAA7E9FE605BF019532C5C /* MKRExportProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRExportProcessor.m; sourceTree = "<group>"; };
 		58AAA7F720FF79335A6FCF27 /* MKRFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRFilterInstruction.m; sourceTree = "<group>"; };
 		58AAA812DF65A508D05C6618 /* MKRFiltersManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRFiltersManager.h; sourceTree = "<group>"; };
 		58AAA8C928C870FD3C0AC76F /* MKRFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRFilterInstruction.h; sourceTree = "<group>"; };
 		58AAA961F62E5CE7A1FDA1CA /* UIColor+MKRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MKRColor.m"; sourceTree = "<group>"; };
 		58AAAA340F82A110339BAA56 /* MKRVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRVad.m; sourceTree = "<group>"; };
+		58AAAA7AF9E33C6835C8E1E5 /* MKRBloomFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRBloomFilterInstruction.h; sourceTree = "<group>"; };
 		58AAAB935C8B7FE6E7E27DF0 /* MKRVad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRVad.h; sourceTree = "<group>"; };
 		58AAABD5461E53C1292D33A8 /* MKRSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSettingsManager.h; sourceTree = "<group>"; };
 		58AAABECDDA957863529FB9A /* MKRScenesFillManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRScenesFillManager.m; sourceTree = "<group>"; };
 		58AAACD1FA4D58090C4CD60E /* MKRCVad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCVad.m; sourceTree = "<group>"; };
+		58AAACED4ACF2013C45178A9 /* MKRBloomFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRBloomFilterInstruction.m; sourceTree = "<group>"; };
 		58AAAD01955A4571E9DEF1E5 /* MKRRawDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRRawDataProcessor.h; sourceTree = "<group>"; };
 		58AAAE39E812A80587472FE0 /* MKRTrackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTrackManager.h; sourceTree = "<group>"; };
 		58AAAE5350D8F9BD1ACE429C /* README.MD */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.MD; sourceTree = "<group>"; };
@@ -299,6 +305,10 @@
 				58AAA8C928C870FD3C0AC76F /* MKRFilterInstruction.h */,
 				58AAAF6DF9977CB1E15DDC57 /* MKRColorInvertFilterInstruction.m */,
 				58AAA6132DB39666B84CD649 /* MKRColorInvertFilterInstruction.h */,
+				58AAACED4ACF2013C45178A9 /* MKRBloomFilterInstruction.m */,
+				58AAAA7AF9E33C6835C8E1E5 /* MKRBloomFilterInstruction.h */,
+				58AAA6766D65BFC484CE3A72 /* MKRBumpDistortionFilterInstruction.m */,
+				58AAA78E8DF36951FC3FD0D4 /* MKRBumpDistortionFilterInstruction.h */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -616,6 +626,8 @@
 				58AAAB873D786CE11A7EC469 /* MKRFiltersManager.m in Sources */,
 				58AAA489E909334F9BBF3A3C /* MKRFilterInstruction.m in Sources */,
 				58AAA463018AFE275FBDCAB9 /* MKRColorInvertFilterInstruction.m in Sources */,
+				58AAA3E48A615D53DE249BC7 /* MKRBloomFilterInstruction.m in Sources */,
+				58AAA76E564B0E22EB56B00C /* MKRBumpDistortionFilterInstruction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
