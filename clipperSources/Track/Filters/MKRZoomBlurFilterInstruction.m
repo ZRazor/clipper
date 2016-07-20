@@ -27,7 +27,7 @@
     Float64 currentAmount = 0;
     
     if (part < 0.25) {
-        currentAmount = part / 0.25 * 200;
+        currentAmount = part / 0.25 * maxAmount;
     } else if (part >= 0.25 && part < 0.5) {
         currentAmount = (maxAmount - (part - 0.25) / 0.25 * maxAmount);
     } else if (part > 0.5) {
