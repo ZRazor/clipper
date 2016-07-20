@@ -36,6 +36,7 @@
                            error:nil];
 
     AVMutableCompositionTrack *videoTrack = [composition mutableTrackCompatibleWithTrack:compositionVideoTrack];
+    [videoTrack setPreferredTransform:transform];
 
     CMTime newDuration = CMTimeMakeWithSeconds(CMTimeGetSeconds(asset.duration), compositionVideoTrack.naturalTimeScale);
 
