@@ -28,10 +28,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveToCameraRollButton;
 @property (weak, nonatomic) IBOutlet UIButton *exportButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *exportViewRightConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *muteButton;
 @property (nonatomic) AVPlayerViewController *playerViewController;
 - (IBAction)backButtonClick:(id)sender;
 - (IBAction)exportButtonClick:(id)sender;
 - (IBAction)saveToCameraRollClick:(id)sender;
+- (IBAction)muteButtonClick:(id)sender;
 
 @end
 
@@ -41,11 +43,13 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
 @implementation MKRVideoProcessViewController {
     NSURL *assetUrl;
     NSURL *clippedVideoUrl;
+    BOOL isMuted;
     MKRTrackManager *trackManager;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isMuted = NO;
     trackManager = [[MKRTrackManager alloc] init];
     [self.exportView setHidden:YES];
     [self.view layoutIfNeeded];
@@ -90,7 +94,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
         AVMutableComposition *resultAsset = [track processVideo:avAsset];
         [MKRExportProcessor exportAudioFromMutableCompositionToDocuments:resultAsset onSuccess:^(NSURL *newAssetUrl) {
             Float64 volumeRatio = [MKRVolumeAnalyzer getAudioAverageVolumesRatioOfA:newAssetUrl andB:[NSURL fileURLWithPath:playbackPath]];
-            MKRAudioProcessor *audioProcessor = [[MKRAudioProcessor alloc] initWithOriginalPath:newAssetUrl.path andPlaybackPath:playbackPath andO2PRatio:volumeRatio];
+            MKRAudioProcessor *audioProcessor = [[MKRAudioProcessor alloc] initWithOriginalPath:newAssetUrl.path andPlaybackPath:playbackPath andO2PRatio:volumeRatio withoutSpeech:isMuted];
             
             [audioProcessor processTrack:track andPlaybackFilePath:playbackPath withOriginalFilePath:newAssetUrl.path completion:^(NSURL *audioURL) {
                 NSArray<AVCompositionTrack *> *audioTracks = [resultAsset tracksWithMediaType:AVMediaTypeAudio];
@@ -144,9 +148,11 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     [self.loadingView setHidden:NO];
     [self.playerViewController.player pause];
     [self hideExportView];
+    [self.muteButton setEnabled:NO];
     void (^finishBlock)() = ^void () {
         [self.collectionView setUserInteractionEnabled:YES];
         [self.loadingView setHidden:YES];
+        [self.muteButton setEnabled:YES];
     };
     [self handleVideo:assetUrl withTrackName:trackName onSuccess:^(NSURL *newVideoURL) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -243,6 +249,14 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(clippedVideoUrl.path)) {
         [self.saveToCameraRollButton setEnabled:NO];
         UISaveVideoAtPathToSavedPhotosAlbum(clippedVideoUrl.path,self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    }
+}
+
+- (IBAction)muteButtonClick:(id)sender {
+    isMuted = !isMuted;
+    [self.muteButton setBackgroundImage:[UIImage imageNamed:isMuted ? @"mute" : @"unmute"] forState:UIControlStateNormal];
+    if ([self.collectionView.indexPathsForSelectedItems count] > 0) {
+        [self.collectionView deselectItemAtIndexPath:self.collectionView.indexPathsForSelectedItems[0] animated:YES];
     }
 }
 

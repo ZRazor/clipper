@@ -312,11 +312,24 @@
                                             <constraint firstItem="a3I-Zf-gJG" firstAttribute="leading" secondItem="fA8-Zh-pmh" secondAttribute="trailing" constant="35" id="yne-G6-kEM"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4g-WH-eho">
+                                        <rect key="frame" x="81" y="23" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="bNq-Ld-g6f"/>
+                                            <constraint firstAttribute="width" constant="25" id="llz-w2-flY"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="unmute"/>
+                                        <connections>
+                                            <action selector="muteButtonClick:" destination="iAZ-yW-FBg" eventType="touchUpInside" id="4fT-gn-4jH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="aa1-en-Nec" firstAttribute="leading" secondItem="dNT-Hn-J3Y" secondAttribute="leading" constant="15" id="18v-FU-5gW"/>
                                     <constraint firstAttribute="height" constant="170" id="9lp-x3-REF"/>
+                                    <constraint firstItem="M4g-WH-eho" firstAttribute="leading" secondItem="aa1-en-Nec" secondAttribute="trailing" constant="16" id="Pd8-E8-Efj"/>
+                                    <constraint firstItem="532-mr-wDU" firstAttribute="top" secondItem="M4g-WH-eho" secondAttribute="bottom" constant="22" id="PnY-oU-Zjb"/>
                                     <constraint firstItem="532-mr-wDU" firstAttribute="leading" secondItem="dNT-Hn-J3Y" secondAttribute="leading" id="WTP-8D-b7e"/>
                                     <constraint firstAttribute="bottom" secondItem="532-mr-wDU" secondAttribute="bottom" id="YBQ-GK-BS4"/>
                                     <constraint firstAttribute="trailing" secondItem="532-mr-wDU" secondAttribute="trailing" id="gR3-hc-C1s"/>
@@ -379,6 +392,7 @@
                         <outlet property="exportViewRightConstraint" destination="k7b-b7-fOq" id="zml-bt-N2G"/>
                         <outlet property="loadingImageView" destination="YWX-ph-Ivs" id="xnk-fm-X9f"/>
                         <outlet property="loadingView" destination="sSj-Eh-VdY" id="VQt-se-DXH"/>
+                        <outlet property="muteButton" destination="M4g-WH-eho" id="ft0-Fh-i1g"/>
                         <outlet property="saveToCameraRollButton" destination="fA8-Zh-pmh" id="M0F-aX-glu"/>
                     </connections>
                 </viewController>
@@ -553,5 +567,6 @@
         <image name="settings" width="25" height="25"/>
         <image name="share" width="25" height="25"/>
         <image name="switch_camera" width="25" height="25"/>
+        <image name="unmute" width="25" height="25"/>
     </resources>
 </document>

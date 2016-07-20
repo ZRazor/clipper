@@ -39,12 +39,13 @@ OSStatus OSSTATUS = noErr;
 @property (nonatomic) Float64 volumeRatio;
 @property (nonatomic) NSString *originalPath;
 @property (nonatomic) NSString *playbackPath;
+@property (nonatomic) BOOL withoutSpeech;
 
 @end
 
 @implementation MKRAudioProcessor
 
-- (instancetype)initWithOriginalPath:(NSString *)originalPath andPlaybackPath:(NSString *)playbackPath andO2PRatio:(Float64)volumeRatio {
+- (instancetype)initWithOriginalPath:(NSString *)originalPath andPlaybackPath:(NSString *)playbackPath andO2PRatio:(Float64)volumeRatio withoutSpeech:(BOOL)withoutSpeech {
     self = [super init];
     if (!self) {
         return nil;
@@ -54,6 +55,7 @@ OSStatus OSSTATUS = noErr;
     [self setMaxSampleTime:0];
     [self setOriginalPath:originalPath];
     [self setPlaybackPath:playbackPath];
+    [self setWithoutSpeech:withoutSpeech];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
     [self initializeGraph];
@@ -120,8 +122,11 @@ OSStatus OSSTATUS = noErr;
     OSSTATUS = [mixer setInputMeteringMode:1]; OSSTATUS_CHECK
     OSSTATUS = [mixer setGlobalMaximumFramesPerSlice:4096]; OSSTATUS_CHECK
     OSSTATUS = [mixer setOutputStreamFormat:_stereoStreamFormat864]; OSSTATUS_CHECK
-    OSSTATUS = [mixer setParameter:kMultiChannelMixerParam_Volume inScope:kAudioUnitScope_Input ofElement:0 to:1.f]; OSSTATUS_CHECK
-    OSSTATUS = [mixer setParameter:kMultiChannelMixerParam_Volume inScope:kAudioUnitScope_Input ofElement:1 to:1.f * self.volumeRatio]; OSSTATUS_CHECK
+    
+    Float64 originalVolume = self.withoutSpeech ? 0 : 1.f;
+    Float64 playbackVolume = self.withoutSpeech ? 1.f : 1.f * self.volumeRatio;
+    OSSTATUS = [mixer setParameter:kMultiChannelMixerParam_Volume inScope:kAudioUnitScope_Input ofElement:0 to:originalVolume]; OSSTATUS_CHECK
+    OSSTATUS = [mixer setParameter:kMultiChannelMixerParam_Volume inScope:kAudioUnitScope_Input ofElement:1 to:playbackVolume]; OSSTATUS_CHECK
     
     MKRAUDistortion *distortion = (MKRAUDistortion *)[self.units objectForKey:@(kMKRUnit_Distortion)];
     OSSTATUS = [distortion setParameter:kDistortionParam_FinalMix inScope:kAudioUnitScope_Global to:0]; OSSTATUS_CHECK
