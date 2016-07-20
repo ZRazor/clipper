@@ -8,6 +8,8 @@
 
 #import "MKRSceneTrack05.h"
 #import "MKRAudioUnits.h"
+#import "MKRTemperatureAndTintFilterInstruction.h"
+#import "MKRColorGlitchInstruction.h"
 
 @implementation MKRSceneTrack05
 
@@ -56,6 +58,9 @@
     [self insertTimeRange:composition ofAsset:composition startAt:CMTimeAdd(start, d075) duration:d025 resultCursorPtr:resultCursorPtr];
     [self insertTimeRange:composition ofAsset:composition startAt:start duration:d1 resultCursorPtr:resultCursorPtr];
     [self makeCompositionBar:composition withBarAsset:asset4 andWithBar:self.bars[3] andWithResultCursorPtr:resultCursorPtr andWithMSPQ:MSPQ andWithBarRange:CMTimeRangeMake(kCMTimeZero, asset4.duration) usingAutoComplete:YES];
+    
+    [filtersManager addInstruction:[[MKRTemperatureAndTintFilterInstruction alloc] initWithStartTime:0 andEndTime:8000]];
+    [filtersManager addInstruction:[[MKRColorGlitchInstruction alloc] initWithStartTime:2000 andEndTime:4000]];
 }
 
 @end
