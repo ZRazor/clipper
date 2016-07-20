@@ -123,7 +123,20 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
                     AVAssetTrack *videoTrack = tracks[0];
                     transform = videoTrack.preferredTransform;
                 }
-                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset prefferedTransform:transform withFiltersManager:track.filtersManager onSuccess:success onFailure:failure];
+                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset prefferedTransform:transform withFiltersManager:track.filtersManager onSuccess:^(NSURL *assertURL) {
+                    NSError *err;
+                    [[NSFileManager defaultManager] removeItemAtURL:newAssetUrl error:&err];
+                    if (err) {
+                        NSLog(@"error = %@", err.localizedDescription);
+                        err = nil;
+                    }
+                    [[NSFileManager defaultManager] removeItemAtURL:audioURL error:&err];
+                    if (err) {
+                        NSLog(@"error = %@", err.localizedDescription);
+                        err = nil;
+                    }
+                    success(assertURL);
+                } onFailure:failure];
             } failure:^(NSError *error) {
                 NSLog(@"error = %@", error);
             }];
