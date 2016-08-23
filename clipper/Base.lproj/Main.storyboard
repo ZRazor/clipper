@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GM1-an-33d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GM1-an-33d">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -46,6 +46,42 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="scaleToFill" bounces="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQS-HK-8Yg">
+                                <rect key="frame" x="0.0" y="384" width="320" height="44"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qif-GM-Rc9">
+                                        <rect key="frame" x="0.0" y="0.0" width="384.5" height="44"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сабы сабчики сабули сабачули сабачуленьки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJY-e2-rh8">
+                                                <rect key="frame" x="8" y="11" width="368.5" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="tJY-e2-rh8" secondAttribute="trailing" constant="8" id="FyE-RA-MX6"/>
+                                            <constraint firstItem="tJY-e2-rh8" firstAttribute="top" secondItem="Qif-GM-Rc9" secondAttribute="top" constant="11" id="fSQ-xY-FaD"/>
+                                            <constraint firstAttribute="bottom" secondItem="tJY-e2-rh8" secondAttribute="bottom" constant="12" id="sFy-Jd-uVh"/>
+                                            <constraint firstItem="tJY-e2-rh8" firstAttribute="leading" secondItem="Qif-GM-Rc9" secondAttribute="leading" constant="8" id="xyn-HR-Rus"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Qif-GM-Rc9" firstAttribute="leading" secondItem="CQS-HK-8Yg" secondAttribute="leading" id="1ff-35-NxH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qif-GM-Rc9" secondAttribute="trailing" id="50L-Rz-cgX"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qif-GM-Rc9" secondAttribute="bottom" id="OCr-vz-OrS"/>
+                                    <constraint firstItem="Qif-GM-Rc9" firstAttribute="top" secondItem="CQS-HK-8Yg" secondAttribute="top" id="W7Q-gh-Xkd"/>
+                                    <constraint firstAttribute="height" constant="44" id="fL7-jB-I7B"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.zPosition">
+                                        <integer key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </scrollView>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAT-bU-eWO">
                                 <rect key="frame" x="0.0" y="428" width="320" height="140"/>
                                 <subviews>
@@ -114,6 +150,13 @@
                                             <action selector="recordButtonClick:" destination="GM1-an-33d" eventType="touchUpInside" id="6AE-CB-8er"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lF9-as-Syn">
+                                        <rect key="frame" x="15" y="87" width="25" height="25"/>
+                                        <state key="normal" backgroundImage="subtitles"/>
+                                        <connections>
+                                            <action selector="subsButtonClick:" destination="GM1-an-33d" eventType="touchUpInside" id="1op-Wm-0MJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -139,9 +182,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="CQS-HK-8Yg" firstAttribute="leading" secondItem="q8F-No-mOw" secondAttribute="leading" id="045-Nz-hEw"/>
                             <constraint firstItem="SLE-K2-8XT" firstAttribute="top" secondItem="fAT-bU-eWO" secondAttribute="bottom" id="0g4-ry-EY4"/>
                             <constraint firstAttribute="trailing" secondItem="vUR-zN-2F3" secondAttribute="trailing" id="4VM-LE-xxT"/>
+                            <constraint firstItem="fAT-bU-eWO" firstAttribute="top" secondItem="CQS-HK-8Yg" secondAttribute="bottom" id="AgG-gZ-Hoy"/>
                             <constraint firstItem="vUR-zN-2F3" firstAttribute="top" secondItem="q8F-No-mOw" secondAttribute="top" id="TbE-VS-zxQ"/>
+                            <constraint firstAttribute="trailing" secondItem="CQS-HK-8Yg" secondAttribute="trailing" id="Wln-MG-37J"/>
                             <constraint firstItem="fAT-bU-eWO" firstAttribute="leading" secondItem="q8F-No-mOw" secondAttribute="leading" id="e80-kD-ZTw"/>
                             <constraint firstItem="fAT-bU-eWO" firstAttribute="top" secondItem="vUR-zN-2F3" secondAttribute="bottom" id="iYe-w7-imd"/>
                             <constraint firstItem="fAT-bU-eWO" firstAttribute="top" secondItem="vUR-zN-2F3" secondAttribute="bottom" id="ivL-V7-9ub"/>
@@ -163,6 +209,9 @@
                         <outlet property="lockedCameraImageView" destination="Vrt-ug-2xU" id="cjl-YG-wRz"/>
                         <outlet property="recordButton" destination="SfG-cn-MRy" id="zHL-nD-tDP"/>
                         <outlet property="settingsButton" destination="WXU-lg-bCs" id="Dgw-J0-onG"/>
+                        <outlet property="subsButton" destination="lF9-as-Syn" id="iRt-TW-CJN"/>
+                        <outlet property="subsLabel" destination="tJY-e2-rh8" id="Mpf-3C-wQw"/>
+                        <outlet property="subsScrollView" destination="CQS-HK-8Yg" id="RxL-pI-OD2"/>
                         <outlet property="switchCameraButton" destination="g6B-K7-DOn" id="t6Z-fS-jdD"/>
                         <segue destination="iAZ-yW-FBg" kind="presentation" identifier="selectVideo" modalTransitionStyle="flipHorizontal" id="gLC-J0-lF9"/>
                     </connections>
@@ -433,7 +482,7 @@
                                         <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HAm-qI-qfn" id="ecj-Ih-0Cw">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCD-fl-OOT">
@@ -470,7 +519,7 @@
                                         <rect key="frame" x="0.0" y="143" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V0g-kp-UEJ" id="X2O-8Z-6cI">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZyU-Er-xh9">
@@ -566,6 +615,7 @@
         <image name="save" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <image name="share" width="25" height="25"/>
+        <image name="subtitles" width="25" height="25"/>
         <image name="switch_camera" width="25" height="25"/>
         <image name="unmute" width="25" height="25"/>
     </resources>

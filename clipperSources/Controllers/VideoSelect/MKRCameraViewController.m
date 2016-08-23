@@ -24,10 +24,14 @@
 @property (weak, nonatomic) IBOutlet MKRRecordButton *recordButton;
 @property (weak, nonatomic) IBOutlet UIButton *switchCameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+@property (weak, nonatomic) IBOutlet UILabel *subsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *subsButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *subsScrollView;
 @property (nonatomic) UIImagePickerController *picker;
 - (IBAction)libraryButtonClick:(id)sender;
 - (IBAction)switchCameraClick:(id)sender;
 - (IBAction)changeFlashClick:(id)sender;
+- (IBAction)subsButtonClick:(id)sender;
 - (IBAction)recordButtonClick:(MKRRecordButton *)sender;
 @end
 
@@ -117,6 +121,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
         [self.switchCameraButton setTransform:CGAffineTransformMakeRotation(angle)];
         [self.flashButton setTransform:CGAffineTransformMakeRotation(angle)];
         [self.settingsButton setTransform:CGAffineTransformMakeRotation(angle)];
+        [self.subsButton setTransform:CGAffineTransformMakeRotation(angle)];
     }];
 }
 
@@ -155,7 +160,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
         NSLog(@"No camera on simulator!");
         [self disableCamera];
     } else {
-        pickerCameraDevice = UIImagePickerControllerCameraDeviceRear;
+        pickerCameraDevice = UIImagePickerControllerCameraDeviceFront;
         pickerFlashMode = UIImagePickerControllerCameraFlashModeOff;
 
         [self setPicker:[[UIImagePickerController alloc] init]];
@@ -255,6 +260,24 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
     }
     [self updateFlashButtonState];
     [self.picker setCameraFlashMode:pickerFlashMode];
+}
+
+- (IBAction)subsButtonClick:(id)sender {
+    [self.subsScrollView setHidden:NO];
+    int randomSub = arc4random() % 2;
+    NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"assets/subs/sub%d", randomSub] ofType:@"txt"];
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    content = [content stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+    [self.subsLabel setText:content];
+    [self.subsScrollView setContentOffset:CGPointMake(-150, 0) animated:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
+}
+
+- (void)onTimer {
+    if (self.subsScrollView.contentOffset.x < self.subsScrollView.contentSize.width - self.view.frame.size.width) {
+        [self.subsScrollView setContentOffset:CGPointMake(self.subsScrollView.contentOffset.x + 50, 0) animated:YES];
+    }
+
 }
 
 - (IBAction)recordButtonClick:(MKRRecordButton *)sender {
