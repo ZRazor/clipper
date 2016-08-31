@@ -38,7 +38,6 @@
 - (id)init
 {
     self = [super init];
-    
     if (self)
     {
         _renderingQueue = dispatch_queue_create("com.apple.aplcustomvideocompositor.renderingqueue", DISPATCH_QUEUE_SERIAL);
@@ -46,6 +45,7 @@
         _previousBuffer = nil;
         _renderContextDidChange = NO;
         self.oglRenderer = [[MKRRenderer alloc] init];
+        self.isPortrait = NO;
 
 //        _filter = [CIFilter filterWithName:@"CIColorMonochrome"];
 //        [_filter setValue:@0.8f forKey:kCIInputIntensityKey];
@@ -153,6 +153,10 @@
         CGAffineTransform destinationTransform = {2/destinationSize.width, 0, 0, 2/destinationSize.height, -1, -1};
         CGAffineTransform normalizedRenderTransform = CGAffineTransformConcat(CGAffineTransformConcat(renderContextTransform, _renderContext.renderTransform), destinationTransform);
         _oglRenderer.renderTransform = normalizedRenderTransform;
+        if (self.isPortrait) {
+            //OMG!
+            _oglRenderer.renderTransform = CGAffineTransformConcat( _oglRenderer.renderTransform, CGAffineTransformMakeRotation(-M_PI_2));
+        }
 //
         _renderContextDidChange = NO;
     }

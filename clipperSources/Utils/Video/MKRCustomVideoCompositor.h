@@ -13,6 +13,7 @@
 @interface MKRCustomVideoCompositor : NSObject <AVVideoCompositing>
 
 @property (nonatomic) MKRFiltersManager *filtersManager;
+@property BOOL isPortrait;
 
 @end;
 

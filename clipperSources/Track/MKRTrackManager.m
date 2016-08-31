@@ -37,6 +37,10 @@ static NSString *const kMKRTracksPath = @"assets/tracks";
     return [[NSBundle mainBundle] pathForResource:trackName ofType:@"plist" inDirectory:kMKRTracksPath];
 }
 
+- (NSString *)pathForImage:(NSString *)trackName {
+    return [[NSBundle mainBundle] pathForResource:trackName ofType:@"png" inDirectory:kMKRTracksPath];
+}
+
 - (NSString *)pathForPlayback:(NSString *)trackName {
     return [[NSBundle mainBundle] pathForResource:trackName ofType:@"wav" inDirectory:kMKRTracksPath];
 }

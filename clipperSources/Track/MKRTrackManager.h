@@ -15,5 +15,7 @@
 
 - (NSString *)pathForMetaDesc:(NSString *)trackName;
 
+- (NSString *)pathForImage:(NSString *)trackName;
+
 - (NSString *)pathForPlayback:(NSString *)trackName;
 @end

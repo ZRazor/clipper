@@ -21,14 +21,10 @@
 }
 
 
-+ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset prefferedTransform:(CGAffineTransform)transform withFiltersManager:(MKRFiltersManager *)filtersManager onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure {
++ (void)exportMutableCompositionToDocuments:(AVMutableComposition *)asset isPortrait:(BOOL)videoIsPortrait withFiltersManager:(MKRFiltersManager *)filtersManager onSuccess:(void (^)(NSURL *assertUrl))success onFailure:(void (^)(NSError *error))failure {
 
     AVMutableCompositionTrack *compositionVideoTrack = [asset tracksWithMediaType:AVMediaTypeVideo].lastObject;
-    if (compositionVideoTrack) {
-        [compositionVideoTrack setPreferredTransform:transform];
-    }
-    
-    
+
     AVMutableComposition *composition = [AVMutableComposition composition];
     [composition insertTimeRange:CMTimeRangeMake(kCMTimeZero, [asset duration])
                          ofAsset:asset
@@ -36,7 +32,6 @@
                            error:nil];
 
     AVMutableCompositionTrack *videoTrack = [composition mutableTrackCompatibleWithTrack:compositionVideoTrack];
-    [videoTrack setPreferredTransform:transform];
 
     CMTime newDuration = CMTimeMakeWithSeconds(CMTimeGetSeconds(asset.duration), compositionVideoTrack.naturalTimeScale);
 
@@ -47,16 +42,21 @@
     AVMutableVideoCompositionInstruction *videoCompositionInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
     videoCompositionInstruction.layerInstructions = @[instruction];
     videoCompositionInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, newDuration);
-    
+
+
     AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
     videoComposition.frameDuration = CMTimeMakeWithSeconds(1.0 / compositionVideoTrack.nominalFrameRate, compositionVideoTrack.naturalTimeScale); //Считаем fps для рендера
     videoComposition.renderSize = compositionVideoTrack.naturalSize;
     videoComposition.instructions = @[videoCompositionInstruction];
     videoComposition.customVideoCompositorClass = [MKRCustomVideoCompositor class];
+    CGSize videoSize = videoTrack.naturalSize;
+    if (videoIsPortrait) {
+        videoSize = CGSizeMake(videoSize.height, videoSize.width);
+    }
+    videoComposition.renderSize = videoSize;
 
     AVAssetExportSession *exportSession = [AVAssetExportSession exportSessionWithAsset:composition
                                       presetName:AVAssetExportPresetHighestQuality];
-    
     
     NSURL *outputURL = [self generateFilePathWithFormat:@"mov"];
     
@@ -65,7 +65,8 @@
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
     exportSession.videoComposition = videoComposition;
     [(MKRCustomVideoCompositor *)exportSession.customVideoCompositor setFiltersManager:filtersManager];
-    
+    [(MKRCustomVideoCompositor *) exportSession.customVideoCompositor setIsPortrait:videoIsPortrait];
+
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
                 int exportStatus = exportSession.status;
                 switch (exportStatus) {
@@ -165,6 +166,15 @@
             }
         }
     }];
+}
+
++ (CGAffineTransform)prefferedTransformFromAsset:(AVAsset *)asset {
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    if ([tracks count]) {
+        AVAssetTrack *videoTrack = tracks[0];
+        return videoTrack.preferredTransform;
+    }
+    return CGAffineTransformMake(0,0,0,0,0,0);
 }
 
 + (BOOL)isVideoPortrait:(AVAsset *)asset {

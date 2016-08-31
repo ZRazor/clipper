@@ -85,7 +85,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         AVAsset *avAsset = [AVAsset assetWithURL:videoURL];
         NSString *playbackPath = [trackManager pathForPlayback:trackName];
-        
+        BOOL isPortrait = [MKRExportProcessor isVideoPortrait:avAsset];
         MKRScenesFillManager *scenesFillManager = [[MKRScenesFillManager alloc] initWithMetaDataPath:[trackManager pathForMetaDesc:trackName]];
         
         MKRTrack *track = [scenesFillManager tryToFillScenesWithAsset:avAsset];
@@ -117,13 +117,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
                     AVMutableCompositionTrack *playbackTrack = [resultAsset addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:trackId++];
                     [playbackTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, realAudio.duration) ofTrack:audioTrack atTime:kCMTimeZero error:nil];
                 }
-                CGAffineTransform transform = avAsset.preferredTransform;
-                NSArray *tracks = [avAsset tracksWithMediaType:AVMediaTypeVideo];
-                if ([tracks count]) {
-                    AVAssetTrack *videoTrack = tracks[0];
-                    transform = videoTrack.preferredTransform;
-                }
-                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset prefferedTransform:transform withFiltersManager:track.filtersManager onSuccess:^(NSURL *assertURL) {
+                [MKRExportProcessor exportMutableCompositionToDocuments:resultAsset isPortrait:isPortrait withFiltersManager:track.filtersManager onSuccess:^(NSURL *assertURL) {
                     NSError *err;
                     [[NSFileManager defaultManager] removeItemAtURL:newAssetUrl error:&err];
                     if (err) {
@@ -154,6 +148,7 @@ static NSString *const kMKRTrackCellIdentifier = @"trackCell";
     MKRTrackCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMKRTrackCellIdentifier forIndexPath:indexPath];
     NSString *trackName = [trackManager trackNameForRow:indexPath.row];
     [cell.trackTitleLabel setText:trackName];
+    [cell.albumImageView setImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:[trackManager pathForImage:trackName]] scale:[UIScreen mainScreen].scale]];
     return cell;
 }
 
