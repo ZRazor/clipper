@@ -8,6 +8,7 @@
 
 #import "MKRTrackCollectionViewCell.h"
 #import "UIColor+MKRColor.h"
+#import "CALayer+RuntimeAttribute.h"
 
 @implementation MKRTrackCollectionViewCell
 
@@ -15,15 +16,15 @@
     [super setHighlighted:highlighted];
     if (highlighted) {
         if (self.selected) {
-            [self.selectionView setAlpha:0.6];
+            [self.layer setBorderIBColor:[UIColor mkr_darkRedColor]];
         } else {
-            [self.selectionView setAlpha:0.6];
+            [self.layer setBorderIBColor:[UIColor mkr_darkRedColor]];
         }
     } else {
         if (self.selected) {
-            [self.selectionView setAlpha:0.4];
+            [self.layer setBorderIBColor:[UIColor mkr_redColor]];
         } else {
-            [self.selectionView setAlpha:0];
+            [self.layer setBorderIBColor:[UIColor clearColor]];
         }
     }
 }
@@ -31,9 +32,9 @@
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     if (selected) {
-        [self.selectionView setAlpha:0.4];
+        [self.layer setBorderIBColor:[UIColor mkr_redColor]];
     } else {
-        [self.selectionView setAlpha:0];
+        [self.layer setBorderIBColor:[UIColor clearColor]];
     }
 }
 

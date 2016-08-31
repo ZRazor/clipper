@@ -22,6 +22,11 @@
 
 - (void)clickRecording {
     self.isRecording = !self.isRecording;
+//    if (self.isRecording) {
+//        [self setBackgroundColor:[UIColor mkr_redColor]];
+//    } else {
+//        [self setBackgroundColor:[UIColor mkr_lightGrayColor]];
+//    }
 }
 
 - (void)setEnabled:(BOOL)enabled {

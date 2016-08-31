@@ -11,6 +11,5 @@
 @interface MKRTrackCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *trackTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
-@property (weak, nonatomic) IBOutlet UIView *selectionView;
 
 @end

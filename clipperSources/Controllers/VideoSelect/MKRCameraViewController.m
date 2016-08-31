@@ -63,6 +63,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.recordButton setHighlighted:NO];
     if (self.picker.cameraDevice != pickerCameraDevice) {
         NSLog(@"Updating cameraStates");
         pickerCameraDevice = self.picker.cameraDevice;
@@ -160,7 +161,7 @@ static NSString *const kMKRSelectVideoIdentifier = @"selectVideo";
         NSLog(@"No camera on simulator!");
         [self disableCamera];
     } else {
-        pickerCameraDevice = UIImagePickerControllerCameraDeviceFront;
+        pickerCameraDevice = UIImagePickerControllerCameraDeviceRear;
         pickerFlashMode = UIImagePickerControllerCameraFlashModeOff;
 
         [self setPicker:[[UIImagePickerController alloc] init]];

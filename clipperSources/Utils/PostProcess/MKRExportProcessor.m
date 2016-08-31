@@ -65,7 +65,7 @@
     exportSession.outputFileType = AVFileTypeQuickTimeMovie;
     exportSession.videoComposition = videoComposition;
     [(MKRCustomVideoCompositor *)exportSession.customVideoCompositor setFiltersManager:filtersManager];
-    [(MKRCustomVideoCompositor *) exportSession.customVideoCompositor setIsPortrait:videoIsPortrait];
+    [(MKRCustomVideoCompositor *)exportSession.customVideoCompositor setIsPortrait:videoIsPortrait];
 
     [exportSession exportAsynchronouslyWithCompletionHandler:^{
                 int exportStatus = exportSession.status;

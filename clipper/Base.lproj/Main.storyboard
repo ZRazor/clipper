@@ -258,10 +258,6 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="03.png" translatesAutoresizingMaskIntoConstraints="NO" id="QBd-Uq-vna">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                         </imageView>
-                                                        <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S6G-KE-ASL">
-                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                                                            <color key="backgroundColor" red="0.81960791349999995" green="0.16862745579999999" blue="0.1215686351" alpha="1" colorSpace="deviceRGB"/>
-                                                        </view>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tK8-UR-6A6">
                                                             <rect key="frame" x="0.0" y="60" width="90" height="30"/>
                                                             <subviews>
@@ -296,19 +292,18 @@
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
+                                                        <integer key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                        <integer key="value" value="1"/>
+                                                        <integer key="value" value="3"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderIBColor">
-                                                        <color key="value" red="0.62765546085858581" green="0.62765546085858581" blue="0.62765546085858581" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="albumImageView" destination="QBd-Uq-vna" id="9zO-Vg-764"/>
-                                                    <outlet property="selectionView" destination="S6G-KE-ASL" id="2oh-vH-v26"/>
                                                     <outlet property="trackTitleLabel" destination="MA0-gD-hpY" id="E9C-OC-BH3"/>
                                                 </connections>
                                             </collectionViewCell>
