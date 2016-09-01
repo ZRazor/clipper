@@ -11,6 +11,7 @@
 
 @implementation MKRBarManager{
     NSMutableDictionary *cache;
+    NSMutableDictionary<NSString *, MKRProcessedInterval *> *intervalsCache;
 }
 
 -(instancetype)initWithFeaturesIntervals:(NSMutableArray<MKRInterval *> *)features andMSPQ:(double)MSPQ andQPB:(NSInteger)QPB {
@@ -22,6 +23,8 @@
     [self setQPB:QPB];
     [self setFeatures:[features mutableCopy]];
     [self setRegisteredBars:[NSMutableArray<MKRBar *> new]];
+
+    intervalsCache = [NSMutableDictionary<NSString *, MKRProcessedInterval *> new];
     cache = [NSMutableDictionary new];
     
     return self;
@@ -35,23 +38,28 @@
     return result;
 }
 
--(MKRProcessedInterval *)calculateIntervalWithLeft:(double)left andRight:(double)right andAverageGain:(double)averageGain andBarErrorPtr:(double *)barErrorPtr {
-    double msLength = right - left;
-    double quantsLength = MAX(round(msLength / self.MSPQ), 1);
-    double warpedMsLength = quantsLength * self.MSPQ;
-    double speedFactor = msLength / warpedMsLength;
-    *barErrorPtr += fabs(warpedMsLength - msLength);
-    MKRProcessedInterval *interval = [[MKRProcessedInterval alloc] initWithStart:left
-                                                                          andEnd:right
-                                                                  andAverageGain:averageGain
-                                                                  andSpeedFactor:speedFactor
-                                                                 andQuantsLength:quantsLength
-                                                                     andMsLength:msLength
-                                                               andWarpedMsLength:warpedMsLength
-    ];
-    
-    return interval;
-    
+-(MKRProcessedInterval *)calculateIntervalWithLeft:(double)left
+                                          andRight:(double)right
+                                    andAverageGain:(double)averageGain
+                                    andBarErrorPtr:(double *)barErrorPtr {
+    NSString *key = [NSString stringWithFormat:@"%.20lf;%.20lf", left, right];
+    if (intervalsCache[key] == nil) {
+        double msLength = right - left;
+        double quantsLength = MAX(round(msLength / self.MSPQ), 1);
+        double warpedMsLength = quantsLength * self.MSPQ;
+        double speedFactor = msLength / warpedMsLength;
+        *barErrorPtr += fabs(warpedMsLength - msLength);
+        MKRProcessedInterval *interval = [[MKRProcessedInterval alloc] initWithStart:left
+                                                                              andEnd:right
+                                                                      andAverageGain:averageGain
+                                                                      andSpeedFactor:speedFactor
+                                                                     andQuantsLength:quantsLength
+                                                                         andMsLength:msLength
+                                                                   andWarpedMsLength:warpedMsLength];
+        [intervalsCache setObject:interval forKey:key];
+    }
+
+    return intervalsCache[key];
 }
 
 -(NSMutableArray<MKRBar *> *)getBarsImplWithQuantsLength:(NSNumber *)quantsLength {
@@ -66,18 +74,27 @@
             double leftMs = self.features[j].start;
             if (leftMs - mergeLeftMs > 0) {
                 //TODO calc gain for non-voiced intervals
-                MKRProcessedInterval *foundInterval = [self calculateIntervalWithLeft:mergeLeftMs andRight:leftMs andAverageGain:0 andBarErrorPtr:&totalBarError];
+                MKRProcessedInterval *foundInterval = [self calculateIntervalWithLeft:mergeLeftMs
+                                                                             andRight:leftMs
+                                                                       andAverageGain:0
+                                                                       andBarErrorPtr:&totalBarError];
                 if (currentIntervalQuants + foundInterval.quantsLength > realQuantsLength) {
                     break;
                 }
                 [currentIntervalSequence addObject:foundInterval];
                 currentIntervalQuants += foundInterval.quantsLength;
                 double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ;
-                MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence andQuantsLength:currentIntervalQuants andError:barError andTotalQuantsLength:realQuantsLength];
+                MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence
+                                               andQuantsLength:currentIntervalQuants
+                                                      andError:barError
+                                          andTotalQuantsLength:realQuantsLength];
                 [self.registeredBars addObject:bar];
                 [bars addObject:bar];
             }
-            MKRProcessedInterval *foundInterval = [self calculateIntervalWithLeft:self.features[j].start andRight:self.features[j].end andAverageGain:self.features[j].averageGain andBarErrorPtr:&totalBarError];
+            MKRProcessedInterval *foundInterval = [self calculateIntervalWithLeft:self.features[j].start
+                                                                         andRight:self.features[j].end
+                                                                   andAverageGain:self.features[j].averageGain
+                                                                   andBarErrorPtr:&totalBarError];
             if (currentIntervalQuants + foundInterval.quantsLength > realQuantsLength) {
                 break;
             }
@@ -85,7 +102,10 @@
             [currentIntervalSequence addObject:foundInterval];
             currentIntervalQuants += foundInterval.quantsLength;
             double barError = totalBarError + (realQuantsLength - currentIntervalQuants) * self.MSPQ;
-            MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence andQuantsLength:currentIntervalQuants andError:barError andTotalQuantsLength:realQuantsLength];
+            MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence
+                                           andQuantsLength:currentIntervalQuants
+                                                  andError:barError
+                                      andTotalQuantsLength:realQuantsLength];
             [self.registeredBars addObject:bar];
             [bars addObject:bar];
         }
@@ -106,7 +126,7 @@
 }
 
 -(MKRBar *)getBarWithQuantsLength:(NSNumber *)quantsLength withHighestGain:(BOOL)highestGain {
-    NSMutableArray<MKRBar *> *bars = [[self getBarsWithQuantsLength:quantsLength] mutableCopy];
+    NSMutableArray<MKRBar *> *bars = [self getBarsWithQuantsLength:quantsLength];
     if (highestGain) {
         [bars sortUsingComparator:^NSComparisonResult(MKRBar *obj1, MKRBar *obj2) {
             double gain1 = [obj1 getAverageGainForSequence];
@@ -127,7 +147,7 @@
     MKRBar *result = nil;
     for (NSInteger i = 0; i < [bars count]; i++) {
         if (preferNotUsed) {
-            if (!bars[i].used) {
+            if (![bars[i] isUsed]) {
                 result = bars[i];
                 break;
             }
@@ -142,7 +162,7 @@
     }
     
     if (result) {
-        [result setUsed:YES];
+        [result use];
     }
     
     if (highestGain) {

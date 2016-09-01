@@ -24,9 +24,10 @@ static NSInteger globalIdentifier = 0;
     if (!self) {
         return nil;
     }
+
+    [self setSequence:[sequence copy]];
     [self setUsed:NO];
     [self setQuantsLength:quantsLength];
-    [self setSequence:[sequence mutableCopy]];
     [self setError:error];
     [self setTotalQuantsLength:totalQuantsLength];
     [self setIdentifier:globalIdentifier++];
@@ -43,6 +44,25 @@ static NSInteger globalIdentifier = 0;
         gainSum += interval.averageGain;
     }
     return gainSum / [self.sequence count];
+}
+
+- (BOOL)isUsed {
+    if (self.used) {
+        return YES;
+    }
+    for (MKRProcessedInterval *interval in self.sequence) {
+        if (interval.useCount > 0) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (void)use {
+    self.used = YES;
+    for (MKRProcessedInterval *interval in self.sequence) {
+        [interval use];
+    }
 }
 
 @end

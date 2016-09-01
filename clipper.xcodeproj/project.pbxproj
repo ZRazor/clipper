@@ -61,6 +61,8 @@
 		D77B836D1D3C56BE00FFE311 /* MKRVolumeAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B836C1D3C56BE00FFE311 /* MKRVolumeAnalyzer.m */; };
 		D77B83771D3CA90800FFE311 /* MKRSceneG.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B83761D3CA90800FFE311 /* MKRSceneG.m */; };
 		D77B837A1D3CABB500FFE311 /* MKRSceneA2.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B83791D3CABB500FFE311 /* MKRSceneA2.m */; };
+		D7B4E5571D76CD5000CE2D08 /* MKRSceneTrack06.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B4E5561D76CD5000CE2D08 /* MKRSceneTrack06.m */; };
+		D7B4E55A1D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B4E5591D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.m */; };
 		D7CEF4B81D3F5E79001ECB09 /* MKRCustomVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4B11D3F5E79001ECB09 /* MKRCustomVideoCompositionInstruction.m */; };
 		D7CEF4B91D3F5E79001ECB09 /* MKRCustomVideoCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4B31D3F5E79001ECB09 /* MKRCustomVideoCompositor.m */; };
 		D7CEF4BA1D3F5E79001ECB09 /* MKROpenGLRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4B51D3F5E79001ECB09 /* MKROpenGLRenderer.m */; };
@@ -180,6 +182,10 @@
 		D77B83761D3CA90800FFE311 /* MKRSceneG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneG.m; sourceTree = "<group>"; };
 		D77B83781D3CABB500FFE311 /* MKRSceneA2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneA2.h; sourceTree = "<group>"; };
 		D77B83791D3CABB500FFE311 /* MKRSceneA2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneA2.m; sourceTree = "<group>"; };
+		D7B4E5551D76CD5000CE2D08 /* MKRSceneTrack06.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneTrack06.h; sourceTree = "<group>"; };
+		D7B4E5561D76CD5000CE2D08 /* MKRSceneTrack06.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneTrack06.m; sourceTree = "<group>"; };
+		D7B4E5581D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRColorFadeFilterInstruction.h; sourceTree = "<group>"; };
+		D7B4E5591D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRColorFadeFilterInstruction.m; sourceTree = "<group>"; };
 		D7CEF4B01D3F5E79001ECB09 /* MKRCustomVideoCompositionInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCustomVideoCompositionInstruction.h; sourceTree = "<group>"; };
 		D7CEF4B11D3F5E79001ECB09 /* MKRCustomVideoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCustomVideoCompositionInstruction.m; sourceTree = "<group>"; };
 		D7CEF4B21D3F5E79001ECB09 /* MKRCustomVideoCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCustomVideoCompositor.h; sourceTree = "<group>"; };
@@ -332,6 +338,8 @@
 				D75894B71D3F8B270088135D /* MKRColorGlitchInstruction.m */,
 				D75894B91D3F8EA00088135D /* MKRTemperatureAndTintFilterInstruction.h */,
 				D75894BA1D3F8EA00088135D /* MKRTemperatureAndTintFilterInstruction.m */,
+				D7B4E5581D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.h */,
+				D7B4E5591D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.m */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -471,6 +479,8 @@
 				D715B8011D3E0D5100CE3112 /* MKRSceneTrack04.m */,
 				D7CEF4BC1D3F724D001ECB09 /* MKRSceneTrack05.h */,
 				D7CEF4BD1D3F724D001ECB09 /* MKRSceneTrack05.m */,
+				D7B4E5551D76CD5000CE2D08 /* MKRSceneTrack06.h */,
+				D7B4E5561D76CD5000CE2D08 /* MKRSceneTrack06.m */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -628,6 +638,7 @@
 				D763B3DE1D34C95E00D9669E /* MKRScene.m in Sources */,
 				D761DA521D3B61E40061769A /* MKRAUAudioFilePlayer.m in Sources */,
 				D7E5F3D21D2F49D80095F5D6 /* MKRInterval.m in Sources */,
+				D7B4E55A1D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.m in Sources */,
 				D7E5F3CF1D2F49110095F5D6 /* MKRBarManager.m in Sources */,
 				D763B3E01D34C95E00D9669E /* MKRSceneA1.m in Sources */,
 				D761DA551D3B66410061769A /* MKRAUMixer.m in Sources */,
@@ -646,6 +657,7 @@
 				58AAA1A6E881D667831EDC3B /* MKRScenesFillManager.m in Sources */,
 				D715B8021D3E0D5100CE3112 /* MKRSceneTrack04.m in Sources */,
 				D7CEF4B91D3F5E79001ECB09 /* MKRCustomVideoCompositor.m in Sources */,
+				D7B4E5571D76CD5000CE2D08 /* MKRSceneTrack06.m in Sources */,
 				D700F64D1D3CC52D0074194D /* MKRAUDistortion.m in Sources */,
 				58AAAF6F8D20D8CE4EA64A0E /* UIColor+MKRColor.m in Sources */,
 				58AAA1B3AEC3D57956E67C63 /* MKRStructureUnit.m in Sources */,

@@ -26,12 +26,17 @@
     [self setStart:start];
     [self setEnd:end];
     [self setAverageGain:averageGain];
+    [self setUseCount:0];
     
     return self;
 }
 
 - (NSInteger)length {
     return self.end - self.start;
+}
+
+- (void)use {
+    self.useCount++;
 }
 
 @end
