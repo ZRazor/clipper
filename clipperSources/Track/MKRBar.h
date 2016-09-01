@@ -22,5 +22,5 @@
 
 - (double)getAverageGainForSequence;
 - (void)use;
-- (BOOL)isUsed;
+- (NSInteger)getUsageCount;
 @end

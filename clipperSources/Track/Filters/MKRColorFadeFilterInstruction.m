@@ -41,6 +41,11 @@
     Float64 part = currentDuration / totalDuration;
     CIVector *r, *g, *b, *bias;
     Float64 rFactor = part, gFactor = part, bFactor = part;
+    if (part > 0.8) {
+        rFactor = 1;
+        gFactor = 1;
+        bFactor = 1;
+    }
     if (!fadeIn) {
         rFactor = 1 - rFactor;
         gFactor = 1 - gFactor;

@@ -88,20 +88,38 @@
         }
         AVMutableComposition *barComposition = [AVMutableComposition composition];
         CMTime barCursor = kCMTimeZero;
+        CMTime totalBarLength = CMTimeMakeWithSeconds(bar.totalQuantsLength * _MSPQ / 1000.0, 6000000);
+        CMTime maxAvailableBarLength = CMTimeAdd(CMTimeMakeWithSeconds(2 * _MSPQ / 1000.0, 6000000), totalBarLength);
         NSLog(@"bar.identifier = %ld", bar.identifier);
+        NSLog(@"bar tql = %ld ql = %ld", bar.totalQuantsLength, bar.quantsLength);
         for (NSInteger j = 0; j < [bar.sequence count]; j++) {
+            if (CMTimeCompare(barCursor, totalBarLength) >= 0 && CMTimeCompare(barCursor, kCMTimeZero) == 1) {
+                break;
+            }
             MKRProcessedInterval *interval = bar.sequence[j];
-            NSLog(@"%f [%ld, %ld] q=%ld wms=%f", CMTimeGetSeconds(barCursor), interval.start, interval.end, interval.quantsLength, interval.warpedMsLength / 1000.0);
+            CMTime intervalLen = CMTimeMakeWithSeconds((interval.end - interval.start) / 1000.0, 6000000.0);
+//            NSLog(@"%f [%ld, %ld] q=%ld wms=%f", CMTimeGetSeconds(barCursor), interval.start, interval.end, interval.quantsLength, interval.warpedMsLength / 1000.0);
             CMTime intervalStart = CMTimeMakeWithSeconds(interval.start / 1000.0, 6000000.0);
             CMTime intervalEnd = CMTimeMakeWithSeconds(interval.end / 1000.0, 6000000.0);
+            CMTime potentialBarLength = CMTimeAdd(barCursor, intervalLen);
+            CMTime neededDuration = CMTimeMakeWithSeconds(interval.warpedMsLength / 1000.0, 6000000);
+            NSLog(@"%f [%f, %f] q=%ld wms=%f", CMTimeGetSeconds(barCursor), CMTimeGetSeconds(intervalStart), CMTimeGetSeconds(intervalEnd), interval.quantsLength, CMTimeGetSeconds(neededDuration));
+            if (CMTimeCompare(potentialBarLength, maxAvailableBarLength) == 1) {
+                NSLog(@"interval is really longer than need");
+                intervalEnd = CMTimeSubtract(intervalEnd, CMTimeSubtract(potentialBarLength, maxAvailableBarLength));
+                neededDuration = CMTimeSubtract(totalBarLength, barCursor);
+                NSLog(@"FIXED %f [%f, %f] q=%ld wms=%f", CMTimeGetSeconds(barCursor), CMTimeGetSeconds(intervalStart), CMTimeGetSeconds(intervalEnd), interval.quantsLength, CMTimeGetSeconds(neededDuration));
+            }
             CMTimeRange range = CMTimeRangeMake(intervalStart, CMTimeSubtract(intervalEnd, intervalStart));
             [barComposition insertTimeRange:range ofAsset:original atTime:barCursor error:nil];
 
             CMTimeRange rangeInBar = CMTimeRangeMake(barCursor, CMTimeSubtract(intervalEnd, intervalStart));
-            CMTime neededDuration = CMTimeMakeWithSeconds(interval.warpedMsLength / 1000.0, 6000000);
             [barComposition scaleTimeRange:rangeInBar toDuration:neededDuration];
             barCursor = CMTimeAdd(barCursor, neededDuration);
         }
+        NSLog(@"scale: from %f to %f", CMTimeGetSeconds(barCursor), CMTimeGetSeconds(totalBarLength));
+        CMTimeRange totalRange = CMTimeRangeMake(kCMTimeZero, barCursor);
+        [barComposition scaleTimeRange:totalRange toDuration:totalBarLength];
         [barsAssets setObject:barComposition forKey:@(bar.identifier)];
     }
     

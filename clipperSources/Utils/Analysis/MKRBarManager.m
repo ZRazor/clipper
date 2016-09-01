@@ -96,6 +96,16 @@
                                                                    andAverageGain:self.features[j].averageGain
                                                                    andBarErrorPtr:&totalBarError];
             if (currentIntervalQuants + foundInterval.quantsLength > realQuantsLength) {
+                if (currentIntervalQuants == 0) {
+                    [currentIntervalSequence addObject:foundInterval];
+                    double barError = (foundInterval.quantsLength - realQuantsLength) * self.MSPQ;
+                    MKRBar *bar = [[MKRBar alloc] initWithSequence:currentIntervalSequence
+                                                   andQuantsLength:foundInterval.quantsLength
+                                                          andError:barError
+                                              andTotalQuantsLength:realQuantsLength];
+                    [self.registeredBars addObject:bar];
+                    [bars addObject:bar];
+                }
                 break;
             }
             mergeLeftMs = foundInterval.end;
@@ -127,6 +137,7 @@
 
 -(MKRBar *)getBarWithQuantsLength:(NSNumber *)quantsLength withHighestGain:(BOOL)highestGain {
     NSMutableArray<MKRBar *> *bars = [self getBarsWithQuantsLength:quantsLength];
+    MKRBar *result = nil;
     if (highestGain) {
         [bars sortUsingComparator:^NSComparisonResult(MKRBar *obj1, MKRBar *obj2) {
             double gain1 = [obj1 getAverageGainForSequence];
@@ -140,35 +151,36 @@
             }
             return NSOrderedSame;
         }];
-    }
-    
-    BOOL preferNotUsed = !highestGain;
-    
-    MKRBar *result = nil;
-    for (NSInteger i = 0; i < [bars count]; i++) {
-        if (preferNotUsed) {
-            if (![bars[i] isUsed]) {
-                result = bars[i];
-                break;
+    } else {
+        [bars sortUsingComparator:^NSComparisonResult(MKRBar *obj1, MKRBar *obj2) {
+            if ([obj1 getUsageCount] == [obj2 getUsageCount]) {
+                if (obj1.error > obj2.error) {
+                    return NSOrderedDescending;
+                } else if (obj1.error < obj2.error) {
+                    return NSOrderedAscending;
+                } else {
+                    return NSOrderedSame;
+                }
             }
-        } else {
-            result = bars[i];
-            break;
-        }
+
+            if ([obj1 getUsageCount] > [obj2 getUsageCount]) {
+                return NSOrderedDescending;
+            }
+            if ([obj1 getUsageCount] < [obj2 getUsageCount]) {
+                return NSOrderedAscending;
+            }
+            return NSOrderedSame;
+        }];
     }
-    
-    if (!result) {
-        result = [bars count] > 0 ? bars[0] : nil;
+
+    if ([bars count] > 0) {
+        result = bars[0];
     }
     
     if (result) {
         [result use];
     }
-    
-    if (highestGain) {
-        NSLog(@"Selected Bar with gain %lf", [result getAverageGainForSequence]);
-    }
-    
+
     return result;
 }
 

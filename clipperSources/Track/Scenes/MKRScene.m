@@ -46,30 +46,30 @@ static AVAsset *blank;
 }
 
 - (void)makeCompositionBar:(AVMutableComposition *)composition withBarAsset:(AVMutableComposition *)barAsset andWithBar:(MKRBar *)bar andWithResultCursorPtr:(CMTime *)resultCursorPtr andWithMSPQ:(double)MSPQ andWithBarRange:(CMTimeRange)barTimeRange usingAutoComplete:(BOOL)autoComplete {
-    
+    NSLog(@"Make composition bar ");
     if (barAsset == nil) {
         @throw([NSException exceptionWithName:@"Bar asset not found" reason:@"Bar asset not found" userInfo:nil]);
     }
     CMTime startAt = *resultCursorPtr;
     [self insertTimeRange:composition ofAsset:barAsset startAt:barTimeRange.start duration:barTimeRange.duration resultCursorPtr:resultCursorPtr];
     
-    if (bar.totalQuantsLength > bar.quantsLength && autoComplete) {
-        NSInteger quantsRemainder = bar.totalQuantsLength - bar.quantsLength;
-        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 6000000);
-        [self insertTimeRange:composition ofAsset:composition startAt:startAt duration:remainder resultCursorPtr:resultCursorPtr];
+//    if (bar.totalQuantsLength > bar.quantsLength && autoComplete) {
+//        NSInteger quantsRemainder = bar.totalQuantsLength - bar.quantsLength;
+//        CMTime remainder = CMTimeMakeWithSeconds(quantsRemainder * MSPQ / 1000.0, 6000000);
+//        [self insertTimeRange:composition ofAsset:composition startAt:startAt duration:remainder resultCursorPtr:resultCursorPtr];
 //        [self insertEmptyInComposition:composition startAt:*resultCursorPtr duration:remainder];
 //        [composition insertEmptyTimeRange:CMTimeRangeMake(*resultCursorPtr, remainder)];
 //        *resultCursorPtr = CMTimeAdd(*resultCursorPtr, remainder);
-        NSLog(@"Shift cursor to %f", CMTimeGetSeconds(*resultCursorPtr));
-    }
+//        NSLog(@"Shift cursor to %f", CMTimeGetSeconds(*resultCursorPtr));
+//    }
 }
 
 - (void)insertTimeRange:(AVMutableComposition *)composition ofAsset:(AVAsset *)asset startAt:(CMTime)startAt duration:(CMTime)duration resultCursorPtr:(CMTime *)resultCursorPtr {
     NSLog(@"Insert: [%f, %f] of [%f] at [%f]", CMTimeGetSeconds(startAt), CMTimeGetSeconds(duration), CMTimeGetSeconds(asset.duration), CMTimeGetSeconds(*resultCursorPtr));
-    CMTime realDuration = CMTimeSubtract(CMTimeMinimum(duration, asset.duration), CMTimeMakeWithSeconds(1 / 1000.0, 6000000));
+    CMTime realDuration = CMTimeMinimum(duration, asset.duration);
     NSLog(@"RD: %f D: %f", CMTimeGetSeconds(realDuration), CMTimeGetSeconds(duration));
     CMTimeRange barTimeRange = CMTimeRangeMake(startAt, realDuration);
-    NSLog(@"BarTimeRange = [%f, %f]", CMTimeGetSeconds(barTimeRange.start), CMTimeGetSeconds(barTimeRange.duration));
+    NSLog(@"Insert [%lf, %lf] of asset with duration %lf at %lf", CMTimeGetSeconds(barTimeRange.start), CMTimeGetSeconds(barTimeRange.duration), CMTimeGetSeconds(asset.duration), CMTimeGetSeconds(*resultCursorPtr));
     
     NSError *insertionError;
     [composition insertTimeRange:barTimeRange ofAsset:asset atTime:*resultCursorPtr error:&insertionError];

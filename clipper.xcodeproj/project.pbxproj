@@ -63,6 +63,7 @@
 		D77B837A1D3CABB500FFE311 /* MKRSceneA2.m in Sources */ = {isa = PBXBuildFile; fileRef = D77B83791D3CABB500FFE311 /* MKRSceneA2.m */; };
 		D7B4E5571D76CD5000CE2D08 /* MKRSceneTrack06.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B4E5561D76CD5000CE2D08 /* MKRSceneTrack06.m */; };
 		D7B4E55A1D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B4E5591D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.m */; };
+		D7B4E55D1D77FD1500CE2D08 /* MKRSceneTrack07.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B4E55C1D77FD1500CE2D08 /* MKRSceneTrack07.m */; };
 		D7CEF4B81D3F5E79001ECB09 /* MKRCustomVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4B11D3F5E79001ECB09 /* MKRCustomVideoCompositionInstruction.m */; };
 		D7CEF4B91D3F5E79001ECB09 /* MKRCustomVideoCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4B31D3F5E79001ECB09 /* MKRCustomVideoCompositor.m */; };
 		D7CEF4BA1D3F5E79001ECB09 /* MKROpenGLRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CEF4B51D3F5E79001ECB09 /* MKROpenGLRenderer.m */; };
@@ -186,6 +187,8 @@
 		D7B4E5561D76CD5000CE2D08 /* MKRSceneTrack06.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneTrack06.m; sourceTree = "<group>"; };
 		D7B4E5581D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRColorFadeFilterInstruction.h; sourceTree = "<group>"; };
 		D7B4E5591D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRColorFadeFilterInstruction.m; sourceTree = "<group>"; };
+		D7B4E55B1D77FD1500CE2D08 /* MKRSceneTrack07.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneTrack07.h; sourceTree = "<group>"; };
+		D7B4E55C1D77FD1500CE2D08 /* MKRSceneTrack07.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneTrack07.m; sourceTree = "<group>"; };
 		D7CEF4B01D3F5E79001ECB09 /* MKRCustomVideoCompositionInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCustomVideoCompositionInstruction.h; sourceTree = "<group>"; };
 		D7CEF4B11D3F5E79001ECB09 /* MKRCustomVideoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRCustomVideoCompositionInstruction.m; sourceTree = "<group>"; };
 		D7CEF4B21D3F5E79001ECB09 /* MKRCustomVideoCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRCustomVideoCompositor.h; sourceTree = "<group>"; };
@@ -481,6 +484,8 @@
 				D7CEF4BD1D3F724D001ECB09 /* MKRSceneTrack05.m */,
 				D7B4E5551D76CD5000CE2D08 /* MKRSceneTrack06.h */,
 				D7B4E5561D76CD5000CE2D08 /* MKRSceneTrack06.m */,
+				D7B4E55B1D77FD1500CE2D08 /* MKRSceneTrack07.h */,
+				D7B4E55C1D77FD1500CE2D08 /* MKRSceneTrack07.m */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -568,7 +573,7 @@
 				TargetAttributes = {
 					3AB3B9F11D2CD5CE0062D19D = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 44FPHB4323;
+						DevelopmentTeam = Z2PHG96DRQ;
 					};
 				};
 			};
@@ -621,6 +626,7 @@
 				D7CEF4BA1D3F5E79001ECB09 /* MKROpenGLRenderer.m in Sources */,
 				D761DA581D3B66B30061769A /* MKRAUGenericOutput.m in Sources */,
 				D7E5F3C81D2F48A90095F5D6 /* MKRBar.m in Sources */,
+				D7B4E55D1D77FD1500CE2D08 /* MKRSceneTrack07.m in Sources */,
 				D75894B81D3F8B270088135D /* MKRColorGlitchInstruction.m in Sources */,
 				D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */,
 				D75894BB1D3F8EA00088135D /* MKRTemperatureAndTintFilterInstruction.m in Sources */,

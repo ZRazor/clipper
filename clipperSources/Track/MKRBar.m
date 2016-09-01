@@ -46,23 +46,20 @@ static NSInteger globalIdentifier = 0;
     return gainSum / [self.sequence count];
 }
 
-- (BOOL)isUsed {
-    if (self.used) {
-        return YES;
-    }
-    for (MKRProcessedInterval *interval in self.sequence) {
-        if (interval.useCount > 0) {
-            return YES;
-        }
-    }
-    return NO;
-}
-
 - (void)use {
     self.used = YES;
     for (MKRProcessedInterval *interval in self.sequence) {
         [interval use];
     }
+}
+
+- (NSInteger)getUsageCount {
+    NSInteger sum = 0;
+    for (MKRProcessedInterval *interval in self.sequence) {
+        sum += interval.useCount;
+    }
+
+    return sum;
 }
 
 @end

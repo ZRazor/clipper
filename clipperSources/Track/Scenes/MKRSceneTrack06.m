@@ -45,7 +45,7 @@
     [filtersManager addInstruction:[[MKRColorGlitchInstruction alloc] initWithStartTime:0 andEndTime:1263]];
     [filtersManager addInstruction:[[MKRColorGlitchInstruction alloc] initWithStartTime:2526 andEndTime:1263 + 2526]];
     [filtersManager addInstruction:[[MKRColorPosterizeFilterInstruction alloc] initWithStartTime:0 andEndTime:1263]];
-    [filtersManager addInstruction:[[MKRColorFadeFilterInstruction alloc] initWithStartTime:11000 andEndTime:15157 andFadeIn:NO]];
+    [filtersManager addInstruction:[[MKRColorFadeFilterInstruction alloc] initWithStartTime:11000 andEndTime:15400 andFadeIn:NO]];
     [filtersManager addInstruction:[[MKRColorFadeFilterInstruction alloc] initWithStartTime:0 andEndTime:500 andFadeIn:YES]];
 }
 
