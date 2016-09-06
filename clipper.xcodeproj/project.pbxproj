@@ -40,6 +40,10 @@
 		D715B8021D3E0D5100CE3112 /* MKRSceneTrack04.m in Sources */ = {isa = PBXBuildFile; fileRef = D715B8011D3E0D5100CE3112 /* MKRSceneTrack04.m */; };
 		D71CA5EA1D3752850055EB85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D71CA5E91D3752850055EB85 /* AVFoundation.framework */; };
 		D71CA5F01D37713B0055EB85 /* MKRAudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */; };
+		D74735061D791DAB00AD6C45 /* MKRSceneTrack08.m in Sources */ = {isa = PBXBuildFile; fileRef = D74735051D791DAB00AD6C45 /* MKRSceneTrack08.m */; };
+		D74735091D793AA200AD6C45 /* MKREdgeWorkFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D74735081D793AA200AD6C45 /* MKREdgeWorkFilterInstruction.m */; };
+		D747350C1D793C5C00AD6C45 /* MKRComicEffectFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D747350B1D793C5C00AD6C45 /* MKRComicEffectFilterInstruction.m */; };
+		D747350F1D79498500AD6C45 /* MKREdgesFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D747350E1D79498500AD6C45 /* MKREdgesFilterInstruction.m */; };
 		D75894B81D3F8B270088135D /* MKRColorGlitchInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D75894B71D3F8B270088135D /* MKRColorGlitchInstruction.m */; };
 		D75894BB1D3F8EA00088135D /* MKRTemperatureAndTintFilterInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = D75894BA1D3F8EA00088135D /* MKRTemperatureAndTintFilterInstruction.m */; };
 		D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = D761DA4E1D3B61A50061769A /* MKRAudioUnit.m */; };
@@ -140,6 +144,14 @@
 		D71CA5E91D3752850055EB85 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D71CA5EE1D37713B0055EB85 /* MKRAudioProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRAudioProcessor.h; sourceTree = "<group>"; };
 		D71CA5EF1D37713B0055EB85 /* MKRAudioProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRAudioProcessor.m; sourceTree = "<group>"; };
+		D74735041D791DAB00AD6C45 /* MKRSceneTrack08.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRSceneTrack08.h; sourceTree = "<group>"; };
+		D74735051D791DAB00AD6C45 /* MKRSceneTrack08.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRSceneTrack08.m; sourceTree = "<group>"; };
+		D74735071D793AA200AD6C45 /* MKREdgeWorkFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKREdgeWorkFilterInstruction.h; sourceTree = "<group>"; };
+		D74735081D793AA200AD6C45 /* MKREdgeWorkFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKREdgeWorkFilterInstruction.m; sourceTree = "<group>"; };
+		D747350A1D793C5C00AD6C45 /* MKRComicEffectFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRComicEffectFilterInstruction.h; sourceTree = "<group>"; };
+		D747350B1D793C5C00AD6C45 /* MKRComicEffectFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRComicEffectFilterInstruction.m; sourceTree = "<group>"; };
+		D747350D1D79498500AD6C45 /* MKREdgesFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKREdgesFilterInstruction.h; sourceTree = "<group>"; };
+		D747350E1D79498500AD6C45 /* MKREdgesFilterInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKREdgesFilterInstruction.m; sourceTree = "<group>"; };
 		D75894B61D3F8B270088135D /* MKRColorGlitchInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRColorGlitchInstruction.h; sourceTree = "<group>"; };
 		D75894B71D3F8B270088135D /* MKRColorGlitchInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRColorGlitchInstruction.m; sourceTree = "<group>"; };
 		D75894B91D3F8EA00088135D /* MKRTemperatureAndTintFilterInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRTemperatureAndTintFilterInstruction.h; sourceTree = "<group>"; };
@@ -343,6 +355,12 @@
 				D75894BA1D3F8EA00088135D /* MKRTemperatureAndTintFilterInstruction.m */,
 				D7B4E5581D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.h */,
 				D7B4E5591D77EC3900CE2D08 /* MKRColorFadeFilterInstruction.m */,
+				D74735071D793AA200AD6C45 /* MKREdgeWorkFilterInstruction.h */,
+				D74735081D793AA200AD6C45 /* MKREdgeWorkFilterInstruction.m */,
+				D747350A1D793C5C00AD6C45 /* MKRComicEffectFilterInstruction.h */,
+				D747350B1D793C5C00AD6C45 /* MKRComicEffectFilterInstruction.m */,
+				D747350D1D79498500AD6C45 /* MKREdgesFilterInstruction.h */,
+				D747350E1D79498500AD6C45 /* MKREdgesFilterInstruction.m */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -486,6 +504,8 @@
 				D7B4E5561D76CD5000CE2D08 /* MKRSceneTrack06.m */,
 				D7B4E55B1D77FD1500CE2D08 /* MKRSceneTrack07.h */,
 				D7B4E55C1D77FD1500CE2D08 /* MKRSceneTrack07.m */,
+				D74735041D791DAB00AD6C45 /* MKRSceneTrack08.h */,
+				D74735051D791DAB00AD6C45 /* MKRSceneTrack08.m */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -614,9 +634,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D747350F1D79498500AD6C45 /* MKREdgesFilterInstruction.m in Sources */,
 				D7E5F3C51D2F489C0095F5D6 /* MKRTrack.m in Sources */,
 				D7CEF4B81D3F5E79001ECB09 /* MKRCustomVideoCompositionInstruction.m in Sources */,
+				D747350C1D793C5C00AD6C45 /* MKRComicEffectFilterInstruction.m in Sources */,
 				D77B83771D3CA90800FFE311 /* MKRSceneG.m in Sources */,
+				D74735091D793AA200AD6C45 /* MKREdgeWorkFilterInstruction.m in Sources */,
 				D763B3E21D34C95E00D9669E /* MKRSceneC.m in Sources */,
 				D761DA5B1D3B67190061769A /* MKRAUTimePitch.m in Sources */,
 				D7CEF4BB1D3F5E79001ECB09 /* MKRRenderer.m in Sources */,
@@ -631,6 +654,7 @@
 				D761DA4F1D3B61A50061769A /* MKRAudioUnit.m in Sources */,
 				D75894BB1D3F8EA00088135D /* MKRTemperatureAndTintFilterInstruction.m in Sources */,
 				D77B837A1D3CABB500FFE311 /* MKRSceneA2.m in Sources */,
+				D74735061D791DAB00AD6C45 /* MKRSceneTrack08.m in Sources */,
 				D763B3E51D34C95E00D9669E /* MKRSceneF.m in Sources */,
 				D7CEF4C41D3F85E5001ECB09 /* MKRColorPosterizeFilterInstruction.m in Sources */,
 				D76621751D2F9DE200E0A402 /* MKRProcessedInterval.m in Sources */,

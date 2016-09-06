@@ -31,25 +31,25 @@
     
     if (part < 0.25) {
         rFactor = 1;
-        gFactor = 0.5;
-        bFactor = 0.5;
+        gFactor = 0.7;
+        bFactor = 0.7;
     } else if (part >= 0.25 && part < 0.5) {
-        rFactor = 0.5;
+        rFactor = 0.7;
         gFactor = 1;
-        bFactor = 0.5;
-    } else if (part > 0.5) {
-        rFactor = 0.5;
-        gFactor = 0.5;
+        bFactor = 0.7;
+    } else if (part >= 0.5 && part < 0.75) {
+        rFactor = 0.7;
+        gFactor = 0.7;
         bFactor = 1;
-    } else if (part >= 0.5 && part <= 1) {
+    } else if (part >= 0.75) {
         rFactor = 0.7;
         gFactor = 0.7;
         bFactor = 0.7;
     }
     
-    r = [CIVector vectorWithX:rFactor Y:0.5 Z:0.5];
-    g = [CIVector vectorWithX:0.6 Y:gFactor Z:0.3];
-    b = [CIVector vectorWithX:0.3 Y:0.5 Z:bFactor];
+    r = [CIVector vectorWithX:rFactor Y:0.7 Z:0.7];
+    g = [CIVector vectorWithX:0.7 Y:gFactor Z:0.7];
+    b = [CIVector vectorWithX:0.7 Y:0.7 Z:bFactor];
     bias = [CIVector vectorWithX:0 Y:0 Z:0 W:0];
     
     [filter setValue:r forKey:@"inputRVector"];

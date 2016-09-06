@@ -10,6 +10,8 @@
 
 @interface MKRColorFadeFilterInstruction : MKRFilterInstruction
 
+- (instancetype)initWithStartTime:(double)startTime andEndTime:(double)endTime andFadeIn:(BOOL)isFadeIn andThreshold:(double)_threshold;
+
 - (instancetype)initWithStartTime:(double)startTime andEndTime:(double)endTime andFadeIn:(BOOL)isFadeIn;
 
 @end

@@ -11,6 +11,18 @@
 @implementation MKRColorFadeFilterInstruction {
     CIFilter *filter;
     BOOL fadeIn;
+    double threshold;
+}
+
+- (instancetype)initWithStartTime:(double)startTime andEndTime:(double)endTime andFadeIn:(BOOL)isFadeIn andThreshold:(double)_threshold{
+    self = [super initWithStartTime:startTime andEndTime:endTime];
+    if (!self) {
+        return nil;
+    }
+    fadeIn = isFadeIn;
+    threshold = _threshold;
+
+    return self;
 }
 
 - (instancetype)initWithStartTime:(double)startTime andEndTime:(double)endTime andFadeIn:(BOOL)isFadeIn {
@@ -19,6 +31,7 @@
         return nil;
     }
     fadeIn = isFadeIn;
+    threshold = 0.8;
 
     return self;
 }
@@ -41,7 +54,7 @@
     Float64 part = currentDuration / totalDuration;
     CIVector *r, *g, *b, *bias;
     Float64 rFactor = part, gFactor = part, bFactor = part;
-    if (part > 0.8) {
+    if (part > threshold) {
         rFactor = 1;
         gFactor = 1;
         bFactor = 1;
